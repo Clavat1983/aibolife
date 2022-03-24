@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Notifications\CustomizedVerifyEmail; //追加
+use App\Notifications\CustomizedResetPassword; //追加
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -45,5 +48,15 @@ class User extends Authenticatable implements MustVerifyEmail
     //Ownerとは1:1のリレーション(hasOneは主テーブル側にだけ記載)
     public function owner(){
         return $this->hasOne('App\Models\Owner');
+    }
+
+    //(追加)メール認証のメール通知をカスタマイズしたものでオーバーライドする
+    public function sendEmailVerificationNotification(){
+        $this->notify(new CustomizedVerifyEmail());
+    }
+
+    //(追加)パスワード再設定のメール通知をカスタマイズしたものでオーバーライドする
+    public function sendPasswordResetNotification($token){
+        $this->notify(new CustomizedResetPassword($token));
     }
 }

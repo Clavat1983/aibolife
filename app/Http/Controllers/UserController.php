@@ -86,7 +86,7 @@ class UserController extends Controller
             $user->password = Hash::make($inputs['password']);//パスワードのハッシュ化
             $user->email_verified_at = NULL;//メール認証を解除して認証していない状態にする
             $user->save();
-            $user->sendEmailVerificationNotification();//認証メールを再送付
+            $user->sendEmailVerificationNotification();//認証メールを再送付★カスタム後のものが必要?
             return redirect()->route('user.reverify'); //この時点で「認証済」ではなくなるので、viewで遷移できない。認証外のルートにリダイレクトする。
         } else { //メールアドレスがそのまま
             //$user->email = $inputs['email']; メールアドレスは変更しない
