@@ -92,7 +92,7 @@ class UserController extends Controller
             //$user->email = $inputs['email']; メールアドレスは変更しない
             $user->password = Hash::make($inputs['password']);//パスワードのハッシュ化
             $user->save();
-            return back()->with('message', '変更が完了しました');
+            return back()->with('message', 'パスワードの変更が完了しました。メールアドレスの変更はありません。');
         }
     }
 
