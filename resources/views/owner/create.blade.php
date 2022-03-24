@@ -16,11 +16,13 @@
                             <ul>
                                 @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
+                                    @if(empty($errors->first('owner_icon')))
+                                        <li>オーナーアイコン画像を追加していた場合は、再度選択してください。</li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>
                     @endif
-
                 </div>
 
                 <div style="margin-left:50px; margin-bottom:50px;">
@@ -38,8 +40,8 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="icon">オーナーアイコン（任意）</label><br>
-                            <input type="file" name="icon" id="icon">
+                            <label for="owner_icon">オーナーアイコン（任意）</label><br>
+                            <input type="file" name="owner_icon" id="owner_icon">
                         </div>
                         <p>&nbsp;</p>
                         <div>

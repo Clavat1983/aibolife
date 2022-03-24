@@ -46,8 +46,8 @@ class OwnerController extends Controller
             if($request->pattern == '1'){
                 //バリデーション
                 $inputs=$request->validate([
-                    'owner_old_login_id'=>'required',
-                    'owner_old_login_password'=>'required',
+                    'owner_old_login_id'=>'required|max:255',
+                    'owner_old_login_password'=>'required|max:255',
                 ]);
                 //データ検索
                 $owner=Owner::where('owner_old_login_id', $inputs['owner_old_login_id'])
@@ -120,11 +120,33 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
+        //バリデーション
         $inputs=$request->validate([
-            'owner_name'=>'required',
-            'owner_name_kana'=>'required|hiragana',
+            'owner_name' => 'required|max:255',
+            'owner_name_kana' => 'required|max:255|hiragana',
+            'owner_icon'=> 'image|max:10240',//10MB
             'owner_pref' => 'required',
         ]);
+
+        //オーナー情報をセット(新規)
+        $owner = new Owner();
+        $owner->user_id = auth()->user()->id;
+        $owner->owner_name = $inputs['owner_name'];
+        $owner->owner_name_kana = $inputs['owner_name_kana'];
+        $owner->owner_pref = $inputs['owner_pref'];
+        $owner->owner_transferred_flag = true;
+
+        //画像の保存
+        if (request('owner_icon')){
+            $original = request()->file('owner_icon')->getClientOriginalName();
+            $name = date('Ymd_His').'_'.$original;
+            request()->file('owner_icon')->move('storage/owner_icon', $name);
+            $owner->owner_icon = $name;
+        }
+
+        //DBに追加
+        $owner->save();
+        return redirect()->route('home');
     }
 
     /**
