@@ -17,7 +17,7 @@ class CreateDiaryCommentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('diary_id');
             $table->unsignedBigInteger('owner_id');
-            $table->text('body');
+            $table->text('diary_comment_body');
             $table->timestamps();
         });
     }

@@ -28,7 +28,8 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/owner/transfer/login', 'OwnerController@transfer_login')->name('owner.transfer_login');//旧ユーザ情報の入力画面
     Route::post('/owner/transfer/result', 'OwnerController@transfer_result')->name('owner.transfer_result');//旧ユーザ情報の入力画面
 
-    Route::get('/owner/create', 'OwnerController@create')->name('owner.create');//オーナー登録(新規)
+    Route::get('/owner/create', 'OwnerController@create')->name('owner.create');//オーナー登録(新規-入力画面)
+    Route::post('/owner/store', 'OwnerController@store')->name('owner.store');//オーナー登録(新規-DB登録)
 
     Route::get('/aibo/create', 'AiboController@create')->name('aibo.create');//aibo登録
 

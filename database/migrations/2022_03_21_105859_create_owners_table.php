@@ -16,16 +16,16 @@ class CreateOwnersTable extends Migration
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('name');
-            $table->string('name_kana');
-            $table->string('icon')->nullable();
-            $table->string('pref');
-            $table->boolean('available_flag')->default(true);
-            $table->string('old_login_id')->nullable();
-            $table->string('old_login_password')->nullable();
-            $table->string('old_email')->nullable();
-            $table->string('old_security_code')->nullable();
-            $table->boolean('transferred_flag')->default(false);
+            $table->string('owner_name');
+            $table->string('owner_name_kana');
+            $table->string('owner_icon')->nullable();
+            $table->string('owner_pref');
+            $table->boolean('owner_available_flag')->default(true);
+            $table->string('owner_old_login_id')->nullable();
+            $table->string('owner_old_login_password')->nullable();
+            $table->string('owner_old_email')->nullable();
+            $table->string('owner_old_security_code')->nullable();
+            $table->boolean('owner_transferred_flag')->default(false);
             $table->timestamps();
         });
     }

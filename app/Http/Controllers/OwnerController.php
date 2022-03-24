@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Owner;
 
 class OwnerController extends Controller
@@ -45,33 +46,36 @@ class OwnerController extends Controller
             if($request->pattern == '1'){
                 //バリデーション
                 $inputs=$request->validate([
-                    'old_login_id'=>'required',
-                    'old_login_password'=>'required',
+                    'owner_old_login_id'=>'required',
+                    'owner_old_login_password'=>'required',
                 ]);
                 //データ検索
-                $owner_info=Owner::where('old_login_id', $inputs['old_login_id'])
-                    ->where('old_login_password', $inputs['old_login_password'])
+                $owner=Owner::where('owner_old_login_id', $inputs['owner_old_login_id'])
+                    ->where('owner_old_login_password', $inputs['owner_old_login_password'])
                     ->where('user_id', NULL)
-                    ->where('transferred_flag', false)
-                    ->where('available_flag', true)
+                    ->where('owner_transferred_flag', false)
+                    ->where('owner_available_flag', true)
                     ->first();
             } else if ($request->pattern == '2'){
                 //バリデーション
                 $inputs=$request->validate([
-                    'old_security_code'=>'required|size:9',
+                    'owner_old_security_code'=>'required|size:9',
                 ]);
                 //データ検索
-                $owner_info=Owner::where('old_security_code', $inputs['old_security_code'])
+                $owner=Owner::where('owner_old_security_code', $inputs['owner_old_security_code'])
                     ->where('user_id', NULL)
-                    ->where('transferred_flag', false)
-                    ->where('available_flag', true)
+                    ->where('owner_transferred_flag', false)
+                    ->where('owner_available_flag', true)
                     ->first();
             }
 
             //更新
-            if($owner_info != NULL){ //該当あり
-                return back()->with('message', '該当あり')->withInput();
-                //$owner_info->user_id = $user;
+            if($owner != NULL){ //該当あり
+                //オーナー情報(ownersテーブル)更新
+                $owner->user_id = $user; //オーナーIDとLaravelのユーザを紐づけ
+                $owner->owner_transferred_flag = true;
+                $owner->save();
+                return view('owner.transfer_result', compact('owner'));
             } else { //該当なし
                 return back()->withErrors('該当するユーザが見つかりません')->withInput();
             }
@@ -116,7 +120,11 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs=$request->validate([
+            'owner_name'=>'required',
+            'owner_name_kana'=>'required|hiragana',
+            'owner_pref' => 'required',
+        ]);
     }
 
     /**

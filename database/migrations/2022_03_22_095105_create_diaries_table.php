@@ -16,16 +16,16 @@ class CreateDiariesTable extends Migration
         Schema::create('diaries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('aibo_id');
-            $table->date('date');
-            $table->string('title');
-            $table->string('photo1');
-            $table->string('photo2');
-            $table->string('photo3');
-            $table->string('photo4');
-            $table->text('body');
-            $table->string('personality');
-            $table->string('weather');
-            $table->boolean('share_flag')->default(true);
+            $table->date('diary_date');
+            $table->string('diary_title');
+            $table->string('diary_photo1');
+            $table->string('diary_photo2');
+            $table->string('diary_photo3');
+            $table->string('diary_photo4');
+            $table->text('diary_body');
+            $table->string('diary_personality');
+            $table->string('diary_weather');
+            $table->boolean('diary_share_flag')->default(true);
             $table->timestamps();
         });
     }

@@ -18,8 +18,8 @@
                         </div>
                     @endif
                     
-                    {{$owner->name}}さん！こんにちは。<br>
-                    {{$owner->name}}さんは、現在{{$owner->aibos()->count()}}匹のaiboを登録してます。<br>
+                    {{$owner->owner_name}}さん！こんにちは。<br>
+                    {{$owner->owner_name}}さんは、現在{{$owner->aibos()->count()}}匹のaiboを登録してます。<br>
                     aibo登録を始めましょう！
                 </div>
             </div>

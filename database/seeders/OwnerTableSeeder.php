@@ -16,106 +16,106 @@ class OwnerTableSeeder extends Seeder
     {
         $param = [
             'user_id' => 5,
-            'name' => 'User5-Owner1',
-            'name_kana' => 'あああ',
-            'icon' => 'aaa.jpg',
-            'pref' => '01_北海道',
-            'available_flag' => true,
-            'old_login_id' => 'AAA',
-            'old_login_password' => 'PW-AAA',
-            'old_email' => 'aaa@aaa.com',
-            'old_security_code' => 'SC-AAAAAA',
-            'transferred_flag' => false
+            'owner_name' => 'User5-Owner1',
+            'owner_name_kana' => 'あああ',
+            'owner_icon' => 'aaa.jpg',
+            'owner_pref' => '01_北海道',
+            'owner_available_flag' => true,
+            'owner_old_login_id' => 'AAA',
+            'owner_old_login_password' => 'PW-AAA',
+            'owner_old_email' => 'aaa@aaa.com',
+            'owner_old_security_code' => 'SC-AAAAAA',
+            'owner_transferred_flag' => false
         ];
         DB::table('owners')->insert($param);
 
         $param = [
             'user_id' => 1,
-            'name' => 'User1-Owner2',
-            'name_kana' => 'いいい',
-            'icon' => 'bbb.jpg',
-            'pref' => '02_青森県',
-            'available_flag' => true,
-            'old_login_id' => 'BBB',
-            'old_login_password' => 'PW-BBB',
-            'old_email' => 'bbb@bbb.com',
-            'old_security_code' => 'SC-BBBBBB',
-            'transferred_flag' => false
+            'owner_name' => 'User1-Owner2',
+            'owner_name_kana' => 'いいい',
+            'owner_icon' => 'bbb.jpg',
+            'owner_pref' => '02_青森県',
+            'owner_available_flag' => true,
+            'owner_old_login_id' => 'BBB',
+            'owner_old_login_password' => 'PW-BBB',
+            'owner_old_email' => 'bbb@bbb.com',
+            'owner_old_security_code' => 'SC-BBBBBB',
+            'owner_transferred_flag' => false
         ];
         DB::table('owners')->insert($param);
 
         $param = [
             'user_id' => 2,
-            'name' => 'User2-Owner3',
-            'name_kana' => 'ううう',
-            'icon' => 'ccc.jpg',
-            'pref' => '03_秋田県',
-            'available_flag' => true,
-            'old_login_id' => 'CCC',
-            'old_login_password' => 'PW-CCC',
-            'old_email' => 'ccc@ccc.com',
-            'old_security_code' => 'SC-CCCCCC',
-            'transferred_flag' => false
+            'owner_name' => 'User2-Owner3',
+            'owner_name_kana' => 'ううう',
+            'owner_icon' => 'ccc.jpg',
+            'owner_pref' => '03_秋田県',
+            'owner_available_flag' => true,
+            'owner_old_login_id' => 'CCC',
+            'owner_old_login_password' => 'PW-CCC',
+            'owner_old_email' => 'ccc@ccc.com',
+            'owner_old_security_code' => 'SC-CCCCCC',
+            'owner_transferred_flag' => false
         ];
         DB::table('owners')->insert($param);
 
         $param = [
             'user_id' => 3,
-            'name' => 'User3-Owner4',
-            'name_kana' => 'えええ',
-            'icon' => 'ddd.jpg',
-            'pref' => '28_兵庫県',
-            'available_flag' => true,
-            'old_login_id' => 'DDD',
-            'old_login_password' => 'PW-DDD',
-            'old_email' => 'ddd@ddd.com',
-            'old_security_code' => 'SC-DDDDDD',
-            'transferred_flag' => false
+            'owner_name' => 'User3-Owner4',
+            'owner_name_kana' => 'えええ',
+            'owner_icon' => 'ddd.jpg',
+            'owner_pref' => '28_兵庫県',
+            'owner_available_flag' => true,
+            'owner_old_login_id' => 'DDD',
+            'owner_old_login_password' => 'PW-DDD',
+            'owner_old_email' => 'ddd@ddd.com',
+            'owner_old_security_code' => 'SC-DDDDDD',
+            'owner_transferred_flag' => false
         ];
         DB::table('owners')->insert($param);
 
         $param = [
             'user_id' => 4,
-            'name' => 'User4-Owner5',
-            'name_kana' => 'おおお',
-            'icon' => 'eee.jpg',
-            'pref' => '47_沖縄県',
-            'available_flag' => true,
-            'old_login_id' => 'EEE',
-            'old_login_password' => 'PW-EEE',
-            'old_email' => 'eee@eee.com',
-            'old_security_code' => 'SC-EEEEEE',
-            'transferred_flag' => false
+            'owner_name' => 'User4-Owner5',
+            'owner_name_kana' => 'おおお',
+            'owner_icon' => 'eee.jpg',
+            'owner_pref' => '47_沖縄県',
+            'owner_available_flag' => true,
+            'owner_old_login_id' => 'EEE',
+            'owner_old_login_password' => 'PW-EEE',
+            'owner_old_email' => 'eee@eee.com',
+            'owner_old_security_code' => 'SC-EEEEEE',
+            'owner_transferred_flag' => false
         ];
         DB::table('owners')->insert($param);
 
         $param = [
             'user_id' => NULL,
-            'name' => 'かかか',
-            'name_kana' => 'かかか',
-            'icon' => 'fff.jpg',
-            'pref' => '01_北海道',
-            'available_flag' => true,
-            'old_login_id' => 'FFF',
-            'old_login_password' => 'PW-FFF',
-            'old_email' => 'fff@fff.com',
-            'old_security_code' => 'SC-FFFFFF',
-            'transferred_flag' => false
+            'owner_name' => 'かかか',
+            'owner_name_kana' => 'かかか',
+            'owner_icon' => 'fff.jpg',
+            'owner_pref' => '01_北海道',
+            'owner_available_flag' => true,
+            'owner_old_login_id' => 'FFF',
+            'owner_old_login_password' => 'PW-FFF',
+            'owner_old_email' => 'fff@fff.com',
+            'owner_old_security_code' => 'SC-FFFFFF',
+            'owner_transferred_flag' => false
         ];
         DB::table('owners')->insert($param);
 
         $param = [
             'user_id' => NULL,
-            'name' => 'ききき',
-            'name_kana' => 'ききき',
-            'icon' => 'ggg.jpg',
-            'pref' => '01_北海道',
-            'available_flag' => true,
-            'old_login_id' => 'GGG',
-            'old_login_password' => 'PW-GGG',
-            'old_email' => 'ggg@ggg.com',
-            'old_security_code' => 'SC-GGGGGG',
-            'transferred_flag' => false
+            'owner_name' => 'ききき',
+            'owner_name_kana' => 'ききき',
+            'owner_icon' => 'ggg.jpg',
+            'owner_pref' => '01_北海道',
+            'owner_available_flag' => true,
+            'owner_old_login_id' => 'GGG',
+            'owner_old_login_password' => 'PW-GGG',
+            'owner_old_email' => 'ggg@ggg.com',
+            'owner_old_security_code' => 'SC-GGGGGG',
+            'owner_transferred_flag' => false
         ];
         DB::table('owners')->insert($param);
     }

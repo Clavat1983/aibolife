@@ -125,6 +125,10 @@ return [
     'url'                  => ':attributeに正しい形式を指定してください。',
     'uuid'                 => ':attributeに有効なUUIDを指定してください。',
 
+    // カスタムバリデーション
+    'hiragana'   => ':attributeは全角のひらがなで入力してください。',
+
+
     /*
     |--------------------------------------------------------------------------
     | Custom バリデーション言語行
@@ -160,9 +164,13 @@ return [
         'password' => 'パスワード',
         'email' => 'メールアドレス',
 
-        'old_login_id' => 'ログインID（旧）',
-        'old_login_password' => 'パスワード（旧）',
-        'old_security_code' => 'セキュリティコード（旧）',
+        'owner_name' => 'オーナー名',
+        'owner_name_kana' => 'オーナー名（よみ）',
+        'owner_pref' => '都道府県',
+
+        'owner_old_login_id' => 'ログインID（旧）',
+        'owner_old_login_password' => 'パスワード（旧）',
+        'owner_old_security_code' => 'セキュリティコード（旧）',
     ],
 
 ];

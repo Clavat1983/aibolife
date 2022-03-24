@@ -25,6 +25,7 @@
                 </div>
 
                 <div style="margin-left:50px; margin-bottom:50px;">
+
                     <form method="POST" action="{{route('owner.transfer_result')}}" enctype="multipart/form-data">
                         @csrf
                         <div>
@@ -32,13 +33,13 @@
                         </div>
                         <p>&nbsp;</p>
                         <div style="margin-left:50px;">
-                            <label for="old_login_id">ログインID（旧）</label>
-                            <input type="text" name="old_login_id" id="old_login_id" value="{{old('old_login_id')}}">
+                            <label for="owner_old_login_id">ログインID（旧）</label>
+                            <input type="text" name="owner_old_login_id" id="owner_old_login_id" value="{{old('owner_old_login_id')}}">
                         </div>
                         <p>&nbsp;</p>
                         <div style="margin-left:50px;">
-                            <label for="old_login_password">パスワード（旧）</label>
-                            <input type="password" name="old_login_password" id="old_login_password" value="{{old('old_login_password')}}">
+                            <label for="owner_old_login_password">パスワード（旧）</label>
+                            <input type="password" name="owner_old_login_password" id="owner_old_login_password" value="{{old('owner_old_login_password')}}">
                         </div>
                         <p>&nbsp;</p>
                         <div>
@@ -46,15 +47,13 @@
                         </div>
                         <p>&nbsp;</p>
                         <div style="margin-left:50px;">
-                            <label for="old_security_code">セキュリティコード（旧）</label>
-                            <input type="text" name="old_security_code" id="old_security_code" value="{{old('old_security_code')}}">
+                            <label for="owner_old_security_code">セキュリティコード（旧）</label>
+                            <input type="text" name="owner_old_security_code" id="owner_old_security_code" value="{{old('owner_old_security_code')}}">
                         </div>
                         <p>&nbsp;</p>
-                        <button>
-                            認証
-                        </button>
-                        
+                        <button>認証（引き継ぎ実行）</button>
                     </form>
+
                 </div>
 
             </div>

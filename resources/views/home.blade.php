@@ -21,15 +21,15 @@
                     @else
                         @foreach ($owners as $owner)
                             オーナーID:{{$owner->id}}<br>
-                            オーナー名:{{$owner->name}}<br>
-                            旧ログインID:{{$owner->old_login_id}}<br>
-                            旧セキュリティコード:{{$owner->old_security_code}}<br>
+                            オーナー名:{{$owner->owner_name}}<br>
+                            旧ログインID:{{$owner->owner_old_login_id}}<br>
+                            旧セキュリティコード:{{$owner->owner_old_security_code}}<br>
 
                             @if(count($owner->aibos) == 0)
                                 aibo登録がされていない。これが表示されたらバグ。
                             @else
                                 @foreach ($owner->aibos as $aibo)
-                                aibo ID:{{$aibo->id}} ... 名前{{$aibo->name}}<br>
+                                aibo ID:{{$aibo->id}} ... 名前{{$aibo->aibo_name}}<br>
                                 @endforeach
                             @endif
                         @endforeach
