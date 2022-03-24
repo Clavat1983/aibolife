@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Owner;
+use Illuminate\Support\Facades\Storage;
 
 class OwnerController extends Controller
 {
@@ -166,9 +167,10 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Owner $owner)
     {
-        //
+        $this->authorize('update', $owner); //ポリシー適用(自分だけ編集可能)
+        return view('owner.edit', compact('owner'));
     }
 
     /**
@@ -178,9 +180,42 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Owner $owner)
     {
-        //
+        $this->authorize('update', $owner); //ポリシー適用(自分だけ編集可能)
+
+        //バリデーション
+        $inputs=$request->validate([
+            'owner_name' => 'required|max:255',
+            'owner_name_kana' => 'required|max:255|hiragana',
+            'owner_icon'=> 'image|max:10240',//10MB
+            'owner_pref' => 'required',
+        ]);
+
+        //オーナー情報をセット(新規)
+        //$owner->user_id = auth()->user()->id; //変更しない
+        $owner->owner_name = $inputs['owner_name'];
+        $owner->owner_name_kana = $inputs['owner_name_kana'];
+        $owner->owner_pref = $inputs['owner_pref'];
+        //$owner->owner_transferred_flag = true; //変更しない
+
+        //画像の保存
+        if (request('owner_icon')){
+            //古い画像は削除
+            if ($owner->owner_icon!=='default.jpg') {
+                $old='public/owner_icon/'.$owner->owner_icon;
+                Storage::delete($old);
+            }
+            //新しい画像を保管
+            $original = request()->file('owner_icon')->getClientOriginalName();
+            $name = date('Ymd_His').'_'.$original;
+            request()->file('owner_icon')->move('storage/owner_icon', $name);
+            $owner->owner_icon = $name;
+        }
+
+        //DBに追加
+        $owner->save();
+        return back()->with('message', 'オーナー情報を更新しました。');
     }
 
     /**
