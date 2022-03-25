@@ -19,7 +19,7 @@ class CreateAibosTable extends Migration
             $table->string('aibo_name');
             $table->string('aibo_kana');
             $table->string('aibo_kana_gyo');
-            $table->string('aibo_keisho');
+            $table->string('aibo_nickname');
             $table->string('aibo_icon')->nullable();
             $table->text('aibo_yurai')->nullable();
             $table->date('aibo_birthday');
@@ -40,11 +40,12 @@ class CreateAibosTable extends Migration
             $table->boolean('aibo_toy_food_flag');
             $table->boolean('aibo_toy_drink_flag');
 
+            $table->string('aibo_serial_no');
             $table->string('aibo_plan');
             $table->string('aibo_care');
             $table->text('aibo_message')->nullable();
             $table->text('aibo_reason')->nullable();
-            $table->string('aibo_friend_code_qr');
+            $table->string('aibo_friend_qr')->nullable();
             $table->boolean('aibo_available_flag')->dafault(true);
             $table->timestamps();
         });

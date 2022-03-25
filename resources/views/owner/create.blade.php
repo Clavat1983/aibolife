@@ -16,10 +16,10 @@
                             <ul>
                                 @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
-                                    @if(empty($errors->first('owner_icon')))
-                                        <li>オーナーアイコン画像を追加していた場合は、再度選択してください。</li>
-                                    @endif
                                 @endforeach
+                                @if(empty($errors->first('owner_icon')))
+                                    <li>オーナーアイコン画像を追加していた場合は、再度選択してください。</li>
+                                @endif
                             </ul>
                         </div>
                     @endif
