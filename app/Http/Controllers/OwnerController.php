@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Owner;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage; //画像削除用
 
 class OwnerController extends Controller
 {
@@ -147,7 +147,8 @@ class OwnerController extends Controller
 
         //DBに追加
         $owner->save();
-        return redirect()->route('home');
+        //return redirect()->route('home');
+        return view('owner.create_result', compact('owner'));
     }
 
     /**

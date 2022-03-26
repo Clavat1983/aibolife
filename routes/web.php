@@ -42,6 +42,9 @@ Route::middleware(['verified'])->group(function(){
     //aibo情報
     Route::get('/mypage/aibo/create', 'AiboController@create')->name('aibo.create');//aibo登録
     Route::post('/mypage/aibo/store', 'AiboController@store')->name('aibo.store');//aibo登録・追加(新規-DB登録)
+    Route::get('/mypage/aibo/{aibo}/edit', 'AiboController@edit')->name('aibo.edit');//変更(入力)
+    Route::put('/mypage/aibo/{aibo}', 'AiboController@update')->name('aibo.update');//変更(DB更新)
+
 
 });
 

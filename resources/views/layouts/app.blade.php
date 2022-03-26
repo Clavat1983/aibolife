@@ -60,12 +60,12 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('user.edit', auth()->user()->id) }}">
-                                        ログイン情報（編集）
+                                        ログイン情報
                                     </a>
 
                                     @if(auth()->user()->owner != NULL)
                                         <a class="dropdown-item" href="{{ route('owner.edit', auth()->user()->owner->id) }}">
-                                            オーナー情報情報（編集）
+                                            オーナー情報情報
                                         </a>
                                     @endif
 
