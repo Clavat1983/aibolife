@@ -45,4 +45,18 @@ class HomeController extends Controller
             }
         }
     }
+
+    public function mypage(){
+        //ユーザ登録済が前提
+
+        //オーナー情報を取る
+        $user_id=auth()->user()->id;
+        $owner=Owner::where('user_id', $user_id)->first();
+
+        if($owner==NULL){ //オーナー情報を登録していない(NG)
+            return redirect()->route('home'); //homeに飛ばす(再度リダイレクトしてオーナー登録画面に行く)
+        } else {
+            return view('mypage', compact('owner'));
+        }
+    }
 }

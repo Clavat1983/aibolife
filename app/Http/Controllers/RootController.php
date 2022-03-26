@@ -13,6 +13,7 @@ class RootController extends Controller
             return redirect()->route('home');
         } else { //ログインしていない場合
             return view('welcome');
+            //return redirect()->route('home'); //welcomeを見せないでログイン画面に遷移させる場合
         }
     }
 }

@@ -24,6 +24,7 @@ Auth::routes(['verify' => true]);
 Route::middleware(['verified'])->group(function(){
 
     Route::get('/home', 'HomeController@index')->name('home'); //認証後のリダイレクト判定を含む
+    Route::get('/mypage', 'HomeController@mypage')->name('mypage'); //マイページ
 
     //ユーザ登録情報
     Route::get('/mypage/user/{user}/edit', 'UserController@edit')->name('user.edit');//変更(入力)
@@ -36,7 +37,6 @@ Route::middleware(['verified'])->group(function(){
 
     Route::get('/mypage/owner/create', 'OwnerController@create')->name('owner.create');//オーナー登録(新規-入力画面)
     Route::post('/mypage/owner/store', 'OwnerController@store')->name('owner.store');//オーナー登録(新規-DB登録)
-
     Route::get('/mypage/owner/{owner}/edit', 'OwnerController@edit')->name('owner.edit');//変更(入力)
     Route::put('/mypage/owner/{owner}', 'OwnerController@update')->name('owner.update');//変更(DB更新)
 
@@ -46,6 +46,9 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/mypage/aibo/{aibo}/edit', 'AiboController@edit')->name('aibo.edit');//変更(入力)
     Route::put('/mypage/aibo/{aibo}', 'AiboController@update')->name('aibo.update');//変更(DB更新)
 
+    //aibo日記
+    Route::get('/diary', 'DiaryController@index')->name('diary.index');//aibo日記トップ
+    Route::get('/diary/list', 'DiaryController@list')->name('diary.list');//aibo日記一覧（1日）
 
 });
 

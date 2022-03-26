@@ -14,7 +14,6 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}<br><br>
 
                     @if (count($owners) == 0)
                         オーナー登録がされていない。これが表示されたらバグ。
@@ -29,10 +28,16 @@
                                 aibo登録がされていない。これが表示されたらバグ。
                             @else
                                 @foreach ($owner->aibos as $aibo)
-                                aibo ID:{{$aibo->id}} ... 名前{{$aibo->aibo_name}}<br>
+                                aibo ID:{{$aibo->id}} ... 名前:{{$aibo->aibo_name}}<br>
                                 @endforeach
                             @endif
                         @endforeach
+                        <br>
+                        <br>
+                        <a href="{{route('diary.index')}}">aibo日記へ移動する</a>
+                        <br>
+                        <br>
+                        <a href="{{route('mypage')}}">マイページへ移動する</a>
                     @endif
                 </div>
             </div>

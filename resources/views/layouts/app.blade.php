@@ -72,7 +72,7 @@
 
                                     @if(auth()->user()->owner != NULL)
                                         <a class="dropdown-item" href="{{ route('owner.edit', auth()->user()->owner->id) }}">
-                                            オーナー情報情報
+                                            オーナー情報
                                         </a>
                                     @endif
 
