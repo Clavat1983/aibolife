@@ -13,16 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+//  Route::get('/', function () {
+//      return view('welcome');
+//  });
+Route::get('/', 'RootController@root')->name('root'); //トップページにアクセスしたとき
 
 //Auth::routes();
 Auth::routes(['verify' => true]);
 
 Route::middleware(['verified'])->group(function(){
 
-    Route::get('/', 'HomeController@index')->name('home'); //認証後のリダイレクト判定を含む
+    Route::get('/home', 'HomeController@index')->name('home'); //認証後のリダイレクト判定を含む
 
     //ユーザ登録情報
     Route::get('/mypage/user/{user}/edit', 'UserController@edit')->name('user.edit');//変更(入力)
