@@ -11,10 +11,10 @@
                     <h2>{{$target_string_format}}の日記</h2>
 
                     @if($before_flag)
-                    <a href="{{route('diary.list')}}?date={{$before_string}}">←前日の日記を見る</a><br>
+                    <a href="{{route('diary.list_day')}}?date={{$before_string}}">←前日の日記を見る</a><br>
                     @endif
                     @if($after_flag)
-                    <a href="{{route('diary.list')}}?date={{$after_string}}">翌日の日記を見る→</a><br>
+                    <a href="{{route('diary.list_day')}}?date={{$after_string}}">翌日の日記を見る→</a><br>
                     @endif
                     <br>
                     <br>

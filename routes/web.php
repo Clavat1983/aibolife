@@ -48,7 +48,8 @@ Route::middleware(['verified'])->group(function(){
 
     //aibo日記
     Route::get('/diary', 'DiaryController@index')->name('diary.index');//aibo日記トップ
-    Route::get('/diary/list', 'DiaryController@list')->name('diary.list');//aibo日記一覧（1日）
+    Route::get('/diary/list_day', 'DiaryController@list_day')->name('diary.list_day');//aibo日記一覧（日ごと）
+    Route::get('/diary/list_aibo', 'DiaryController@list_aibo')->name('diary.list_aibo');//aibo日記一覧（aiboごと）
 
 });
 
