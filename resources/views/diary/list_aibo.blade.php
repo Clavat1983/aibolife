@@ -11,22 +11,35 @@
                     <h2>aibo_ID:{{$aibo->id}}「{{$aibo->aibo_name}}」の日記</h2>
 
                     <br>
-                    この1週間の日記は{{$diaries->count()}}件です<br>
+                    <h5>直近7日間の日記</h5>
                     <br>
-                    @foreach($calendar['days'] as $date) {{--7日間ループ--}}
-                        @if($diaries->contains('diary_date', $date)) {{--その日に書かれている日記があるか(true/falseしかわからない)--}}
-                            @foreach($diaries as $diary) {{--日記の数だけループ--}}
-                                @if($diary->diary_date == $date) {{--その日に書かれている日記なら--}}
-                                    日付：{{$date}}、タイトル：{{$diary->diary_title}}<br>
-                                @endif
-                            @endforeach
+                    @foreach($this_week as $date => $diary)
+                        @if($diary == NULL)
+                            配列：{{$date}}、日記：なし<br>
                         @else
-                            日付：{{$date}}、なし<br>
+                            配列：{{$date}}、aibo：{{$diary->aibo->aibo_name}}、日記：{{$diary->diary_date}}、タイトル：{{$diary->diary_title}}<br>
                         @endif
                     @endforeach
 
 
                     <br>
+                    <br>
+                    <h5>過去の日記</h5>
+                    
+                    {{-- 
+                    @foreach ($archive_count as $yyyy => $yyyymm)
+                        {{$yyyy}}年<br>
+                        <ul>
+                        @foreach ($yyyymm as $month => $count)
+                            <li>{{$month}}月（{{$count}}件）</li>
+                        @endforeach
+                        </ul>
+                    @endforeach
+                    --}}
+
+                    <br>
+                    <br>
+
 
                     <a href="{{route('diary.index')}}">日記メニューに戻る</a>
                     <br>

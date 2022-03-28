@@ -93,6 +93,10 @@
             </div>
         </nav>
 
+        @auth {{--ログインしていたら--}}
+        <nav class="navbar navbar-expand-md" style="background-color:pink;">｜はじめに｜最新情報｜日記｜名鑑｜ふるまい｜掲示板｜オフ会｜お問い合わせ｜</nav>
+        @endauth
+
         <main class="py-4">
             @yield('content')
         </main>
