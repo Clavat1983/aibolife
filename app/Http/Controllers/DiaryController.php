@@ -163,9 +163,51 @@ class DiaryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $aibo_id = $request->aibo; //クエリパラメータから取得
+        $date = $request->date; //クエリパラメータから取得
+
+        if($aibo_id === NULL || $date === NULL){ //クエリパラメータがない
+            abort(403);
+        } else {
+            //クエリパラメータのバリデーション
+                //日付のチェック
+                $preg = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/'; //数字4桁-数字2桁-数字2桁か
+                if(!preg_match($preg, $date)) { //日付の形式ではない
+                    abort(403); //エラーページへ転送
+                }
+                $Y = substr($date,0,4);
+                $m = substr($date,5,2);
+                $d = substr($date,8,2);
+                if (checkdate($m, $d, $Y) === false) { //日付の形式ではない
+                    abort(403); //エラーページへ転送
+                }
+
+                //自分のaiboかチェック
+                $user_id=auth()->user()->id;
+                $owner=Owner::where('user_id', $user_id)->first();
+                $aibo=Aibo::where('id', $aibo_id)->where('owner_id', $owner->id)->first();
+                if($aibo === NULL){ //自分のaiboではないなら
+                    abort(403); //エラーページへ転送
+                }
+
+                //誕生日以降かチェック
+                $date_carbon = new Carbon($date);
+                $birthday_carbon = new Carbon($aibo->aibo_birthday);
+                if($date_carbon->lt($birthday_carbon)){ //指定日 < 誕生日なら
+                    abort(403); //エラーページへ転送
+                }
+                
+
+            //まだ書いていないか確認
+            $diary = Diary::where('aibo_id', $aibo_id)->where('diary_date', $date)->first();
+            if($diary === NULL){ //まだ書いていない
+                return view('diary.create' , compact('aibo','date'));//新規投稿へ
+            } else { //既に書いている
+                return redirect()->route('diary.edit', ['diary' => $diary]);//該当の日記の編集画面へ
+            }
+        }
     }
 
     /**
@@ -176,7 +218,46 @@ class DiaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs=$request->validate([
+            'diary_title' => 'required',
+            'diary_photo1' => 'image',
+            'diary_body' => 'required',
+            'diary_personality' => 'required',
+            'diary_weather' => 'required'
+        ]);
+        //hiddenで来るものもセット
+        $inputs['aibo_id'] = $request['aibo_id'];
+        $inputs['diary_date'] = $request['diary_date'];
+
+        //保存
+        $diary = new Diary();
+        $diary->aibo_id = $inputs['aibo_id'];
+        $diary->diary_date = $inputs['diary_date'];
+        $diary->diary_title = $inputs['diary_title'];
+        // $diary->diary_photo1 = $inputs['diary_photo1'];
+        // $diary->diary_photo2 = $inputs['diary_photo2'];
+        // $diary->diary_photo3 = $inputs['diary_photo3'];
+        // $diary->diary_photo4 = $inputs['diary_photo4'];
+        $diary->diary_body = $inputs['diary_body'];
+        $diary->diary_personality = $inputs['diary_personality'];
+        $diary->diary_weather = $inputs['diary_weather'];
+        $diary->diary_share_flag = true;
+
+        //画像の保存
+        //アイコン
+        if (request('diary_photo1')){
+            $original = request()->file('diary_photo1')->getClientOriginalName();
+            $name = date('Ymd_His').'_'.$original;
+            request()->file('diary_photo1')->move('storage/diary', $name);
+            $diary->diary_photo1 = $name;
+        }
+
+        //DBに追加
+        $diary->save();
+
+        //今書いた日記を取り出して、表示画面へ転送
+        $diary = Diary::where('aibo_id', $inputs['aibo_id'])->where('diary_date', $inputs['diary_date'])->first();
+        return redirect()->route('diary.show',['diary' => $diary]); //書いた日記の個別表示へ
     }
 
     /**

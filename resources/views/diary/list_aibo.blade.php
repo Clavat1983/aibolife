@@ -15,7 +15,11 @@
                     <br>
                     @foreach($this_week as $date => $diary)
                         @if($diary == NULL)
-                            配列：{{$date}}、日記：なし<br>
+                            @if(strtotime($aibo->aibo_birthday) <= strtotime($date)) {{--誕生日が日記の日付より前--}}
+                                配列の日付：{{$date}}、<a href="{{route('diary.create')}}?aibo={{$aibo->id}}&date={{$date}}">日記を書く</a>（aiboID:{{$aibo->id}}、日付:{{$date}}）<br>
+                            @else
+                                配列の日付：{{$date}}、お迎え前<br>
+                            @endif
                         @else
                             配列：{{$date}}、aibo：{{$diary->aibo->aibo_name}}、日記：{{$diary->diary_date}}、タイトル：{{$diary->diary_title}}<br>
                         @endif

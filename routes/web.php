@@ -50,6 +50,11 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/diary', 'DiaryController@index')->name('diary.index');//aibo日記トップ
     Route::get('/diary/list_day', 'DiaryController@list_day')->name('diary.list_day');//aibo日記一覧（日ごと）
     Route::get('/diary/list_aibo', 'DiaryController@list_aibo')->name('diary.list_aibo');//aibo日記一覧（aiboごと）
+    Route::get('/diary/create', 'DiaryController@create')->name('diary.create');//日記を書く(新規-入力画面)
+    Route::post('/diary/store', 'DiaryController@store')->name('diary.store');//日記を書く(新規-DB登録)
+    Route::get('/diary/{diary}', 'DiaryController@show')->name('diary.show');//日記を個別表示
+    Route::get('/diary/{diary}/edit', 'DiaryController@edit')->name('diary.edit');//変更(入力)
+
 
 });
 

@@ -40,7 +40,7 @@ class CreateAibosTable extends Migration
             $table->boolean('aibo_toy_food_flag');
             $table->boolean('aibo_toy_drink_flag');
 
-            $table->string('aibo_serial_no');
+            $table->string('aibo_serial_no')->nullable();
             $table->string('aibo_plan');
             $table->string('aibo_care');
             $table->text('aibo_message')->nullable();

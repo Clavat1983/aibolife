@@ -37,7 +37,7 @@
                         @endforeach
                         @if($wrote == NULL)
                             @if(strtotime($aibo->aibo_birthday) <= strtotime($target_string)) {{--誕生日が日記の指定日より前--}}
-                                <li>名前：{{$aibo->aibo_name}}.........日記を書く（aiboID:{{$aibo->id}}、日付:{{$target_string}}）</li>
+                                <li>名前：{{$aibo->aibo_name}}.........<a href="{{route('diary.create')}}?aibo={{$aibo->id}}&date={{$target_string}}">日記を書く</a>（aiboID:{{$aibo->id}}、日付:{{$target_string}}）</li>
                             @else
                                 <li>名前：{{$aibo->aibo_name}}.........お迎え前</li>
                             @endif

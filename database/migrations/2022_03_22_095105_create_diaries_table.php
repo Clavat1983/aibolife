@@ -18,10 +18,10 @@ class CreateDiariesTable extends Migration
             $table->unsignedBigInteger('aibo_id');
             $table->date('diary_date');
             $table->string('diary_title');
-            $table->string('diary_photo1');
-            $table->string('diary_photo2');
-            $table->string('diary_photo3');
-            $table->string('diary_photo4');
+            $table->string('diary_photo1')->nullable();
+            $table->string('diary_photo2')->nullable();
+            $table->string('diary_photo3')->nullable();
+            $table->string('diary_photo4')->nullable();
             $table->text('diary_body');
             $table->string('diary_personality');
             $table->string('diary_weather');
