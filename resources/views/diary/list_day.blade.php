@@ -42,7 +42,7 @@
                                 <li>名前：{{$aibo->aibo_name}}.........お迎え前</li>
                             @endif
                         @else
-                            <li>名前：{{$aibo->aibo_name}}.........aiboID：{{$wrote->aibo->id}}、日記ID：{{$wrote->id}}、日記のaibo：{{$wrote->aibo->aibo_name}}、タイトル：{{$wrote->diary_title}}</li>
+                            <li>名前：{{$aibo->aibo_name}}.........aiboID：{{$wrote->aibo->id}}、日記ID：{{$wrote->id}}、日記のaibo：{{$wrote->aibo->aibo_name}}、タイトル：{{$wrote->diary_title}}、<a href="{{route('diary.show',$wrote)}}">【見る】</a></li>
                         @endif
                     @endforeach
                     </ul>
@@ -53,7 +53,7 @@
                         <li>この日の日記はまだありません</li>
                     @else
                         @foreach($other_diaries as $diary)
-                            <li>名前：{{$diary->aibo->aibo_name}}.........aiboID：{{$diary->aibo->id}}、日記ID：{{$diary->id}}、日記のaibo：{{$diary->aibo->aibo_name}}、タイトル：{{$diary->diary_title}}</li>
+                            <li>名前：{{$diary->aibo->aibo_name}}.........aiboID：{{$diary->aibo->id}}、日記ID：{{$diary->id}}、日記のaibo：{{$diary->aibo->aibo_name}}、タイトル：{{$diary->diary_title}}、<a href="{{route('diary.show',$diary)}}">【見る】</a></li>
                         @endforeach
                     @endif
                     </ul>
