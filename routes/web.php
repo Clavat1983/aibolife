@@ -40,21 +40,41 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/mypage/owner/{owner}/edit', 'OwnerController@edit')->name('owner.edit');//変更(入力)
     Route::put('/mypage/owner/{owner}', 'OwnerController@update')->name('owner.update');//変更(DB更新)
 
-    //aibo情報
+    //aibo情報(mypage)
     Route::get('/mypage/aibo/create', 'AiboController@create')->name('aibo.create');//aibo登録
     Route::post('/mypage/aibo/store', 'AiboController@store')->name('aibo.store');//aibo登録・追加(新規-DB登録)
     Route::get('/mypage/aibo/{aibo}/edit', 'AiboController@edit')->name('aibo.edit');//変更(入力)
     Route::put('/mypage/aibo/{aibo}', 'AiboController@update')->name('aibo.update');//変更(DB更新)
+    //aibo情報(公開)
+    Route::get('/aibo', 'AiboController@index')->name('aibo.index');//aibo名鑑トップ
+    Route::get('/aibo/syllabary', 'AiboController@list_syllabary')->name('aibo.list_syllabary');
+    Route::get('/aibo/area', 'AiboController@list_area')->name('aibo.list_area');
+    Route::get('/aibo/birthday', 'AiboController@list_birthday')->name('aibo.list_birthday');
+    Route::get('/aibo/search', 'AiboController@search_top')->name('aibo.search_top');
+    Route::put('/aibo/result', 'AiboController@search_result')->name('aibo.search_result');
+
+    Route::get('/aibo/{aibo}', 'AiboController@show')->name('aibo.show');//aiboを個別表示
 
     //aibo日記
     Route::get('/diary', 'DiaryController@index')->name('diary.index');//aibo日記トップ
     Route::get('/diary/list_day', 'DiaryController@list_day')->name('diary.list_day');//aibo日記一覧（日ごと）
     Route::get('/diary/list_aibo', 'DiaryController@list_aibo')->name('diary.list_aibo');//aibo日記一覧（aiboごと）
+    Route::get('/diary/archive', 'DiaryController@archive')->name('diary.archive');//aibo日記（過去の日記アーカイブ）
+
     Route::get('/diary/create', 'DiaryController@create')->name('diary.create');//日記を書く(新規-入力画面)
     Route::post('/diary/store', 'DiaryController@store')->name('diary.store');//日記を書く(新規-DB登録)
     Route::get('/diary/{diary}', 'DiaryController@show')->name('diary.show');//日記を個別表示
     Route::get('/diary/{diary}/edit', 'DiaryController@edit')->name('diary.edit');//変更(入力)
+    Route::put('/diary/{diary}', 'DiaryController@update')->name('diary.update');//変更(DB更新)
 
+    //日記コメント
+    Route::post('/diary/comment/store', 'DiaryCommentController@store')->name('diarycomment.store');//(新規-DB登録)
+
+
+    //最新情報
+    Route::get('/news/create', 'NewsController@create')->name('news.create');//ニュース登録
+    Route::post('/news', 'NewsController@store')->name('news.store');//ニュース登録
+    Route::get('/news/{news}', 'NewsController@show')->name('news.show');
 
 });
 

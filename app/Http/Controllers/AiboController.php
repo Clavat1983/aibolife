@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Owner;
 use App\Models\Aibo;
 use Illuminate\Support\Facades\Storage; //画像削除用
+use Carbon\Carbon; //日付操作
 
 class AiboController extends Controller
 {
@@ -16,8 +17,81 @@ class AiboController extends Controller
      */
     public function index()
     {
-        //
+        //誕生日のaibo取得
+        $birthday_aibos = $this->get_birthday_aibos();
+
+        //新しいお友達取得(最新6件)
+        $new_aibos = Aibo::orderBy('id', 'desc')->limit(6)->get();
+
+        return view('aibo.index',compact('birthday_aibos','new_aibos')); //aibo名鑑トップ
     }
+
+    private function get_birthday_aibos(){
+
+        //日付
+        $before_2day = new Carbon('-2 day');
+            $before_2day_mm = $before_2day->month;
+            $before_2day_dd = $before_2day->day;
+        $yesterday = new Carbon('yesterday');
+            $yesterday_mm = $yesterday->month;
+            $yesterday_dd = $yesterday->day;
+        $today = new Carbon('today');
+            $today_mm = $today->month;
+            $today_dd = $today->day;
+
+        //誕生日(今日・昨日・一昨日)
+        $aibos = Aibo::where(function($q) use($today_mm,$today_dd) {
+            $q->whereMonth('aibo_birthday',$today_mm)->whereDay('aibo_birthday',$today_dd);
+        })->orderBy('id', 'asc')->get();
+
+        $aibos_1 = Aibo::Where(function($q) use($yesterday_mm,$yesterday_dd) {
+            $q->whereMonth('aibo_birthday',$yesterday_mm)->whereDay('aibo_birthday',$yesterday_dd);
+        })->orderBy('id', 'asc')->get();
+        $aibos = $aibos->merge($aibos_1); //今日+昨日
+        
+        $aibos_2 = Aibo::Where(function($q) use($before_2day_mm,$before_2day_dd) {
+            $q->whereMonth('aibo_birthday',$before_2day_mm)->whereDay('aibo_birthday',$before_2day_dd);
+        })->orderBy('id', 'asc')->get();
+        $aibos = $aibos->merge($aibos_2); //(今日+昨日)+一昨日
+
+        return $aibos; //誕生日3日分
+    }
+
+    public function list_syllabary() //50音順
+    {
+        return view('list_syllabary');
+    }
+
+    public function list_area() //居住地
+    {
+        return view('list_area');
+    }
+
+    public function list_birthday() //誕生日
+    {
+        // $aibos=Aibo::where('aibo_available_flag', true)->get();
+
+        // $month_ary = ["01"=>0,"02"=>0,"03"=>0,"04"=>0,"05"=>0,"06"=>0,"07"=>0,"08"=>0,"09"=>0,"10"=>0,"11"=>0,"12"=>0];
+
+        // foreach($aibos as $aibo){
+        //     $month = substr($aibo->aibo_birthday,5,2);
+        //     $month_ary[$month]++;
+        // }
+        // return view('aibo.index', compact('month_ary')); //aibo名鑑トップ
+        return view('list_birthday');
+    }
+
+    public function search_top() //検索条件入力画面
+    {
+        return view('search_top');
+    }
+
+    public function search_result() //検索結果画面
+    {
+        return view('search_result');
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -153,9 +227,9 @@ class AiboController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Aibo $aibo)
     {
-        //
+        return view('aibo.show', compact('aibo'));
     }
 
     /**
@@ -290,7 +364,10 @@ class AiboController extends Controller
 
         //DBに追加
         $aibo->save();
-        return back()->with('message', 'aibo情報を更新しました。');
+        return redirect()->route('aibo.show', $aibo)->with('message', 'aibo情報を更新しました。');
+        //return back()->with('message', 'aibo情報を更新しました。');
+
+        //return view('aibo.show', compact('aibo')); //これはNG。URLが/mypage/aiboとなってしまうため。
     }
 
     /**

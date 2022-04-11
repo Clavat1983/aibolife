@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Owner;
 use App\Models\Aibo;
+use App\Models\Diary;
+use Carbon\Carbon; //日付操作
 
 class HomeController extends Controller
 {
@@ -26,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //1:オーナー情報の登録を確認
+        //1.オーナー情報取得
         $user=auth()->user()->id;
         $owners=Owner::where('user_id', $user)->get();
 
@@ -40,8 +42,19 @@ class HomeController extends Controller
 
             if(count($aibos)==0){ //aiboを1匹も登録していない
                 return redirect()->route('aibo.create');
-            } else { //aiboを登録している
-                return view('home', compact('owners'));
+            } else { //aiboを登録している=トップページの情報取得
+
+                //最新情報の取得(最新6件か今日)
+
+                //日記の取得(最新6件)
+                $diaries = Diary::orderBy('id', 'desc')->limit(6)->get();
+
+                //掲示板の取得(最新6件)
+
+                //新しいお友達取得(最新6件)
+                $new_aibos = Aibo::orderBy('id', 'desc')->limit(6)->get();
+
+                return view('home', compact('owners', 'diaries', 'new_aibos'));
             }
         }
     }

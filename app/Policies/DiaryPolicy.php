@@ -55,7 +55,17 @@ class DiaryPolicy
      */
     public function update(User $user, Diary $diary)
     {
-        //
+        $login_owner=Owner::where('user_id', auth()->user()->id)->first();
+
+        if($login_owner==NULL){ //オーナー情報を登録していない(NG)
+            return false;
+        } else {
+            if ($login_owner->id == $diary->aibo->owner->id) { //ログインしているオーナーのIDと編集対象の日記のaiboのオーナーIDが一致
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     /**

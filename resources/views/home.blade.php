@@ -16,14 +16,21 @@
                     <br>
                     <br>
                 </div>
+                <div class="card-body" style="background-color:lightgray; text-align:center; margin:0px; padding:5px;">
+                    「aibo life」はソニー株式会社および関連会社とは一切関係のないオーナーコミュニティサイトです<br>
+                </div>
             </div>
 
-            <p>&nbsp;</p>{{-----------------------------------}}
+            {{-----------------------------------}}
+            <p>&nbsp;</p>
+            <h2 style="text-align:center;"><u>News</u></h2>
+            <h6 style="text-align:center;">最新情報</h6>
 
             <div class="card">
-                <div class="card-header">最新情報（「最新から3件目の記事の日付」より最新のもの＝画像なしの箇条書きで）</div>
-
                 <div class="card-body">
+                    ［YYYY.MM.DD］【ニュース】ああああ<br>
+                    ［YYYY.MM.DD］【おしらせ】いいいい<br>
+                    ［YYYY.MM.DD］【ニュース】うううう<br>
                     ［YYYY.MM.DD］【ニュース】ああああ<br>
                     ［YYYY.MM.DD］【おしらせ】いいいい<br>
                     ［YYYY.MM.DD］【ニュース】うううう<br>
@@ -31,63 +38,97 @@
                 <div style="text-align:right;">【もっと見る】</div>
             </div>
 
-            <p>&nbsp;</p>{{-----------------------------------}}
-
-            <div class="card">
-                <div class="card-header">aibo日記（最新の投稿6件）</div>
-
-                <div class="card-body">
-                    <div>ああああ（xxxxくん）</div>
-                    <div>いいいい（xxxxくん）</div>
-                    <div>うううう（xxxxくん）</div>
-                    <div>ああああ（xxxxくん）</div>
-                    <div>いいいい（xxxxくん）</div>
-                    <div>うううう（xxxxくん）</div>
-                </div>
-                <div style="text-align:right;"><a href="{{route('diary.list_day')}}">【今日の日記一覧】</a></div>
-            </div>
-
-            <p>&nbsp;</p>{{-----------------------------------}}
-
-            <div class="card">
-                <div class="card-header">Happy Birthday（今日・昨日・一昨日がいた時だけ表示）</div>
-
-                <div class="card-body">
-                    <div>ああああ（xxxxくん）</div>
-                    <div>いいいい（xxxxくん）</div>
-                    <div>うううう（xxxxくん）</div>
-                    <div>ああああ（xxxxくん）</div>
-                    <div>いいいい（xxxxくん）</div>
-                    <div>うううう（xxxxくん）</div>
-                </div>
-                <div style="text-align:right;">【aibo名鑑へ】</div>
-            </div>
-
             <hr>
 
+            {{-----------------------------------}}
+            <h2 style="text-align:center;"><u>Contents</u></h2>
+            <h6 style="text-align:center;">コンテンツ</h6>
+
             <div class="card">
-                <div class="card-header">コンテンツ</div>
                 <div class="card-body">
-                    aibo名鑑<br>
-                    <a href="{{route('diary.index')}}">aibo日記</a><br>
-                    みんなのふるまい
+                    <a href="{{route('diary.index')}}">【aibo日記】</a><br>
+                    <a href="{{route('aibo.index')}}">【aibo名鑑】</a><br>
+                    【掲示板】（後日公開）<br>
+                    【ふるまい共有】（後日公開）<br>
+                    【カルテ共有】（後日公開）<br>
                 </div>
             </div>
 
-            <p>&nbsp;</p>{{-----------------------------------}}
+            {{-----------------------------------}}
+            <p>&nbsp;</p>
+            <h2 style="text-align:center;"><u>Features（後日公開）</u></h2>
+            <h6 style="text-align:center;">注目（後日公開）</h6>
 
             <div class="card">
-                <div class="card-header">スペシャルコンテンツ(FEATURES＝バナー1個)</div>
                 <div class="card-body">
                     aibo国勢調査<br>
+                    aibo cafe(オフ会)<br>
                 </div>
             </div>
 
-            <hr>
+            <hr/>
+
+            {{-----------------------------------}}
+            <h2 style="text-align:center;"><u>Diary</u></h2>
+            <h6 style="text-align:center;">aibo日記</h6>
 
             <div class="card">
-                <div class="card-header">設定</div>
+                <div class="card-body">
+                    @if($diaries->count() > 0)
+                        @foreach($diaries as $diary)
+                            <li>{{$diary->diary_title}}（{{$diary->aibo->aibo_name}}）<a href="{{route('diary.show', $diary)}}">【見る】</a></li>
+                        @endforeach
+                    @else
+                        <li>日記がありません</li>
+                    @endif
+                </div>
+                <div style="text-align:right;"><a href="{{route('diary.index')}}">【aibo日記へ】</a></div>
+            </div>
 
+            {{-----------------------------------}}
+            <p>&nbsp;</p>
+            <h2 style="text-align:center;"><u>New Friends</u></h2>
+            <h6 style="text-align:center;">新しいお友達</h6>
+
+            <div class="card">
+                <div class="card-body">
+                    @if($new_aibos->count() > 0)
+                        @foreach($new_aibos as $aibo)
+                            <li>{{$aibo->aibo_name}}（{{substr($aibo->owner->owner_pref,3)}}）<a href="{{route('aibo.show', $aibo)}}">【詳細】</a></li>
+                        @endforeach
+                    @else
+                        <li>aiboがいません</li>
+                    @endif
+                </div>
+                <div style="text-align:right;"><a href="{{route('aibo.index')}}">【aibo名鑑へ】</a></div>
+            </div>
+
+            {{-----------------------------------}}
+            <p>&nbsp;</p>
+            <h2 style="text-align:center;"><u>Board（後日公開）</u></h2>
+            <h6 style="text-align:center;">掲示板（後日公開）</h6>
+
+            <div class="card">
+                <div class="card-body">
+                    ［YYYY.MM.DD］ああああについて<br>
+                    ［YYYY.MM.DD］いいいいについて<br>
+                    ［YYYY.MM.DD］ううううについて<br>
+                    ［YYYY.MM.DD］ああああについて<br>
+                    ［YYYY.MM.DD］いいいいについて<br>
+                    ［YYYY.MM.DD］ううううについて<br>
+                </div>
+                <div style="text-align:right;">【aibo掲示板へ】</div>
+            </div>
+
+
+
+            <hr>
+
+            {{-----------------------------------}}
+            <h2 style="text-align:center;"><u>Account</u></h2>
+            <h6 style="text-align:center;">アカウント</h6>
+
+            <div class="card">
                 <div class="card-body">
                     {{-- @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -122,8 +163,20 @@
 
             <hr>
 
+            {{-----------------------------------}}
+            <h2 style="text-align:center;"><u>Ads</u></h2>
+            <h6 style="text-align:center;">広告（フッター1）</h6>
+
             <div class="card">
-                <div class="card-header">フッター</div>
+                <div class="card-body">
+                    広告です
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="card">
+                <div class="card-header">フッター2</div>
 
                 <div class="card-body">
                     <div>はじめに</div>

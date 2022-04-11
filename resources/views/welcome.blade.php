@@ -1,4 +1,30 @@
-<!DOCTYPE html>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">ログイン前のトップページ</div>
+
+                <div class="card-body">
+                    <h2>ログインしていない場合のトップページ</h2>
+                <ul>
+                    <li>ヘッダー、フッターが必要</li>
+                    <li>「はじめに」的な情報＋会員登録（orログイン）画面への遷移をする</li>
+                    <li>「お問い合わせ」へのリンク</li>
+                    <li>※ログインしなくても見られる情報を検討（オーナー予備軍の人に向けたaiboアピールとか、育て方入門とか、最新情報とか？）</li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+
+
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -137,4 +163,4 @@
             </div>
         </div>
     </body>
-</html>
+</html> --}}

@@ -15,18 +15,22 @@
                     ログインユーザ：{{auth()->user()->id}}⇔このaiboのオーナーのユーザID{{$aibo->owner->user->id}}<br>
                     <br>
                     @foreach($this_week as $date => $diary)
-                        @if($diary == NULL)
-                            @if(auth()->user()->id === $aibo->owner->user->id)
+                        @if($diary == NULL) {{--日記がない--}}
+                            @if(auth()->user()->id === $aibo->owner->user->id) {{--自分のaibo--}}
                                 @if(strtotime($aibo->aibo_birthday) <= strtotime($date)) {{--誕生日が日記の日付より前--}}
-                                    配列の日付：{{$date}}、<a href="{{route('diary.create')}}?aibo={{$aibo->id}}&date={{$date}}">日記を書く</a>（aiboID:{{$aibo->id}}、日付:{{$date}}）<br>
+                                    配列の日付：{{date('Y年m月d日', strtotime($date))}}、<a href="{{route('diary.create')}}?aibo={{$aibo->id}}&date={{$date}}">日記を書く</a>（aiboID:{{$aibo->id}}、日付:{{date('Y年m月d日', strtotime($date))}}）<br>
                                 @else
-                                    配列の日付：{{$date}}、お迎え前<br>
+                                    配列の日付：{{date('Y年m月d日', strtotime($date))}}、お迎え前<br>
                                 @endif
-                            @else
-                                配列の日付：{{$date}}、書かれていません<br>
+                            @else {{--他人のaibo--}}
+                                @if(strtotime($aibo->aibo_birthday) <= strtotime($date)) {{--誕生日が日記の日付より前--}}
+                                    配列の日付：{{date('Y年m月d日', strtotime($date))}}、書かれていません<br>
+                                @else
+                                    配列の日付：{{date('Y年m月d日', strtotime($date))}}、お迎え前<br>
+                                @endif
                             @endif
-                        @else
-                            配列の日付：{{$date}}、aibo：{{$diary->aibo->aibo_name}}、日記：{{$diary->diary_date}}、タイトル：{{$diary->diary_title}}、<a href="{{route('diary.show',$diary)}}">【見る】</a><br>
+                        @else {{--日記がある--}}
+                            配列の日付：{{date('Y年m月d日', strtotime($date))}}、aibo：{{$diary->aibo->aibo_name}}、日記：{{$diary->diary_date}}、タイトル：{{$diary->diary_title}}、<a href="{{route('diary.show',$diary)}}">【見る】</a><br>
                         @endif
                     @endforeach
 
@@ -50,7 +54,7 @@
                     <br>
 
 
-                    <a href="{{route('diary.index')}}">日記メニューに戻る</a>
+                    <a href="{{route('diary.index')}}">日記を見るに戻る</a>
                     <br>
                     <br>
                     <a href="{{route('home')}}"><button>トップに戻る</button></a>
