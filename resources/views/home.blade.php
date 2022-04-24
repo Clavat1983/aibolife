@@ -35,7 +35,7 @@
                     ［YYYY.MM.DD］【おしらせ】いいいい<br>
                     ［YYYY.MM.DD］【ニュース】うううう<br>
                 </div>
-                <div style="text-align:right;">【もっと見る】</div>
+                <div style="text-align:right;"><a href="{{route('news.index')}}">【もっと見る】</a></div>
             </div>
 
             <hr>

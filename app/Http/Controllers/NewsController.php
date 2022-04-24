@@ -15,7 +15,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news_all = News::where('news_publication_flag',1)->get();
+        return view('news.index', compact('news_all'));
     }
 
     /**
@@ -25,7 +26,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('news.create');
+        $now = date('Y-m-d').'T'.date('H:i');
+        return view('news.create', compact('now'));
     }
 
     /**
@@ -38,12 +40,20 @@ class NewsController extends Controller
     {
         //バリデーション
         $inputs=$request->validate([
+            'news_publication_datetime' => 'required',
+            'news_category' => 'required',
+            'news_title' => 'required',
             'news_body' => 'required',
         ]);
 
-        $news = new News();
-        $news->news_body = $inputs['news_body'];
+        
 
+        $news = new News();
+        $news->news_publication_datetime = $inputs['news_publication_datetime'];
+        $news->news_publication_flag = true;//デフォルト
+        $news->news_category = $inputs['news_category'];
+        $news->news_title = $inputs['news_title'];
+        $news->news_body = $inputs['news_body'];
         $news->save();
         return back();
     }

@@ -36,13 +36,13 @@ Route::middleware(['verified'])->group(function(){
     Route::post('/mypage/owner/transfer/result', 'OwnerController@transfer_result')->name('owner.transfer_result');//旧ユーザ情報の入力画面
 
     Route::get('/mypage/owner/create', 'OwnerController@create')->name('owner.create');//オーナー登録(新規-入力画面)
-    Route::post('/mypage/owner/store', 'OwnerController@store')->name('owner.store');//オーナー登録(新規-DB登録)
+    Route::post('/mypage/owner', 'OwnerController@store')->name('owner.store');//オーナー登録(新規-DB登録)
     Route::get('/mypage/owner/{owner}/edit', 'OwnerController@edit')->name('owner.edit');//変更(入力)
     Route::put('/mypage/owner/{owner}', 'OwnerController@update')->name('owner.update');//変更(DB更新)
 
     //aibo情報(mypage)
     Route::get('/mypage/aibo/create', 'AiboController@create')->name('aibo.create');//aibo登録
-    Route::post('/mypage/aibo/store', 'AiboController@store')->name('aibo.store');//aibo登録・追加(新規-DB登録)
+    Route::post('/mypage/aibo', 'AiboController@store')->name('aibo.store');//aibo登録・追加(新規-DB登録)
     Route::get('/mypage/aibo/{aibo}/edit', 'AiboController@edit')->name('aibo.edit');//変更(入力)
     Route::put('/mypage/aibo/{aibo}', 'AiboController@update')->name('aibo.update');//変更(DB更新)
     //aibo情報(公開)
@@ -62,7 +62,7 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/diary/archive', 'DiaryController@archive')->name('diary.archive');//aibo日記（過去の日記アーカイブ）
 
     Route::get('/diary/create', 'DiaryController@create')->name('diary.create');//日記を書く(新規-入力画面)
-    Route::post('/diary/store', 'DiaryController@store')->name('diary.store');//日記を書く(新規-DB登録)
+    Route::post('/diary', 'DiaryController@store')->name('diary.store');//日記を書く(新規-DB登録)
     Route::get('/diary/{diary}', 'DiaryController@show')->name('diary.show');//日記を個別表示
     Route::get('/diary/{diary}/edit', 'DiaryController@edit')->name('diary.edit');//変更(入力)
     Route::put('/diary/{diary}', 'DiaryController@update')->name('diary.update');//変更(DB更新)
@@ -72,6 +72,7 @@ Route::middleware(['verified'])->group(function(){
 
 
     //最新情報
+    Route::get('/news', 'NewsController@index')->name('news.index');//ニュース登録
     Route::get('/news/create', 'NewsController@create')->name('news.create');//ニュース登録
     Route::post('/news', 'NewsController@store')->name('news.store');//ニュース登録
     Route::get('/news/{news}', 'NewsController@show')->name('news.show');
