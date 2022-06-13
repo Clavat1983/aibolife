@@ -46,16 +46,15 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        @guest
+                            @guest
+                                @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -94,7 +93,10 @@
         </nav>
 
         @auth {{--ログインしていたら--}}
-        <nav class="navbar navbar-expand-md" style="background-color:pink;">｜はじめに｜最新情報｜日記｜名鑑｜ふるまい｜掲示板｜オフ会｜お問い合わせ｜</nav>
+            {{-- トップページが表示される場合(オーナー登録済 かつ aibo登録済)、グローバルナビを出力 --}}
+            @if(auth()->user()->owner != NULL && count(auth()->user()->owner->aibos) > 0)
+                <nav class="navbar navbar-expand-md" style="background-color:pink;">｜はじめに｜最新情報｜日記｜名鑑｜ふるまい｜掲示板｜オフ会｜お問い合わせ｜</nav>
+            @endif
         @endauth
 
         <main class="py-4">

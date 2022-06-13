@@ -8,11 +8,32 @@
                 <div class="card-header">ログイン前のトップページ</div>
 
                 <div class="card-body">
-                    <h2>ログインしていない場合のトップページ</h2>
+                    <h2>（当初暫定的に...）</h2>
+                    <p>①2022/●/●以降、新「aibo life」を初めて利用される場合は「アカウント作成」をお願いします。</p>
+                    <p style="text-align:center;"><a href="{{route('register')}}"><button class="btn btn-primary">アカウント作成</button></a></p>
+                    <p>※旧「aibo life」（アプリ版）をお使いだった方も、初回は「アカウント作成」へお進みください。旧「aibo life」のデータは全て移行されます。</p>
+                    <p>&nbsp;</p>
+                    <p>②新「aibo life」に登録済（アカウント作成済）の方は「ログイン」からお進みください。</p>
+                    <p style="text-align:center;"><a href="{{route('login')}}"><button class="btn btn-primary">ログイン</button></a></p>
+                    <p>-----------------</p>
+                    <p style="text-align:center;"><a href="#"><button class="btn btn-primary">お問い合わせ(未)</button></a></p>
+                    <p>-----------------</p>
+                    <ul>
+                        <li>ヘッダー、フッターが必要</li>
+                        <li>「はじめに」的な情報＋会員登録（orログイン）画面への遷移をする</li>
+                        <li>「お問い合わせ」へのリンク（フッターで良いか...）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <p>&nbsp;</p>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">ログイン前のトップページ</div>
+
+                <div class="card-body">
+                    <h2>最終的には...</h2>
                 <ul>
-                    <li>ヘッダー、フッターが必要</li>
-                    <li>「はじめに」的な情報＋会員登録（orログイン）画面への遷移をする</li>
-                    <li>「お問い合わせ」へのリンク</li>
                     <li>※ログインしなくても見られる情報を検討（オーナー予備軍の人に向けたaiboアピールとか、育て方入門とか、最新情報とか？）</li>
                 </ul>
                 </div>

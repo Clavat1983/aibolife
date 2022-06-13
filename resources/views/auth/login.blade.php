@@ -64,6 +64,12 @@
                                 @endif
                             </div>
                         </div>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <div class="row mb-0">【ご確認ください】<br>
+                            旧「aibo life」のログインID（メールアドレス）・パスワード（パスコード）ではログインできません。<br>
+                            新「aibo life」を初めて使用される方は「アカウント作成」へお進みください。旧「aibo life」のデータは全て移行されます。
+                        </div>
                     </form>
                 </div>
             </div>
