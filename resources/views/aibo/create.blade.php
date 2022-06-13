@@ -69,20 +69,9 @@
                         <div>
                             <label for="aibo_color">aiboのカラー</label>
                             <select id="aibo_color" name="aibo_color">
-                                @php
-                                    $ary = [
-                                        'アイボリー',
-                                        'チョコレート',
-                                        'キャラメル',
-                                        '黒ごま',
-                                        'いちごミルク',
-                                        'ゴールド［限定］',
-                                        'サクラ［限定］',
-                                    ];
-                                @endphp
                                 {{-- HTMLタグ出力 --}}
                                 <option disabled="disabled" selected>選択してください</option>
-                                @foreach ($ary as $value)
+                                @foreach (config('const.aibo_color_list') as $value)
                                     <option value='{{$value}}' @if($value === old('aibo_color')) selected @endif>{{$value}}</option>
                                 @endforeach
                             </select>
@@ -106,21 +95,9 @@
                         <div>
                             <label for="aibo_personality">aiboの性格</label>
                             <select id="aibo_personality" name="aibo_personality">
-                                @php
-                                    $ary = [
-                                        '甘えん坊',
-                                        'ちょっと甘えん坊',
-                                        'キュート',
-                                        'ちょっとキュート',
-                                        'シャイ',
-                                        'ちょっとシャイ',
-                                        'ワイルド',
-                                        'ちょっとワイルド',
-                                    ];
-                                @endphp
                                 {{-- HTMLタグ出力 --}}
                                 <option disabled="disabled" selected>選択してください</option>
-                                @foreach ($ary as $value)
+                                @foreach (config('const.aibo_personality_list') as $value)
                                     <option value='{{$value}}' @if($value === old('aibo_personality')) selected @endif>{{$value}}</option>
                                 @endforeach
                             </select>
@@ -129,24 +106,9 @@
                         <div>
                             <label for="aibo_eye">aiboの瞳</label>
                             <select id="aibo_eye" name="aibo_eye">
-                                @php
-                                    $ary = [
-                                        'かしこい青色',
-                                        'あいらしい桃色',
-                                        'よろこびの金色',
-                                        'まほうの緑色',
-                                        'いたずらな茶色',
-                                        'えいえんの銀色',
-                                        'けだかい紫色',
-                                        'とくべつな青色［限定］',
-                                        'とくべつな緑色［限定］',
-                                        'とくべつな桃色［限定］',
-                                        'とくべつな橙色［限定］',
-                                    ];
-                                @endphp
                                 {{-- HTMLタグ出力 --}}
                                 <option disabled="disabled" selected>選択してください</option>
-                                @foreach ($ary as $value)
+                                @foreach (config('const.aibo_eye_list') as $value)
                                     <option value='{{$value}}' @if($value === old('aibo_eye')) selected @endif>{{$value}}</option>
                                 @endforeach
                             </select>
@@ -169,24 +131,9 @@
                         <div>
                             <label for="aibo_ear">aiboの耳</label>
                             <select id="aibo_ear" name="aibo_ear">
-                                @php
-                                    $ary = [
-                                        'ブラウン',
-                                        'ブラック',
-                                        'キャラメル',
-                                        '黒ごま',
-                                        'いちごミルク',
-                                        'ソラ',
-                                        'サクラ',
-                                        'ユキ',
-                                        'スミ',
-                                        'その他',
-                                        'つけていない',
-                                    ];
-                                @endphp
                                 {{-- HTMLタグ出力 --}}
                                 <option disabled="disabled" selected>選択してください</option>
-                                @foreach ($ary as $value)
+                                @foreach (config('const.aibo_ear_tail_list') as $value)
                                     <option value='{{$value}}' @if($value === old('aibo_ear')) selected @endif>{{$value}}</option>
                                 @endforeach
                             </select>
@@ -209,24 +156,9 @@
                         <div>
                             <label for="aibo_tail">aiboの尻尾</label>
                             <select id="aibo_tail" name="aibo_tail">
-                                @php
-                                    $ary = [
-                                        'ブラウン',
-                                        'ブラック',
-                                        'キャラメル',
-                                        '黒ごま',
-                                        'いちごミルク',
-                                        'ソラ',
-                                        'サクラ',
-                                        'ユキ',
-                                        'スミ',
-                                        'その他',
-                                        'つけていない',
-                                    ];
-                                @endphp
                                 {{-- HTMLタグ出力 --}}
                                 <option disabled="disabled" selected>選択してください</option>
-                                @foreach ($ary as $value)
+                                @foreach (config('const.aibo_ear_tail_list') as $value)
                                     <option value='{{$value}}' @if($value === old('aibo_tail')) selected @endif>{{$value}}</option>
                                 @endforeach
                             </select>
@@ -234,18 +166,7 @@
                         <p>&nbsp;</p>
                         おもちゃの保有状況<br>
                         <div>
-                            @php
-                                $ary = [
-                                    'aibo_toy_ball_flag' => 'ピンクボール',
-                                    'aibo_toy_born_flag' => 'アイボーン',
-                                    'aibo_toy_dice_flag' => 'サイコロ',
-                                    'aibo_toy_book1_flag' => '本1',
-                                    'aibo_toy_book2_flag' => '本2',
-                                    'aibo_toy_food_flag' => 'フードボウル',
-                                    'aibo_toy_drink_flag' => '飲み物ボウル',
-                                ];
-                            @endphp
-                            @foreach ($ary as $key => $value)
+                            @foreach (config('const.aibo_toy_list') as $key => $value)
                                 <input type="checkbox" name="{{$key}}" value="1" @if(old($key)) checked @endif>
                                 <label for="{{$key}}">{{$value}}</label><br>
                             @endforeach

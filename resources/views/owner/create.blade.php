@@ -48,13 +48,12 @@
                         <label for="owner_pref">都道府県</label>
                             <select id="owner_pref" name="owner_pref">
                                 <option disabled="disabled" selected>選択してください</option>
-                                <option value="01_北海道" @if('01_北海道' === old('owner_pref')) selected @endif>北海道</option>
-                                <option value="02_青森県" @if('02_青森県' === old('owner_pref')) selected @endif>青森県</option>
-                                <option value="03_秋田県" @if('03_秋田県' === old('owner_pref')) selected @endif>秋田県</option>
-                                <option value="28_兵庫県" @if('28_兵庫県' === old('owner_pref')) selected @endif>兵庫県</option>
-                                <option value="47_沖縄県" @if('47_沖縄県' === old('owner_pref')) selected @endif>沖縄県</option>
-                                <option value="99_海外" @if('99_海外' === old('owner_pref')) selected @endif>海外</option>
-                                <option value="00_非公開" @if('00_非公開' === old('owner_pref')) selected @endif>非公開</option>
+                                @foreach(config('const.pref_list') as $pref)
+                                    @php
+                                        $pref_echo = mb_substr($pref,3); //数字2桁と_は消す
+                                    @endphp
+                                    <option value="{{ $pref }}" @if($pref === old('owner_pref')) selected @endif>{{ $pref_echo }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <p>&nbsp;</p>

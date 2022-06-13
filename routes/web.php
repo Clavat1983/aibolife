@@ -72,10 +72,10 @@ Route::middleware(['verified'])->group(function(){
 
 
     //最新情報
-    Route::get('/news', 'NewsController@index')->name('news.index');//ニュース登録
-    Route::get('/news/create', 'NewsController@create')->name('news.create');//ニュース登録
-    Route::post('/news', 'NewsController@store')->name('news.store');//ニュース登録
-    Route::get('/news/{news}', 'NewsController@show')->name('news.show');
+    Route::get('/news', 'NewsController@index')->name('news.index');//最新情報一覧
+    Route::get('/news/create', 'NewsController@create')->name('news.create');//最新情報(新規-入力画面)
+    Route::post('/news', 'NewsController@store')->name('news.store');//最新情報(新規-DB登録)
+    Route::get('/news/{news}', 'NewsController@show')->name('news.show');//最新情報（個別表示）
 
 });
 

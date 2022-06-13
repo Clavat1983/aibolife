@@ -51,14 +51,23 @@
                         </div>
 
                         <p>&nbsp;</p>
+
+                        
                         {{--本文--}}
-                            <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+                        <div>
+                            <label for="news_body">本文</label>
+                            <textarea class="ckeditor" name="news_body" id="news_body">{{old('news_body')}}</textarea>
+                        </div>
+
+                            {{-- ckeditor 4.14.1 --}}
+                            {{-- <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
                             <div>
                                 <label for="news_body">本文</label>
                                 <textarea class="ckeditor" name="news_body" id="news_body">{{old('news_body')}}</textarea>
                             </div>
-                            <p>&nbsp;</p>
+                            <p>&nbsp;</p> --}}
 
+                            {{-- ckeditor 5.33.0 --}}
                             {{-- <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
                             <div>
                                 <label for="news_body">本文</label>
