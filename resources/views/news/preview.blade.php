@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <p style="background-color:black; color:yellow; text-align:center;">【管理者専用ページ】</p>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -42,23 +43,14 @@
                     @if($news->news_link4_name)<a href="{{$news->news_link4_url}}" target="blank">{{$news->news_link4_name}}</a><br>@endif
                     @if($news->news_link5_name)<a href="{{$news->news_link5_url}}" target="blank">{{$news->news_link5_name}}</a><br>@endif
 
-                    {{-- 前後移動 --}}
+                    {{-- 編集画面へ --}}
                     <p style="text-align:center;">
-                        @if($prev)
-                            <a href="{{route('news.show', $prev)}}">【前】</a>
-                        @else
-                           【－】
-                        @endif
-                        ｜ <a href="{{route('news.index')}}">【一覧】</a>｜
-                        @if($next)
-                            <a href="{{route('news.show', $next)}}">【次】</a>
-                        @else
-                            【－】
-                        @endif
+                        <a href="{{route('news.edit', $news)}}">【編集画面へ】</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
+    <p style="background-color:black; color:yellow; text-align:center;">【管理者専用ページ】</p>
 </div>
 @endsection

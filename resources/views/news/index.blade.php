@@ -8,10 +8,15 @@
                 <div class="card-header">ニュース一覧</div>
 
                 <div class="card-body">
-
+                    <table>
                     @foreach($news_all as $news)
-                        {{$news->news_title}}<br>
+                        <tr>
+                            <td style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
+                            <td style="padding:10px;">{{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}｜{{$news->news_category}}<br><a href="{{route('news.show', $news)}}">{{$news->news_title}}</a></td>
+                        </tr>
                     @endforeach
+                    </table>
+                    {{$news_all->links()}}
                 </div>
 
 

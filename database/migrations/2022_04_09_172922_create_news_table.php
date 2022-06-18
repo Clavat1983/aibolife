@@ -17,16 +17,25 @@ class CreateNewsTable extends Migration
             $table->id();
             $table->datetime('news_publication_datetime');//公開日時
             $table->boolean('news_publication_flag')->dafault(true);//公開フラグ
-            $table->text('news_category');//「公式ニュース」か「お知らせ】か
+            $table->text('news_category');
             $table->text('news_title');
             $table->longText('news_body');
 
-            $table->text('news_photo1')->default('default.jpg');
-            $table->text('news_photo2')->nullable();
-            $table->text('news_photo3')->nullable();
-            $table->text('news_photo4')->nullable();
-            $table->text('news_photo5')->nullable();
+            //画像
+            $table->text('news_image1')->default('default.jpg');
+            $table->text('news_image2')->nullable();
+            $table->text('news_image3')->nullable();
+            $table->text('news_image4')->nullable();
+            $table->text('news_image5')->nullable();
 
+            //タグ
+            $table->text('news_tag1')->nullable();
+            $table->text('news_tag2')->nullable();
+            $table->text('news_tag3')->nullable();
+            $table->text('news_tag4')->nullable();
+            $table->text('news_tag5')->nullable();
+
+            //リンク
             $table->text('news_link1_name')->nullable();
             $table->text('news_link1_url')->nullable();
             $table->text('news_link2_name')->nullable();
@@ -38,13 +47,6 @@ class CreateNewsTable extends Migration
             $table->text('news_link5_name')->nullable();
             $table->text('news_link5_url')->nullable();
 
-            //タグ
-            $table->boolean('news_tag1')->default(false);
-            $table->boolean('news_tag2')->default(false);
-            $table->boolean('news_tag3')->default(false);
-            $table->boolean('news_tag4')->default(false);
-            $table->boolean('news_tag5')->default(false);
-            
             $table->timestamps();
         });
     }

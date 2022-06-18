@@ -28,12 +28,18 @@
 
             <div class="card">
                 <div class="card-body">
-                    ［YYYY.MM.DD］【ニュース】ああああ<br>
-                    ［YYYY.MM.DD］【おしらせ】いいいい<br>
-                    ［YYYY.MM.DD］【ニュース】うううう<br>
-                    ［YYYY.MM.DD］【ニュース】ああああ<br>
-                    ［YYYY.MM.DD］【おしらせ】いいいい<br>
-                    ［YYYY.MM.DD］【ニュース】うううう<br>
+                    <table>
+                        @if($news_list->count() > 0)
+                            @foreach($news_list as $news)
+                                <tr>
+                                    <td style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
+                                    <td style="padding:10px;">{{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}｜{{$news->news_category}}<br><a href="{{route('news.show', $news)}}">{{$news->news_title}}</a></td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr><td>最新情報がありません</td></tr>
+                        @endif
+                    </table>
                 </div>
                 <div style="text-align:right;"><a href="{{route('news.index')}}">【もっと見る】</a></div>
             </div>
@@ -74,6 +80,7 @@
 
             <div class="card">
                 <div class="card-body">
+                    <ul>
                     @if($diaries->count() > 0)
                         @foreach($diaries as $diary)
                             <li>{{$diary->diary_title}}（{{$diary->aibo->aibo_name}}）<a href="{{route('diary.show', $diary)}}">【見る】</a></li>
@@ -81,6 +88,7 @@
                     @else
                         <li>日記がありません</li>
                     @endif
+                    </ul>
                 </div>
                 <div style="text-align:right;"><a href="{{route('diary.index')}}">【aibo日記へ】</a></div>
             </div>
@@ -92,6 +100,7 @@
 
             <div class="card">
                 <div class="card-body">
+                    <ul>
                     @if($new_aibos->count() > 0)
                         @foreach($new_aibos as $aibo)
                             <li>{{$aibo->aibo_name}}（{{substr($aibo->owner->owner_pref,3)}}）<a href="{{route('aibo.show', $aibo)}}">【詳細】</a></li>
@@ -99,6 +108,7 @@
                     @else
                         <li>aiboがいません</li>
                     @endif
+                    </ul>
                 </div>
                 <div style="text-align:right;"><a href="{{route('aibo.index')}}">【aibo名鑑へ】</a></div>
             </div>

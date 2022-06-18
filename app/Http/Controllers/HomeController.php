@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Owner;
 use App\Models\Aibo;
+use App\Models\News;
 use App\Models\Diary;
 use Carbon\Carbon; //日付操作
 
@@ -44,7 +45,8 @@ class HomeController extends Controller
                 return redirect()->route('aibo.create');
             } else { //aiboを登録している=トップページの情報取得
 
-                //最新情報の取得(最新6件か今日)
+                //最新情報の取得(最新6件)
+                $news_list = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->limit(6)->get();
 
                 //日記の取得(最新6件)
                 $diaries = Diary::orderBy('id', 'desc')->limit(6)->get();
@@ -54,7 +56,7 @@ class HomeController extends Controller
                 //新しいお友達取得(最新6件)
                 $new_aibos = Aibo::orderBy('id', 'desc')->limit(6)->get();
 
-                return view('home', compact('owners', 'diaries', 'new_aibos'));
+                return view('home', compact('owners', 'news_list', 'diaries', 'new_aibos'));
             }
         }
     }
