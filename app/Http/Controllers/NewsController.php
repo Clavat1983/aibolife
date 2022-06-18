@@ -258,9 +258,7 @@ class NewsController extends Controller
             'news_link5_url' => 'nullable|url',
         ]);
 
-        // //現在のニュースの最大ID
-        // $max = News::max('id');
-        // $news_id = $max + 1; //最大のid+1（今回登録されるNewsのid）
+        $news_id = $news->id;
 
         // //値のセット
         // $news = new News();
