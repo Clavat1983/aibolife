@@ -22,11 +22,11 @@ class CreateNewsTable extends Migration
             $table->longText('news_body');
 
             //画像
-            $table->text('news_image1')->default('default.jpg');
-            $table->text('news_image2')->nullable();
-            $table->text('news_image3')->nullable();
-            $table->text('news_image4')->nullable();
-            $table->text('news_image5')->nullable();
+            $table->string('news_image1')->nullable();
+            $table->string('news_image2')->nullable();
+            $table->string('news_image3')->nullable();
+            $table->string('news_image4')->nullable();
+            $table->string('news_image5')->nullable();
 
             //タグ
             $table->text('news_tag1')->nullable();
