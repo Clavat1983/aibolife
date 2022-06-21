@@ -85,6 +85,9 @@ Route::middleware(['verified'])->group(function(){
 });
 
 //認証外
-Route::get('/mypage/user/reverify', function(){return view('user.reverify');})->name('user.reverify');
-
+    //再認証画面へ
+    Route::get('/mypage/user/reverify', function(){return view('user.reverify');})->name('user.reverify');
+    //お問い合わせ
+    Route::get('/contact/create', 'ContactController@create')->name('contact.create');//お問い合わせ(入力画面)
+    Route::post('/contact', 'ContactController@store')->name('contact.store');//お問い合わせ(保存)
 

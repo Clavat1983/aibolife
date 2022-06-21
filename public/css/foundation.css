@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Foundation
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -279,44 +280,41 @@ template {
 [hidden] {
   display: none;
 }
-:root
-{
-    --text-header1-size: 3.6rem;
-    --text-header2-size: 3.2rem;
-    --text-header3-size: 2.8rem;
-    --text-header4-size: 2.4rem;
-    --text-header5-size: 1.8rem;
-    --text-header6-size: 1.4rem;
-    --text-header6-size: 1.4rem;
-    --text-paragraph-size: 1.4rem;
-    --text-note-size: 1.2rem;
-    --text-label-size: 1.0rem;
-    --text-header-weight: 700;
-    --text-header-line-height: 1.4;
+:root {
+  --text-header-line-height: 1.4;
+  --text-header-weight: 700;
+  --text-header1-size: 3.6rem;
+  --text-header2-size: 3.2rem;
+  --text-header3-size: 2.8rem;
+  --text-header4-size: 2.4rem;
+  --text-header5-size: 1.8rem;
+  --text-header6-size: 1.4rem;
+  --text-header6-size: 1.4rem;
+  --text-label-size: 1.0rem;
+  --text-note-size: 1.2rem;
+  --text-paragraph-size: 1.4rem;
 }
-:root
-{
-    --color-primary-text: #4d4d4d;
-    --color-secondary-text: #737373;
-    --color-tertiary-text: #999;
-    --color-gray-background: #f5f5f5;
-    --color-white-background: #fff;
-    --color-error-background: #fdeded;
-    --color-alert-background: #edf4fd;
-    --color-gray-border: #e0e0e0;
-    --color-error-border: #f8c9c9;
-    --color-alert-border: #c9ddf8;
-    --color-error-text: #ec6f6f;
-    --color-alert-text: #6fa5ec;
-    --color-primary-brand: #ec6f81;
-    --color-secondary-brand: #f29da9;
+:root {
+  --color-alert-background: #edf4fd;
+  --color-alert-border: #c9ddf8;
+  --color-alert-text: #6fa5ec;
+  --color-error-background: #fdeded;
+  --color-error-border: #f8c9c9;
+  --color-error-text: #ec6f6f;
+  --color-gray-background: #f5f5f5;
+  --color-gray-border: #e0e0e0;
+  --color-primary-brand: #ec6f81;
+  --color-primary-text: #4d4d4d;
+  --color-secondary-brand: #f29da9;
+  --color-secondary-text: #737373;
+  --color-tertiary-text: #999;
+  --color-white-background: #fff;
 }
 /* width や height がパディングやボーダーに依存しないようにする */
 *,
 *:before,
-*:after
-{
-    box-sizing: border-box;
+*:after {
+  box-sizing: border-box;
 }
 /* デフォルトのマージンを削除 */
 h1,
@@ -324,142 +322,112 @@ h2,
 h3,
 h4,
 h5,
-h6
-{
-    font-size: 1em;
-
-    margin: 0;
+h6 {
+  font-size: 1em;
+  margin: 0;
 }
 /* IE6/7 で 2 つ個以上の連続した br タグは無視するバグに対応 */
-br
-{
-    letter-spacing: 0;
+br {
+  letter-spacing: 0;
 }
 /* デフォルトのマージンを削除 */
 p,
 blockquote,
 dl,
 dd,
-figure
-{
-    margin: 0;
+figure {
+  margin: 0;
 }
 /*
   長い行は改行させる
   デフォルトのマージンを削除
 */
-pre
-{
-    margin: 0;
-
-    white-space: pre-wrap;
-    word-wrap: break-word;
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 /* デフォルトのマージンを削除 */
 ol,
-ul
-{
-    margin: 0;
-    padding: 0;
+ul {
+  margin: 0;
+  padding: 0;
 }
 /* デフォルトのマージンを削除 */
-li
-{
-    list-style: none;
+li {
+  list-style: none;
 }
 /* フォントのサイズを統合 */
 button,
 input,
 optgroup,
 select,
-textarea
-{
-    font-size: 1em;
+textarea {
+  font-size: 1em;
 }
 /* マージンとボーダーを削除 */
-fieldset
-{
-    margin: 0;
-    padding: 0;
-
-    border: 0;
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 /* Chrome で selectbox の background-color を継承しない対策 */
-select
-{
-    line-height: inherit;
-
-    background-color: inherit;
+select {
+  background-color: inherit;
+  line-height: inherit;
 }
 /* セルの文字寄せをリセット */
 th,
-td
-{
-    text-align: left;
+td {
+  text-align: left;
 }
 /*
   文字寄せをリセット
   余白を削除
 */
-caption
-{
-    padding: 0;
-
-    text-align: left;
+caption {
+  padding: 0;
+  text-align: left;
 }
-html
-{
-    font-size: 62.5%;
+html {
+  font-size: 62.5%;
 }
-body
-{
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 1.6;
-
-    margin: 0;
-    padding: 0;
-
-    word-break: break-all;
-
-    color: var(--color-primary-text);
-    background-color: var(--color-gray-background);
+body {
+  background-color: var(--color-gray-background);
+  color: var(--color-primary-text);
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
 }
 p,
 ul,
 ol,
-dl
-{
-    margin-bottom: 1em;
+dl {
+  margin-bottom: 1em;
 }
-a
-{
-    text-decoration: none;
-
-    color: var(--color-primary-brand);
+a {
+  color: var(--color-primary-brand);
+  text-decoration: none;
 }
-a:hover
-{
-    text-decoration: underline;
-
-    color: var(--color-primary-brand);
+a:hover {
+  color: var(--color-primary-brand);
+  text-decoration: underline;
 }
-img
-{
-    vertical-align: bottom;
+img {
+  vertical-align: bottom;
 }
 input,
 textarea,
-select
-{
-    font-family: inherit;
+select {
+  font-family: inherit;
 }
-@media all and (-ms-high-contrast: none)
-{
-    body
-    {
-        font-family: 'メイリオ', Meiryo, '游ゴシック体', '游ゴシック Medium', 'Yu Gothic Medium', 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', sans-serif;
-    }
+@media all and (-ms-high-contrast: none) {
+  body {
+    font-family: "メイリオ", Meiryo, "游ゴシック体", "游ゴシック Medium", "Yu Gothic Medium", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", sans-serif;
+  }
 }
