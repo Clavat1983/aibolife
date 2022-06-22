@@ -1,3 +1,8 @@
+{{--
+    パスワード再入力をもとめる画面
+    参考）https://blog.capilano-fw.com/?p=5043#i-5
+--}}
+
 @extends('layouts.app')
 
 @section('content')

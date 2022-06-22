@@ -42,7 +42,7 @@
                     <div class="alert">
                       <p class="alert__text">
                         旧「aibo life」のログインIDやパスワードはログインできません。<br>
-                        新「aibo life」のアカウント登録をお願いします。
+                        新「aibo life」の<a href="{{route('register')}}">新規登録</a>をお願いします。
                       </p>
                     <!-- /.alert --></div>
                   </div>
@@ -58,7 +58,7 @@
                       </dt>
                       <dd>
                         <div class="form-data__item">
-                          <p class="input">
+                          <p class="input @error('email') input--error @enderror">
                             <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="aibo@mail.com" required autofocus>
                           <!-- /.input --></p>
                         </div>
@@ -87,7 +87,7 @@
                       </dt>
                       <dd>
                         <div class="form-data__item">
-                          <p class="input">
+                          <p class="input @error('password') input--error @enderror">
                             <input type="password" id="password" name="password" placeholder="password1234" required>
                           <!-- /.input --></p>
                         </div>
