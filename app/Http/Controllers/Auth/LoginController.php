@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request; //オーバーライドしたメソッドで使用するために追加
 
 class LoginController extends Controller
 {
@@ -20,6 +21,16 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
+    //AuthenticatesUsers内のメソッドをオーバーライド
+    //emailとmin:8を追加している
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|email',
+            'password' => 'required|string|min:8',
+        ]);
+    }
 
     /**
      * Where to redirect users after login.

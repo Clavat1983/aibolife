@@ -55,7 +55,7 @@
                 <!-- /.form --></div>
               </div>
               <div class="panel__footer">
-                <form action="{{route('verification.resend') }}" name="resend" method="post">
+                <form action="{{route('verification.resend') }}" name="resend" method="post" novalidate>
                     @csrf
                     <ul class="btn-list">
                         <li><button type="submit" class="btn">メール再送</button></li>

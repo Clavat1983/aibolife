@@ -30,7 +30,7 @@
           <!-- /.img --></p>
         </div>
         <div class="external-content__body">
-          <form action="{{ route('password.update') }}" method="post">
+          <form action="{{ route('password.update') }}" method="post" novalidate>
             @csrf
 
             <input type="hidden" name="token" value="{{ $token }}">{{-- メールごとのトークン --}}

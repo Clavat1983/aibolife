@@ -30,7 +30,7 @@
           <!-- /.img --></p>
         </div>
         <div class="external-content__body">
-          <form action="{{ route('password.email') }}" method="post">
+          <form action="{{ route('password.email') }}" method="post" novalidate>
             @csrf
             <section class="panel">
               <header class="panel__header">

@@ -30,7 +30,7 @@
           <!-- /.img --></p>
         </div>
         <div class="external-content__body">
-          <form action="{{ route('register') }}" method="post">
+          <form action="{{ route('register') }}" method="post" novalidate>
             @csrf
             <input id="name" type="hidden" name="name" value="do_not_use">
 
