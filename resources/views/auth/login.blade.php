@@ -59,7 +59,7 @@
                       <dd>
                         <div class="form-data__item">
                           <p class="input @error('email') input--error @enderror">
-                            <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="aibo@mail.com" required autofocus>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="" required autofocus>
                           <!-- /.input --></p>
                         </div>
 @error('email')
@@ -88,7 +88,7 @@
                       <dd>
                         <div class="form-data__item">
                           <p class="input @error('password') input--error @enderror">
-                            <input type="password" id="password" name="password" placeholder="password1234" required>
+                            <input type="password" id="password" name="password" placeholder="" required>
                           <!-- /.input --></p>
                         </div>
 @error('password')

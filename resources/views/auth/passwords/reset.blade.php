@@ -63,7 +63,7 @@
                       <dd>
                         <div class="form-data__item">
                           <p class="input @error('email') input--error @enderror">
-                            <input type="email" id="email" name="email" value="{{ $email ?? old('email') }}" placeholder="aibo@mail.com" required readonly>
+                            <input type="email" id="email" name="email" value="{{ $email ?? old('email') }}" placeholder="" required readonly>
                           <!-- /.input --></p>
                         </div>
 @error('email')
