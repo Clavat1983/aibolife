@@ -70,18 +70,23 @@ Route::middleware(['verified'])->group(function(){
     //日記コメント
     Route::post('/diary/comment/store', 'DiaryCommentController@store')->name('diarycomment.store');//(新規-DB登録)
 
-
     //最新情報(News)
-        //管理者用
-        Route::get('/news/{news}/preview', 'NewsController@preview')->name('news.preview');//最新情報（個別表示=管理者プレビュー）
-        Route::get('/news/admin', 'NewsController@admin')->name('news.admin');//最新情報（全件表示）
-        Route::get('/news/create', 'NewsController@create')->name('news.create');//最新情報(新規-入力画面)
-        Route::post('/news', 'NewsController@store')->name('news.store');//最新情報(新規-DB登録)
-        Route::get('/news/{news}/edit', 'NewsController@edit')->name('news.edit');//変更(入力)
-        Route::put('/news/{news}', 'NewsController@update')->name('news.update');//変更(DB更新)
+        //管理者用(パスワード再確認を挟む)
+        Route::group(['middleware' => 'auth'], function(){
+            Route::middleware('password.confirm')->group(function(){
+                Route::get('/news/{news}/preview', 'NewsController@preview')->name('news.preview');//最新情報（個別表示=管理者プレビュー）
+                Route::get('/news/admin', 'NewsController@admin')->name('news.admin');//最新情報（全件表示）
+                Route::get('/news/create', 'NewsController@create')->name('news.create');//最新情報(新規-入力画面)
+                Route::post('/news', 'NewsController@store')->name('news.store');//最新情報(新規-DB登録)
+                Route::get('/news/{news}/edit', 'NewsController@edit')->name('news.edit');//変更(入力)
+                Route::put('/news/{news}', 'NewsController@update')->name('news.update');//変更(DB更新)
+            });
+        });
         //一般ユーザ
         Route::get('/news', 'NewsController@index')->name('news.index');//最新情報一覧
         Route::get('/news/{news}', 'NewsController@show')->name('news.show');//最新情報（個別表示）
+
+
 });
 
 //認証外

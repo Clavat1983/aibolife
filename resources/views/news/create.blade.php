@@ -221,6 +221,7 @@
             </div>
         </div>
     </div>
+    <br>
     <p style="background-color:black; color:yellow; text-align:center;">【管理者専用ページ】</p>
 </div>
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>

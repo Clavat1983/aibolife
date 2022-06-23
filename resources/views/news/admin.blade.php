@@ -7,8 +7,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">【管理者用】ニュース一覧（非公開含む全件）</div>
-
                 <div class="card-body">
+                    <p style="text-align:right;"><a href="{{route('news.create')}}">【新規ニュース投稿】</a></p>
                     <table>
                     @foreach($news_all as $news)
                         <tr>
@@ -32,6 +32,7 @@
             </div>
         </div>
     </div>
+    <br>
     <p style="background-color:black; color:yellow; text-align:center;">【管理者専用ページ】</p>
 </div>
 @endsection

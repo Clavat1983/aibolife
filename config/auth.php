@@ -90,14 +90,14 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
-            'expire' => 60, //60min
-            'throttle' => 60, //60min
+            'expire' => 60, //60=60min
+            'throttle' => 60, //60=60min
         ],
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | Password Confirmation Timeout
+    | Password Confirmation Timeout (パスワード確認画面が再表示されるまでの時間)
     |--------------------------------------------------------------------------
     |
     | Here you may define the amount of seconds before a password confirmation
@@ -106,6 +106,6 @@ return [
     |
     */
 
-    'password_timeout' => 3600, //60min
+    'password_timeout' => 1800, //1800=30min
 
 ];

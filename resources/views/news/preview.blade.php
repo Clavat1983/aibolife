@@ -47,10 +47,16 @@
                     <p style="text-align:center;">
                         <a href="{{route('news.edit', $news)}}">【編集画面へ】</a>
                     </p>
+                    {{-- 一覧画面へ --}}
+                    <p style="text-align:center;">
+                        <a href="{{route('news.admin')}}">【一覧画面へ】</a>
+                    </p>
+                    
                 </div>
             </div>
         </div>
     </div>
+    <br>
     <p style="background-color:black; color:yellow; text-align:center;">【管理者専用ページ】</p>
 </div>
 @endsection
