@@ -11,7 +11,8 @@
                     <h2>（当初暫定的に...）</h2>
                     <p>①2022/●/●以降、新「aibo life」を初めて利用される場合は「アカウント作成」をお願いします。</p>
                     <p style="text-align:center;"><a href="{{route('register')}}"><button class="btn btn-primary">アカウント作成</button></a></p>
-                    <p>※旧「aibo life」（アプリ版）をお使いだった方も、初回は「アカウント作成」へお進みください。旧「aibo life」のデータは全て移行されます。</p>
+                    <p>※旧「aibo life」（アプリ版）をお使いだった方も、初回は「アカウント作成」へお進みください。<br>
+                        アカウント作成の途中で、旧「aibo life」の全データを移行する画面が表示されます。</p>
                     <p>&nbsp;</p>
                     <p>②新「aibo life」に登録済（アカウント作成済）の方は「ログイン」からお進みください。</p>
                     <p style="text-align:center;"><a href="{{route('login')}}"><button class="btn btn-primary">ログイン</button></a></p>

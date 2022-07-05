@@ -32,6 +32,7 @@
         <div class="external-content__body">
           <form action="{{ route('password.email') }}" method="post" novalidate>
             @csrf
+
             <section class="panel">
               <header class="panel__header">
                 <h1 class="ttl ttl--type2">パスワード忘れ</h1>
@@ -40,13 +41,13 @@
                 <div class="form">
 @if (session('status'))
                   <div class="form__item">
-                    <div class="alert">
+                    <div class="alert alert--success">
                       <p class="alert__text">{{ session('status') }}</p>
                     <!-- /.alert --></div>
                   </div>
 @else
                   <div class="form__item">
-                    <div class="alert">
+                    <div class="alert alert--info">
                     <p class="alert__text">
                         パスワードの再設定メールを送信します。<br>
                         登録されているメールアドレスを入力してください。</p>
@@ -76,7 +77,7 @@
 @enderror
                         <div class="form-data__item">
                           <ul class="note-list">
-                            <li>補足事項</li>
+                            <li>登録されたメールアドレスを入力してください。</li>
                           <!-- /.note-list --></ul>
                         </div>
                       </dd>
@@ -87,6 +88,7 @@
               <div class="panel__footer">
                 <ul class="btn-list">
                   <li><button type="submit" class="btn">メール送信</button></li>
+                  <li><a href="{{ route('contact.create') }}">メールアドレスがわからない場合はこちら</a></li>
                 <!-- /.btn-list --></ul>
               </div>
             <!-- /.panel --></section>
@@ -116,54 +118,4 @@
 
   
 </body>
-
 </html>
-
-
-{{-- @extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection --}}

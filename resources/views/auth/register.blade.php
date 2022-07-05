@@ -32,6 +32,7 @@
         <div class="external-content__body">
           <form action="{{ route('register') }}" method="post" novalidate>
             @csrf
+            
             <input id="name" type="hidden" name="name" value="do_not_use">
 
             <section class="panel">
@@ -41,9 +42,9 @@
               <div class="panel__content">
                 <div class="form">
                   <div class="form__item">
-                    <div class="alert">
+                    <div class="alert alert--info">
                       <p class="alert__text">
-                        新「aibo life」をするためのアカウント作成を行います。<br>
+                        新「aibo life」のアカウント作成を行います。<br>
                         メールアドレスとパスワードを登録してください。
                       </p>
                     <!-- /.alert --></div>
@@ -71,7 +72,7 @@
 @enderror
                         <div class="form-data__item">
                           <ul class="note-list">
-                            <li>補足事項</li>
+                            <li>旧「aibo life」と異なるメールアドレスでも構いません。</li>
                           <!-- /.note-list --></ul>
                         </div>
                       </dd>
@@ -100,7 +101,7 @@
 @enderror
                         <div class="form-data__item">
                           <ul class="note-list">
-                            <li>補足事項</li>
+                            <li>半角英数字8文字以上</li>
                           <!-- /.note-list --></ul>
                         </div>
                       </dd>

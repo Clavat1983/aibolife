@@ -38,17 +38,22 @@
                 <div class="form">
                   <div class="form__item">
 @if (session('resent'))
-                    <div class="alert">
-                        <p class="alert__text">メールを再送しました。</p>
+                    <div class="alert alert--success">
+                      <p class="alert__text">メールを再送しました。</p>
+                    <!-- /.alert --></div>
+@else
+                    <div class="alert alert--success">
+                      <p class="alert__text">「アカウント作成」のお知らせメールを送付しました。</p>
                     <!-- /.alert --></div>
 @endif
-                    <div class="alert" style="margin-top:8px;">
+                    <div class="alert alert--info" style="margin-top:8px;">
                       <p class="alert__text">
-                        入力されたメールアドレスに「アカウント作成」のお知らせメールを送付しました。<br/>
-                        1時間以内にお知らせメール内に記載されたURLをクリックし、引き続きオーナー登録をお願いします。<br/>
+                        ①お知らせメールを受信してください。<br>
                         （迷惑メールフォルダなどに振り分けられていないかもご確認ください）<br>
+                        ②1時間以内にメール内に記載されたURLをクリックしてメール認証をしてください。
+                        ③認証後の画面に沿ってアカウント登録を引き続き実施してください。<br/>
                         <br/>
-                        お知らせメールが届いていない場合は、別のメールアドレスで「アカウント作成」を改めて実施いただくか、「メール再送」ボタンをクリックしてください。
+                        お知らせメールが届いていない場合は、別のメールアドレスで「アカウント作成」を改めて実施いただくか、以下の「メール再送」ボタンをクリックしてください。
                       </p>
                     <!-- /.alert --></div>
                   </div>
@@ -57,14 +62,16 @@
               <div class="panel__footer">
                 <form action="{{route('verification.resend') }}" name="resend" method="post" novalidate>
                     @csrf
+
                     <ul class="btn-list">
                         <li><button type="submit" class="btn">メール再送</button></li>
                     <!-- /.btn-list --></ul>
                 </form>
                 <form action="{{route('logout') }}" name="logout" method="post">
                     @csrf
+
                     <ul class="btn-list">
-                        <li style="margin-top:8px;"><a href="javascript:logout.submit()">新規登録する場合はこちら</a></li>
+                        <li style="margin-top:8px;"><a href="javascript:logout.submit()">登録をやり直す場合はこちら</a></li>
                     <!-- /.btn-list --></ul>
                 </form>
               </div>
@@ -94,38 +101,4 @@
 
   
 </body>
-
 </html>
-
-
-{{-- @extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">メール認証</div>
-
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            メールを再送付しました。
-                        </div>
-                    @endif
-
-                    入力されたメールアドレスに「アカウント作成」のお知らせメールを送付しました。<br/>
-                    1時間以内にお知らせメール内に記載されたURLをクリックし、引き続きオーナー登録をお願いします。<br/>
-                    （迷惑メールフォルダなどに振り分けられていないかもご確認ください）<br>
-                    <br/>
-                    お知らせメールが届いていない場合は、別のメールアドレスで「アカウント作成」を改めて実施いただくか、「メール再送」ボタンをクリックしてください。<br><br>
-                    <form method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="bottun" class="btn btn-primary">メール再送</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection --}}

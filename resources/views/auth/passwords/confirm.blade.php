@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="format-detection" content="telephone=no">
-  <title>パスワード再入力</title>
+  <title>パスワード確認</title>
   <meta name="description" content="">
   
   <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
@@ -42,14 +42,14 @@
             
             <section class="panel">
               <header class="panel__header">
-                <h1 class="ttl ttl--type2">パスワード再入力</h1>
+                <h1 class="ttl ttl--type2">パスワード確認</h1>
               </header>
               <div class="panel__content">
                 <div class="form">
                   <div class="form__item">
-                    <div class="alert">
+                    <div class="alert alert--warning">
                       <p class="alert__text">
-                        パスワードを再入力してください。
+                        セキュリティ確保のため、パスワードを入力してください。
                       </p>
                     <!-- /.alert --></div>
                   </div>
@@ -76,7 +76,7 @@
 @enderror
                         <div class="form-data__item">
                           <ul class="note-list">
-                            <li>補足事項</li>
+                            <li>半角英数字8文字以上</li>
                           <!-- /.note-list --></ul>
                         </div>
                       </dd>
@@ -86,9 +86,9 @@
               </div>
               <div class="panel__footer">
                 <ul class="btn-list">
-                  <li><button type="submit" class="btn">認証</button></li>
+                  <li><button type="submit" class="btn">パスワード認証</button></li>
 @if (Route::has('password.request'))
-                  <li><a href="{{ route('password.request') }}">パスワードを忘れた場合はこちら</a></li>
+                  <li><a href="{{ route('password.request') }}">パスワードがわからない場合はこちら</a></li>
 @endif
                 <!-- /.btn-list --></ul>
               </div>

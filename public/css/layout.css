@@ -7,10 +7,13 @@ Layout
 .wrap {
   min-height: 100vh;
   min-height: 100dvh;
-  min-width: 100vw;
+  min-width: 375px;
   overflow: hidden;
   position: relative;
   width: 100%;
+}
+.wrap--component {
+  background-color: #fff;
 }
 .external-footer {
   background-color: var(--color-primary-text);

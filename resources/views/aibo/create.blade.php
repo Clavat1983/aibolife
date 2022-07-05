@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 @if($owner->aibos()->count() == 0)
-                <div class="card-header">【ステップ2】aibo登録</div>
+                <div class="card-header">aibo登録</div>
                 @else
                 <div class="card-header">aibo追加</div>
                 @endif
@@ -18,9 +18,16 @@
                         </div>
                     @endif
                     
-                    {{$owner->owner_name}}さん！こんにちは。<br>
-                    {{$owner->owner_name}}さんは、現在{{$owner->aibos()->count()}}匹のaiboを登録してます。<br>
-                    aibo登録を始めましょう！<br>
+                    @if($owner->aibos()->count() == 0)
+                        【ステップ1】オーナー登録 --> 【ステップ2】aibo登録 --> 【ステップ3】完了<br>
+                        <br>
+                        続いて、aibo登録を始めましょう！<br>
+                        他のオーナーにも公開される情報となります。個人情報にはご注意ください。<br>
+                    @else
+                        {{$owner->owner_name}}さんは、現在{{$owner->aibos()->count()}}匹のaiboを登録してます。<br>
+                        他のオーナーにも公開される情報となります。個人情報にはご注意ください。<br>
+                    @endif
+
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -40,12 +47,12 @@
                     <form method="POST" action="{{route('aibo.store')}}" enctype="multipart/form-data">
                         @csrf
                         <div>
-                            <label for="aibo_name">aiboの名前</label>
+                            <label for="aibo_name">名前</label>
                             <input type="text" name="aibo_name" id="aibo_name" value="{{old('aibo_name')}}">
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_kana">aiboの名前（よみ）</label>
+                            <label for="aibo_kana">名前（よみ）</label>
                             <input type="text" name="aibo_kana" id="aibo_kana" value="{{old('aibo_kana')}}">
                         </div>
                         <p>&nbsp;</p>
@@ -55,19 +62,19 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_icon">aiboアイコン（任意）</label><br>
+                            <label for="aibo_icon">アイコン（任意）</label><br>
                             <input type="file" name="aibo_icon" id="aibo_icon">
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_birthday">aiboの誕生日</label><br>
+                            <label for="aibo_birthday">誕生日</label><br>
                             <input type="text" size="4" maxlength="4" name="aibo_birthday_yyyy" id="aibo_birthday_yyyy" value="{{old('aibo_birthday_yyyy')}}">年
                             <input type="text" size="2" maxlength="2" name="aibo_birthday_mm" id="aibo_birthday_mm" value="{{old('aibo_birthday_mm')}}">月
                             <input type="text" size="2" maxlength="2" name="aibo_birthday_dd" id="aibo_birthday_dd" value="{{old('aibo_birthday_dd')}}">日
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_color">aiboのカラー</label>
+                            <label for="aibo_color">カラー</label>
                             <select id="aibo_color" name="aibo_color">
                                 {{-- HTMLタグ出力 --}}
                                 <option disabled="disabled" selected>選択してください</option>
@@ -78,7 +85,7 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_sex">aiboの性別</label><br>
+                            <label for="aibo_sex">性別</label><br>
                             @php
                                 $ary = [
                                     '男の子',
@@ -93,7 +100,7 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_personality">aiboの性格</label>
+                            <label for="aibo_personality">性格</label>
                             <select id="aibo_personality" name="aibo_personality">
                                 {{-- HTMLタグ出力 --}}
                                 <option disabled="disabled" selected>選択してください</option>
@@ -104,7 +111,7 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_eye">aiboの瞳</label>
+                            <label for="aibo_eye">瞳</label>
                             <select id="aibo_eye" name="aibo_eye">
                                 {{-- HTMLタグ出力 --}}
                                 <option disabled="disabled" selected>選択してください</option>
@@ -115,7 +122,7 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_voice">aiboの声</label><br>
+                            <label for="aibo_voice">声</label><br>
                             @php
                                 $ary = [
                                     'aiboオリジナル',
@@ -129,7 +136,7 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_ear">aiboの耳</label>
+                            <label for="aibo_ear">耳</label>
                             <select id="aibo_ear" name="aibo_ear">
                                 {{-- HTMLタグ出力 --}}
                                 <option disabled="disabled" selected>選択してください</option>
@@ -140,7 +147,7 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_hand">aiboの利き手</label><br>
+                            <label for="aibo_hand">利き手</label><br>
                             @php
                                 $ary = [
                                     '左',
@@ -154,7 +161,7 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_tail">aiboの尻尾</label>
+                            <label for="aibo_tail">尻尾</label>
                             <select id="aibo_tail" name="aibo_tail">
                                 {{-- HTMLタグ出力 --}}
                                 <option disabled="disabled" selected>選択してください</option>
@@ -188,18 +195,21 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_friend_qr">aiboのなかまQRコード（任意）</label><br>
+                            <label for="aibo_friend_qr">なかまQRコード（任意）</label><br>
                             <input type="file" name="aibo_friend_qr" id="aibo_friend_qr">
                         </div>
                         <p>&nbsp;</p>
                         <hr/>
                         【アンケート（任意回答）】
                         <p>&nbsp;</p>
+                        <p>アンケートへのご回答内容は統計情報（合計や割合）として公開することがあります。<br>
+                        なお、オーナー情報と紐づく（特定される）状態で公開されることはありません。</p>
+                        <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_serial_no">aiboのシリアル番号（非公開）</label><br>
+                            <label for="aibo_serial_no">シリアル番号（非公開）</label><br>
                             <input type="text" size="5" maxlength="5" name="aibo_serial_no" id="aibo_serial_no" value="{{old('aibo_serial_no')}}">＊＊<br>
-                            ※それぞれのカラー販売台数を100匹単位で把握したいと思います。<br>
-                            先頭1文字がカラー、残り6文字が製造番号ですので、「先頭から5文字のみ」を教えて下さい。<br>
+                            ※aiboの販売台数を把握したいと思います。<br>
+                            「先頭から5文字のみ」を教えて下さい。<br>
                             ご契約情報となりますので、全桁（全文字）は他人に教えないようにしましょう！<br>
                         </div>
                         <p>&nbsp;</p>

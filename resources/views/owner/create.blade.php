@@ -5,12 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">【ステップ1】オーナー登録</div>
+                <div class="card-header">オーナー登録</div>
 
                 <div class="card-body">
+                    【ステップ1】オーナー登録 --> 【ステップ2】aibo登録 --> 【ステップ3】完了
+                    <br><br>
                     オーナー登録を始めましょう！<br>
-                    こちらは他のオーナー様への公開情報となります。
-
+                    他のオーナーにも公開される情報となります。個人情報にはご注意ください。<br>
+                    <br>
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -18,7 +20,7 @@
                                 <li>{{ $error }}</li>
                                 @endforeach
                                 @if(empty($errors->first('owner_icon')))
-                                    <li>オーナーアイコン画像を追加していた場合は、再度選択してください。</li>
+                                    <li>オーナーアイコンを追加していた場合は再度選択してください。</li>
                                 @endif
                             </ul>
                         </div>
@@ -57,7 +59,7 @@
                             </select>
                         </div>
                         <p>&nbsp;</p>
-                        <button>登録</button>
+                        <button>次へ</button>
                     </form>
                     
                 </div>

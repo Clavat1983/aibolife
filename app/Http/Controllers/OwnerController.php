@@ -125,9 +125,14 @@ class OwnerController extends Controller
         $inputs=$request->validate([
             'owner_name' => 'required|max:255',
             'owner_name_kana' => 'required|max:255|hiragana',
-            'owner_icon'=> 'image|max:10240',//10MB
+            'owner_icon'=> 'image|max:10240',//10240=10MB
             'owner_pref' => 'required',
-        ]);
+        ],
+        //エラーメッセージ
+        [
+            'owner_icon.max' => "オーナーアイコンのファイルサイズは10MB以下にしてください。",
+        ]
+        );
 
         //オーナー情報をセット(新規)
         $owner = new Owner();
@@ -147,8 +152,8 @@ class OwnerController extends Controller
 
         //DBに追加
         $owner->save();
-        //return redirect()->route('home');
-        return view('owner.create_result', compact('owner'));
+        return redirect()->route('home');
+        //return view('owner.create_result', compact('owner'));
     }
 
     /**

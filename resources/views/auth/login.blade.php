@@ -32,6 +32,7 @@
         <div class="external-content__body">
           <form action="{{ route('login') }}" method="post" novalidate>
             @csrf
+            
             <section class="panel">
               <header class="panel__header">
                 <h1 class="ttl ttl--type2">ログイン</h1>
@@ -39,10 +40,9 @@
               <div class="panel__content">
                 <div class="form">
                   <div class="form__item">
-                    <div class="alert">
+                    <div class="alert alert--info">
                       <p class="alert__text">
-                        旧「aibo life」のログインIDやパスワードはログインできません。<br>
-                        新「aibo life」の<a href="{{route('register')}}">新規登録</a>をお願いします。
+                        旧「aibo life」のログインIDやパスワードはログインできません。新「aibo life」の<a href="{{route('register')}}">新規登録</a>をお願いします。
                       </p>
                     <!-- /.alert --></div>
                   </div>
@@ -67,11 +67,15 @@
                           <p class="error">{{ $message }}</p>
                         </div>
 @enderror
+                        @php
+                        /*
                         <div class="form-data__item">
                           <ul class="note-list">
                             <li>補足事項</li>
                           <!-- /.note-list --></ul>
                         </div>
+                        */
+                        @endphp
                       </dd>
                     <!-- /.form-data --></dl>
                   </div>
@@ -98,7 +102,7 @@
 @enderror
                         <div class="form-data__item">
                           <ul class="note-list">
-                            <li>補足事項</li>
+                            <li>半角英数字8文字以上</li>
                           <!-- /.note-list --></ul>
                         </div>
                       </dd>
@@ -110,7 +114,7 @@
                 <ul class="btn-list">
                   <li><button type="submit" class="btn">ログイン</button></li>
 @if (Route::has('password.request'))
-                  <li><a href="{{ route('password.request') }}">パスワードを忘れた場合はこちら</a></li>
+                  <li><a href="{{ route('password.request') }}">パスワードがわからない場合はこちら</a></li>
 @endif
                 <!-- /.btn-list --></ul>
               </div>

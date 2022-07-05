@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -14,17 +14,16 @@
                         <p>オーナー登録が完了しました。<br>
                         aiboが登録されていません。<br>
                         aibo登録に進みましょう</p>
-                        <a href="{{route('home')}}">aibo登録へ</a><br>{{-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ --}}
+                        <a href="{{route('home')}}">aibo登録へ</a><br>
                     @else
                         <p>新規オーナー登録が完了しました。<br>
                         【エラー】既にaibo登録が完了している状態。この表示が出たらおかしい。</p>
                         <a href="{{route('home')}}">トップページへ</a><br>
                     @endif
-
-                    
                 </div>
+
             </div>
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

@@ -4,6 +4,39 @@
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Object - component
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.alert {
+  background-color: var(--color-alert-background);
+  border-radius: 4px;
+  color: var(--color-alert-text);
+  font-size: var(--text-note-size);
+  padding: 10px 12px;
+}
+.alert > :last-child {
+  margin-bottom: 0;
+}
+.alert__text {
+  margin-bottom: 8px;
+}
+.alert--secondary {
+  background-color: var(--color-gray-background);
+  color: var(--color-tertiary-text);
+}
+.alert--success {
+  background-color: var(--color-success-background);
+  color: var(--color-success-text);
+}
+.alert--warning {
+  background-color: var(--color-warning-background);
+  color: var(--color-warning-text);
+}
+.alert--error {
+  background-color: var(--color-error-background);
+  color: var(--color-error-text);
+}
+.alert--info {
+  background-color: var(--color-info-background);
+  color: var(--color-info-text);
+}
 .btn {
   -webkit-appearance: none;
           appearance: none;
@@ -123,22 +156,23 @@ textarea {
 .ttl--type2 {
   text-align: center;
 }
-.alert {
-  background-color: var(--color-alert-background);
-  border-radius: 4px;
-  color: var(--color-alert-text);
-  font-size: var(--text-note-size);
-  padding: 10px 12px;
-}
-.alert > :last-child {
-  margin-bottom: 0;
-}
-.alert__text {
-  margin-bottom: 8px;
-}
 .copyright {
   color: #fff;
   font-size: var(--text-note-size);
+}
+.component {
+  padding: 40px 24px;
+}
+.component__inner {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1198px;
+}
+.component__header {
+  margin-bottom: 32px;
+}
+.component__item + .component__item {
+  margin-top: 32px;
 }
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Object - project

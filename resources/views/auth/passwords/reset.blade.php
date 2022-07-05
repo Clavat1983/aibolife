@@ -44,41 +44,12 @@
               <div class="panel__content">
                 <div class="form">
                   <div class="form__item">
-                    <div class="alert">
+                    <div class="alert alert--info">
                       <p class="alert__text">
                         新しく設定するパスワードを2回入力してください。
                       </p>
                     <!-- /.alert --></div>
                   </div>
-                  {{-- <div class="form__item">
-                    <dl class="form-data">
-                      <dt>
-                        <span class="label-set">
-                          <span class="label-set__item">メールアドレス</span>
-                          <span class="label-set__item">
-                            <span class="label label--required">必須</span>
-                          </span>
-                        <!-- /.label-set --></span>
-                      </dt>
-                      <dd>
-                        <div class="form-data__item">
-                          <p class="input @error('email') input--error @enderror">
-                            <input type="email" id="email" name="email" value="{{ $email ?? old('email') }}" placeholder="" required readonly>
-                          <!-- /.input --></p>
-                        </div>
-@error('email')
-                        <div class="form-data__item">
-                          <p class="error">{{ $message }}</p>
-                        </div>
-@enderror
-                        <div class="form-data__item">
-                          <ul class="note-list">
-                            <li>補足事項</li>
-                          <!-- /.note-list --></ul>
-                        </div>
-                      </dd>
-                    <!-- /.form-data --></dl>
-                  </div> --}}
                   <div class="form__item">
                     <dl class="form-data">
                       <dt>
@@ -100,14 +71,6 @@
                   </div>
                   <div class="form__item">
                     <dl class="form-data">
-                      {{-- <dt>
-                        <span class="label-set">
-                          <span class="label-set__item">新パスワード（確認用）</span>
-                          <span class="label-set__item">
-                            <span class="label label--required">必須</span>
-                          </span>
-                        <!-- /.label-set --></span>
-                      </dt> --}}
                       <dd>
                         <div class="form-data__item">
                           <p class="input @error('password') input--error @enderror">
@@ -121,7 +84,7 @@
 @enderror
                         <div class="form-data__item">
                           <ul class="note-list">
-                            <li>補足事項</li>
+                            <li>半角英数字8文字以上</li>
                           <!-- /.note-list --></ul>
                         </div>
                       </dd>
@@ -163,72 +126,3 @@
 </body>
 
 </html>
-
-
-
-
-{{-- 
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" readonly>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">新{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" autofocus>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">新{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection --}}
