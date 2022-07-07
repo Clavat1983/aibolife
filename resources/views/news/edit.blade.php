@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">ニュース登録</div>
+                <div class="card-header">ニュース更新</div>
 
                 <div class="card-body">
 
@@ -84,10 +84,20 @@
                             <tr style="border:solid 1px;">
                                 <th style="border:solid 1px; padding:10px;">メイン画像</th>
                                 <td style="border:solid 1px; padding:10px;">
-                                    @if($news->news_image1)
-                                        <img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:300px;"><br/><br/>
-                                    @endif
-                                    <input type="file" name="news_image1" id="news_image1">
+                                    <div id="vue1">
+                                        @if($news->news_image1)
+                                            <div id="news_image1_now">
+                                                <img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="max-width:100%;"><br/>
+                                                <input type="checkbox" name="news_image1_del" value="1">
+                                                <label for="news_image1_del">削除</label>
+                                            </div>
+                                        @endif
+                                        <div v-if="url1" style="margin-bottom:10px;">
+                                            <img :src="url1" style="max-width:100%;"><br>
+                                            <button type="button" onclick="clear_image('news_image1')" @click="uploadFile1">キャンセル</button>
+                                        </div>
+                                        <input type="file" name="news_image1" id="news_image1" ref="preview1" @change="uploadFile1">
+                                    </div>
                                 </td>
                             </tr>
 
@@ -103,34 +113,77 @@
                             <tr style="border:solid 1px;">
                                 <th rowspan="4" style="border:solid 1px; padding:10px;">サブ画像（4枚まで）</th>
                                 <td style="border:solid 1px; padding:10px;">
-                                    @if($news->news_image2)
-                                        <img src="{{ asset('storage/news_image/'.$news->news_image2)}}" style="width:300px;"><br/><br/>
-                                    @endif
-                                    <input type="file" name="news_image2" id="news_image2">
+                                    @php
+                                        $no = 2;
+                                    @endphp
+                                    <div id="vue2">
+                                        @if($news->news_image2)
+                                            <div id="news_image2_now">
+                                                <img src="{{ asset('storage/news_image/'.$news->news_image2)}}" style="max-width:100%;"><br/>
+                                                <input type="checkbox" name="news_image2_del" value="1">
+                                                <label for="news_image2_del">削除</label>
+                                            </div>
+                                        @endif
+                                        <div v-if="url2" style="margin-bottom:10px;">
+                                            <img :src="url2" style="max-width:100%;"><br>
+                                            <button type="button" onclick="clear_image('news_image2')" @click="uploadFile2">キャンセル</button>
+                                        </div>
+                                        <input type="file" name="news_image2" id="news_image2" ref="preview2" @change="uploadFile2">
+                                    </div>
                                 </td>
                             </tr>
                             <tr style="border:solid 1px;">
                                 <td style="border:solid 1px; padding:10px;">
-                                    @if($news->news_image3)
-                                        <img src="{{ asset('storage/news_image/'.$news->news_image3)}}" style="width:300px;"><br/><br/>
-                                    @endif
-                                    <input type="file" name="news_image3" id="news_image3">
+                                    <div id="vue3">
+                                        @if($news->news_image3)
+                                            <div id="news_image3_now">
+                                                <img src="{{ asset('storage/news_image/'.$news->news_image3)}}" style="max-width:100%;"><br/>
+                                                <input type="checkbox" name="news_image3_del" value="1">
+                                                <label for="news_image3_del">削除</label>
+                                            </div>
+                                        @endif
+                                        <div v-if="url3" style="margin-bottom:10px;">
+                                            <img :src="url3" style="max-width:100%;"><br>
+                                            <button type="button" onclick="clear_image('news_image3')" @click="uploadFile3">キャンセル</button>
+                                        </div>
+                                        <input type="file" name="news_image3" id="news_image3" ref="preview3" @change="uploadFile3">
+                                    </div>
                                 </td>
                             </tr>
                             <tr style="border:solid 1px;">
                                 <td style="border:solid 1px; padding:10px;">
-                                    @if($news->news_image4)
-                                        <img src="{{ asset('storage/news_image/'.$news->news_image4)}}" style="width:300px;"><br/><br/>
-                                    @endif
-                                    <input type="file" name="news_image4" id="news_image4">
+                                    <div id="vue4">
+                                        @if($news->news_image4)
+                                            <div id="news_image4_now">
+                                                <img src="{{ asset('storage/news_image/'.$news->news_image4)}}" style="max-width:100%;"><br/>
+                                                <input type="checkbox" name="news_image4_del" value="1">
+                                                <label for="news_image4_del">削除</label>
+                                            </div>
+                                        @endif
+                                        <div v-if="url4" style="margin-bottom:10px;">
+                                            <img :src="url4" style="max-width:100%;"><br>
+                                            <button type="button" onclick="clear_image('news_image4')" @click="uploadFile4">キャンセル</button>
+                                        </div>
+                                        <input type="file" name="news_image4" id="news_image4" ref="preview4" @change="uploadFile4">
+                                    </div>
                                 </td>
                             </tr>
                             <tr style="border:solid 1px;">
                                 <td style="border:solid 1px; padding:10px;">
-                                    @if($news->news_image5)
-                                        <img src="{{ asset('storage/news_image/'.$news->news_image5)}}" style="width:300px;"><br/><br/>
-                                    @endif
-                                    <input type="file" name="news_image5" id="news_image5">
+                                    <div id="vue5">
+                                        @if($news->news_image5)
+                                            <div id="news_image5_now">
+                                                <img src="{{ asset('storage/news_image/'.$news->news_image5)}}" style="max-width:100%;"><br/>
+                                                <input type="checkbox" name="news_image5_del" value="1">
+                                                <label for="news_image5_del">削除</label>
+                                            </div>
+                                        @endif
+                                        <div v-if="url5" style="margin-bottom:10px;">
+                                            <img :src="url5" style="max-width:100%;"><br>
+                                            <button type="button" onclick="clear_image('news_image5')" @click="uploadFile5">キャンセル</button>
+                                        </div>
+                                        <input type="file" name="news_image5" id="news_image5" ref="preview5" @change="uploadFile5">
+                                    </div>
                                 </td>
                             </tr>
 
@@ -262,4 +315,124 @@
     <p style="background-color:black; color:yellow; text-align:center;">【管理者専用ページ】</p>
 </div>
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script>
+    //画像選択クリア
+    function clear_image(id) {
+      let obj = document.getElementById(id);
+      obj.value = '';
+    }
+</script>
+<script>
+ new Vue({
+    el: '#vue1',
+    data() {
+      return {
+        url1 : ""
+      }
+    },
+    methods:{
+        uploadFile1(){
+            const file = this.$refs.preview1.files[0];
+            if (file === undefined) {
+                this.url1 = '';
+                document.getElementById("news_image1_now").style.display ="block";
+            } else {
+                this.url1 = URL.createObjectURL(file);
+                document.getElementById("news_image1_now").style.display ="none";
+            }
+        }
+    }
+  })
+</script>
+<script>
+    new Vue({
+       el: '#vue2',
+       data() {
+         return {
+           url2 : ""
+         }
+       },
+       methods:{
+           uploadFile2(){
+               const file = this.$refs.preview2.files[0];
+               if (file === undefined) {
+                   this.url2 = '';
+                   document.getElementById("news_image2_now").style.display ="block";
+               } else {
+                   this.url2 = URL.createObjectURL(file);
+                   document.getElementById("news_image2_now").style.display ="none";
+               }
+           }
+       }
+    })
+</script>
+<script>
+    new Vue({
+       el: '#vue3',
+       data() {
+         return {
+           url3 : ""
+         }
+       },
+       methods:{
+           uploadFile3(){
+               const file = this.$refs.preview3.files[0];
+               if (file === undefined) {
+                   this.url3 = '';
+                   document.getElementById("news_image3_now").style.display ="block";
+               } else {
+                   this.url3 = URL.createObjectURL(file);
+                   document.getElementById("news_image3_now").style.display ="none";
+               }
+           }
+       }
+    })
+</script>
+<script>
+    new Vue({
+       el: '#vue4',
+       data() {
+         return {
+           url4 : ""
+         }
+       },
+       methods:{
+           uploadFile4(){
+               const file = this.$refs.preview4.files[0];
+               if (file === undefined) {
+                   this.url4 = '';
+                   document.getElementById("news_image4_now").style.display ="block";
+               } else {
+                   this.url4 = URL.createObjectURL(file);
+                   document.getElementById("news_image4_now").style.display ="none";
+               }
+           }
+       }
+    })
+</script>
+<script>
+    new Vue({
+       el: '#vue5',
+       data() {
+         return {
+           url5 : ""
+         }
+       },
+       methods:{
+           uploadFile5(){
+               const file = this.$refs.preview5.files[0];
+               if (file === undefined) {
+                   this.url5 = '';
+                   document.getElementById("news_image5_now").style.display ="block";
+               } else {
+                   this.url5 = URL.createObjectURL(file);
+                   document.getElementById("news_image5_now").style.display ="none";
+               }
+           }
+       }
+    })
+</script>
 @endsection

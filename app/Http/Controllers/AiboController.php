@@ -265,6 +265,7 @@ class AiboController extends Controller
             'aibo_kana' => 'required|hiragana',
             'aibo_nickname' => 'required',
             'aibo_icon' => 'image',
+            'aibo_icon_del' => '',//削除チェック
             'aibo_yurai' => '',
             'aibo_birthday' => "date|gte:20180111|lte:$today",
             'aibo_color' => 'required',
@@ -288,6 +289,7 @@ class AiboController extends Controller
             'aibo_message' => '',
             'aibo_reason' => '',
             'aibo_friend_qr' => 'image',
+            'aibo_friend_qr_del' => '',//削除チェック
         ],
         [ //第2引数はバリエーションメッセージのカスタマイズ
             'aibo_birthday.date' => "aiboの誕生日が日付ではありません。",
@@ -333,6 +335,19 @@ class AiboController extends Controller
         // $aibo->aibo_friend_qr = NULL;
         $aibo->aibo_available_flag = true;
 
+        //画像の削除
+        $del_flg = 0;//削除したかどうか
+        $checkbox_aibo_icon_del = 0; //削除チェックボックスの値
+        if(isset($inputs['aibo_icon_del'])){ //非表示の時は取得できないのでisset
+            $checkbox_aibo_icon_del = $inputs['aibo_icon_del'];
+        }
+        if ($aibo->aibo_icon!=='default.jpg' &&  $checkbox_aibo_icon_del == '1') {
+            $old='public/aibo_icon/'.$aibo->aibo_icon;
+            Storage::delete($old);
+            $aibo->aibo_icon = NULL; //デフォルト(NULL)をセット
+            $del_flg = 1;//削除後
+        }
+
         //画像の保存
         //アイコン
         if (request('aibo_icon')){
@@ -346,6 +361,19 @@ class AiboController extends Controller
             $name = date('Ymd_His').'_'.$original;
             request()->file('aibo_icon')->move('storage/aibo_icon', $name);
             $aibo->aibo_icon = $name;
+        }
+
+        //QRコードの削除
+        $del_flg = 0;//削除したかどうか
+        $checkbox_aibo_friend_qr_del = 0; //削除チェックボックスの値
+        if(isset($inputs['aibo_friend_qr_del'])){ //非表示の時は取得できないのでisset
+            $checkbox_aibo_friend_qr_del = $inputs['aibo_friend_qr_del'];
+        }
+        if ($aibo->aibo_friend_qr!=='default.jpg' &&  $checkbox_aibo_friend_qr_del == '1') {
+            $old='public/aibo_friend_qr/'.$aibo->aibo_friend_qr;
+            Storage::delete($old);
+            $aibo->aibo_friend_qr = NULL; //デフォルト(NULL)をセット
+            $del_flg = 1;//削除後
         }
 
         //フレンドQRコード

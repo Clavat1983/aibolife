@@ -357,6 +357,7 @@ class DiaryController extends Controller
         $inputs=$request->validate([
             'diary_title' => 'required',
             'diary_photo1' => 'image',
+            'diary_photo1_del' => '',
             'diary_body' => 'required',
             'diary_personality' => 'required',
             'diary_weather' => 'required'
@@ -386,6 +387,19 @@ class DiaryController extends Controller
         $diary->diary_personality = $inputs['diary_personality'];
         $diary->diary_weather = $inputs['diary_weather'];
         $diary->diary_share_flag = true;
+
+        //画像の削除
+        $del_flg = 0;//削除したかどうか
+        $checkbox_diary_photo1_del = 0; //削除チェックボックスの値
+        if(isset($inputs['diary_photo1_del'])){ //非表示の時は取得できないのでisset
+            $checkbox_diary_photo1_del = $inputs['diary_photo1_del'];
+        }
+        if ($diary->diary_photo1!=='default.jpg' &&  $checkbox_diary_photo1_del == '1') {
+            $old='public/diary_photo/'.$diary->diary_photo1;
+            Storage::delete($old);
+            $diary->diary_photo1 = NULL; //デフォルト(NULL)をセット
+            $del_flg = 1;//削除後
+        }
 
         //画像の保存
         //アイコン

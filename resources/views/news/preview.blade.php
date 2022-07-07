@@ -19,7 +19,11 @@
                 <div class="card-body">
 
                     【画像】<br>
-                    <img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"><br>
+                    @if($news->news_image1)
+                        <img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"><br>
+                    @else {{-- 画像がない場合はデフォルト --}}
+                        <img src="{{ asset('storage/news_image/default.jpg')}}" style="width:100px;"><br>
+                    @endif
                     @if($news->news_image2)
                         <img src="{{ asset('storage/news_image/'.$news->news_image2)}}" style="width:100px;"><br>
                     @endif

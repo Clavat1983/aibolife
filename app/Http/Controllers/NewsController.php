@@ -236,11 +236,16 @@ class NewsController extends Controller
             'news_category' => 'required',
             'news_title' => 'required',
             'news_image1' => 'image|max:10240',//10MB
+            'news_image1_del' => '',
             'news_body' => 'required',
             'news_image2' => 'image|max:10240',//10MB
+            'news_image2_del' => '',
             'news_image3' => 'image|max:10240',//10MB
+            'news_image3_del' => '',
             'news_image4' => 'image|max:10240',//10MB
+            'news_image4_del' => '',
             'news_image5' => 'image|max:10240',//10MB
+            'news_image5_del' => '',
             'news_tag1' => 'required',
             'news_tag2' => '',
             'news_tag3' => '',
@@ -276,42 +281,107 @@ class NewsController extends Controller
             //タイトル
             $news->news_title = $inputs['news_title'];
             //メイン(画像1)
-            if (request('news_image1')){
-                $ext = request()->file('news_image1')->getClientOriginalExtension(); //拡張子
-                $name = 'news_' . sprintf('%05d', $news_id) .'_1.' . $ext;
-                request()->file('news_image1')->move('storage/news_image', $name);
-                $news->news_image1 = $name;
-            }
+                //画像の削除
+                $del_flg = 0;//削除したかどうか
+                $checkbox_news_image1_del = 0; //削除チェックボックスの値
+                if(isset($inputs['news_image1_del'])){ //非表示の時は取得できないのでisset
+                    $checkbox_news_image1_del = $inputs['news_image1_del'];
+                }
+                if ($news->news_image1!=='default.jpg' &&  $checkbox_news_image1_del == '1') {
+                    $old='public/news_image/'.$news->news_image1;
+                    Storage::delete($old);
+                    $news->news_image1 = NULL; //デフォルト(NULL)をセット
+                    $del_flg = 1;//削除後
+                }
+                //保存
+                if (request('news_image1')){
+                    $ext = request()->file('news_image1')->getClientOriginalExtension(); //拡張子
+                    $name = 'news_' . sprintf('%05d', $news_id) .'_1.' . $ext;
+                    request()->file('news_image1')->move('storage/news_image', $name);
+                    $news->news_image1 = $name;
+                }
             //本文
             $news->news_body = $inputs['news_body'];
             //サブ(画像2)
-            if (request('news_image2')){
-                $ext = request()->file('news_image2')->getClientOriginalExtension(); //拡張子
-                $name = 'news_' . sprintf('%05d', $news_id) .'_2.' . $ext;
-                request()->file('news_image2')->move('storage/news_image', $name);
-                $news->news_image2 = $name;
-            }
+                //画像の削除
+                $del_flg = 0;//削除したかどうか
+                $checkbox_news_image2_del = 0; //削除チェックボックスの値
+                if(isset($inputs['news_image2_del'])){ //非表示の時は取得できないのでisset
+                    $checkbox_news_image2_del = $inputs['news_image2_del'];
+                }
+                if ($news->news_image2!=='default.jpg' &&  $checkbox_news_image2_del == '1') {
+                    $old='public/news_image/'.$news->news_image2;
+                    Storage::delete($old);
+                    $news->news_image2 = NULL; //デフォルト(NULL)をセット
+                    $del_flg = 1;//削除後
+                }
+                //保存
+                if (request('news_image2')){
+                    $ext = request()->file('news_image2')->getClientOriginalExtension(); //拡張子
+                    $name = 'news_' . sprintf('%05d', $news_id) .'_2.' . $ext;
+                    request()->file('news_image2')->move('storage/news_image', $name);
+                    $news->news_image2 = $name;
+                }
             //サブ(画像3)
-            if (request('news_image3')){
-                $ext = request()->file('news_image3')->getClientOriginalExtension(); //拡張子
-                $name = 'news_' . sprintf('%05d', $news_id) .'_3.' . $ext;
-                request()->file('news_image3')->move('storage/news_image', $name);
-                $news->news_image3 = $name;
-            }
+                //画像の削除
+                $del_flg = 0;//削除したかどうか
+                $checkbox_news_image3_del = 0; //削除チェックボックスの値
+                if(isset($inputs['news_image3_del'])){ //非表示の時は取得できないのでisset
+                    $checkbox_news_image3_del = $inputs['news_image3_del'];
+                }
+                if ($news->news_image3!=='default.jpg' &&  $checkbox_news_image3_del == '1') {
+                    $old='public/news_image/'.$news->news_image3;
+                    Storage::delete($old);
+                    $news->news_image3 = NULL; //デフォルト(NULL)をセット
+                    $del_flg = 1;//削除後
+                }
+                //保存
+                if (request('news_image3')){
+                    $ext = request()->file('news_image3')->getClientOriginalExtension(); //拡張子
+                    $name = 'news_' . sprintf('%05d', $news_id) .'_3.' . $ext;
+                    request()->file('news_image3')->move('storage/news_image', $name);
+                    $news->news_image3 = $name;
+                }
             //サブ(画像4)
-            if (request('news_image4')){
-                $ext = request()->file('news_image4')->getClientOriginalExtension(); //拡張子
-                $name = 'news_' . sprintf('%05d', $news_id) .'_4.' . $ext;
-                request()->file('news_image4')->move('storage/news_image', $name);
-                $news->news_image4 = $name;
-            }
+                //画像の削除
+                $del_flg = 0;//削除したかどうか
+                $checkbox_news_image4_del = 0; //削除チェックボックスの値
+                if(isset($inputs['news_image4_del'])){ //非表示の時は取得できないのでisset
+                    $checkbox_news_image4_del = $inputs['news_image4_del'];
+                }
+                if ($news->news_image4!=='default.jpg' &&  $checkbox_news_image4_del == '1') {
+                    $old='public/news_image/'.$news->news_image4;
+                    Storage::delete($old);
+                    $news->news_image4 = NULL; //デフォルト(NULL)をセット
+                    $del_flg = 1;//削除後
+                }
+                //保存
+                if (request('news_image4')){
+                    $ext = request()->file('news_image4')->getClientOriginalExtension(); //拡張子
+                    $name = 'news_' . sprintf('%05d', $news_id) .'_4.' . $ext;
+                    request()->file('news_image4')->move('storage/news_image', $name);
+                    $news->news_image4 = $name;
+                }
             //サブ(画像5)
-            if (request('news_image5')){
-                $ext = request()->file('news_image5')->getClientOriginalExtension(); //拡張子
-                $name = 'news_' . sprintf('%05d', $news_id) .'_5.' . $ext;
-                request()->file('news_image5')->move('storage/news_image', $name);
-                $news->news_image5 = $name;
-            }
+                //画像の削除
+                $del_flg = 0;//削除したかどうか
+                $checkbox_news_image5_del = 0; //削除チェックボックスの値
+                if(isset($inputs['news_image5_del'])){ //非表示の時は取得できないのでisset
+                    $checkbox_news_image5_del = $inputs['news_image5_del'];
+                }
+                if ($news->news_image5!=='default.jpg' &&  $checkbox_news_image5_del == '1') {
+                    $old='public/news_image/'.$news->news_image5;
+                    Storage::delete($old);
+                    $news->news_image5 = NULL; //デフォルト(NULL)をセット
+                    $del_flg = 1;//削除後
+                }
+                //保存
+                if (request('news_image5')){
+                    $ext = request()->file('news_image5')->getClientOriginalExtension(); //拡張子
+                    $name = 'news_' . sprintf('%05d', $news_id) .'_5.' . $ext;
+                    request()->file('news_image5')->move('storage/news_image', $name);
+                    $news->news_image5 = $name;
+                }
 
             //タグ
             $news->news_tag1 = $inputs['news_tag1'];

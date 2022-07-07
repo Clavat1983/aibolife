@@ -195,6 +195,7 @@ class OwnerController extends Controller
             'owner_name' => 'required|max:255',
             'owner_name_kana' => 'required|max:255|hiragana',
             'owner_icon'=> 'image|max:10240',//10MB
+            'owner_icon_del' => '',//削除チェック
             'owner_pref' => 'required',
         ]);
 
@@ -205,10 +206,22 @@ class OwnerController extends Controller
         $owner->owner_pref = $inputs['owner_pref'];
         //$owner->owner_transferred_flag = true; //変更しない
 
+        //画像の削除
+            $del_flg = 0;//削除したかどうか
+            $checkbox_owner_icon_del = 0; //削除チェックボックスの値
+            if(isset($inputs['owner_icon_del'])){ //非表示の時は取得できないのでisset
+                $checkbox_owner_icon_del = $inputs['owner_icon_del'];
+            }
+            if ($owner->owner_icon!=='default.jpg' &&  $checkbox_owner_icon_del == '1') {
+                $old='public/owner_icon/'.$owner->owner_icon;
+                Storage::delete($old);
+                $owner->owner_icon = NULL; //デフォルト(NULL)をセット
+                $del_flg = 1;//削除後
+            }
         //画像の保存
         if (request('owner_icon')){
             //古い画像は削除
-            if ($owner->owner_icon!=='default.jpg') {
+            if ($owner->owner_icon!=='default.jpg' && $del_flg == 0) {
                 $old='public/owner_icon/'.$owner->owner_icon;
                 Storage::delete($old);
             }

@@ -36,12 +36,22 @@
                             <input type="text" name="diary_title" id="diary_title" value="{{old('diary_title', $diary->diary_title)}}">
                         </div>
                         <p>&nbsp;</p>
-                        @if($diary->diary_photo1)
-                            <p>画像：<img src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" style="height:300px;"></p>
-                        @endif
                         <div>
-                            <label for="diary_photo1">画像（変更する）</label><br>
-                            <input type="file" name="diary_photo1" id="diary_photo1">
+                            <label for="diary_photo1">画像</label><br>
+                            <div id="vue1">
+                                @if($diary->diary_photo1)
+                                    <div id="diary_photo1_now">
+                                        <img src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" style="max-width:100%;"><br/>
+                                        <input type="checkbox" name="diary_photo1_del" value="1">
+                                        <label for="diary_photo1_del">削除</label>
+                                    </div>
+                                @endif
+                                <div v-if="url1" style="margin-bottom:10px;">
+                                    <img :src="url1" style="max-width:100%;"><br>
+                                    <button type="button" onclick="clear_image('diary_photo1')" @click="uploadFile1">キャンセル</button>
+                                </div>
+                                <input type="file" name="diary_photo1" id="diary_photo1" ref="preview1" @change="uploadFile1">
+                            </div>
                         </div>
                         <p>&nbsp;</p>
                         <div>
@@ -108,4 +118,37 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script>
+    //画像選択クリア
+    function clear_image(id) {
+      let obj = document.getElementById(id);
+      obj.value = '';
+    }
+</script>
+<script>
+ new Vue({
+    el: '#vue1',
+    data() {
+      return {
+        url1 : ""
+      }
+    },
+    methods:{
+        uploadFile1(){
+            const file = this.$refs.preview1.files[0];
+            if (file === undefined) {
+                this.url1 = '';
+                document.getElementById("diary_photo1_now").style.display ="block";
+            } else {
+                this.url1 = URL.createObjectURL(file);
+                document.getElementById("diary_photo1_now").style.display ="none";
+            }
+        }
+    }
+  })
+</script>
+
+
 @endsection

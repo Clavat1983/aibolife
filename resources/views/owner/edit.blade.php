@@ -46,13 +46,21 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <div>
-                                @if($owner->owner_icon)
-                                <img src="{{ asset('storage/owner_icon/'.$owner->owner_icon)}}" style="width:300px;">
-                                @endif
-                            </div>
                             <label for="owner_icon">オーナーアイコン（任意）</label><br>
-                            <input type="file" name="owner_icon" id="owner_icon">
+                            <div id="vue1">
+                                @if($owner->owner_icon)
+                                    <div id="owner_icon_now">
+                                        <img src="{{ asset('storage/owner_icon/'.$owner->owner_icon)}}" style="max-width:100%;"><br/>
+                                        <input type="checkbox" name="owner_icon_del" value="1">
+                                        <label for="owner_icon_del">削除</label>
+                                    </div>
+                                @endif
+                                <div v-if="url1" style="margin-bottom:10px;">
+                                    <img :src="url1" style="max-width:100%;"><br>
+                                    <button type="button" onclick="clear_image('owner_icon')" @click="uploadFile1">キャンセル</button>
+                                </div>
+                                <input type="file" name="owner_icon" id="owner_icon" ref="preview1" @change="uploadFile1">
+                            </div>
                         </div>
                         <p>&nbsp;</p>
                         <div>
@@ -78,4 +86,36 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script>
+    //画像選択クリア
+    function clear_image(id) {
+      let obj = document.getElementById(id);
+      obj.value = '';
+    }
+</script>
+<script>
+ new Vue({
+    el: '#vue1',
+    data() {
+      return {
+        url1 : ""
+      }
+    },
+    methods:{
+        uploadFile1(){
+            const file = this.$refs.preview1.files[0];
+            if (file === undefined) {
+                this.url1 = '';
+                document.getElementById("owner_icon_now").style.display ="block";
+            } else {
+                this.url1 = URL.createObjectURL(file);
+                document.getElementById("owner_icon_now").style.display ="none";
+            }
+        }
+    }
+  })
+</script>
+
 @endsection

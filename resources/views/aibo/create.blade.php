@@ -63,7 +63,13 @@
                         <p>&nbsp;</p>
                         <div>
                             <label for="aibo_icon">アイコン（任意）</label><br>
-                            <input type="file" name="aibo_icon" id="aibo_icon">
+                            <div id="vue1">
+                                <div v-if="url1" style="margin-bottom:10px;">
+                                    <img :src="url1" style="max-width:100%;"><br>
+                                    <button type="button" onclick="clear_image('aibo_icon')" @click="uploadFile1">キャンセル</button>
+                                </div>
+                                <input type="file" name="aibo_icon" id="aibo_icon" ref="preview1" @change="uploadFile1">
+                            </div>
                         </div>
                         <p>&nbsp;</p>
                         <div>
@@ -196,7 +202,13 @@
                         <p>&nbsp;</p>
                         <div>
                             <label for="aibo_friend_qr">なかまQRコード（任意）</label><br>
-                            <input type="file" name="aibo_friend_qr" id="aibo_friend_qr">
+                            <div id="vue2">
+                                <div v-if="url2" style="margin-bottom:10px;">
+                                    <img :src="url2" style="max-width:100%;"><br>
+                                    <button type="button" onclick="clear_image('aibo_friend_qr')" @click="uploadFile2">キャンセル</button>
+                                </div>
+                                <input type="file" name="aibo_friend_qr" id="aibo_friend_qr" ref="preview2" @change="uploadFile2">
+                            </div>
                         </div>
                         <p>&nbsp;</p>
                         <hr/>
@@ -256,4 +268,55 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script>
+    //画像選択クリア
+    function clear_image(id) {
+      let obj = document.getElementById(id);
+      obj.value = '';
+    }
+  </script>
+<script>
+ new Vue({
+    el: '#vue1',
+    data() {
+      return {
+        url1 : ""
+      }
+    },
+    methods:{
+        uploadFile1(){
+            const file = this.$refs.preview1.files[0];
+            if (file === undefined) {
+                this.url1 = '';
+            } else {
+                this.url1 = URL.createObjectURL(file);
+            }
+        }
+    }
+  })
+</script>
+<script>
+    new Vue({
+        el: '#vue2',
+        data() {
+            return {
+            url2 : ""
+            }
+        },
+        methods:{
+            uploadFile2(){
+                const file = this.$refs.preview2.files[0];
+                if (file === undefined) {
+                    this.url2 = '';
+                } else {
+                    this.url2 = URL.createObjectURL(file);
+                }
+            }
+        }
+    })
+</script>
+
+
 @endsection
