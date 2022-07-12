@@ -284,6 +284,11 @@ class AiboController extends Controller
         $aibo->aibo_name = $inputs['aibo_name'];
         $aibo->aibo_kana = $inputs['aibo_kana'];
         $aibo->aibo_kana_gyo = mb_substr($inputs['aibo_kana'],0,1);//要修正
+            $aibo->aibo_kana_gyo = mb_convert_kana($aibo->aibo_kana_gyo, "h", "utf-8");//全角ひらがなを半角カタカナに変換
+            $aibo->aibo_kana_gyo = mb_convert_kana($aibo->aibo_kana_gyo, "H", "utf-8"); // 半角カタカナを全角ひらがなに変換する
+            if (mb_strlen($aibo->aibo_kana_gyo, "utf-8") > 1) {
+                $aibo->aibo_kana_gyo = mb_substr($aibo->aibo_kana_gyo, 0, 1, "utf-8");// 濁点を除いた文字列を取得する
+            }
         $aibo->aibo_nickname = $inputs['aibo_nickname'];
         // $aibo->aibo_icon = NULL;
         $aibo->aibo_yurai = $inputs['aibo_yurai'];
@@ -419,7 +424,12 @@ class AiboController extends Controller
         // $aibo->owner_id = $owner->id;
         $aibo->aibo_name = $inputs['aibo_name'];
         $aibo->aibo_kana = $inputs['aibo_kana'];
-        $aibo->aibo_kana_gyo = mb_substr($inputs['aibo_kana'],0,1);//要修正
+        $aibo->aibo_kana_gyo = mb_substr($inputs['aibo_kana'],0,1);
+            $aibo->aibo_kana_gyo = mb_convert_kana($aibo->aibo_kana_gyo, "h", "utf-8");//全角ひらがなを半角カタカナに変換
+            $aibo->aibo_kana_gyo = mb_convert_kana($aibo->aibo_kana_gyo, "H", "utf-8"); // 半角カタカナを全角ひらがなに変換する
+            if (mb_strlen($aibo->aibo_kana_gyo, "utf-8") > 1) {
+                $aibo->aibo_kana_gyo = mb_substr($aibo->aibo_kana_gyo, 0, 1, "utf-8");// 濁点を除いた文字列を取得する
+            }
         $aibo->aibo_nickname = $inputs['aibo_nickname'];
         // $aibo->aibo_icon = NULL;
         $aibo->aibo_yurai = $inputs['aibo_yurai'];
