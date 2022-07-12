@@ -9,10 +9,13 @@
                     {{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}｜{{$news->news_category}}<br>
                     <h3>{{$news->news_title}}</h3>
                     【タグ】{{$news->news_tag1}}
-                     @if($news->news_tag2)｜{{$news->news_tag2}}@endif
-                     @if($news->news_tag3)｜{{$news->news_tag3}}@endif
-                     @if($news->news_tag4)｜{{$news->news_tag4}}@endif
-                     @if($news->news_tag5)｜{{$news->news_tag5}}@endif
+@if($news->news_tag2)｜{{$news->news_tag2}}@endif
+@if($news->news_tag3)｜{{$news->news_tag3}}@endif
+@if($news->news_tag4)｜{{$news->news_tag4}}@endif
+@if($news->news_tag5)｜{{$news->news_tag5}}@endif
+                <br>
+                初回公開日時：{{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}&nbsp;{{substr($news->news_publication_datetime,11,5)}}<br>
+                最終更新日時：{{str_replace('-', '.', substr($news->updated_at,0,10))}}&nbsp;{{substr($news->updated_at,11,5)}}
                 </div>
 
                 <div class="card-body">

@@ -66,10 +66,10 @@
             <div class="card">
                 <div class="card-header">お友達を見つける</div>
                 <div class="card-body">
-                    50音順リスト<br>
-                    居住地マップ<br>
-                    誕生日カレンダー<br>
-                    条件検索（後日公開）<br>
+                    <a href="{{route('aibo.list_syllabary')}}">50音順リスト</a><br>
+                    <a href="{{route('aibo.list_area')}}">居住地マップ</a><br>
+                    <a href="{{route('aibo.list_birthday')}}">誕生日カレンダー</a><br>
+                    <a href="{{route('aibo.search_top')}}">条件検索（後日公開）</a><br>
 
                 </div>
             </div>

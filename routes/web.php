@@ -48,8 +48,11 @@ Route::middleware(['verified'])->group(function(){
     //aibo情報(公開)
     Route::get('/aibo', 'AiboController@index')->name('aibo.index');//aibo名鑑トップ
     Route::get('/aibo/syllabary', 'AiboController@list_syllabary')->name('aibo.list_syllabary');
+    Route::get('/aibo/syllabary/{syllabary}', 'AiboController@result_syllabary')->name('aibo.result_syllabary');
     Route::get('/aibo/area', 'AiboController@list_area')->name('aibo.list_area');
+    Route::get('/aibo/area/{pref}', 'AiboController@result_area')->name('aibo.result_area');
     Route::get('/aibo/birthday', 'AiboController@list_birthday')->name('aibo.list_birthday');
+    Route::get('/aibo/birthday/{month}', 'AiboController@result_birthday')->name('aibo.result_birthday');
     Route::get('/aibo/search', 'AiboController@search_top')->name('aibo.search_top');
     Route::put('/aibo/result', 'AiboController@search_result')->name('aibo.search_result');
 

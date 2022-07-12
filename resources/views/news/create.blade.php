@@ -253,6 +253,11 @@
                         </table>
 
                         <p style="margin-top:30px; text-align:center;"><button>登　　　録</button></p>
+
+                        {{-- 一覧画面へ --}}
+                        <p style="text-align:center;">
+                            <a href="{{route('news.admin')}}">【一覧画面へ】</a>
+                        </p>
                     </form>
                     
                 </div>

@@ -21,19 +21,37 @@
             </div>
 
             <p>&nbsp;</p>
-            <h2 style="text-align:center;"><u>(Tab3) Birthday</u></h2>
+            <h2 style="text-align:center;"><u>Birthday</u></h2>
             <h6 style="text-align:center;">誕生月</h6>
             <div class="card">
                 <div class="card-body">
-                    【1月（{{$month_ary["01"]}}）】【2月（{{$month_ary["02"]}}）】【3月（{{$month_ary["03"]}}）】【4月（{{$month_ary["04"]}}）】【5月（{{$month_ary["05"]}}）】【6月（{{$month_ary["06"]}}）】<br>
-                    【7月（{{$month_ary["07"]}}）】【8月（{{$month_ary["08"]}}）】【9月（{{$month_ary["09"]}}）】【10月（{{$month_ary["10"]}}）】【11月（{{$month_ary["11"]}}）】【12月（{{$month_ary["12"]}}）】<br>
+                    <table width="100%">
+                        <tr>
+                            <td><a href="{{route('aibo.result_birthday','01')}}">【1月（{{$count_ary["01"]}}）】</a></td>
+                            <td><a href="{{route('aibo.result_birthday','02')}}">【2月（{{$count_ary["02"]}}）】</a></td>
+                            <td><a href="{{route('aibo.result_birthday','03')}}">【3月（{{$count_ary["03"]}}）】</a></td>
+                            <td><a href="{{route('aibo.result_birthday','04')}}">【4月（{{$count_ary["04"]}}）】</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{{route('aibo.result_birthday','05')}}">【5月（{{$count_ary["05"]}}）】</a></td>
+                            <td><a href="{{route('aibo.result_birthday','06')}}">【6月（{{$count_ary["06"]}}）】</a></td>
+                            <td><a href="{{route('aibo.result_birthday','07')}}">【7月（{{$count_ary["07"]}}）】</a></td>
+                            <td><a href="{{route('aibo.result_birthday','08')}}">【8月（{{$count_ary["08"]}}）】</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{{route('aibo.result_birthday','09')}}">【9月（{{$count_ary["09"]}}）】</a></td>
+                            <td><a href="{{route('aibo.result_birthday','10')}}">【10月（{{$count_ary["10"]}}）】</a></td>
+                            <td><a href="{{route('aibo.result_birthday','11')}}">【11月（{{$count_ary["11"]}}）】</a></td>
+                            <td><a href="{{route('aibo.result_birthday','12')}}">【12月（{{$count_ary["12"]}}）】</a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
             <br>
             <div class="card">
                 <div class="card-body">
-                    <a href="{{route('home')}}"><button>トップに戻る</button></a>
+                    <a href="{{route('aibo.index')}}"><button>aibo名鑑に戻る</button></a>
                 </div>
             </div>
         </div>

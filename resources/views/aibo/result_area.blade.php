@@ -25,36 +25,17 @@
             <h6 style="text-align:center;">居住地</h6>
             <div class="card">
                 <div class="card-body">
-                    <table width="100%">
-                    <tr>
-                        @php
-                            $pref_count = 0;
-                        @endphp
-                        @foreach (config('const.pref_list') as $pref)
-                            @if(mb_substr($pref,0,2) != '00')
-                                <td><a href="{{route('aibo.result_area',mb_substr($pref,3))}}">【{{mb_substr($pref,3)}}（{{$count_ary[$pref]}}）】</a></td>
-                            @endif
-                            @php
-                                if(mb_substr($pref,0,2) != '00'){
-                                    $pref_count++;
-                                }
-                            @endphp
-                            @if($pref_count % 4 == 0)
-                    </tr>
-                    <tr>
-                            @endif
-                        @endforeach
-                        <td><a href="{{route('aibo.result_area','非公開')}}">【非公開（{{$count_ary['00_非公開']}}）】</a></td>
-                    </tr>
-                    </table>
-                    <br>
-                    <h3 style="text-align:right">全{{$count}}匹</h3>
+                    <h2>{{$pref}}</h2>
+                    @foreach($aibos as $aibo)
+                        名前：{{$aibo->aibo_name}}<br>
+                    @endforeach
                 </div>
             </div>
 
             <br>
             <div class="card">
                 <div class="card-body">
+                    <a href="{{route('aibo.list_area')}}"><button>aibo名鑑(居住地マップ)に戻る</button></a><br>
                     <a href="{{route('aibo.index')}}"><button>aibo名鑑に戻る</button></a>
                 </div>
             </div>
