@@ -347,7 +347,8 @@ class AiboController extends Controller
      */
     public function show(Aibo $aibo)
     {
-        return view('aibo.show', compact('aibo'));
+        $age = Carbon::parse($aibo->aibo_birthday)->age;
+        return view('aibo.show', compact('aibo', 'age'));
     }
 
     /**
