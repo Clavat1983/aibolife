@@ -19,6 +19,10 @@ class Owner extends Model
         return $this->hasMany('App\Models\Aibo');
     }
 
+    public function aibocomments(){
+        return $this->hasMany('App\Models\AiboComment');
+    }
+
     public function diarycomments(){
         return $this->hasMany('App\Models\DiaryComment');
     }

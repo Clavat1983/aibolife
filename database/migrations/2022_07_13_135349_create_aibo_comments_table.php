@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiaryCommentsTable extends Migration
+class CreateAiboCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateDiaryCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('diary_comments', function (Blueprint $table) {
+        Schema::create('aibo_comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('diary_id');
+            $table->unsignedBigInteger('aibo_id');
             $table->unsignedBigInteger('owner_id');//コメントを書いたオーナー
-            $table->text('diary_comment_body');
+            $table->text('aibo_comment_body');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateDiaryCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('diary_comments');
+        Schema::dropIfExists('aibo_comments');
     }
 }

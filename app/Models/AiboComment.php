@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Aibo extends Model
+class AiboComment extends Model
 {
     use HasFactory;
 
@@ -15,11 +15,7 @@ class Aibo extends Model
         return $this->belongsTo('App\Models\Owner');
     }
 
-    public function aibocomments(){
-        return $this->hasMany('App\Models\AiboComments');
-    }
-
-    public function diaries(){
-        return $this->hasMany('App\Models\Diary');
+    public function aibo(){
+        return $this->belongsTo('App\Models\Aibo');
     }
 }
