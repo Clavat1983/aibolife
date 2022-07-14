@@ -1,104 +1,135 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="format-detection" content="telephone=no">
-  <title>【U_00001】メール認証</title>
-  <meta name="description" content="">
-  
-  <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
-  <link rel="icon" href="{{asset('img/favicon.ico')}}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('css/foundation.css')}}">
-  <link rel="stylesheet" href="{{asset('css/layout.css')}}">
-  <link rel="stylesheet" href="{{asset('css/object.css')}}">
-  
-  
-</head>
-<body>
-  <div class="wrap">
-    <main class="external-content">
-      <div class="external-content__inner">
-        
-        <div class="external-content__header">
-          <p class="img">
-            <img src="{{asset('img/logo_horizontal.svg')}}" alt="" width="161" height="150">
-          <!-- /.img --></p>
-        </div>
-        <div class="external-content__body">
-            <section class="panel">
-              <header class="panel__header">
-                <h1 class="ttl ttl--type2">メール認証</h1>
-              </header>
-              <div class="panel__content">
-                <div class="form">
-                  <div class="form__item">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>【U_00002】メール認証</title>
+    <meta
+      name="description"
+      content="xxxxx"
+    />
+    <meta property="og:title" content="【U_00002】メール認証" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://example.com../assets/images/ogp.png"
+    />
+    <meta property="og:url" content="https://example.com/login/" />
+    <meta
+      property="og:description"
+      content="xxxxx"
+    />
+    <meta property="og:site_name" content="websitekit" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Twitter" />
+    <link rel="canonical" href="https://example.com/login/" />
+    <link rel="icon" href="{{asset('favicon.ico')}}" />
+    <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}" />
+    <link rel="stylesheet" href="{{asset('css/common.eb43d745.css')}}" />
+  </head>
+
+  <body>
+    <div class="l-wrap">
+      <main class="l-external-content">
+        <div class="l-external-content__inner">
+          <div class="p-login-index">
+            <div class="p-login-index__header">
+              <p class="c-img">
+                <img
+                  src="{{asset('img/logo_horizontal.svg')}}"
+                  alt=""
+                  width="161"
+                  height="150"
+                />
+              </p>
+            </div>
+            <div class="p-login-index__body">
+              <section class="c-panel">
+                <header class="c-panel__header">
+                  <h1 class="c-ttl c-ttl--type2">メール認証</h1>
+                </header>
+                <div class="c-panel__content">
+                  <div class="c-form">
+                    <div class="c-form__item">
 @if (session('resent'))
-                    <div class="alert alert--success">
-                      <p class="alert__text">メールを再送しました。</p>
-                    <!-- /.alert --></div>
+                      <div class="c-alert c-alert--success">
+                        <div class="c-alert__text">
+                          メールを再送しました。
+                        </div>
+                      </div>
 @else
-                    <div class="alert alert--success">
-                      <p class="alert__text">「アカウント作成」のお知らせメールを送付しました。</p>
-                    <!-- /.alert --></div>
+                      <div class="c-alert c-alert--info">
+                        <div class="c-alert__text">
+                          「アカウント作成」のお知らせメールを送付しました。
+                        </div>
+                      </div>
 @endif
-                    <div class="alert alert--info" style="margin-top:8px;">
-                      <p class="alert__text">
-                        ①お知らせメールを受信してください。<br>
-                        （迷惑メールフォルダなどに振り分けられていないかもご確認ください）<br>
-                        ②1時間以内にメール内に記載されたURLをクリックしてメール認証をしてください。
-                        ③認証後の画面に沿ってアカウント登録を引き続き実施してください。<br/>
-                        <br/>
-                        お知らせメールが届いていない場合は、別のメールアドレスで「アカウント作成」を改めて実施いただくか、以下の「メール再送」ボタンをクリックしてください。
-                      </p>
-                    <!-- /.alert --></div>
+                      <div class="c-alert c-alert--info" style="margin-top:8px;">
+                        <div class="c-alert__text">
+                          ①お知らせメールを受信してください。<br>
+                          （迷惑メールフォルダなどに振り分けられていないかもご確認ください）<br>
+                          ②1時間以内にメール内に記載されたURLをクリックしてメール認証をしてください。
+                          ③認証後の画面に沿ってアカウント登録を引き続き実施してください。<br/>
+                          <br/>
+                          お知らせメールが届いていない場合は、別のメールアドレスで「アカウント作成」を改めて実施いただくか、以下の「メール再送」ボタンをクリックしてください。
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                <!-- /.form --></div>
-              </div>
-              <div class="panel__footer">
-                <form action="{{route('verification.resend') }}" name="resend" method="post" novalidate>
+                </div>
+                <div class="c-panel__footer">
+                  <form action="{{ route('verification.resend') }}" name="resend" method="post" novalidate>
+                  @csrf
+
+                    <ul class="c-btn-list">
+                      <li class="c-btn-list__item">
+                        <button class="c-btn" type="submit">メール再送</button>
+                      </li>
+                    </ul>
+                  </form>
+                  <form action="{{ route('logout') }}" name="logout" method="post" novalidate>
                     @csrf
 
-                    <ul class="btn-list">
-                        <li><button type="submit" class="btn">メール再送</button></li>
-                    <!-- /.btn-list --></ul>
-                </form>
-                <form action="{{route('logout') }}" name="logout" method="post">
-                    @csrf
-
-                    <ul class="btn-list">
-                        <li style="margin-top:8px;"><a href="javascript:logout.submit()">登録をやり直す場合はこちら</a></li>
-                    <!-- /.btn-list --></ul>
-                </form>
-              </div>
-            <!-- /.panel --></section>
+                    <ul class="c-btn-list">
+                      <li class="c-btn-list__item" style="margin-top:8px;">
+                        <a href="javascript:logout.submit()">登録をやり直す場合はこちら</a>
+                      </li>
+                    </ul>
+                  </form>
+                </div>
+              </section>
+            </form>
+          </div>
         </div>
       </div>
-    <!-- /.external-content --></main>
-    <footer class="external-footer">
-      <div class="external-footer__inner">
-        <p class="external-footer__item">
-          <small class="copyright">©︎ 2022 aibo life</small>
+    </main>
+    <footer class="l-external-footer">
+      <div class="l-external-footer__inner">
+        <p class="l-external-footer__item">
+          <small class="l-external-footer__copyright"
+            >©︎ 2022 aibo life</small
+          >
         </p>
-        <div class="external-footer__item">
-          <nav class="external-footer__nav">
-            <ul class="external-footer__nav-list">
-              <li><a href="#">プライバシーポリシー</a></li>
-              <li><a href="#">利用規約</a></li>
+        <div class="l-external-footer__item">
+          <nav class="l-external-footer__nav">
+            <ul class="l-external-footer__list">
+              <li class="l-external-footer__list-item">
+                <a class="l-external-footer__link" href="#"
+                  >プライバシーポリシー</a
+                >
+              </li>
+              <li class="l-external-footer__list-item">
+                <a class="l-external-footer__link" href="#">利用規約</a>
+              </li>
             </ul>
           </nav>
         </div>
       </div>
-    <!-- /.external-footer --></footer>
-  <!-- /.wrap --></div>
+    </footer>
+  </div>
+  <script type="module" src="{{asset('js/common.9e780efa.js')}}"></script>
 
-  <script src="{{asset('js/libs/jquery-3.4.1.min.js')}}"></script>
-  <script src="{{asset('js/common.js')}}"></script>
-
-  
-</body>
+  </body>
 </html>
