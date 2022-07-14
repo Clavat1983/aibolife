@@ -61,6 +61,54 @@
                     <br/>
                     <a href="{{route('diary.list_aibo')}}?aibo={{$aibo->id}}"><button>{{$aibo->aibo_name}}の日記を見る</button></a><br>
                     <br/>
+
+                    <hr/>
+                    <h4>コメント</h4>
+                    {{-- バリデーションエラー表示 --}}
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    {{-- コメント表示 --}}
+                    @if($aibo->aibocomments->count())
+                        @foreach ($aibo->aibocomments as $comment)
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                オーナー名：{{$comment->owner->owner_name}}（投稿日時：{{$comment->created_at}}）
+                            </div>
+                            <div class="card-body">
+                                コメント：{!! nl2br(e($comment->aibo_comment_body)) !!}
+                            </div>
+                            {{-- 削除（編集は不可） --}}
+                            {{-- @if(auth()->user()->owner->id === $comment->owner_id)
+                                <p style="text-align:right; margin-right:1em;">削除</p>
+                            @endif --}}
+                        </div>
+                        @endforeach
+                    @else
+                    <div class="card mb-4">
+                        <div class="card-body">まだコメントがありません。</div>
+                    </div>
+                    @endif
+                    {{-- コメント投稿フォーム --}}
+                    <form method="post" action="{{route('aibocomment.store')}}">
+                        @csrf
+                        <input type="hidden" name='aibo_id' value="{{$aibo->id}}">
+                        <div class="form-group">
+                            <textarea name="aibo_comment_body" class="form-control" id="aibo_comment_body" cols="30" rows="5" >{{old('aibo_comment_body')}}</textarea>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button class="btn btn-success float-right mb-3 mr-3">コメントする</button>
+                        </div>
+                    </form>
+                    <hr/>
+
                     <br/>
                     <a href="{{route('home')}}"><button>トップに戻る</button></a><br>
                 </div>

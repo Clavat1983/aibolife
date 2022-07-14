@@ -16,7 +16,7 @@ class Aibo extends Model
     }
 
     public function aibocomments(){
-        return $this->hasMany('App\Models\AiboComments');
+        return $this->hasMany('App\Models\AiboComment');
     }
 
     public function diaries(){

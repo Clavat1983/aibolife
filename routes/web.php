@@ -57,6 +57,8 @@ Route::middleware(['verified'])->group(function(){
     Route::put('/aibo/result', 'AiboController@search_result')->name('aibo.search_result');
 
     Route::get('/aibo/{aibo}', 'AiboController@show')->name('aibo.show');//aiboを個別表示
+    //aiboコメント
+    Route::post('/aibo/comment/store', 'AiboCommentController@store')->name('aibocomment.store');//(新規-DB登録)
 
     //aibo日記
     Route::get('/diary', 'DiaryController@index')->name('diary.index');//aibo日記トップ
