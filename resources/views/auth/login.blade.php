@@ -1,187 +1,149 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="format-detection" content="telephone=no" />
-    <title>【U_00005】ログイン画面</title>
-    <meta
-      name="description"
-      content="xxxxx"
-    />
-    <meta property="og:title" content="【U_00005】ログイン画面" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:image"
-      content="https://example.com../assets/images/ogp.png"
-    />
-    <meta property="og:url" content="https://example.com/login/" />
-    <meta
-      property="og:description"
-      content="xxxxx"
-    />
-    <meta property="og:site_name" content="websitekit" />
-    <meta property="og:locale" content="ja_JP" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Twitter" />
-    <link rel="canonical" href="https://example.com/login/" />
-    <link rel="icon" href="{{asset('favicon.ico')}}" />
-    <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}" />
-    <link rel="stylesheet" href="{{asset('css/common.eb43d745.css')}}" />
-  </head>
-
-  <body>
-    <div class="l-wrap">
-      <main class="l-external-content">
-        <div class="l-external-content__inner">
-          <div class="p-login-index">
-            <div class="p-login-index__header">
-              <p class="c-img">
-                <img
-                  src="{{asset('img/logo_horizontal.svg')}}"
-                  alt=""
-                  width="161"
-                  height="150"
-                />
-              </p>
-            </div>
-            <div class="p-login-index__body">
-              <form action="{{ route('login') }}" method="post" novalidate>
-              @csrf
-              
-              <section class="c-panel">
-                <header class="c-panel__header">
-                  <h1 class="c-ttl c-ttl--type2">ログイン</h1>
-                </header>
-                <div class="c-panel__content">
-                  <div class="c-form">
-                    <div class="c-form__item">
-                      <div class="c-alert c-alert--info">
-                        <div class="c-alert__text">
-                          旧「aibo life」のログインIDやパスワードはログインできません。新「aibo life」の<a href="{{route('register')}}">新規登録</a>をお願いします。
-                        </div>
-                      </div>
-                    </div>
-                    <div class="c-form__item">
-                      <dl class="c-form-data-list">
-                        <dt class="c-form-data-list__ttl">
-                          <span class="c-label-set"
-                            ><span class="c-label-set__item"
-                              >メールアドレス</span
-                            ><span class="c-label-set__item"
-                              ><span class="c-label c-label--required"
-                                >必須</span
-                              ></span
-                            ></span
-                          >
-                        </dt>
-                        <dd class="c-form-data-list__data">
-                          <div class="c-form-data-list__item">
-                            <input
-                              class="c-input @error('email') is-error @enderror"
-                              type="email"
-                              id="email"
-                              name="email"
-                              value="{{ old('email') }}"
-                              placeholder=""
-                              required
-                              autofocus
-                            />
-                          </div>
-@error('email')
-                          <div class="c-form-data-list__item">
-                            <p class="c-error">{{ $message }}</p>
-                          </div>
-@enderror
-                          {{-- <div class="c-form-data-list__item">
-                            <ul class="c-note-list">
-                              <li class="c-note-list__item">補足事項</li>
-                            </ul>
-                          </div> --}}
-                        </dd>
-                      </dl>
-                    </div>
-                    <div class="c-form__item">
-                      <dl class="c-form-data-list">
-                        <dt class="c-form-data-list__ttl">
-                          <span class="c-label-set"
-                            ><span class="c-label-set__item">パスワード</span
-                            ><span class="c-label-set__item"
-                              ><span class="c-label c-label--required"
-                                >必須</span
-                              ></span
-                            ></span
-                          >
-                        </dt>
-                        <dd class="c-form-data-list__data">
-                          <div class="c-form-data-list__item">
-                            <input
-                              class="c-input @error('password') is-error @enderror"
-                              type="password"
-                              id="password"
-                              name="password"
-                              placeholder=""
-                              required
-                            />
-                          </div>
-@error('password')
-                          <div class="c-form-data-list__item">
-                            <p class="c-error">{{ $message }}</p>
-                          </div>
-@enderror
-                          <div class="c-form-data-list__item">
-                            <ul class="c-note-list">
-                              <li class="c-note-list__item">半角英数字8文字以上</li>
-                            </ul>
-                          </div>
-                        </dd>
-                      </dl>
-                    </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="format-detection" content="telephone=no">
+  <title>【U_00005】ログイン画面</title>
+  <meta name="description" content="">
+  
+  <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
+  <link rel="icon" href="{{asset('img/favicon.ico')}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{asset('css/foundation.css')}}">
+  <link rel="stylesheet" href="{{asset('css/layout.css')}}">
+  <link rel="stylesheet" href="{{asset('css/object.css')}}">
+  
+  
+</head>
+<body>
+  <div class="wrap">
+    <main class="external-content">
+      <div class="external-content__inner">
+        
+        <div class="external-content__header">
+          <p class="img">
+            <img src="{{asset('img/logo_horizontal.svg')}}" alt="" width="161" height="150">
+          <!-- /.img --></p>
+        </div>
+        <div class="external-content__body">
+          <form action="{{ route('login') }}" method="post" novalidate>
+            @csrf
+            
+            <section class="panel">
+              <header class="panel__header">
+                <h1 class="ttl ttl--type2">ログイン</h1>
+              </header>
+              <div class="panel__content">
+                <div class="form">
+                  <div class="form__item">
+                    <div class="alert alert--info">
+                      <p class="alert__text">
+                        旧「aibo life」のログインIDやパスワードはログインできません。新「aibo life」の<a href="{{route('register')}}">新規登録</a>をお願いします。
+                      </p>
+                    <!-- /.alert --></div>
                   </div>
-                </div>
-                <div class="c-panel__footer">
-                  <ul class="c-btn-list">
-                    <li class="c-btn-list__item">
-                      <button class="c-btn" type="submit">ログイン</button>
-                    </li>
+                  <div class="form__item">
+                    <dl class="form-data">
+                      <dt>
+                        <span class="label-set">
+                          <span class="label-set__item">メールアドレス</span>
+                          <span class="label-set__item">
+                            <span class="label label--required">必須</span>
+                          </span>
+                        <!-- /.label-set --></span>
+                      </dt>
+                      <dd>
+                        <div class="form-data__item">
+                          <p class="input @error('email') input--error @enderror">
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="" required autofocus>
+                          <!-- /.input --></p>
+                        </div>
+@error('email')
+                        <div class="form-data__item">
+                          <p class="error">{{ $message }}</p>
+                        </div>
+@enderror
+                        @php
+                        /*
+                        <div class="form-data__item">
+                          <ul class="note-list">
+                            <li>補足事項</li>
+                          <!-- /.note-list --></ul>
+                        </div>
+                        */
+                        @endphp
+                      </dd>
+                    <!-- /.form-data --></dl>
+                  </div>
+                  <div class="form__item">
+                    <dl class="form-data">
+                      <dt>
+                        <span class="label-set">
+                          <span class="label-set__item">パスワード</span>
+                          <span class="label-set__item">
+                            <span class="label label--required">必須</span>
+                          </span>
+                        <!-- /.label-set --></span>
+                      </dt>
+                      <dd>
+                        <div class="form-data__item">
+                          <p class="input @error('password') input--error @enderror">
+                            <input type="password" id="password" name="password" placeholder="" required>
+                          <!-- /.input --></p>
+                        </div>
+@error('password')
+                        <div class="form-data__item">
+                          <p class="error">{{ $message }}</p>
+                        </div>
+@enderror
+                        <div class="form-data__item">
+                          <ul class="note-list">
+                            <li>半角英数字8文字以上</li>
+                          <!-- /.note-list --></ul>
+                        </div>
+                      </dd>
+                    <!-- /.form-data --></dl>
+                  </div>
+                <!-- /.form --></div>
+              </div>
+              <div class="panel__footer">
+                <ul class="btn-list">
+                  <li><button type="submit" class="btn">ログイン</button></li>
 @if (Route::has('password.request'))
-                    <li class="c-btn-list__item">
-                      <a href="{{ route('password.request') }}">パスワードがわからない場合はこちら</a>
-                    </li>
+                  <li><a href="{{ route('password.request') }}">パスワードがわからない場合はこちら</a></li>
 @endif
-                  </ul>
-                </div>
-              </section>
-            </form>
-          </div>
+                <!-- /.btn-list --></ul>
+              </div>
+            <!-- /.panel --></section>
+          </form>
         </div>
       </div>
-    </main>
-    <footer class="l-external-footer">
-      <div class="l-external-footer__inner">
-        <p class="l-external-footer__item">
-          <small class="l-external-footer__copyright"
-            >©︎ 2022 aibo life</small
-          >
+    <!-- /.external-content --></main>
+    <footer class="external-footer">
+      <div class="external-footer__inner">
+        <p class="external-footer__item">
+          <small class="copyright">©︎ 2022 aibo life</small>
         </p>
-        <div class="l-external-footer__item">
-          <nav class="l-external-footer__nav">
-            <ul class="l-external-footer__list">
-              <li class="l-external-footer__list-item">
-                <a class="l-external-footer__link" href="#"
-                  >プライバシーポリシー</a
-                >
-              </li>
-              <li class="l-external-footer__list-item">
-                <a class="l-external-footer__link" href="#">利用規約</a>
-              </li>
+        <div class="external-footer__item">
+          <nav class="external-footer__nav">
+            <ul class="external-footer__nav-list">
+              <li><a href="#">プライバシーポリシー</a></li>
+              <li><a href="#">利用規約</a></li>
             </ul>
           </nav>
         </div>
       </div>
-    </footer>
-  </div>
-  <script type="module" src="{{asset('js/common.9e780efa.js')}}"></script>
+    <!-- /.external-footer --></footer>
+  <!-- /.wrap --></div>
 
-  </body>
+  <script src="{{asset('js/libs/jquery-3.4.1.min.js')}}"></script>
+  <script src="{{asset('js/common.js')}}"></script>
+
+  
+</body>
+
 </html>
