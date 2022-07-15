@@ -76,15 +76,16 @@
                     <div class="c-form__item">
                       <dl class="c-form-data-list">
                         <dt class="c-form-data-list__ttl">
-                          <span class="c-label-set"
-                            ><span class="c-label-set__item"
-                              >メールアドレス</span
-                            ><span class="c-label-set__item"
-                              ><span class="c-label c-label--required"
-                                >必須</span
-                              ></span
-                            ></span
-                          >
+                          <span class="c-label-set">
+                            <span class="c-label-set__item">
+                              メールアドレス
+                            </span>
+                            <span class="c-label-set__item">
+                              <span class="c-label c-label--required">
+                                必須
+                              </span>
+                            </span>
+                          </span>
                         </dt>
                         <dd class="c-form-data-list__data">
                           <div class="c-form-data-list__item">
@@ -133,17 +134,15 @@
     <footer class="l-external-footer">
       <div class="l-external-footer__inner">
         <p class="l-external-footer__item">
-          <small class="l-external-footer__copyright"
-            >©︎ 2022 aibo life</small
-          >
+          <small class="l-external-footer__copyright">
+            ©︎ 2022 aibo life
+          </small>
         </p>
         <div class="l-external-footer__item">
           <nav class="l-external-footer__nav">
             <ul class="l-external-footer__list">
               <li class="l-external-footer__list-item">
-                <a class="l-external-footer__link" href="#"
-                  >プライバシーポリシー</a
-                >
+                <a class="l-external-footer__link" href="#">プライバシーポリシー</a>
               </li>
               <li class="l-external-footer__list-item">
                 <a class="l-external-footer__link" href="#">利用規約</a>

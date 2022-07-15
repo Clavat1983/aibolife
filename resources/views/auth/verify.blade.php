@@ -60,7 +60,7 @@
                         </div>
                       </div>
 @else
-                      <div class="c-alert c-alert--info">
+                      <div class="c-alert c-alert--success">
                         <div class="c-alert__text">
                           「アカウント作成」のお知らせメールを送付しました。
                         </div>
@@ -108,17 +108,15 @@
     <footer class="l-external-footer">
       <div class="l-external-footer__inner">
         <p class="l-external-footer__item">
-          <small class="l-external-footer__copyright"
-            >©︎ 2022 aibo life</small
-          >
+          <small class="l-external-footer__copyright">
+            ©︎ 2022 aibo life
+          </small>
         </p>
         <div class="l-external-footer__item">
           <nav class="l-external-footer__nav">
             <ul class="l-external-footer__list">
               <li class="l-external-footer__list-item">
-                <a class="l-external-footer__link" href="#"
-                  >プライバシーポリシー</a
-                >
+                <a class="l-external-footer__link" href="#">プライバシーポリシー</a>
               </li>
               <li class="l-external-footer__list-item">
                 <a class="l-external-footer__link" href="#">利用規約</a>
