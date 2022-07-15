@@ -27,9 +27,19 @@
                 <div class="card-body">
                     <table>
                         <tr>
-                            <th>←前の月へ</th>
-                            <th width="50%">xxxx年xx月</th>
-                            <th>次の月へ→</th>
+@if($before_flg)
+                            <th width="25%"><a href="{{route('diary.archive')}}?year={{$before_year}}&month={{$before_month}}">←前の月へ</a></th>
+@else
+                            <th width="25%">---</th>
+@endif
+
+                            <th width="50%">{{$target_year}}年{{$target_month}}月</th>
+
+@if($next_flg)
+                            <th width="25%"><a href="{{route('diary.archive')}}?year={{$next_year}}&month={{$next_month}}">次の月へ→</a></th>
+@else
+                            <th width="25%">---</th>
+@endif
                         </tr>
                     </table>
                     <br>
@@ -43,14 +53,24 @@
                             <th>土</th>
                             <th>日</th>
                         </tr>
-                     
+
                         <tr>
                         @php $cnt = 0; @endphp
                         @foreach ($calendar as $key => $value)
                             <td>
-                            @php $cnt++; @endphp
+                            @php
+                                $cnt++;
+                                $date_str = $target_year.'-'.sprintf('%02d',$target_month).'-'.sprintf('%02d',$value['day']);
+                                //その日の日記の件数
+                                $date_array = $diaries->firstWhere('diary_date', $date_str);
+                                $count = 0;
+                                if($date_array){
+                                    $count = $date_array['count'];
+                                }
+                            @endphp
+
                             @if($value['day'] != '')
-                                <a href=""><span style="font-size:150%;">{{$value['day']}}</span><br>（●件）</a>
+                                <a href="{{route('diary.list_day')}}?date={{$date_str}}"><span style="font-size:150%;">{{$value['day']}}</span><br>（{{$count}}件）</a>
                             @else
                                 <span style="font-size:150%;">&nbsp;</span>
                             @endif

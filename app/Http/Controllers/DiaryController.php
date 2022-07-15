@@ -159,55 +159,101 @@ class DiaryController extends Controller
 
     public function archive(Request $request){
 
-        //現在の年月を取得
-        $year = date('Y');
-        $month = date('n');//前ゼロなし
+        //1.いつ？（クエリパラメータの取得＆設定）
+        $target_year = $request->year; //クエリパラメータから取得
+        $target_month = $request->month; //クエリパラメータから取得
 
-        // 月末日を取得
-        $last_day = date('j', mktime(0, 0, 0, $month + 1, 0, $year));
-        
-        $calendar = array();
-        $j = 0;
-        
-        // 月末日までループ
-        for ($i = 1; $i < $last_day + 1; $i++) {
-            // 曜日を取得
-            $week = date('w', mktime(0, 0, 0, $month, $i, $year));
-            if($week == 0){
-                $week=6;
-            } else {
-                $week--;
-            }
-            // 1日の場合
-            if ($i == 1) {
-                // 1日目の曜日までをループ
-                for ($s = 1; $s <= $week; $s++) {
-                    // 前半に空文字をセット
-                    $calendar[$j]['day'] = '';
-                    $j++;
-                }
-            }
-        
-            // 配列に日付をセット
-            if($year == date('Y') && $month == date('n') && $i>date('j')){ //今月で明日以降だったら
-                $calendar[$j]['day'] = ''; //日付は入れない
-            } else {
-                $calendar[$j]['day'] = $i;
-            }
-            $j++;
-        
-            // 月末日の場合
-            if ($i == $last_day) {
-                // 月末日から残りをループ
-                for ($e = 1; $e <= 6 - $week; $e++) {
-                    // 後半に空文字をセット
-                    $calendar[$j]['day'] = '';
-                    $j++;
-                }
-            }
+        if(is_null($target_year) || is_null($target_month)){ //年月指定なし
+            //現在の年月とする
+            $target_year = date('Y');
+            $target_month = date('n');//前ゼロなし
         }
 
-        return view('diary.archive', compact('calendar'));
+        //現在の年月
+        $now_year = date('Y');
+        $now_month = date('n');//前ゼロなし
+
+        //パラメータのチェック
+        if(preg_match('/^[0-9]{4}$/u', $target_year) && preg_match('/^[1-9]{1}$|[1]{1}[0-2]{1}$/u', $target_month)){
+        //カーボン作成
+            //今日
+            $today_carbon = new Carbon('today');
+            //指定年月(の1日)
+            $target_str = $target_year.'-'.sprintf('%02d', $target_month).'-01';
+            $target_carbon = new Carbon($target_str);
+            //日記の開始年月(2018-01-01) *1/11ではなく月なので1/1とする
+            $start_carbon = new Carbon('2018-01-01');
+            //指定年月-1ヵ月
+            $before_carbon = $target_carbon->copy()->subMonths(1);
+            //指定年月+1ヵ月
+            $next_carbon = $target_carbon->copy()->addMonths(1);
+        } else {
+            abort(403);
+        }
+
+        //年月のチェック(2018年1月より小さい か 未来だとNG)
+        if($target_carbon->lt($start_carbon) || $target_carbon ->isFuture()){
+            abort(403);
+        } else { //正常な年月
+            // 月末日を取得
+            $last_day = date('j', mktime(0, 0, 0, $target_month + 1, 0, $target_year));
+            
+            $calendar = array();
+            $j = 0;
+            
+            // 月末日までループ
+            for ($i = 1; $i < $last_day + 1; $i++) {
+                // 曜日を取得
+                $week = date('w', mktime(0, 0, 0, $target_month, $i, $target_year));
+                if($week == 0){
+                    $week=6;
+                } else {
+                    $week--;
+                }
+                // 1日の場合
+                if ($i == 1) {
+                    // 1日目の曜日までをループ
+                    for ($s = 1; $s <= $week; $s++) {
+                        // 前半に空文字をセット
+                        $calendar[$j]['day'] = '';
+                        $j++;
+                    }
+                }
+            
+                // 配列に日付をセット
+                if($target_year == date('Y') && $target_month == date('n') && $i>date('j')){ //今月で明日以降だったら
+                    $calendar[$j]['day'] = ''; //日付は入れない
+                } else {
+                    $calendar[$j]['day'] = $i;
+                }
+                $j++;
+            
+                // 月末日の場合
+                if ($i == $last_day) {
+                    // 月末日から残りをループ
+                    for ($e = 1; $e <= 6 - $week; $e++) {
+                        // 後半に空文字をセット
+                        $calendar[$j]['day'] = '';
+                        $j++;
+                    }
+                }
+            }
+
+            //日記取得
+            $date_from = $target_carbon->toDateString();
+            $date_to = $target_carbon->endOfMonth()->toDateString();
+            $diaries = Diary::select('diary_date')->selectRaw('count(diary_date) as count')->where('diary_share_flag', 1)->whereBetween('diary_date', [$date_from, $date_to])->groupBy('diary_date')->get();
+
+            //戻り値調整
+            $before_year = $before_carbon->year;
+            $before_month = $before_carbon->month;
+            $before_flg = $before_carbon->gte($start_carbon);//日記開始日(2018-01)より後か
+            $next_year = $next_carbon->year;
+            $next_month = $next_carbon->month;
+            $next_flg = $next_carbon->isPast();//来月が過去か
+
+            return view('diary.archive', compact('before_year','before_month','before_flg','target_year','target_month','next_year','next_month','next_flg','calendar','diaries'));
+        }
     }
 
     /**
