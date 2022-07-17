@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Owner;
 use App\Models\Aibo;
 use App\Models\Diary;
+use App\Models\Notification;
 use Carbon\Carbon; //日付操作
 use Illuminate\Support\Facades\Storage; //画像削除用
 
@@ -14,7 +15,11 @@ class DiaryController extends Controller
     public function index()
     {
         $diaries = Diary::orderBy('id', 'desc')->limit(6)->get();
-        return view('diary.index',compact('diaries'));
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('diary.index',compact('bell_count','diaries'));
     }
 
     public function list_day(Request $request)
@@ -84,7 +89,10 @@ class DiaryController extends Controller
                 $after_flag = false;
             }
 
-        return view('diary.list_day', compact('owner','my_diaries','other_diaries','before_flag','after_flag','before_string','target_string','target_string_format','after_string'));
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('diary.list_day', compact('bell_count', 'owner','my_diaries','other_diaries','before_flag','after_flag','before_string','target_string','target_string_format','after_string'));
     }
 
 
@@ -153,7 +161,10 @@ class DiaryController extends Controller
                     }
             */
             
-            return view('diary.list_aibo', compact('aibo','this_week'));
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('diary.list_aibo', compact('bell_count','aibo','this_week'));
         }
     }
 
@@ -252,7 +263,10 @@ class DiaryController extends Controller
             $next_month = $next_carbon->month;
             $next_flg = $next_carbon->isPast();//来月が過去か
 
-            return view('diary.archive', compact('before_year','before_month','before_flg','target_year','target_month','next_year','next_month','next_flg','calendar','diaries'));
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('diary.archive', compact('bell_count','before_year','before_month','before_flg','target_year','target_month','next_year','next_month','next_flg','calendar','diaries'));
         }
     }
 
@@ -300,10 +314,14 @@ class DiaryController extends Controller
 
             //まだ書いていないか確認
             $diary = Diary::where('aibo_id', $aibo_id)->where('diary_date', $date)->first();
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
             if($diary === NULL){ //まだ書いていない
-                return view('diary.create' , compact('aibo','date'));//新規投稿へ
+                return view('diary.create' , compact('bell_count','aibo','date'));//新規投稿へ
             } else { //既に書いている
-                return redirect()->route('diary.edit', ['diary' => $diary]);//該当の日記の編集画面へ
+                return redirect()->route('diary.edit', ['diary' => $diary])->with('bell_count', $bell_count);//該当の日記の編集画面へ
             }
         }
     }
@@ -363,7 +381,11 @@ class DiaryController extends Controller
 
         //今書いた日記を取り出して、表示画面へ転送
         $diary = Diary::where('aibo_id', $inputs['aibo_id'])->where('diary_date', $inputs['diary_date'])->first();
-        return redirect()->route('diary.show',['diary' => $diary]); //書いた日記の個別表示へ
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return redirect()->route('diary.show',['diary' => $diary])->with('bell_count', $bell_count); //書いた日記の個別表示へ
     }
 
     /**
@@ -374,7 +396,10 @@ class DiaryController extends Controller
      */
     public function show(Diary $diary)
     {
-        return view('diary.show', compact('diary'));
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('diary.show', compact('bell_count','diary'));
     }
 
     /**
@@ -386,7 +411,11 @@ class DiaryController extends Controller
     public function edit(Diary $diary)
     {
         $this->authorize('update', $diary); //ポリシー適用(自分だけ編集可能)
-        return view('diary.edit', compact('diary'));
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('diary.edit', compact('bell_count','diary'));
     }
 
     /**
@@ -465,9 +494,12 @@ class DiaryController extends Controller
         //DBに追加
         $diary->save();
 
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
         //今書いた日記を取り出して、表示画面へ転送
         //$diary = Diary::where('aibo_id', $inputs['aibo_id'])->where('diary_date', $inputs['diary_date'])->first();
-        return redirect()->route('diary.show',['diary' => $diary]); //書いた日記の個別表示へ
+        return redirect()->route('diary.show',['diary' => $diary])->with('bell_count', $bell_count); //書いた日記の個別表示へ
 
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Owner;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Storage; //画像削除用
 
 class OwnerController extends Controller
@@ -17,7 +18,11 @@ class OwnerController extends Controller
         $owners=Owner::where('user_id', $user)->get();
 
         if(count($owners)==0){ //オーナー情報を登録していない(OK)
-            return view('owner.transfer');
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            
+            return view('owner.transfer',compact('bell_count'));
         } else { //オーナー情報を登録していない(NG)
             return redirect()->route('home');
         }
@@ -30,7 +35,11 @@ class OwnerController extends Controller
         $owners=Owner::where('user_id', $user)->get();
 
         if(count($owners)==0){ //オーナー情報を登録していない(OK)
-            return view('owner.transfer_login');
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('owner.transfer_login', compact('bell_count'));
         } else { //オーナー情報を登録していない(NG)
             return redirect()->route('home');
         }
@@ -76,7 +85,11 @@ class OwnerController extends Controller
                 $owner->user_id = $user; //オーナーIDとLaravelのユーザを紐づけ
                 $owner->owner_transferred_flag = true;
                 $owner->save();
-                return view('owner.transfer_result', compact('owner'));
+
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+                return view('owner.transfer_result', compact('owner', 'bell_count'));
             } else { //該当なし
                 return back()->withErrors('該当するユーザが見つかりません')->withInput();
             }
@@ -107,7 +120,11 @@ class OwnerController extends Controller
         $owners=Owner::where('user_id', $user)->get();
 
         if(count($owners)==0){ //オーナー情報を登録していない(OK)
-            return view('owner.create');
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('owner.create', compact('bell_count'));
         } else { //オーナー情報を登録していない(NG)
             return redirect()->route('home');
         }
@@ -176,7 +193,11 @@ class OwnerController extends Controller
     public function edit(Owner $owner)
     {
         $this->authorize('update', $owner); //ポリシー適用(自分だけ編集可能)
-        return view('owner.edit', compact('owner'));
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('owner.edit', compact('bell_count','owner'));
     }
 
     /**
@@ -234,7 +255,11 @@ class OwnerController extends Controller
 
         //DBに追加
         $owner->save();
-        return back()->with('message', 'オーナー情報を更新しました。');
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+        
+        return back()->with('message', 'オーナー情報を更新しました。')->with('bell_count', $bell_count);
     }
 
     /**

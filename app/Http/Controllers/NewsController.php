@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Storage; //画像削除用
 use Carbon\Carbon; //日付操作
 
@@ -17,7 +18,11 @@ class NewsController extends Controller
     public function index()
     {
         $news_all = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
-        return view('news.index', compact('news_all'));
+        
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.index', compact('bell_count','news_all'));
     }
 
     //管理者用の全件表示
@@ -26,7 +31,11 @@ class NewsController extends Controller
         $role=auth()->user()->role;
         if($role == 'admin'){ //admin(管理者)のみ入力画面表示
             $news_all = News::orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
-            return view('news.admin', compact('news_all'));
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('news.admin', compact('bell_count','news_all'));
         } else {
             abort(404);
         }
@@ -42,7 +51,11 @@ class NewsController extends Controller
         $role=auth()->user()->role;
         if($role == 'admin'){ //admin(管理者)のみ入力画面表示
             $now = date('Y-m-d').'T'.date('H:i');
-            return view('news.create', compact('now'));
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('news.create', compact('bell_count','now'));
         } else {
             abort(404);
         }
@@ -164,8 +177,11 @@ class NewsController extends Controller
         //DB保存
         $news->save();
 
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
         //プレビューページへ
-        return redirect()->route('news.preview', compact('news'));
+        return redirect()->route('news.preview', compact('bell_count','news'));
     }
 
     /**
@@ -189,7 +205,11 @@ class NewsController extends Controller
 
         //return
         if($news->news_publication_flag && ($open <= $now)){ //true(公開)
-            return view('news.show', compact('news', 'prev', 'next'));
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('news.show', compact('bell_count','news', 'prev', 'next'));
         } else { //false(非公開)
             abort(404);
         }
@@ -200,7 +220,10 @@ class NewsController extends Controller
     {
         $role=auth()->user()->role;
         if($role == 'admin'){ //admin(管理者)
-            return view('news.preview', compact('news'));
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('news.preview', compact('bell_count','news'));
         } else { //一般
             abort(404);
         }
@@ -215,7 +238,11 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         $this->authorize('update', $news); //ポリシー適用
-        return view('news.edit', compact('news'));
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.edit', compact('bell_count','news'));
     }
 
     /**
@@ -405,8 +432,11 @@ class NewsController extends Controller
         //DB保存
         $news->save();
 
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
         //プレビューページへ
-        return redirect()->route('news.preview', compact('news'));
+        return redirect()->route('news.preview', compact('bell_count','news'));
     }
 
     /**

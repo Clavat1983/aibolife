@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Owner;
 use App\Models\Aibo;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Storage; //画像削除用
 use Carbon\Carbon; //日付操作
 
@@ -23,7 +24,10 @@ class AiboController extends Controller
         //新しいお友達取得(最新6件)
         $new_aibos = Aibo::orderBy('id', 'desc')->limit(6)->get();
 
-        return view('aibo.index',compact('birthday_aibos','new_aibos')); //aibo名鑑トップ
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('aibo.index',compact('bell_count','birthday_aibos','new_aibos')); //aibo名鑑トップ
     }
 
     private function get_birthday_aibos(){
@@ -80,14 +84,21 @@ class AiboController extends Controller
             $count++;
         }
 
-        return view('aibo.list_syllabary',compact('count_ary','count'));
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('aibo.list_syllabary',compact('bell_count','count_ary','count'));
     }
 
     public function result_syllabary($syllabary) //50音順(検索結果)
     {
         if(preg_match('/^[あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん]{1}$/u', $syllabary)){
             $aibos=Aibo::where('aibo_available_flag', true)->where('aibo_kana_gyo', $syllabary)->orderby('aibo_kana')->orderby('id')->get();
-            return view('aibo.result_syllabary',compact('aibos', 'syllabary'));
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('aibo.result_syllabary',compact('bell_count','aibos', 'syllabary'));
         } else {
             abort(403);
         }
@@ -155,7 +166,10 @@ class AiboController extends Controller
             $count++;
         }
 
-        return view('aibo.list_area',compact('count_ary','count'));
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('aibo.list_area',compact('bell_count','count_ary','count'));
     }
 
     //居住地マップ(検索結果)
@@ -163,7 +177,11 @@ class AiboController extends Controller
     {
         if(in_array($pref, ['非公開','北海道', '青森県', '岩手県', '宮城県','秋田県', '山形県', '福島県', '茨城県','栃木県', '群馬県', '埼玉県', '千葉県','東京都', '神奈川県', '新潟県', '富山県','石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県','滋賀県', '京都府', '大阪府', '兵庫県','奈良県', '和歌山県', '鳥取県', '島根県','岡山県', '広島県', '山口県', '徳島県','香川県','愛媛県','高知県', '福岡県','佐賀県', '長崎県', '熊本県', '大分県','宮崎県', '鹿児島県', '沖縄県','海外'])){
             $aibos=Aibo::leftjoin('owners', function($join){$join->on('aibos.owner_id','=','owners.id');})->where('aibo_available_flag', true)->where('owners.owner_pref', 'like', '%'.$pref.'%')->orderby('aibos.id')->get();
-            return view('aibo.result_area',compact('aibos', 'pref'));
+            
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('aibo.result_area',compact('bell_count','aibos', 'pref'));
         } else {
             abort(403);
         }
@@ -180,7 +198,11 @@ class AiboController extends Controller
             $month = substr($aibo->aibo_birthday,5,2);
             $count_ary[$month]++;
         }
-        return view('aibo.list_birthday', compact('count_ary'));
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('aibo.list_birthday', compact('bell_count','count_ary'));
     }
 
     //誕生日カレンダー(検索結果)
@@ -188,7 +210,11 @@ class AiboController extends Controller
     {
         if(in_array($month, ['01','02','03','04','05','06','07','08','09','10','11','12'])){
             $aibos=Aibo::where('aibo_available_flag', true)->whereMonth('aibo_birthday', '=', $month)->orderByRaw('DAY(aibo_birthday), MONTH(aibo_birthday), YEAR(aibo_birthday)')->get();
-            return view('aibo.result_birthday',compact('aibos', 'month'));
+            
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('aibo.result_birthday',compact('bell_count','aibos', 'month'));
         } else {
             abort(403);
         }
@@ -196,12 +222,18 @@ class AiboController extends Controller
 
     public function search_top() //検索条件入力画面
     {
-        return view('aibo.search_top');
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('aibo.search_top',compact('bell_count'));
     }
 
     public function search_result() //検索結果画面
     {
-        return view('aibo.search_result');
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('aibo.search_result',compact('bell_count'));
     }
 
 
@@ -221,7 +253,11 @@ class AiboController extends Controller
             return redirect()->route('home');
         } else { //オーナー情報を登録している(OK)
             $owner = $owners[0];
-            return view('aibo.create' , compact('owner'));
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('aibo.create' , compact('bell_count','owner'));
         }
         
     }
@@ -336,7 +372,11 @@ class AiboController extends Controller
 
         //DBに追加
         $aibo->save();
-        return view('aibo.create_result', compact('owner')); //aibo情報ではなく、親であるオーナー情報を引き継いで完了画面へ遷移
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('aibo.create_result', compact('bell_count','owner')); //aibo情報ではなく、親であるオーナー情報を引き継いで完了画面へ遷移
     }
 
     /**
@@ -348,7 +388,11 @@ class AiboController extends Controller
     public function show(Aibo $aibo)
     {
         $age = Carbon::parse($aibo->aibo_birthday)->age;
-        return view('aibo.show', compact('aibo', 'age'));
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('aibo.show', compact('bell_count', 'aibo', 'age'));
     }
 
     /**
@@ -360,7 +404,11 @@ class AiboController extends Controller
     public function edit(Aibo $aibo)
     {
         $this->authorize('update', $aibo); //ポリシー適用(自分だけ編集可能)
-        return view('aibo.edit', compact('aibo'));
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('aibo.edit', compact('bell_count','aibo'));
     }
 
     /**
@@ -516,7 +564,11 @@ class AiboController extends Controller
 
         //DBに追加
         $aibo->save();
-        return redirect()->route('aibo.show', $aibo)->with('message', 'aibo情報を更新しました。');
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return redirect()->route('aibo.show', $aibo)->with('message', 'aibo情報を更新しました。')->with('bell_count', $bell_count);
         //return back()->with('message', 'aibo情報を更新しました。');
 
         //return view('aibo.show', compact('aibo')); //これはNG。URLが/mypage/aiboとなってしまうため。

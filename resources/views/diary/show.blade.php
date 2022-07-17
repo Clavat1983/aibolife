@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('notification')
+    {{$bell_count}}
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

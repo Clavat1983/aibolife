@@ -27,7 +27,7 @@
     <link rel="canonical" href="https://example.com/login/" />
     <link rel="icon" href="{{asset('favicon.ico')}}" />
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}" />
-    <link rel="stylesheet" href="{{asset('css/common.eb43d745.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/common.css')}}" />
   </head>
 
   <body>
@@ -182,7 +182,7 @@
       </div>
     </footer>
   </div>
-  <script type="module" src="{{asset('js/common.9e780efa.js')}}"></script>
+  <script type="module" src="{{asset('js/common.js')}}"></script>
 
   </body>
 </html>

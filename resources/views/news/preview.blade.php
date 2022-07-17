@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('notification')
+    {{$bell_count}}
+@endsection
+
 @section('content')
 <div class="container">
     <p style="background-color:black; color:yellow; text-align:center;">【管理者専用ページ】</p>

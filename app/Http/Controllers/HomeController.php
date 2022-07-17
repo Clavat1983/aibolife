@@ -59,7 +59,8 @@ class HomeController extends Controller
 
 
                 //【全ビュー共通処理】未読通知数
-                $bell_count = Notification::where('user_id', $user)->where('read_at', NULL)->count();
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
                 return view('home', compact('bell_count','owners', 'news_list', 'diaries', 'new_aibos'));
             }
         }
@@ -75,7 +76,10 @@ class HomeController extends Controller
         if($owner==NULL){ //オーナー情報を登録していない(NG)
             return redirect()->route('home'); //homeに飛ばす(再度リダイレクトしてオーナー登録画面に行く)
         } else {
-            return view('mypage', compact('owner'));
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('mypage', compact('bell_count','owner'));
         }
     }
 }

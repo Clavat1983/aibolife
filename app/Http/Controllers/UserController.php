@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Notification;
 
 use Illuminate\Support\Facades\Hash;//パスワードをハッシュ化
 use Illuminate\Validation\Rule;//メールアドレスの登録済(重複)を防ぐ
@@ -61,7 +62,11 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $this->authorize('update', $user); //ポリシー適用(自分だけ編集可能)
-        return view('user.edit', compact('user'));
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('user.edit', compact('bell_count','user'));
     }
 
     /**
@@ -92,7 +97,11 @@ class UserController extends Controller
             //$user->email = $inputs['email']; メールアドレスは変更しない
             $user->password = Hash::make($inputs['password']);//パスワードのハッシュ化
             $user->save();
-            return back()->with('message', 'パスワードの変更が完了しました。メールアドレスの変更はありません。');
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            
+            return back()->with('message', 'パスワードの変更が完了しました。メールアドレスの変更はありません。')->with('bell_count', $bell_count);
         }
     }
 
