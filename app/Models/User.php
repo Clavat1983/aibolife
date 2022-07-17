@@ -51,6 +51,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne('App\Models\Owner');
     }
 
+    public function notifications() {
+        return $this->hasMany('App\Models\Notification');
+    }
+
     //(追加)メール認証のメール通知をカスタマイズしたものでオーバーライドする
     public function sendEmailVerificationNotification(){
         $this->notify(new CustomizedVerifyEmail());

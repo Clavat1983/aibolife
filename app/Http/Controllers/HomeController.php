@@ -8,6 +8,7 @@ use App\Models\Owner;
 use App\Models\Aibo;
 use App\Models\News;
 use App\Models\Diary;
+use App\Models\Notification;
 use Carbon\Carbon; //日付操作
 
 class HomeController extends Controller
@@ -56,7 +57,10 @@ class HomeController extends Controller
                 //新しいお友達取得(最新6件)
                 $new_aibos = Aibo::orderBy('id', 'desc')->limit(6)->get();
 
-                return view('home', compact('owners', 'news_list', 'diaries', 'new_aibos'));
+
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', $user)->where('read_at', NULL)->count();
+                return view('home', compact('bell_count','owners', 'news_list', 'diaries', 'new_aibos'));
             }
         }
     }

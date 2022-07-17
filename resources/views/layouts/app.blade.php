@@ -40,7 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li style="color:red"><b>&nbsp;&nbsp;&nbsp; @yield('notification')件</b></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
