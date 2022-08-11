@@ -26,6 +26,10 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/home', 'HomeController@index')->name('home'); //認証後のリダイレクト判定を含む
     Route::get('/mypage', 'HomeController@mypage')->name('mypage'); //マイページ
 
+    //通知
+    Route::get('/mypage/notification', 'NotificationController@index')->name('notification.index'); //通知一覧
+    Route::get('/mypage/notification/{notification}', 'NotificationController@redirect')->name('notification.redirect'); //通知一覧
+
     //ユーザ登録情報
     Route::get('/mypage/user/{user}/edit', 'UserController@edit')->name('user.edit');//変更(入力)
     Route::put('/mypage/user/{user}', 'UserController@update')->name('user.update');//変更(DB更新)

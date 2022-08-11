@@ -432,11 +432,11 @@ class NewsController extends Controller
         //DB保存
         $news->save();
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+        //【全ビュー共通処理】未読通知数(不要)
+        //$bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
         //プレビューページへ
-        return redirect()->route('news.preview', compact('bell_count','news'));
+        return redirect()->route('news.preview', compact('news'));
     }
 
     /**

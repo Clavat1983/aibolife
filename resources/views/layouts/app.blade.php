@@ -40,7 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li style="color:red"><b>&nbsp;&nbsp;&nbsp; @yield('notification')件</b></li>
+                        <li style="color:red"><b>&nbsp;&nbsp;&nbsp; <a href="{{ route('notification.index') }}">@yield('notification')件</a></b></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -61,7 +61,11 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{-- {{ Auth::user()->name }} --}}
-                                    マイページ
+@if(Auth::user()->owner->owner_icon)
+                                    <img src="{{ asset('storage/owner_icon/'.Auth::user()->owner->owner_icon)}}" style="height:20px; width:20px;">マイページ
+@else
+                                    <img src="{{ asset('storage/owner_icon/default.jpg')}}" style="height:20px; width:20px;">マイページ
+@endif
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

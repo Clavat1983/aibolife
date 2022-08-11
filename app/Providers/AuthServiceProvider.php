@@ -18,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Aibo' => 'App\Policies\AiboPolicy',
         'App\Models\Diary' => 'App\Policies\DiaryPolicy',
         'App\Models\News' => 'App\Policies\NewsPolicy',
+        'App\Models\Notification' => 'App\Policies\NotificationPolicy',
     ];
 
     /**
