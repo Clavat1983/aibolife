@@ -61,7 +61,7 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{-- {{ Auth::user()->name }} --}}
-@if(Auth::user()->owner->owner_icon)
+@if((auth()->user()->owner != NULL) && (Auth::user()->owner->owner_icon))
                                     <img src="{{ asset('storage/owner_icon/'.Auth::user()->owner->owner_icon)}}" style="height:20px; width:20px;">マイページ
 @else
                                     <img src="{{ asset('storage/owner_icon/default.jpg')}}" style="height:20px; width:20px;">マイページ

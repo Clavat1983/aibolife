@@ -35,9 +35,9 @@ class NotificationController extends Controller
             if($notification->category == 'aibo'){ //aiboのページ
                 return redirect()->route('aibo.show',$notification->link_url);
             } else if($notification->category == 'diary'){//日記のページ
-                return redirect()->route('aibo.show',$notification->link_url);
+                return redirect()->route('diary.show',$notification->link_url);
             } else if($notification->category == 'contact'){//お問い合わせのページ
-                return redirect()->route('aibo.show',$notification->link_url);
+                return redirect()->route('contact.show',$notification->link_url);
             } else { //転送先がない
                 abort(404);
             }

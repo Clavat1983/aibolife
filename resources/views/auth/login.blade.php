@@ -58,7 +58,7 @@
                     <div class="c-form__item">
                       <div class="c-alert c-alert--info">
                         <div class="c-alert__text">
-                          旧「aibo life」のログインIDやパスワードはログインできません。新「aibo life」の<a href="{{route('register')}}">新規登録</a>をお願いします。
+                          旧「aibo life」のログインIDやパスワードではログインできません。新「aibo life」の<a href="{{route('register')}}">アカウント作成</a>をお願いします。
                         </div>
                       </div>
                     </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="format-detection" content="telephone=no" />
-    <title>【U_00001】新規登録</title>
+    <title>【U_00001】アカウント作成</title>
     <meta
       name="description"
       content="xxxxx"
@@ -53,7 +53,7 @@
               
               <section class="c-panel">
                 <header class="c-panel__header">
-                  <h1 class="c-ttl c-ttl--type2">新規登録</h1>
+                  <h1 class="c-ttl c-ttl--type2">アカウント作成</h1>
                 </header>
                 <div class="c-panel__content">
                   <div class="c-form">
@@ -148,7 +148,7 @@
                 <div class="c-panel__footer">
                   <ul class="c-btn-list">
                     <li class="c-btn-list__item">
-                      <button class="c-btn" type="submit">新規登録</button>
+                      <button class="c-btn" type="submit">アカウント作成</button>
                     </li>
                     <li class="c-btn-list__item">
                       <a href="{{ route('login') }}">ログインする場合はこちら</a>
