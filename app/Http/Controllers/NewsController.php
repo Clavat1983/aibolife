@@ -15,14 +15,81 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() //すべて
     {
+        $category = 'すべて';
         $news_all = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
         
         //【全ビュー共通処理】未読通知数
         $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return view('news.index', compact('bell_count','news_all'));
+        return view('news.index', compact('bell_count','category','news_all'));
+    }
+
+    public function index_news() //公式ニュース
+    {
+        $category = '公式ニュース';
+        $news_all = News::where('news_category',$category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+        
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.index', compact('bell_count','category','news_all'));
+    }
+
+    public function index_event() //公式イベント
+    {
+        $category = '公式イベント';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+        
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.index', compact('bell_count','category','news_all'));
+    }
+
+    public function index_media() //メディア
+    {
+        $category = 'メディア';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+        
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.index', compact('bell_count','category','news_all'));
+    }
+
+    public function index_info() //お知らせ
+    {
+        $category = 'お知らせ';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+        
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.index', compact('bell_count','category','news_all'));
+    }
+
+    public function index_special() //スペシャル
+    {
+        $category = 'スペシャル';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+        
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.index', compact('bell_count','category','news_all'));
+    }
+
+    public function index_maintenance() //障害・メンテナンス
+    {
+        $category = '障害・メンテナンス';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+        
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.index', compact('bell_count','category','news_all'));
     }
 
     //管理者用の全件表示

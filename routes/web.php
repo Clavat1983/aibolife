@@ -79,21 +79,28 @@ Route::middleware(['verified'])->group(function(){
     //日記コメント
     Route::post('/diary/comment/store', 'DiaryCommentController@store')->name('diarycomment.store');//(新規-DB登録)
 
-    //最新情報(News)
+    //最新情報(News->URLだけTopicsに変えた)
         //管理者用(パスワード再確認を挟む)
         Route::group(['middleware' => 'auth'], function(){
             Route::middleware('password.confirm')->group(function(){
-                Route::get('/news/{news}/preview', 'NewsController@preview')->name('news.preview');//最新情報（個別表示=管理者プレビュー）
-                Route::get('/news/admin', 'NewsController@admin')->name('news.admin');//最新情報（全件表示）
-                Route::get('/news/create', 'NewsController@create')->name('news.create');//最新情報(新規-入力画面)
-                Route::post('/news', 'NewsController@store')->name('news.store');//最新情報(新規-DB登録)
-                Route::get('/news/{news}/edit', 'NewsController@edit')->name('news.edit');//変更(入力)
-                Route::put('/news/{news}', 'NewsController@update')->name('news.update');//変更(DB更新)
+                Route::get('/topics/{news}/preview', 'NewsController@preview')->name('news.preview');//最新情報（個別表示=管理者プレビュー）
+                Route::get('/topics/admin', 'NewsController@admin')->name('news.admin');//最新情報（全件表示）
+                Route::get('/topics/create', 'NewsController@create')->name('news.create');//最新情報(新規-入力画面)
+                Route::post('/topics', 'NewsController@store')->name('news.store');//最新情報(新規-DB登録)
+                Route::get('/topics/{news}/edit', 'NewsController@edit')->name('news.edit');//変更(入力)
+                Route::put('/topics/{news}', 'NewsController@update')->name('news.update');//変更(DB更新)
             });
         });
         //一般ユーザ
-        Route::get('/news', 'NewsController@index')->name('news.index');//最新情報一覧
-        Route::get('/news/{news}', 'NewsController@show')->name('news.show');//最新情報（個別表示）
+        Route::get('/topics', 'NewsController@index')->name('news.index');//最新情報一覧（すべて）
+        Route::get('/topics/news', 'NewsController@index_news')->name('news.index_news');//カテゴリ別（公式ニュース）
+        Route::get('/topics/event', 'NewsController@index_event')->name('news.index_event');//カテゴリ別（公式イベント）
+        Route::get('/topics/media', 'NewsController@index_media')->name('news.index_media');//カテゴリ別（メディア）
+        Route::get('/topics/info', 'NewsController@index_info')->name('news.index_info');//カテゴリ別（お知らせ）
+        Route::get('/topics/special', 'NewsController@index_special')->name('news.index_special');//カテゴリ別（スペシャル）
+        Route::get('/topics/maintenance', 'NewsController@index_maintenance')->name('news.index_maintenance');//カテゴリ別（障害・メンテ）
+
+        Route::get('/topics/{news}', 'NewsController@show')->name('news.show');//最新情報（個別表示）
 
 
 });
