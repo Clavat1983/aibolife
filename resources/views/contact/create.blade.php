@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('notification')
+    {{$bell_count}}
+@endsection
+
 @section('content')
 
 {{-- エラーメッセージ表示 --}}
@@ -47,6 +52,15 @@
                     </p>
                 </div>
 
+
+    
+@auth
+                    名前：{{auth()->user()->owner->owner_name}}<br>
+                    メールアドレス：{{auth()->user()->email}}
+                    <input type="hidden" name="name" id="name" value="{{auth()->user()->owner->owner_name}}">
+                    <input type="hidden" name="email" id="email" value="{{auth()->user()->email}}">
+</div>
+@else
                 <div class="form-group">
                     <label for="title">お名前</label>
                     <input type="name" name="name" 
@@ -59,6 +73,7 @@
                     class="form-control" id="email" value="{{old('email')}}" 
                     placeholder="">
                 </div>
+@endauth
 
                 <p>&nbsp;</p>
                 <button type="submit" class="btn btn-success">送信する</button>

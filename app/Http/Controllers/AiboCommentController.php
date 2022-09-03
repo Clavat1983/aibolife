@@ -30,7 +30,7 @@ class AiboCommentController extends Controller
         //通知作成
             //1. このaiboのオーナーに対して
             $target_aibo = Aibo::where('id', $request->aibo_id)->first();
-            if($target_aibo->owner->user->id != auth()->user()->id){ //このaiboのオーナーが自分ではない場合 
+            if(($target_aibo->owner->user != NULL) && ($target_aibo->owner->user->id != auth()->user()->id)){ //このaiboのオーナーが自分ではない場合 
                 $notification = new Notification();
                 $notification->category = 'aibo';
                 $notification->user_id = $target_aibo->owner->user->id;

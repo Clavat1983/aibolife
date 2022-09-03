@@ -3,17 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Owner;
 use App\Models\Contact;
 use App\Models\Notification;
+use Auth;
 
 class ContactController extends Controller
 {
-    public function create()
+    public function index()
+    {
+        if (Auth::check()) { //ログインしている場合
+            return redirect()->route('contact.list');
+        } else { //ログインしていない場合
+            return redirect()->route('contact.create');
+        }
+
+    }
+
+    public function list()
     {
         //【全ビュー共通処理】未読通知数
         $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+        return view('contact.list', compact('bell_count'));
+    }
 
+    public function create()
+    {
+        if (Auth::check()) { //ログインしている場合
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+        } else { //ログインしていない場合
+            $bell_count = 0;
+        }
         return view('contact.create', compact('bell_count'));
+
     }
 
     public function store(Request $request)
@@ -32,8 +55,12 @@ class ContactController extends Controller
         //保存
         Contact::create($inputs);
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+        if (Auth::check()) { //ログインしている場合
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+        } else { //ログインしていない場合
+            $bell_count = 0;
+        }
 
         //画面遷移
         return view('contact.thanks', compact('bell_count'));

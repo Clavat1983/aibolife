@@ -58,7 +58,7 @@ class DiaryCommentController extends Controller
         //通知作成
             //1. この日記を書いた人に対して
             $target_diary = Diary::where('id', $request->diary_id)->first();
-            if($target_diary->aibo->owner->user->id != auth()->user()->id){ //日記を書いた人が自分ではない場合 
+            if(($target_diary->aibo->owner->user != NULL) && ($target_diary->aibo->owner->user->id != auth()->user()->id)){ //日記を書いた人が自分ではない場合 
                 $notification = new Notification();
                 $notification->category = 'diary';
                 $notification->user_id = $target_diary->aibo->owner->user->id;

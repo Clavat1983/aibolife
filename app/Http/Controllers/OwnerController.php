@@ -60,11 +60,14 @@ class OwnerController extends Controller
                     'owner_old_login_password'=>'required|max:255',
                 ]);
                 //データ検索
-                $owner=Owner::where('owner_old_login_id', $inputs['owner_old_login_id'])
-                    ->where('owner_old_login_password', $inputs['owner_old_login_password'])
+                $owner=Owner::where('owner_old_login_password', $inputs['owner_old_login_password'])
                     ->where('user_id', NULL)
                     ->where('owner_transferred_flag', false)
                     ->where('owner_available_flag', true)
+                    ->where(function($query) use ($inputs){
+                        $query->where('owner_old_login_id', $inputs['owner_old_login_id'])
+                        ->orWhere('owner_old_email', $inputs['owner_old_login_id']); //旧ログインIDか旧メールアドレスが一致
+                      })
                     ->first();
             } else if ($request->pattern == '2'){
                 //バリデーション

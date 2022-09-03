@@ -17,7 +17,7 @@
                     <p>②新「aibo life」に登録済（アカウント作成済）の方は「ログイン」からお進みください。</p>
                     <p style="text-align:center;"><a href="{{route('login')}}"><button class="btn btn-primary">ログイン</button></a></p>
                     <p>-----------------</p>
-                    <p style="text-align:center;"><a href="{{route('contact.create')}}"><button class="btn btn-primary">お問い合わせ</button></a></p>
+                    <p style="text-align:center;"><a href="{{route('contact.index')}}"><button class="btn btn-primary">お問い合わせ</button></a></p>
                     <p>-----------------</p>
                     <ul>
                         <li>ヘッダー、フッターが必要</li>

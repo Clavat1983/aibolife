@@ -206,7 +206,7 @@
                     <div>プライバシーポリシー</div>
                     <div>権利表記</div>
                     <div>よくある質問</div>
-                    <div>お問い合わせ</div>
+                    <div><a href="{{route('contact.index')}}">お問い合わせ</div>
                 </div>
             </div>
 

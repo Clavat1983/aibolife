@@ -102,13 +102,18 @@ Route::middleware(['verified'])->group(function(){
 
         Route::get('/topics/{news}', 'NewsController@show')->name('news.show');//最新情報（個別表示）
 
+        //お問い合わせ
+        Route::get('/mypage/contact', 'ContactController@list')->name('contact.list');//お問い合わせ(一覧)
 
 });
 
 //認証外
     //再認証画面へ
     Route::get('/mypage/user/reverify', function(){return view('user.reverify');})->name('user.reverify');
+
     //お問い合わせ
+    Route::get('/contact', 'ContactController@index')->name('contact.index');//お問い合わせ(トップ)
+//    Route::get('/mypage/contact', 'ContactController@list')->name('contact.list');//お問い合わせ(一覧)：要ログイン
     Route::get('/contact/create', 'ContactController@create')->name('contact.create');//お問い合わせ(入力画面)
     Route::post('/contact', 'ContactController@store')->name('contact.store');//お問い合わせ(保存)
 

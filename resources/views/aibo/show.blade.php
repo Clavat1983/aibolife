@@ -57,7 +57,7 @@
                     都道府県：{{substr($aibo->owner->owner_pref,3,)}}<br>
 
                     <br/>
-                    @if(auth()->user()->id === $aibo->owner->user->id) {{--自分のaibo--}}
+                    @if(($aibo->owner->user != NULL) && (auth()->user()->id === $aibo->owner->user->id)) {{--自分のaibo--}}
                         自分のaiboなので...<br>
                         <a href="{{route('aibo.edit', $aibo)}}"><button>aiboの編集</button></a><br/>
                     @endif

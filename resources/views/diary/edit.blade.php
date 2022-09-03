@@ -88,13 +88,14 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="diary_weather">この日の性格</label>
+                            <label for="diary_weather">この日の天気</label>
                             <select id="diary_weather" name="diary_weather">
                                 @php
                                     $ary = [
                                         '晴れ',
                                         '曇り',
                                         '雨',
+                                        '雪',
                                         '荒天',
                                         '不明',
                                     ];

@@ -40,7 +40,7 @@ class HomeController extends Controller
             $owner_id = $owners[0]['id'];
 
             //2:aiboの登録を確認
-            $aibos=Aibo::where('owner_id', $owner_id)->get();
+            $aibos=Aibo::where('owner_id', $owner_id)->where('aibo_available_flag', true)->get();
 
             if(count($aibos)==0){ //aiboを1匹も登録していない
                 return redirect()->route('aibo.create');
@@ -55,7 +55,7 @@ class HomeController extends Controller
                 //掲示板の取得(最新6件)
 
                 //新しいお友達取得(最新6件)
-                $new_aibos = Aibo::orderBy('id', 'desc')->limit(6)->get();
+                $new_aibos = Aibo::orderBy('id', 'desc')->where('aibo_available_flag', true)->limit(6)->get();
 
 
                 //【全ビュー共通処理】未読通知数

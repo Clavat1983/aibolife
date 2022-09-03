@@ -22,7 +22,7 @@ class AiboController extends Controller
         $birthday_aibos = $this->get_birthday_aibos();
 
         //新しいお友達取得(最新6件)
-        $new_aibos = Aibo::orderBy('id', 'desc')->limit(6)->get();
+        $new_aibos = Aibo::where('aibo_available_flag', true)->orderBy('id', 'desc')->limit(6)->get();
 
         //【全ビュー共通処理】未読通知数
         $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -46,16 +46,16 @@ class AiboController extends Controller
         //誕生日(今日・昨日・一昨日)
         $aibos = Aibo::where(function($q) use($today_mm,$today_dd) {
             $q->whereMonth('aibo_birthday',$today_mm)->whereDay('aibo_birthday',$today_dd);
-        })->orderBy('id', 'asc')->get();
+        })->where('aibo_available_flag', true)->orderBy('id', 'asc')->get();
 
         $aibos_1 = Aibo::Where(function($q) use($yesterday_mm,$yesterday_dd) {
             $q->whereMonth('aibo_birthday',$yesterday_mm)->whereDay('aibo_birthday',$yesterday_dd);
-        })->orderBy('id', 'asc')->get();
+        })->where('aibo_available_flag', true)->orderBy('id', 'asc')->get();
         $aibos = $aibos->merge($aibos_1); //今日+昨日
         
         $aibos_2 = Aibo::Where(function($q) use($before_2day_mm,$before_2day_dd) {
             $q->whereMonth('aibo_birthday',$before_2day_mm)->whereDay('aibo_birthday',$before_2day_dd);
-        })->orderBy('id', 'asc')->get();
+        })->where('aibo_available_flag', true)->orderBy('id', 'asc')->get();
         $aibos = $aibos->merge($aibos_2); //(今日+昨日)+一昨日
 
         return $aibos; //誕生日3日分
@@ -387,6 +387,11 @@ class AiboController extends Controller
      */
     public function show(Aibo $aibo)
     {
+        //aiboが公開状態ではない
+        if(!$aibo->aibo_available_flag){
+            abort(404); //エラーページへ転送
+        }
+
         $age = Carbon::parse($aibo->aibo_birthday)->age;
 
         //【全ビュー共通処理】未読通知数

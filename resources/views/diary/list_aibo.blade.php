@@ -16,11 +16,15 @@
 
                     <br>
                     <h5>直近7日間の日記</h5>
+                    @if($aibo->owner->user)
                     ログインユーザ：{{auth()->user()->id}}⇔このaiboのオーナーのユーザID{{$aibo->owner->user->id}}<br>
+                    @else
+                    ログインユーザ：{{auth()->user()->id}}⇔このaiboのオーナーのユーザ（未登録）
+                    @endif
                     <br>
                     @foreach($this_week as $date => $diary)
                         @if($diary == NULL) {{--日記がない--}}
-                            @if(auth()->user()->id === $aibo->owner->user->id) {{--自分のaibo--}}
+                            @if(($aibo->owner->user != NULL) && (auth()->user()->id === $aibo->owner->user->id)) {{--自分のaibo--}}
                                 @if(strtotime($aibo->aibo_birthday) <= strtotime($date)) {{--誕生日が日記の日付より前--}}
                                     配列の日付：{{date('Y年m月d日', strtotime($date))}}、<a href="{{route('diary.create')}}?aibo={{$aibo->id}}&date={{$date}}">日記を書く</a>（aiboID:{{$aibo->id}}、日付:{{date('Y年m月d日', strtotime($date))}}）<br>
                                 @else

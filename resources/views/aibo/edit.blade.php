@@ -85,7 +85,7 @@
                             <label for="aibo_color">aiboのカラー</label>
                             <select id="aibo_color" name="aibo_color">
                                 {{-- HTMLタグ出力 --}}
-                                <option disabled="disabled">選択してください</option>
+                                <option disabled="disabled" selected>選択してください</option>
                                 @foreach (config('const.aibo_color_list') as $value)
                                     <option value='{{$value}}' @if($value === old('aibo_color', $aibo->aibo_color)) selected @endif>{{$value}}</option>
                                 @endforeach
@@ -110,7 +110,7 @@
                         <div>
                             <label for="aibo_personality">aiboの性格</label>
                             <select id="aibo_personality" name="aibo_personality">
-                                <option disabled="disabled">選択してください</option>
+                                <option disabled="disabled" selected>選択してください</option>
                                 @foreach (config('const.aibo_personality_list') as $value)
                                     <option value='{{$value}}' @if($value === old('aibo_personality',$aibo->aibo_personality)) selected @endif>{{$value}}</option>
                                 @endforeach
@@ -120,7 +120,7 @@
                         <div>
                             <label for="aibo_eye">aiboの瞳</label>
                             <select id="aibo_eye" name="aibo_eye">
-                                <option disabled="disabled">選択してください</option>
+                                <option disabled="disabled" selected>選択してください</option>
                                 @foreach (config('const.aibo_eye_list') as $value)
                                     <option value='{{$value}}' @if($value === old('aibo_eye',$aibo->aibo_eye)) selected @endif>{{$value}}</option>
                                 @endforeach
@@ -144,7 +144,7 @@
                         <div>
                             <label for="aibo_ear">aiboの耳</label>
                             <select id="aibo_ear" name="aibo_ear">
-                                <option disabled="disabled">選択してください</option>
+                                <option disabled="disabled" selected>選択してください</option>
                                 @foreach (config('const.aibo_ear_tail_list') as $value)
                                     <option value='{{$value}}' @if($value === old('aibo_ear', $aibo->aibo_ear)) selected @endif>{{$value}}</option>
                                 @endforeach
@@ -168,7 +168,7 @@
                         <div>
                             <label for="aibo_tail">aiboの尻尾</label>
                             <select id="aibo_tail" name="aibo_tail">
-                                <option disabled="disabled">選択してください</option>
+                                <option disabled="disabled" selected>選択してください</option>
                                 @foreach (config('const.aibo_ear_tail_list') as $value)
                                     <option value='{{$value}}' @if($value === old('aibo_tail',$aibo->aibo_tail)) selected @endif>{{$value}}</option>
                                 @endforeach

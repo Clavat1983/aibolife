@@ -60,7 +60,7 @@ class DiaryController extends Controller
         //2.自分のaiboの日記を取得
             $user_id=auth()->user()->id;
             $owner=Owner::where('user_id', $user_id)->first();
-            $aibos_id=Aibo::select('id')->where('owner_id', $owner->id)->get();
+            $aibos_id=Aibo::select('id')->where('owner_id', $owner->id)->where('aibo_available_flag', true)->get();
             $my_diaries = Diary::where('diary_date', $target_string)->whereIn('aibo_id', $aibos_id)->get();
 
         //3.他人のaiboの日記を取得(自分のaibo以外)
@@ -99,7 +99,7 @@ class DiaryController extends Controller
     public function list_aibo(Request $request) //クエリパラメータに日付指定ありでも表示できるようにする
     {
         $aibo_id = $request->aibo; //クエリパラメータから取得
-        $aibo=Aibo::where('id', $aibo_id)->first();
+        $aibo=Aibo::where('aibo_available_flag', true)->where('id', $aibo_id)->first();
         if($aibo==null){
             abort(404); //エラーページへ転送
         }else{
@@ -299,7 +299,7 @@ class DiaryController extends Controller
                 //自分のaiboかチェック
                 $user_id=auth()->user()->id;
                 $owner=Owner::where('user_id', $user_id)->first();
-                $aibo=Aibo::where('id', $aibo_id)->where('owner_id', $owner->id)->first();
+                $aibo=Aibo::where('id', $aibo_id)->where('owner_id', $owner->id)->where('aibo_available_flag', true)->first();
                 if($aibo === NULL){ //自分のaiboではないなら
                     abort(403); //エラーページへ転送
                 }

@@ -24,7 +24,7 @@
                     <p>本文：{!! nl2br(e($diary->diary_body)) !!}</p> {{--改行あり--}}
                     
                     <br/>
-                    @if(auth()->user()->id === $diary->aibo->owner->user->id) {{--自分のaibo--}}
+                    @if(($diary->aibo->owner->user != NULL) && (auth()->user()->id === $diary->aibo->owner->user->id)) {{--自分のaibo--}}
                         自分のaiboなので...<br>
                         <a href="{{route('diary.edit', $diary)}}"><button>日記の編集</button></a><br/>
                     @endif
