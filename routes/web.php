@@ -97,8 +97,10 @@ Route::middleware(['verified'])->group(function(){
         Route::get('/topics/event', 'NewsController@index_event')->name('news.index_event');//カテゴリ別（公式イベント）
         Route::get('/topics/media', 'NewsController@index_media')->name('news.index_media');//カテゴリ別（メディア）
         Route::get('/topics/info', 'NewsController@index_info')->name('news.index_info');//カテゴリ別（お知らせ）
-        Route::get('/topics/special', 'NewsController@index_special')->name('news.index_special');//カテゴリ別（スペシャル）
+        Route::get('/topics/update', 'NewsController@index_update')->name('news.index_update');//カテゴリ別（アップデート）
         Route::get('/topics/maintenance', 'NewsController@index_maintenance')->name('news.index_maintenance');//カテゴリ別（障害・メンテ）
+        Route::get('/topics/special', 'NewsController@index_special')->name('news.index_special');//カテゴリ別（スペシャル）
+        Route::get('/topics/etc', 'NewsController@index_etc')->name('news.index_etc');//カテゴリ別（スペシャル）
 
         Route::get('/topics/{news}', 'NewsController@show')->name('news.show');//最新情報（個別表示）
 
@@ -116,4 +118,7 @@ Route::middleware(['verified'])->group(function(){
 //    Route::get('/mypage/contact', 'ContactController@list')->name('contact.list');//お問い合わせ(一覧)：要ログイン
     Route::get('/contact/create', 'ContactController@create')->name('contact.create');//お問い合わせ(入力画面)
     Route::post('/contact', 'ContactController@store')->name('contact.store');//お問い合わせ(保存)
+
+    //バナー広告一覧（確認用）
+    Route::get('/banner', 'ContactController@banner')->name('contact.banner');
 

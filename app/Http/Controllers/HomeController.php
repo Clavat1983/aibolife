@@ -82,4 +82,5 @@ class HomeController extends Controller
             return view('mypage', compact('bell_count','owner'));
         }
     }
+
 }

@@ -65,4 +65,10 @@ class ContactController extends Controller
         //画面遷移
         return view('contact.thanks', compact('bell_count'));
     }
+
+
+    //バナー広告確認用
+    public function banner(){
+        return view('banner');
+    }
 }

@@ -26,9 +26,9 @@ class NewsController extends Controller
         return view('news.index', compact('bell_count','category','news_all'));
     }
 
-    public function index_news() //公式ニュース
+    public function index_news() //ニュース
     {
-        $category = '公式ニュース';
+        $category = 'ニュース';
         $news_all = News::where('news_category',$category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
         
         //【全ビュー共通処理】未読通知数
@@ -37,9 +37,9 @@ class NewsController extends Controller
         return view('news.index', compact('bell_count','category','news_all'));
     }
 
-    public function index_event() //公式イベント
+    public function index_event() //イベント
     {
-        $category = '公式イベント';
+        $category = 'イベント';
         $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
         
         //【全ビュー共通処理】未読通知数
@@ -70,9 +70,9 @@ class NewsController extends Controller
         return view('news.index', compact('bell_count','category','news_all'));
     }
 
-    public function index_special() //スペシャル
+    public function index_update() //アップデート
     {
-        $category = 'スペシャル';
+        $category = 'アップデート';
         $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
         
         //【全ビュー共通処理】未読通知数
@@ -81,9 +81,9 @@ class NewsController extends Controller
         return view('news.index', compact('bell_count','category','news_all'));
     }
 
-    public function index_maintenance() //障害・メンテナンス
+    public function index_maintenance() //メンテナンス
     {
-        $category = '障害・メンテナンス';
+        $category = 'メンテナンス';
         $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
         
         //【全ビュー共通処理】未読通知数
@@ -91,6 +91,30 @@ class NewsController extends Controller
 
         return view('news.index', compact('bell_count','category','news_all'));
     }
+
+    public function index_special() //特別企画
+    {
+        $category = '特別企画';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+        
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.index', compact('bell_count','category','news_all'));
+    }
+
+    public function index_etc() //その他
+    {
+        $category = 'その他';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+        
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.index', compact('bell_count','category','news_all'));
+    }
+
+
 
     //管理者用の全件表示
     public function admin()
