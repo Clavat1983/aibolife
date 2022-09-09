@@ -121,7 +121,7 @@
                       <button class="c-btn" type="submit">メール送信</button>
                     </li>
                     <li class="c-btn-list__item">
-                      <a href="{{ route('contact.create') }}">メールアドレスがわからない場合はこちら</a>
+                      <a href="{{ route('contact.new') }}">メールアドレスがわからない場合はこちら</a>
                     </li>
                   </ul>
                 </div>

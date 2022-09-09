@@ -18,4 +18,8 @@ class Diary extends Model
     public function diarycomments(){
         return $this->hasMany('App\Models\DiaryComment');
     }
+
+    public function diaryreactions(){
+        return $this->hasMany('App\Models\DiaryReaction');
+    }
 }

@@ -30,6 +30,36 @@
                     @endif
                     <hr/>
 
+                    <h4>リアクション</h4>
+                    @php 
+                        $reaction_name = ['＊＊＊','いいね','面白い','悲しい','ひどい','ガーン'];
+                    @endphp
+
+                    {{-- リアクション投稿フォーム --}}
+                    <form method="post" action="{{route('diaryreaction.store')}}">
+                        @csrf
+                        <input type="hidden" name='diary_id' value="{{$diary->id}}">
+                        <div class="form-group">
+                            <table>
+                                <tr>
+                            @for ($i = 1; $i <= 5; $i++)
+                                <td style="text-align:center;">
+                                @if($my_reaction == null || $my_reaction->reaction_type != $i)
+                                    <button type="submit" name=reaction_type value="{{$i}}" class="btn btn-success float-right mb-3 mr-3">{{$reaction_name[$i]}}({{$i}})</button>
+                                @else
+                                    <button type="submit" name=reaction_type value="0" class="btn btn-success float-right mb-3 mr-3">いいね({{$i}}を取消)</button>
+                                @endif
+                                <br>
+                                {{$diary->diaryreactions()->where('reaction_type', $i)->count()}}件
+                                </td>
+                            @endfor
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+
+                    <hr/>
+
                     <h4>コメント</h4>
                     {{-- バリデーションエラー表示 --}}
                     @if ($errors->any())
@@ -49,7 +79,7 @@
                                 オーナー名：{{$comment->owner->owner_name}}（投稿日時：{{$comment->created_at}}）
                             </div>
                             <div class="card-body">
-                                コメント：{!! nl2br(e($comment->diary_comment_body)) !!}
+                                {!! nl2br(e($comment->diary_comment_body)) !!}
                             </div>
                             {{-- 削除（編集は不可） --}}
                             {{-- @if(auth()->user()->owner->id === $comment->owner_id)

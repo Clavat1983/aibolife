@@ -50,19 +50,19 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/mypage/aibo/{aibo}/edit', 'AiboController@edit')->name('aibo.edit');//変更(入力)
     Route::put('/mypage/aibo/{aibo}', 'AiboController@update')->name('aibo.update');//変更(DB更新)
     //aibo情報(公開)
-    Route::get('/aibo', 'AiboController@index')->name('aibo.index');//aibo名鑑トップ
-    Route::get('/aibo/syllabary', 'AiboController@list_syllabary')->name('aibo.list_syllabary');
-    Route::get('/aibo/syllabary/{syllabary}', 'AiboController@result_syllabary')->name('aibo.result_syllabary');
-    Route::get('/aibo/area', 'AiboController@list_area')->name('aibo.list_area');
-    Route::get('/aibo/area/{pref}', 'AiboController@result_area')->name('aibo.result_area');
-    Route::get('/aibo/birthday', 'AiboController@list_birthday')->name('aibo.list_birthday');
-    Route::get('/aibo/birthday/{month}', 'AiboController@result_birthday')->name('aibo.result_birthday');
-    Route::get('/aibo/search', 'AiboController@search_top')->name('aibo.search_top');
-    Route::put('/aibo/result', 'AiboController@search_result')->name('aibo.search_result');
+    Route::get('/friend', 'AiboController@index')->name('aibo.index');//aibo名鑑トップ
+    Route::get('/friend/syllabary', 'AiboController@list_syllabary')->name('aibo.list_syllabary');
+    Route::get('/friend/syllabary/{syllabary}', 'AiboController@result_syllabary')->name('aibo.result_syllabary');
+    Route::get('/friend/birthday', 'AiboController@list_birthday')->name('aibo.list_birthday');
+    Route::get('/friend/birthday/{month}', 'AiboController@result_birthday')->name('aibo.result_birthday');
+    Route::get('/friend/area', 'AiboController@list_area')->name('aibo.list_area');
+    Route::get('/friend/area/{pref}', 'AiboController@result_area')->name('aibo.result_area');
+    Route::get('/friend/search', 'AiboController@search_top')->name('aibo.search_top');
+    Route::put('/friend/result', 'AiboController@search_result')->name('aibo.search_result');
 
-    Route::get('/aibo/{aibo}', 'AiboController@show')->name('aibo.show');//aiboを個別表示
+    Route::get('/friend/{aibo}', 'AiboController@show')->name('aibo.show');//aiboを個別表示
     //aiboコメント
-    Route::post('/aibo/comment/store', 'AiboCommentController@store')->name('aibocomment.store');//(新規-DB登録)
+    Route::post('/friend/comment/store', 'AiboCommentController@store')->name('aibocomment.store');//(新規-DB登録)
 
     //aibo日記
     Route::get('/diary', 'DiaryController@index')->name('diary.index');//aibo日記トップ
@@ -78,6 +78,9 @@ Route::middleware(['verified'])->group(function(){
 
     //日記コメント
     Route::post('/diary/comment/store', 'DiaryCommentController@store')->name('diarycomment.store');//(新規-DB登録)
+
+    //日記にリアクション
+    Route::post('/diary/reaction/', 'DiaryReactionController@store')->name('diaryreaction.store');//付ける・外すともに
 
     //最新情報(News->URLだけTopicsに変えた)
         //管理者用(パスワード再確認を挟む)
@@ -106,6 +109,9 @@ Route::middleware(['verified'])->group(function(){
 
         //お問い合わせ
         Route::get('/mypage/contact', 'ContactController@list')->name('contact.list');//お問い合わせ(一覧)
+        Route::get('/mypage/contact/{contact}', 'ContactController@show')->name('contact.show');//お問い合わせ(個別画面)
+        Route::post('/mypage/contact', 'ContactController@store_res')->name('contact.store_res');//お問い合わせ(既存のお問い合わせへのレス)
+
 
 });
 
@@ -116,8 +122,8 @@ Route::middleware(['verified'])->group(function(){
     //お問い合わせ
     Route::get('/contact', 'ContactController@index')->name('contact.index');//お問い合わせ(トップ)
 //    Route::get('/mypage/contact', 'ContactController@list')->name('contact.list');//お問い合わせ(一覧)：要ログイン
-    Route::get('/contact/create', 'ContactController@create')->name('contact.create');//お問い合わせ(入力画面)
-    Route::post('/contact', 'ContactController@store')->name('contact.store');//お問い合わせ(保存)
+    Route::get('/contact/new', 'ContactController@new')->name('contact.new');//お問い合わせ(入力画面)
+    Route::post('/contact', 'ContactController@store_new')->name('contact.store_new');//お問い合わせ(新規お問い合わせの保存)
 
     //バナー広告一覧（確認用）
     Route::get('/banner', 'ContactController@banner')->name('contact.banner');

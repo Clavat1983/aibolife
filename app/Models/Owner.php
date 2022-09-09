@@ -26,4 +26,12 @@ class Owner extends Model
     public function diarycomments(){
         return $this->hasMany('App\Models\DiaryComment');
     }
+
+    public function diaryreactions(){
+        return $this->hasMany('App\Models\DiaryReaction');
+    }
+
+    public function contacts(){
+        return $this->hasMany('App\Models\Contact');
+    }
 }

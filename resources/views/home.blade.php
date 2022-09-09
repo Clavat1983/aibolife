@@ -27,7 +27,7 @@
 
             {{-----------------------------------}}
             <p>&nbsp;</p>
-            <h2 style="text-align:center;"><u>News</u></h2>
+            <h2 style="text-align:center;"><u>Topics</u></h2>
             <h6 style="text-align:center;">最新情報</h6>
 
             <div class="card">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Owner;
 use App\Models\Aibo;
 use App\Models\Diary;
+use App\Models\DiaryReaction;
 use App\Models\Notification;
 use Carbon\Carbon; //日付操作
 use Illuminate\Support\Facades\Storage; //画像削除用
@@ -396,10 +397,13 @@ class DiaryController extends Controller
      */
     public function show(Diary $diary)
     {
+        //既に自分が何かリアクションをつけているか
+        $my_reaction = DiaryReaction::where('diary_id', $diary->id)->where('owner_id', auth()->user()->owner->id)->first();
+
         //【全ビュー共通処理】未読通知数
         $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return view('diary.show', compact('bell_count','diary'));
+        return view('diary.show', compact('my_reaction','bell_count','diary'));
     }
 
     /**

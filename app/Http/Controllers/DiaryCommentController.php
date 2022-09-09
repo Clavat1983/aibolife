@@ -72,13 +72,15 @@ class DiaryCommentController extends Controller
             $comment_owners = DiaryComment::select('owner_id')->where('diary_id', $request->diary_id)->whereNotIn('owner_id', [$target_diary->aibo->owner->id, auth()->user()->owner->id])->distinct()->get();
             if($comment_owners){ //他にコメントをつけた人
                 foreach($comment_owners as $comment_owner){
-                    $notification = new Notification();
-                    $notification->category = 'diary';
-                    $notification->user_id = $comment_owner->owner->user->id; //他にコメントをつけたオーナーのユーザID
-                    $notification->send_user_id = auth()->user()->id;
-                    $notification->title = '日記にcommentがついたよ[2]';
-                    $notification->link_url = $target_diary->id;
-                    $notification->save();
+                    if($comment_owner->owner->user != NULL){ //コメントを付けたオーナーのユーザID(空の場合、新aibolife未登録状態となり通知できない)
+                        $notification = new Notification();
+                        $notification->category = 'diary';
+                        $notification->user_id = $comment_owner->owner->user->id; //他にコメントをつけたオーナーのユーザID
+                        $notification->send_user_id = auth()->user()->id;
+                        $notification->title = '日記にcommentがついたよ[2]';
+                        $notification->link_url = $target_diary->id;
+                        $notification->save();
+                    }
                 }
             }
 
