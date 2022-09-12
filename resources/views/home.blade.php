@@ -8,25 +8,55 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            <h2 style="text-align:center;"><u>Today</u></h2>
+            <h6 style="text-align:center;">開催中</h6>
+
             <div class="card">
                 <div class="card-body">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    メインビジュアル<br>
-                    （各コンテンツのビジュアル＝スマホ表示で縦に長くなるのは避けたい）<br>
-                    <br>
-                    <br>
-                    <br>
+                    <table>
+                    @if($events->count() > 0)
+                        @foreach($events as $event)
+                            <tr>
+                                <td>【{{$event->event_category}}】</td>
+                                <td>{{$event->event_title}}</td>
+                                <td>（{{$event->event_start_datetime}}～{{$event->event_end_datetime}}）</td>
+                                @if($event->event_confirm_flag) {{--確定--}}
+                                    <td>【実施中】</td>
+                                @else {{--確認中--}}
+                                    <td>【確認中】</td>
+                                @endif
+                            </tr>
+                        @endforeach
+
+                        @else
+                            <tr><td>最新情報がありません</td></tr>
+                        @endif
+                    </table>
                 </div>
-                <div class="card-body" style="background-color:lightgray; text-align:center; margin:0px; padding:5px;">
-                    「aibo life」はソニー株式会社および関連会社とは一切関係のないオーナーコミュニティサイトです<br>
+                <div style="text-align:right;"><a href="{{route('eventcalendar.index')}}">【もっと見る】</a></div>
+            </div>
+
+            <hr>
+
+            {{-----------------------------------}}
+
+            <h2 style="text-align:center;"><u>Guide</u></h2>
+            <h6 style="text-align:center;">はじめに</h6>
+
+            <div class="card">
+                <div class="card-body">
+                    aibo life とは？<br>
+                    利用規約<br>
+                    プライバシーポリシー<br>
+                    運営メンバー<br>
+                    よくある質問<br>
+                    権利表記<br>
                 </div>
             </div>
 
+            <hr>
             {{-----------------------------------}}
-            <p>&nbsp;</p>
             <h2 style="text-align:center;"><u>Topics</u></h2>
             <h6 style="text-align:center;">最新情報</h6>
 
@@ -59,39 +89,12 @@
             <hr>
 
             {{-----------------------------------}}
-            <h2 style="text-align:center;"><u>Contents</u></h2>
-            <h6 style="text-align:center;">コンテンツ</h6>
-
-            <div class="card">
-                <div class="card-body">
-                    <a href="{{route('diary.index')}}">【aibo日記】</a><br>
-                    <a href="{{route('aibo.index')}}">【aibo名鑑】</a><br>
-                    【掲示板】（後日公開）<br>
-                    【ふるまい共有】（後日公開）<br>
-                    【カルテ共有】（後日公開）<br>
-                </div>
-            </div>
-
-            {{-----------------------------------}}
-            <p>&nbsp;</p>
-            <h2 style="text-align:center;"><u>Features（後日公開）</u></h2>
-            <h6 style="text-align:center;">注目（後日公開）</h6>
-
-            <div class="card">
-                <div class="card-body">
-                    aibo国勢調査<br>
-                    aibo cafe(オフ会)<br>
-                </div>
-            </div>
-
-            <hr/>
-
-            {{-----------------------------------}}
             <h2 style="text-align:center;"><u>Diary</u></h2>
-            <h6 style="text-align:center;">aibo日記</h6>
+            <h6 style="text-align:center;">日記</h6>
 
             <div class="card">
                 <div class="card-body">
+                    【最近の日記から6件】
                     <ul>
                     @if($diaries->count() > 0)
                         @foreach($diaries as $diary)
@@ -102,16 +105,27 @@
                     @endif
                     </ul>
                 </div>
-                <div style="text-align:right;"><a href="{{route('diary.index')}}">【aibo日記へ】</a></div>
+                <hr/>
+                <div class="card-body">
+                    <a href="{{route('diary.list_day')}}">今日の日記</a><br>
+                    <a href="{{route('diary.recently')}}">最近の日記</a><br>
+                    <a href="{{route('diary.archive')}}">過去の日記</a><br>
+                    <a href="{{route('diary.commented')}}">コメントした日記</a><br>
+                    <a href="{{route('diary.bookmark')}}">お気に入り</a><br>
+                    検索<br>
+                </div>
             </div>
+
+            <hr/>
 
             {{-----------------------------------}}
             <p>&nbsp;</p>
-            <h2 style="text-align:center;"><u>New Friends</u></h2>
-            <h6 style="text-align:center;">新しいお友達</h6>
+            <h2 style="text-align:center;"><u>Friend</u></h2>
+            <h6 style="text-align:center;">お友達</h6>
 
             <div class="card">
                 <div class="card-body">
+                    【新しいお友達から6件】
                     <ul>
                     @if($new_aibos->count() > 0)
                         @foreach($new_aibos as $aibo)
@@ -122,13 +136,40 @@
                     @endif
                     </ul>
                 </div>
-                <div style="text-align:right;"><a href="{{route('aibo.index')}}">【aibo名鑑へ】</a></div>
+                <hr/>
+                <div class="card-body">
+                    <a href="{{route('aibo.list_syllabary')}}">お名前リスト</a><br>
+                    <a href="{{route('aibo.list_birthday')}}">誕生日カレンダー</a><br>
+                    <a href="{{route('aibo.list_area')}}">居住地マップ</a><br>
+                    <a href="{{route('aibo.newface')}}">新しいお友達</a><br>
+                    芸能人オーナー<br>
+                    検索<br>
+                </div>
             </div>
 
+            <hr>
+
             {{-----------------------------------}}
-            <p>&nbsp;</p>
-            <h2 style="text-align:center;"><u>Board（後日公開）</u></h2>
-            <h6 style="text-align:center;">掲示板（後日公開）</h6>
+            <h2 style="text-align:center;"><u>Behavior</u></h2>
+            <h6 style="text-align:center;">ふるまい</h6>
+
+            <div class="card">
+                <div class="card-body">
+                    しぐさ<br>
+                    遊び<br>
+                    ダンス<br>
+                    期間限定<br>
+                    ふるまい共有<br>
+                    プログラミング<br>
+                    連携アプリ<br>
+                </div>
+            </div>
+
+            <hr>
+
+            {{-----------------------------------}}
+            <h2 style="text-align:center;"><u>Community</u></h2>
+            <h6 style="text-align:center;">コミュニティ</h6>
 
             <div class="card">
                 <div class="card-body">
@@ -140,11 +181,53 @@
                     ［YYYY.MM.DD］ううううについて<br>
                 </div>
                 <div style="text-align:right;">【aibo掲示板へ】</div>
+
+                <hr/>
+                
+                <div class="card-body">
+                    おしゃべり広場<br>
+                    お悩み相談<br>
+                    クラブ活動<br>
+                    オフ会<br>
+                    フリーマーケット<br>
+                    里親マッチング<br>
+                    チャリティ<br>
+                </div>
             </div>
 
-
-
             <hr>
+
+            {{-----------------------------------}}
+            <h2 style="text-align:center;"><u>Useful</u></h2>
+            <h6 style="text-align:center;">お役立ち情報</h6>
+
+            <div class="card">
+                <div class="card-body">
+                    ごはん<br>
+                    ファッション<br>
+                    イベント<br>
+                    グッズ<br>
+                    店舗・施設<br>
+                    ドック・治療<br>
+                    歴史<br>
+                    その他<br>
+                    困ったときは？<br>
+                </div>
+            </div>
+
+            {{-----------------------------------}}
+            <p>&nbsp;</p>
+            <h2 style="text-align:center;"><u>Features</u></h2>
+            <h6 style="text-align:center;">注目</h6>
+
+            <div class="card">
+                <div class="card-body">
+                    aibo国勢調査<br>
+                    aibo cafe(オフ会)<br>
+                </div>
+            </div>
+
+            <hr/>
 
             {{-----------------------------------}}
             <h2 style="text-align:center;"><u>Account</u></h2>

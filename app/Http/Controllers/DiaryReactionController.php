@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DiaryReaction;
+use App\Models\Notification;
 
 class DiaryReactionController extends Controller
 {
@@ -13,11 +14,17 @@ class DiaryReactionController extends Controller
         $owner_id = auth()->user()->owner->id;
         $reaction_type = $request->reaction_type;
 
-        //既に付いているリアクションを消去
-        $like = DiaryReaction::where('diary_id', $diary_id)->where('owner_id', $owner_id)->delete();
+        //0-5(リアクション)は既に付いているリアクションを消去、6-7(お気に入り)はお気に入りだけ消す
+        if($reaction_type <= 5){
+            //6(お気に入り)以外を消す)
+            $like = DiaryReaction::where('diary_id', $diary_id)->where('reaction_type', '!=', 6)->where('owner_id', $owner_id)->delete();
+        } else {
+            //6(お気に入り)のみ消す
+            $like = DiaryReaction::where('diary_id', $diary_id)->where('reaction_type', 6)->where('owner_id', $owner_id)->delete();
+        }
 
         //リアクションをDBに保存
-        if($request->reaction_type > 0){
+        if($request->reaction_type > 0 && $request->reaction_type != 7){
             $reaction= new DiaryReaction();
             $reaction->diary_id = $diary_id;
             $reaction->owner_id = $owner_id;
@@ -56,5 +63,19 @@ class DiaryReactionController extends Controller
         //     }
 
         return back();
+    }
+
+    
+    //お気に入りの日記
+    public function bookmark()
+    {
+        $owner_id = auth()->user()->owner->id;
+        //reaction_type=6がお気に入り
+        $bookmarks = DiaryReaction::where('owner_id', $owner_id)->where('reaction_type', 6)->orderBy('created_at', 'desc')->paginate(10);
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('diary.bookmark', compact('bell_count','bookmarks'));
     }
 }

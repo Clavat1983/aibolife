@@ -14,6 +14,20 @@
                 <div class="card-body">
 
                     <h4>タイトル：{{$diary->diary_title}}</h4>
+
+                    {{-- お気に入り追加 --}}
+                    <form method="post" action="{{route('diaryreaction.store')}}">
+                        @csrf
+                        <input type="hidden" name='diary_id' value="{{$diary->id}}">
+                        <div class="form-group">
+                            @if($my_reaction != null && $my_reaction->max('reaction_type') == 6)
+                                <button type="submit" name=reaction_type value="7" class="btn btn-success float-right mb-3 mr-3">お気に入り取消(7)</button>
+                            @else
+                                <button type="submit" name=reaction_type value="6" class="btn btn-success float-right mb-3 mr-3">お気に入り追加(6)</button>
+                            @endif
+                        </div>
+                    </form>
+
                     <p>名前：{{$diary->aibo->aibo_name}}</p>
                     <p>日付：{{date('Y年m月d日', strtotime($diary->diary_date))}}、この日の性格：{{$diary->diary_personality}}、この日の天気：{{$diary->diary_weather}}</p>
                     @if($diary->diary_photo1)
@@ -44,11 +58,11 @@
                                 <tr>
                             @for ($i = 1; $i <= 5; $i++)
                                 <td style="text-align:center;">
-                                @if($my_reaction == null || $my_reaction->reaction_type != $i)
+                                    @if($my_reaction->firstWhere('reaction_type', '<=', 5) != null && $my_reaction->firstWhere('reaction_type', '<=', 5)->reaction_type == $i)
+                                        <button type="submit" name=reaction_type value="0" class="btn btn-success float-right mb-3 mr-3">いいね({{$i}}を取消)</button>
+                                    @else
                                     <button type="submit" name=reaction_type value="{{$i}}" class="btn btn-success float-right mb-3 mr-3">{{$reaction_name[$i]}}({{$i}})</button>
-                                @else
-                                    <button type="submit" name=reaction_type value="0" class="btn btn-success float-right mb-3 mr-3">いいね({{$i}}を取消)</button>
-                                @endif
+                                    @endif
                                 <br>
                                 {{$diary->diaryreactions()->where('reaction_type', $i)->count()}}件
                                 </td>

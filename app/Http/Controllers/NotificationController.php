@@ -42,6 +42,5 @@ class NotificationController extends Controller
                 abort(404);
             }
         }
-
     }
 }

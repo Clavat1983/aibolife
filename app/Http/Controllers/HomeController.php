@@ -8,6 +8,7 @@ use App\Models\Owner;
 use App\Models\Aibo;
 use App\Models\News;
 use App\Models\Diary;
+use App\Models\EventCalendar;
 use App\Models\Notification;
 use Carbon\Carbon; //日付操作
 
@@ -46,6 +47,9 @@ class HomeController extends Controller
                 return redirect()->route('aibo.create');
             } else { //aiboを登録している=トップページの情報取得
 
+                //イベントカレンダー取得（開始日時が今日の23:59:59以前＝今日以前に開始+今日始まる　かつ　終了時間が今日の0:00より大きい＝今日以降に終わる）
+                $events = EventCalendar::where('event_publication_flag',1)->where('event_publication_datetime','<=',date('Y-m-d H:i:s'))->where('event_start_datetime','<=',date('Y-m-d 23:59:59'))->where('event_end_datetime','>=',date('Y-m-d 00:00:00'))->orderby('event_publication_datetime', 'asc')->get();
+
                 //最新情報の取得(最新6件)
                 $news_list = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->limit(6)->get();
 
@@ -61,7 +65,7 @@ class HomeController extends Controller
                 //【全ビュー共通処理】未読通知数
                 $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-                return view('home', compact('bell_count','owners', 'news_list', 'diaries', 'new_aibos'));
+                return view('home', compact('bell_count','owners', 'events', 'news_list', 'diaries', 'new_aibos'));
             }
         }
     }

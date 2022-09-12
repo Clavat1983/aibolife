@@ -169,6 +169,20 @@ class DiaryController extends Controller
         }
     }
 
+    //最近の日記
+    public function recently(){
+
+        //3日以内に書かれた日記を新しい順に取得
+        $target_carbon = Carbon::now()->subDay(3);
+        $diaries = Diary::orderBy('id', 'desc')->where('created_at','>=', $target_carbon->format('Y-m-d H:i:s'))->get();
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('diary.recently', compact('bell_count','diaries'));
+    }
+
+    //過去の日記
     public function archive(Request $request){
 
         //1.いつ？（クエリパラメータの取得＆設定）
@@ -398,7 +412,7 @@ class DiaryController extends Controller
     public function show(Diary $diary)
     {
         //既に自分が何かリアクションをつけているか
-        $my_reaction = DiaryReaction::where('diary_id', $diary->id)->where('owner_id', auth()->user()->owner->id)->first();
+        $my_reaction = DiaryReaction::where('diary_id', $diary->id)->where('owner_id', auth()->user()->owner->id)->get();
 
         //【全ビュー共通処理】未読通知数
         $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();

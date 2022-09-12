@@ -57,6 +57,7 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/friend/birthday/{month}', 'AiboController@result_birthday')->name('aibo.result_birthday');
     Route::get('/friend/area', 'AiboController@list_area')->name('aibo.list_area');
     Route::get('/friend/area/{pref}', 'AiboController@result_area')->name('aibo.result_area');
+    Route::get('/friend/newface', 'AiboController@newface')->name('aibo.newface');
     Route::get('/friend/search', 'AiboController@search_top')->name('aibo.search_top');
     Route::put('/friend/result', 'AiboController@search_result')->name('aibo.search_result');
 
@@ -69,6 +70,9 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/diary/list_day', 'DiaryController@list_day')->name('diary.list_day');//aibo日記一覧（日ごと）
     Route::get('/diary/list_aibo', 'DiaryController@list_aibo')->name('diary.list_aibo');//aibo日記一覧（aiboごと）
     Route::get('/diary/archive', 'DiaryController@archive')->name('diary.archive');//aibo日記（過去の日記アーカイブ）
+    Route::get('/diary/recently', 'DiaryController@recently')->name('diary.recently');//最新の日記トップ
+    Route::get('/diary/commented', 'DiaryCommentController@commented')->name('diary.commented');//コメントを付けた日記一覧
+    Route::get('/diary/bookmark', 'DiaryReactionController@bookmark')->name('diary.bookmark');//コメントを付けた日記一覧
 
     Route::get('/diary/create', 'DiaryController@create')->name('diary.create');//日記を書く(新規-入力画面)
     Route::post('/diary', 'DiaryController@store')->name('diary.store');//日記を書く(新規-DB登録)
@@ -81,6 +85,9 @@ Route::middleware(['verified'])->group(function(){
 
     //日記にリアクション
     Route::post('/diary/reaction/', 'DiaryReactionController@store')->name('diaryreaction.store');//付ける・外すともに
+
+    //イベントカレンダー
+    Route::get('/useful/event/calendar', 'EventCalendarController@index')->name('eventcalendar.index');//イベントカレンダー（すべて）
 
     //最新情報(News->URLだけTopicsに変えた)
         //管理者用(パスワード再確認を挟む)

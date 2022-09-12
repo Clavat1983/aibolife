@@ -105,7 +105,7 @@
         @auth {{--ログインしていたら--}}
             {{-- トップページが表示される場合(オーナー登録済 かつ aibo登録済)、グローバルナビを出力 --}}
             @if(auth()->user()->owner != NULL && count(auth()->user()->owner->aibos) > 0)
-                <nav class="navbar navbar-expand-md" style="background-color:pink;">｜はじめに｜最新情報｜日記｜名鑑｜ふるまい｜掲示板｜オフ会｜<a href="{{route('contact.index')}}">お問い合わせ</a></nav>
+                <nav class="navbar navbar-expand-md" style="background-color:pink;">【ログイン中】　｜はじめに｜最新情報｜日記｜お友達｜ふるまい｜コミュニティ｜お役立ち情報｜<a href="{{route('contact.index')}}">お問い合わせ</a></nav>
             @endif
         @endauth
 

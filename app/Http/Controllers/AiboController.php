@@ -220,6 +220,17 @@ class AiboController extends Controller
         }
     }
 
+    public function newface()
+    {
+        $before_7day = new Carbon('-7 day');
+        $aibos=Aibo::where('aibo_available_flag', true)->where('created_at','>=',$before_7day->format('Y-m-d 00:00:00'))->orderBy('id', 'desc')->get();
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('aibo.newface',compact('bell_count','aibos'));
+    }
+
     public function search_top() //検索条件入力画面
     {
         //【全ビュー共通処理】未読通知数
