@@ -120,7 +120,7 @@ class NewsController extends Controller
 
         $keywords = $request->keywords;
         
-        //検索
+        //検索（カタカナや濁点まで区別する場合は「like」を「like BINARY」へ変更すること）
         $query = News::query();
         if(isset($keywords)){
             $keyword_array =  preg_split('/\s+/ui', $keywords, -1, PREG_SPLIT_NO_EMPTY);

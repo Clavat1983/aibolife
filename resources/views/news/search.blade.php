@@ -20,11 +20,10 @@
                     </table>
 
                     <br>
-                    <form method="get" action="{{route('news.search')}}?keywords={{Session::get('keywords')}}">
+                    <form method="get" action="{{route('news.search')}}">
                         @csrf
                         <div>
                             <label for="diary_title">検索キーワード：</label>
-
                             <input type="text" name="keywords" id="keywords" value="{{old('keywords', $keywords)}}">
                             <button type="submit" class="btn btn-success">検索</button>
                         </div>
@@ -36,8 +35,9 @@
                         <hr/>
                         @if(count($results))
                             @foreach ($results as $news)
-                                ID：{{$news->id}}、タイトル：{{$news->news_title}}、本文：{{$news->news_body}}<br>
+                                ID：{{$news->id}}、タイトル：{{$news->news_title}}、本文：{{$news->news_body}}、<a href="{{route('news.show', $news->id)}}">【見る】</a><br>
                             @endforeach
+                            <br>
                             {{$results->appends(['keywords' => $keywords])->links()}}<br>
                         @else
                             検索結果がありません

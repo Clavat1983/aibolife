@@ -143,7 +143,7 @@
                     <a href="{{route('aibo.list_area')}}">居住地マップ</a><br>
                     <a href="{{route('aibo.newface')}}">新しいお友達</a><br>
                     芸能人オーナー<br>
-                    検索<br>
+                    <a href="{{route('aibo.search')}}">検索</a><br>
                 </div>
             </div>
 

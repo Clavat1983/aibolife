@@ -58,8 +58,8 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/friend/area', 'AiboController@list_area')->name('aibo.list_area');
     Route::get('/friend/area/{pref}', 'AiboController@result_area')->name('aibo.result_area');
     Route::get('/friend/newface', 'AiboController@newface')->name('aibo.newface');
-    Route::get('/friend/search', 'AiboController@search_top')->name('aibo.search_top');
-    Route::put('/friend/result', 'AiboController@search_result')->name('aibo.search_result');
+    Route::get('/friend/search', 'AiboController@search')->name('aibo.search');
+//    Route::post('/friend/search/result', 'AiboController@search_result')->name('aibo.search_result');
 
     Route::get('/friend/{aibo}', 'AiboController@show')->name('aibo.show');//aiboを個別表示
     //aiboコメント

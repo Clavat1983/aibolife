@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Owner;
 use App\Models\Aibo;
 use App\Models\Notification;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage; //画像削除用
 use Carbon\Carbon; //日付操作
 
@@ -231,21 +232,74 @@ class AiboController extends Controller
         return view('aibo.newface',compact('bell_count','aibos'));
     }
 
-    public function search_top() //検索条件入力画面
+    public function search(Request $request) //検索条件入力画面
     {
+        $aibo_name = $request->aibo_name;
+        $aibo_birth_year = $request->aibo_birth_year;
+        $aibo_birth_month = $request->aibo_birth_month;
+        $aibo_birth_day = $request->aibo_birth_day;
+        $aibo_color = $request->aibo_color;
+        $aibo_sex = $request->aibo_sex;
+        $owner_name = $request->owner_name;
+        $owner_pref = $request->owner_pref;
+
+        $search_flag = false;
+
+        //検索（カタカナや濁点まで区別する場合は「like」を「like BINARY」へ変更すること）
+        $query = Aibo::query();
+        $query = $query->select(DB::raw("aibos.*, owners.owner_name, owners.owner_name_kana, owners.owner_pref"));//ownewsのidを取ってこないようにするため
+        $query = $query->leftJoin('owners', 'aibos.owner_id', '=', 'owners.id');
+        if(isset($aibo_name)){
+            $search_flag = true;
+            $aibo_name = addcslashes($aibo_name, '\\_%');//エスケープ処理
+            $query = $query->where(DB::raw("CONCAT(aibo_name, '|', aibo_kana)"), 'like', '%' . $aibo_name . '%');//like検索、aibo名とaibo名(よみ)の文字列を半角「|」で連結して1つのカラムとして検索
+        }
+        if(isset($aibo_birth_year)){
+            $search_flag = true;
+            $query = $query->whereYear('aibo_birthday',$aibo_birth_year);
+        }
+        if(isset($aibo_birth_month)){
+            $search_flag = true;
+            $query = $query->whereMonth('aibo_birthday',$aibo_birth_month);
+        }
+        if(isset($aibo_birth_day)){
+            $search_flag = true;
+            $query = $query->whereDay('aibo_birthday',$aibo_birth_day);
+        }
+        if(isset($aibo_color)){
+            $search_flag = true;
+            $query = $query->where('aibo_color',$aibo_color);
+        }
+        if(isset($aibo_sex)){
+            $search_flag = true;
+            $query = $query->where('aibo_sex',$aibo_sex);
+        }
+        if(isset($owner_name)){
+            $search_flag = true;
+            $owner_name = addcslashes($owner_name, '\\_%');//エスケープ処理
+            $query = $query->where(DB::raw("CONCAT(owner_name, '|', owner_name_kana)"), 'like', '%' . $owner_name . '%');//like検索、オーナー名とオーナー名(よみ)の文字列を半角「|」で連結して1つのカラムとして検索
+        }
+        if(isset($owner_pref)){
+            $search_flag = true;
+            $query = $query->where('owner_pref',$owner_pref);
+        }
+        $query->where('aibo_available_flag', true)->orderby('aibo_kana');
+        $results = $query->paginate(10); //クエリ文字列(検索キーワード)をつけて返す
+
+
         //【全ビュー共通処理】未読通知数
         $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return view('aibo.search_top',compact('bell_count'));
+        return view('aibo.search',compact('bell_count','results','search_flag','aibo_name','aibo_birth_year','aibo_birth_month','aibo_birth_day','aibo_color','aibo_sex','owner_name', 'owner_pref'));
     }
 
-    public function search_result() //検索結果画面
-    {
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+    // public function search_result() //検索結果画面
+    // {
+    //     //【全ビュー共通処理】未読通知数
+    //     $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return view('aibo.search_result',compact('bell_count'));
-    }
+    //     return view('aibo.search_result',compact('bell_count'));
+    // }
 
 
 
