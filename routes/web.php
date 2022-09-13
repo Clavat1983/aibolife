@@ -112,6 +112,8 @@ Route::middleware(['verified'])->group(function(){
         Route::get('/topics/special', 'NewsController@index_special')->name('news.index_special');//カテゴリ別（スペシャル）
         Route::get('/topics/etc', 'NewsController@index_etc')->name('news.index_etc');//カテゴリ別（スペシャル）
 
+        Route::get('/topics/search', 'NewsController@search')->name('news.search');//検索＆検索結果
+
         Route::get('/topics/{news}', 'NewsController@show')->name('news.show');//最新情報（個別表示）
 
         //お問い合わせ

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\Notification;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage; //画像削除用
 use Carbon\Carbon; //日付操作
 
@@ -114,6 +115,28 @@ class NewsController extends Controller
         return view('news.index', compact('bell_count','category','news_all'));
     }
 
+    public function search(Request $request) //検索
+    {
+
+        $keywords = $request->keywords;
+        
+        //検索
+        $query = News::query();
+        if(isset($keywords)){
+            $keyword_array =  preg_split('/\s+/ui', $keywords, -1, PREG_SPLIT_NO_EMPTY);
+            foreach ($keyword_array as $word) {
+                $escape_word = addcslashes($word, '\\_%');//エスケープ処理
+                $query = $query->where(DB::raw("CONCAT(news_title, ' ', news_body)"), 'like', '%' . $escape_word . '%');//like検索、タイトルの文字列と本文の文字列を半角スペース「 」で連結して1つのカラムとして検索
+            }
+            $query->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc');
+        }
+        $results = $query->paginate(1); //クエリ文字列(検索キーワード)をつけて返す
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('news.search', compact('bell_count','keywords','results'));
+    }
 
 
     //管理者用の全件表示
