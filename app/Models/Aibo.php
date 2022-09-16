@@ -22,4 +22,8 @@ class Aibo extends Model
     public function diaries(){
         return $this->hasMany('App\Models\Diary');
     }
+
+    public function behaviors(){
+        return $this->hasMany('App\Models\BehaviorShare');
+    }
 }

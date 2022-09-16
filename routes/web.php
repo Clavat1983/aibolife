@@ -72,7 +72,8 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/diary/archive', 'DiaryController@archive')->name('diary.archive');//aibo日記（過去の日記アーカイブ）
     Route::get('/diary/recently', 'DiaryController@recently')->name('diary.recently');//最新の日記トップ
     Route::get('/diary/commented', 'DiaryCommentController@commented')->name('diary.commented');//コメントを付けた日記一覧
-    Route::get('/diary/bookmark', 'DiaryReactionController@bookmark')->name('diary.bookmark');//コメントを付けた日記一覧
+    Route::get('/diary/bookmark', 'DiaryReactionController@bookmark')->name('diary.bookmark');//お気に入り日記一覧
+    Route::get('/diary/search', 'DiaryController@search')->name('diary.search');//お気に入り日記一覧
 
     Route::get('/diary/create', 'DiaryController@create')->name('diary.create');//日記を書く(新規-入力画面)
     Route::post('/diary', 'DiaryController@store')->name('diary.store');//日記を書く(新規-DB登録)
@@ -85,6 +86,12 @@ Route::middleware(['verified'])->group(function(){
 
     //日記にリアクション
     Route::post('/diary/reaction/', 'DiaryReactionController@store')->name('diaryreaction.store');//付ける・外すともに
+
+    //ふるまい共有
+    Route::get('/behavior/share', 'BehaviorShareController@index')->name('behavior.share_index');
+    Route::get('/behavior/share/create', 'BehaviorShareController@create')->name('behavior.share_create');
+    Route::get('/behavior/share/{behavior}', 'BehaviorShareController@show')->name('behavior.share_show');
+
 
     //イベントカレンダー
     Route::get('/useful/event/calendar', 'EventCalendarController@index')->name('eventcalendar.index');//イベントカレンダー（すべて）

@@ -9,6 +9,7 @@ use App\Models\Diary;
 use App\Models\DiaryReaction;
 use App\Models\Notification;
 use Carbon\Carbon; //日付操作
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage; //画像削除用
 
 class DiaryController extends Controller
@@ -283,6 +284,53 @@ class DiaryController extends Controller
 
             return view('diary.archive', compact('bell_count','before_year','before_month','before_flg','target_year','target_month','next_year','next_month','next_flg','calendar','diaries'));
         }
+    }
+
+    //検索
+    public function search(Request $request)
+    {
+        $keywords = $request->keywords;
+        $diary_date_from = $request->diary_date_from;
+        $diary_date_to = $request->diary_date_to;
+        $aibo_name = $request->aibo_name;
+
+        $search_flag = false;
+
+        //検索（カタカナや濁点まで区別する場合は「like」を「like BINARY」へ変更すること）
+        $query = Diary::query();
+        $query = $query->select(DB::raw("diaries.*, aibos.aibo_name"));//ownewsのidを取ってこないようにするため
+        $query = $query->leftJoin('aibos', 'diaries.aibo_id', '=', 'aibos.id');
+
+        if(isset($keywords)){
+            $search_flag = true;
+            $keyword_array =  preg_split('/\s+/ui', $keywords, -1, PREG_SPLIT_NO_EMPTY);
+            foreach ($keyword_array as $word) {
+                $escape_word = addcslashes($word, '\\_%');//エスケープ処理
+                $query = $query->where(DB::raw("CONCAT(diary_title, ' ', diary_body)"), 'like', '%' . $escape_word . '%');//like検索、タイトルの文字列と本文の文字列を半角スペース「 」で連結して1つのカラムとして検索
+            }
+        }
+        if(isset($diary_date_from)){
+            $search_flag = true;
+            $query = $query->where('diary_date', '>=' ,$diary_date_from);
+        }
+        if(isset($diary_date_to)){
+            $search_flag = true;
+            $query = $query->where('diary_date', '<=', $diary_date_to);
+        }
+        if(isset($aibo_name)){
+            $search_flag = true;
+            $aibo_name = addcslashes($aibo_name, '\\_%');//エスケープ処理
+            $query = $query->where(DB::raw("CONCAT(aibo_name, '|', aibo_kana)"), 'like', '%' . $aibo_name . '%');//like検索、aibo名とaibo名(よみ)の文字列を半角「|」で連結して1つのカラムとして検索
+        }
+        $query->where('aibo_available_flag', true)->where('diary_share_flag', true)->orderby('diary_date','desc')->orderby('id');
+        $results = $query->paginate(10); //クエリ文字列(検索キーワード)をつけて返す
+
+
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('diary.search',compact('bell_count','search_flag', 'results', 'keywords','diary_date_from','diary_date_to','aibo_name'));
     }
 
     /**

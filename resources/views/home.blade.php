@@ -112,7 +112,7 @@
                     <a href="{{route('diary.archive')}}">過去の日記</a><br>
                     <a href="{{route('diary.commented')}}">コメントした日記</a><br>
                     <a href="{{route('diary.bookmark')}}">お気に入り</a><br>
-                    検索<br>
+                    <a href="{{route('diary.search')}}">検索</a><br>
                 </div>
             </div>
 
@@ -159,7 +159,7 @@
                     遊び<br>
                     ダンス<br>
                     期間限定<br>
-                    ふるまい共有<br>
+                    <a href="{{route('behavior.share_index')}}">ふるまい共有</a><br>
                     プログラミング<br>
                     連携アプリ<br>
                 </div>
