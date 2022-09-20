@@ -15,7 +15,12 @@
 
                     ID：{{$behavior->id}}、タイトル：{{$behavior->behavior_name}}、aiboの名前：{{$behavior->aibo->aibo_name}}<br>
 
-
+                    {{-- ログイン中のユーザのオーナーIDと、このふるまいを登録しているaiboのオーナーIDが一緒なら編集 --}}
+                    @if(auth()->user()->owner->id == $behavior->aibo->owner_id)
+                        自分のaiboなのでふるまいの編集・削除が【可能】
+                    @else
+                        他人のaiboなのでふるまいの編集・削除は【不可】
+                    @endif
 
                 </div>
             </div>

@@ -89,7 +89,9 @@ Route::middleware(['verified'])->group(function(){
 
     //ふるまい共有
     Route::get('/behavior/share', 'BehaviorShareController@index')->name('behavior.share_index');
-    Route::get('/behavior/share/create', 'BehaviorShareController@create')->name('behavior.share_create');
+    Route::get('/behavior/share/create', 'BehaviorShareController@create')->name('behavior.share_create'); //登録画面(コードはりつけ)
+    Route::post('/behavior/share/confirm', 'BehaviorShareController@confirm')->name('behavior.share_create_confirm'); //確認画面
+    Route::post('/behavior/share/store', 'BehaviorShareController@store')->name('behavior.share_store'); //登録完了
     Route::get('/behavior/share/{behavior}', 'BehaviorShareController@show')->name('behavior.share_show');
 
 
