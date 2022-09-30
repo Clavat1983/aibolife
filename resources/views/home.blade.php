@@ -159,7 +159,7 @@
                     遊び<br>
                     ダンス<br>
                     期間限定<br>
-                    <a href="{{route('behavior.share_index')}}">ふるまい共有</a><br>
+                    <a href="{{route('behaviorshare.index')}}">ふるまい共有</a><br>
                     プログラミング<br>
                     連携アプリ<br>
                 </div>

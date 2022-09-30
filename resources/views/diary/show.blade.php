@@ -29,6 +29,7 @@
                     </form>
 
                     <p>名前：{{$diary->aibo->aibo_name}}</p>
+                    <p>（オーナー名：{{$diary->aibo->owner->owner_name}}）</p>
                     <p>日付：{{date('Y年m月d日', strtotime($diary->diary_date))}}、この日の性格：{{$diary->diary_personality}}、この日の天気：{{$diary->diary_weather}}</p>
                     @if($diary->diary_photo1)
                        <p>画像：<img src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" style="height:300px;"></p>

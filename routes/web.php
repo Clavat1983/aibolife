@@ -88,11 +88,12 @@ Route::middleware(['verified'])->group(function(){
     Route::post('/diary/reaction/', 'DiaryReactionController@store')->name('diaryreaction.store');//付ける・外すともに
 
     //ふるまい共有
-    Route::get('/behavior/share', 'BehaviorShareController@index')->name('behavior.share_index');
-    Route::get('/behavior/share/create', 'BehaviorShareController@create')->name('behavior.share_create'); //登録画面(コードはりつけ)
-    Route::post('/behavior/share/confirm', 'BehaviorShareController@confirm')->name('behavior.share_create_confirm'); //確認画面
-    Route::post('/behavior/share/store', 'BehaviorShareController@store')->name('behavior.share_store'); //登録完了
-    Route::get('/behavior/share/{behavior}', 'BehaviorShareController@show')->name('behavior.share_show');
+    Route::get('/behavior/share', 'BehaviorShareController@index')->name('behaviorshare.index'); //一覧画面
+    Route::get('/behavior/share/create', 'BehaviorShareController@create')->name('behaviorshare.create'); //登録画面
+    Route::post('/behavior/share', 'BehaviorShareController@store')->name('behaviorshare.store'); //新規登録画面
+    Route::get('/behavior/share/{behavior}/edit', 'BehaviorShareController@edit')->name('behaviorshare.edit'); //編集画面
+    Route::put('/behavior/share/{behavior}', 'BehaviorShareController@update')->name('behaviorshare.update');//変更(DB更新)
+    Route::get('/behavior/share/{behavior}', 'BehaviorShareController@show')->name('behaviorshare.show'); //個別画面(表示)
 
 
     //イベントカレンダー

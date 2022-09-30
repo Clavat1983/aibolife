@@ -113,7 +113,7 @@
                         <input type="hidden" name="diary_date" id="diary_date" value="{{$date}}"> --}}
 
                         <p>&nbsp;</p>
-                        <button>編集</button>
+                        <button>更新</button>
                     </form>
                     
                 </div>

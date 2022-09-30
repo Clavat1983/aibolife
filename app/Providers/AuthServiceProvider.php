@@ -19,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Diary' => 'App\Policies\DiaryPolicy',
         'App\Models\News' => 'App\Policies\NewsPolicy',
         'App\Models\Notification' => 'App\Policies\NotificationPolicy',
+        'App\Models\BehaviorShare' => 'App\Policies\BehaviorPolicy',
     ];
 
     /**

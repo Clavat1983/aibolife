@@ -446,9 +446,10 @@ class DiaryController extends Controller
         $diary = Diary::where('aibo_id', $inputs['aibo_id'])->where('diary_date', $inputs['diary_date'])->first();
 
         //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+        //$bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return redirect()->route('diary.show',['diary' => $diary])->with('bell_count', $bell_count); //書いた日記の個別表示へ
+        return redirect()->route('diary.show',['diary' => $diary]);//書いた日記の個別表示へ
+        //return redirect()->route('diary.show',['diary' => $diary])->with('bell_count', $bell_count); //書いた日記の個別表示へ
     }
 
     /**
@@ -516,7 +517,7 @@ class DiaryController extends Controller
         // $inputs['diary_date'] = $request['diary_date'];
 
         //保存
-        //$diary = new Diary();
+        ////$diary = new Diary();
         // $diary->aibo_id = $inputs['aibo_id'];
         // $diary->diary_date = $inputs['diary_date'];
         $diary->diary_title = $inputs['diary_title'];
@@ -529,7 +530,7 @@ class DiaryController extends Controller
         $diary->diary_weather = $inputs['diary_weather'];
         $diary->diary_share_flag = true;
 
-        //画像の削除
+        //画像の削除フラグ確認
         $del_flg = 0;//削除したかどうか
         $checkbox_diary_photo1_del = 0; //削除チェックボックスの値
         if(isset($inputs['diary_photo1_del'])){ //非表示の時は取得できないのでisset
@@ -565,8 +566,8 @@ class DiaryController extends Controller
 
         //今書いた日記を取り出して、表示画面へ転送
         //$diary = Diary::where('aibo_id', $inputs['aibo_id'])->where('diary_date', $inputs['diary_date'])->first();
-        return redirect()->route('diary.show',['diary' => $diary])->with('bell_count', $bell_count); //書いた日記の個別表示へ
-
+        //return redirect()->route('diary.show',['diary' => $diary])->with('bell_count', $bell_count); //書いた日記の個別表示へ
+        return redirect()->route('diary.show',['diary' => $diary]); //書いた日記の個別表示へ
     }
 
     /**
