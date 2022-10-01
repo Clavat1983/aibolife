@@ -97,14 +97,14 @@
             <br>
             <div class="card">
                 <div class="card-body">
-                    <a href="{{route('diary.index')}}"><button>aibo日記に戻る</button></a>
+                    <a href="{{route('diary.index')}}"><button type="button">aibo日記に戻る</button></a>
                 </div>
             </div>
 
             <br>
             <div class="card">
                 <div class="card-body">
-                    <a href="{{route('home')}}"><button>トップに戻る</button></a>
+                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
                 </div>
             </div>
         </div>

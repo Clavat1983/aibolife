@@ -55,7 +55,7 @@
                             <input type="text" name="owner_old_security_code" id="owner_old_security_code" value="{{old('owner_old_security_code')}}">
                         </div>
                         <p>&nbsp;</p>
-                        <button>認証（引き継ぎ実行）</button>
+                        <button type="submit">認証（引き継ぎ実行）</button>
                     </form>
 
                 </div>

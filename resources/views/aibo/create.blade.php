@@ -263,7 +263,7 @@
                         </div>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
-                        <button>登録</button>
+                        <button type="submit">登録</button>
                     </form>
                     
                 </div>

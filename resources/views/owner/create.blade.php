@@ -69,7 +69,7 @@
                             </select>
                         </div>
                         <p>&nbsp;</p>
-                        <button>次へ</button>
+                        <button type="submit">次へ</button>
                     </form>
                     
                 </div>

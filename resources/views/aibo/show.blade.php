@@ -59,11 +59,11 @@
                     <br/>
                     @if(($aibo->owner->user != NULL) && (auth()->user()->id === $aibo->owner->user->id)) {{--自分のaibo--}}
                         自分のaiboなので...<br>
-                        <a href="{{route('aibo.edit', $aibo)}}"><button>aiboの編集</button></a><br/>
+                        <a href="{{route('aibo.edit', $aibo)}}"><button type="button">aiboの編集</button></a><br/>
                     @endif
                     <br/>
                     <br/>
-                    <a href="{{route('diary.list_aibo')}}?aibo={{$aibo->id}}"><button>{{$aibo->aibo_name}}の日記を見る</button></a><br>
+                    <a href="{{route('diary.list_aibo')}}?aibo={{$aibo->id}}"><button type="button">{{$aibo->aibo_name}}の日記を見る</button></a><br>
                     <br/>
 
                     <hr/>
@@ -114,7 +114,7 @@
                     <hr/>
 
                     <br/>
-                    <a href="{{route('home')}}"><button>トップに戻る</button></a><br>
+                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a><br>
                 </div>
             </div>
         </div>

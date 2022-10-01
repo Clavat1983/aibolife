@@ -80,9 +80,11 @@
                             </select>
                         </div>
                         <p>&nbsp;</p>
-                        <button>更新</button>
+                        <button type="submit">更新</button>
                     </form>
                     
+                    <a href="{{route('mypage')}}"><button type="button">マイページに戻る</button></a>
+
                 </div>
 
 

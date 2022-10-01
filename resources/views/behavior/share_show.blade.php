@@ -28,7 +28,7 @@
                     {{-- ログイン中のユーザのオーナーIDと、このふるまいを登録しているaiboのオーナーIDが一緒なら編集 --}}
                     @if(auth()->user()->owner->id == $behavior->aibo->owner_id)
                         自分のaiboなのでふるまいの編集・削除が【可能】<br>
-                        <a href="{{route('behaviorshare.edit',$behavior)}}"><button>編集</button></a>
+                        <a href="{{route('behaviorshare.edit',$behavior)}}"><button type="button">編集</button></a>
                     @else
                         他人のaiboなのでふるまいの編集・削除は【不可】
                     @endif
@@ -67,13 +67,13 @@
             <div class="card">
                 <div class="card-body">
                     @if(isset($page) && isset($seed)) {{-- ふるまい一覧から来た場合：ぺジネーションの情報付与 --}}
-                    <a href="{{route('behaviorshare.index')}}?page={{$page}}&seed={{$seed}}"><button>ふるまい共有に戻る</button></a>
+                    <a href="{{route('behaviorshare.index')}}?page={{$page}}&seed={{$seed}}"><button type="button">ふるまい共有に戻る</button></a>
                     @else
-                    <a href="{{route('behaviorshare.index')}}"><button>ふるまい共有に戻る</button></a>
+                    <a href="{{route('behaviorshare.index')}}"><button type="button">ふるまい共有に戻る</button></a>
                     @endif
                     <br>
                     <br>
-                    <a href="{{route('home')}}"><button>トップに戻る</button></a>
+                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
                 </div>
             </div>
         </div>

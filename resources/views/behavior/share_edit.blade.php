@@ -119,10 +119,10 @@
             <br>
             <div class="card">
                 <div class="card-body">
-                    <a href="{{route('behaviorshare.index')}}"><button>ふるまい共有に戻る</button></a>
+                    <a href="{{route('behaviorshare.index')}}"><button type="button">ふるまい共有に戻る</button></a>
                     <br>
                     <br>
-                    <a href="{{route('home')}}"><button>トップに戻る</button></a>
+                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
                 </div>
             </div>
         </div>

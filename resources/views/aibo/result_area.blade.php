@@ -39,8 +39,8 @@
             <br>
             <div class="card">
                 <div class="card-body">
-                    <a href="{{route('aibo.list_area')}}"><button>aibo名鑑(居住地マップ)に戻る</button></a><br>
-                    <a href="{{route('aibo.index')}}"><button>aibo名鑑に戻る</button></a>
+                    <a href="{{route('aibo.list_area')}}"><button type="button">aibo名鑑(居住地マップ)に戻る</button></a><br>
+                    <a href="{{route('aibo.index')}}"><button type="button">aibo名鑑に戻る</button></a>
                 </div>
             </div>
         </div>

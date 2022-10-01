@@ -41,7 +41,7 @@
                     <br/>
                     @if(($diary->aibo->owner->user != NULL) && (auth()->user()->id === $diary->aibo->owner->user->id)) {{--自分のaibo--}}
                         自分のaiboなので...<br>
-                        <a href="{{route('diary.edit', $diary)}}"><button>日記の編集</button></a><br/>
+                        <a href="{{route('diary.edit', $diary)}}"><button type="button">日記の編集</button></a><br/>
                     @endif
                     <hr/>
 
@@ -121,9 +121,9 @@
                     </form>
                     <hr/>
                     <br/>
-                    <a href="{{route('diary.list_day')}}?date={{$diary->diary_date}}"><button>{{date('Y年m月d日', strtotime($diary->diary_date))}}の日記一覧</button></a><br><br>
-                    <a href="{{route('diary.list_aibo')}}?aibo={{$diary->aibo_id}}"><button>{{$diary->aibo->aibo_name}}の日記一覧</button></a><br><br>
-                    <a href="{{route('home')}}"><button>トップに戻る</button></a><br>
+                    <a href="{{route('diary.list_day')}}?date={{$diary->diary_date}}"><button type="button">{{date('Y年m月d日', strtotime($diary->diary_date))}}の日記一覧</button></a><br><br>
+                    <a href="{{route('diary.list_aibo')}}?aibo={{$diary->aibo_id}}"><button type="button">{{$diary->aibo->aibo_name}}の日記一覧</button></a><br><br>
+                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a><br>
                 </div>
             </div>
         </div>

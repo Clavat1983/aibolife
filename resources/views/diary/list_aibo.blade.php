@@ -65,7 +65,7 @@
                     <a href="{{route('diary.index')}}">日記を見るに戻る</a>
                     <br>
                     <br>
-                    <a href="{{route('home')}}"><button>トップに戻る</button></a>
+                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
                 </div>
             </div>
         </div>

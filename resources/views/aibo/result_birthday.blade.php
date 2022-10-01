@@ -39,8 +39,8 @@
             <br>
             <div class="card">
                 <div class="card-body">
-                    <a href="{{route('aibo.list_birthday')}}"><button>aibo名鑑(誕生日カレンダー)に戻る</button></a><br>
-                    <a href="{{route('aibo.index')}}"><button>aibo名鑑に戻る</button></a>
+                    <a href="{{route('aibo.list_birthday')}}"><button type="button">aibo名鑑(誕生日カレンダー)に戻る</button></a><br>
+                    <a href="{{route('aibo.index')}}"><button type="button">aibo名鑑に戻る</button></a>
                 </div>
             </div>
         </div>

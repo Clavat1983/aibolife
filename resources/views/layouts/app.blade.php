@@ -68,20 +68,22 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{-- {{ Auth::user()->name }} --}}
 @if((auth()->user()->owner != NULL) && (Auth::user()->owner->owner_icon))
-                                    <img src="{{ asset('storage/owner_icon/'.Auth::user()->owner->owner_icon)}}" style="height:20px; width:20px;">マイページ
+                                    <img src="{{ asset('storage/owner_icon/'.Auth::user()->owner->owner_icon)}}" style="height:20px; width:20px;">設定
 @else
-                                    <img src="{{ asset('storage/owner_icon/default.jpg')}}" style="height:20px; width:20px;">マイページ
+                                    <img src="{{ asset('storage/owner_icon/default.jpg')}}" style="height:20px; width:20px;">設定
 @endif
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @if(auth()->user()->owner == NULL)
                                     <a class="dropdown-item" href="{{ route('user.edit', auth()->user()->id) }}">
-                                        ログイン情報
+                                        マイページ（ログイン情報編集）
                                     </a>
-
-                                    @if(auth()->user()->owner != NULL)
-                                        <a class="dropdown-item" href="{{ route('owner.edit', auth()->user()->owner->id) }}">
-                                            オーナー情報
+                                    @else
+                                    {{-- (auth()->user()->owner != NULL) --}}
+                                        {{-- <a class="dropdown-item" href="{{ route('owner.edit', auth()->user()->owner->id) }}"> --}}
+                                        <a class="dropdown-item" href="{{ route('mypage') }}">
+                                            マイページ（トップ）
                                         </a>
                                     @endif
 

@@ -52,9 +52,12 @@
                             <input type="password" name="password_confirmation" id="password_confirmation" value="">
                         </div>
                         <p>&nbsp;</p>
-                        <button>変更</button>
+                        <button type="submit">変更</button>
+
                     </form>
                     
+                    <a href="{{route('mypage')}}"><button type="button">マイページに戻る</button></a>
+
                 </div>
 
 

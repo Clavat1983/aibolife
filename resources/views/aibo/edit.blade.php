@@ -264,7 +264,7 @@
                         </div>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
-                        <button>更新</button>
+                        <button type="submit">更新</button>
                     </form>
                     
                 </div>
