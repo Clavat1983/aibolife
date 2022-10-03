@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+
+// use Illuminate\Support\Facades\Auth;
 use Request;
 
 class DataBaseQueryServiceProvider extends ServiceProvider
@@ -47,9 +49,11 @@ class DataBaseQueryServiceProvider extends ServiceProvider
                 $sql = preg_replace('/\\?/', $binding, $sql, 1);
             }
 
+            // Auth::id(); //何故かものすごく処理が重たくなったのでログには入れず
+            //IPアドレス取得
             $ip = Request::ip();
-
-            Log::channel('sql')->debug('SQL', ['sql' => $sql, 'IP' => $ip]);
+            // //ログに吐き出し
+            Log::channel('sql')->debug('SQL', ['sql' => $sql, 'IP' => $ip, 'HOST' => gethostbyaddr($ip)]);
         });
 
         Event::listen(TransactionBeginning::class, function (TransactionBeginning $event): void {
