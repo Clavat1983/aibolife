@@ -175,6 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //追加
+        App\Providers\DataBaseQueryServiceProvider::class, //実行SQLのログ出力用
+
     ],
 
     /*

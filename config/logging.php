@@ -50,7 +50,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single', 'sql'], //sqlを追加
             'ignore_exceptions' => false,
         ],
 
@@ -113,6 +113,19 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        //追加
+        'sql' => [
+            'driver' => 'daily',  // 日別
+            'path' => storage_path('logs/sql.log'), // 出力先
+            'level' => 'debug', // ログレベル
+            'days' => 14, // 保存期間
+        ],
+    ],
+
+    //追加
+    'sql' => [
+        'enable' => env('LOG_SQL_ENABLE', true),
     ],
 
 ];
