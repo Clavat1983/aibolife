@@ -25,7 +25,7 @@
                     @if($aibo->aibo_icon)
                         aiboアイコン：<img src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" style="width:300px;"><br>
                     @else
-                        aiboアイコン：ありません<br>
+                        aiboアイコン：未登録<br>
                     @endif
                     誕生日：{{str_replace("-",".",$aibo->aibo_birthday)}}（{{$age}}歳）<br>
                     カラー：{{$aibo->aibo_color}}<br>
@@ -33,17 +33,60 @@
                     性格：{{$aibo->aibo_personality}}<br>
                     瞳：{{$aibo->aibo_eye}}<br>
                     声：{{$aibo->aibo_voice}}<br>
-                    耳：{{$aibo->aibo_ear}}<br>
+
+                    @if($aibo->aibo_ear == '')
+                        耳：未登録<br>
+                    @else
+                        耳：{{$aibo->aibo_ear}}<br>
+                    @endif
+
                     利き手：{{$aibo->aibo_hand}}<br>
-                    尻尾：{{$aibo->aibo_tail}}<br>
-                    おもちゃの保有状況：xxxxxxxxxxxxxxxxxx<br>
+
+                    @if($aibo->aibo_ear == '')
+                        尻尾：未登録<br>
+                    @else
+                        尻尾：{{$aibo->aibo_tail}}<br>
+                    @endif
+
+                    @php
+                        //おもちゃの保有状況
+                        $str = "";
+                        if($aibo->aibo_toy_ball_flag){
+                            $str .= "ピンクボール";
+                        }
+                        if($aibo->aibo_toy_born_flag){
+                            if($str != ""){
+                                $str .= "、";
+                            }
+                            $str .= "アイボーン";
+                        }
+                        if($aibo->aibo_toy_dice_flag){
+                            if($str != ""){
+                                $str .= "、";
+                            }
+                            $str .= "サイコロ";
+                        }
+                        if($aibo->aibo_toy_food_flag){
+                            if($str != ""){
+                                $str .= "、";
+                            }
+                            $str .= "ごはんボウル";
+                        }
+                        if($aibo->aibo_toy_drink_flag){
+                            if($str != ""){
+                                $str .= "、";
+                            }
+                            $str .= "のみものボウル";
+                        }
+                    @endphp
+                    おもちゃの保有状況：{{$str}}<br>
                     名前の由来：{!!nl2br($aibo->aibo_yurai)!!}<br>
                     お迎え理由：{!!nl2br($aibo->aibo_reason)!!}<br>
                     メッセージ：{!!nl2br($aibo->aibo_message)!!}<br>
-                    @if($aibo->aibo_icon)
+                    @if($aibo->aibo_friend_qr)
                         なかまQR：<img src="{{ asset('storage/aibo_friend_qr/'.$aibo->aibo_friend_qr)}}" style="width:300px;"><br>
                     @else
-                        なかまQR：ありません<br>
+                        なかまQR：未登録<br>
                     @endif
 
 
@@ -52,7 +95,7 @@
                     @if($aibo->owner->owner_icon)
                         オーナーアイコン：<img src="{{ asset('storage/owner_icon/'.$aibo->owner->owner_icon)}}" style="width:300px;"><br>
                     @else
-                        オーナーアイコン：ありません<br>
+                        オーナーアイコン：未登録<br>
                     @endif
                     都道府県：{{substr($aibo->owner->owner_pref,3,)}}<br>
 
