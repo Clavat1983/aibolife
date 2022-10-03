@@ -47,7 +47,7 @@ class DataBaseQueryServiceProvider extends ServiceProvider
                 $sql = preg_replace('/\\?/', $binding, $sql, 1);
             }
 
-            $ip = $_SERVER['REMOTE_ADDR'];
+            $ip = $_SERVER["REMOTE_ADDR"];
 
             Log::channel('sql')->debug('SQL', ['sql' => $sql, 'IP' => $ip]);
         });
