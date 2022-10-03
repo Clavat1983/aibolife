@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
 use App\Models\Owner;
 use App\Models\Aibo;
 use App\Models\News;
@@ -84,6 +85,19 @@ class HomeController extends Controller
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
             return view('mypage', compact('bell_count','owner'));
+        }
+    }
+
+    //管理者専用ページ
+    public function admin(){
+        $user = User::where('id', auth()->user()->id)->first();
+
+        if($user!=NULL && $user->role == "admin"){
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            return view('admin', compact('bell_count'));
+        } else {
+            return redirect()->route('home');
         }
     }
 

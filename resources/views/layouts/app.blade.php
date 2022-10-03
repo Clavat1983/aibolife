@@ -75,6 +75,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    
+                                    @if(auth()->user()->role == "admin") {{-- 管理者(Admin)の場合のみメニューに追加 --}}
+                                    <a class="dropdown-item" href="{{ route('home.admin') }}">
+                                        管理画面（Admin）
+                                    </a>
+                                    @endif
+                                    
                                     @if(auth()->user()->owner == NULL)
                                     <a class="dropdown-item" href="{{ route('user.edit', auth()->user()->id) }}">
                                         マイページ（ログイン情報編集）

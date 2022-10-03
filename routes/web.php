@@ -100,12 +100,13 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/useful/event/calendar', 'EventCalendarController@index')->name('eventcalendar.index');//イベントカレンダー（すべて）
 
     //最新情報(News->URLだけTopicsに変えた)
-        //管理者用(パスワード再確認を挟む)
+        //管理者用(パスワード再確認を挟む)、★が付くのは管理画面トップからリンクあり
         Route::group(['middleware' => 'auth'], function(){
             Route::middleware('password.confirm')->group(function(){
+                Route::get('/admin', 'HomeController@admin')->name('home.admin'); //管理者画面トップ
                 Route::get('/topics/{news}/preview', 'NewsController@preview')->name('news.preview');//最新情報（個別表示=管理者プレビュー）
-                Route::get('/topics/admin', 'NewsController@admin')->name('news.admin');//最新情報（全件表示）
-                Route::get('/topics/create', 'NewsController@create')->name('news.create');//最新情報(新規-入力画面)
+                Route::get('/topics/admin', 'NewsController@admin')->name('news.admin');//最新情報（全件表示）★
+                Route::get('/topics/create', 'NewsController@create')->name('news.create');//最新情報(新規-入力画面)★
                 Route::post('/topics', 'NewsController@store')->name('news.store');//最新情報(新規-DB登録)
                 Route::get('/topics/{news}/edit', 'NewsController@edit')->name('news.edit');//変更(入力)
                 Route::put('/topics/{news}', 'NewsController@update')->name('news.update');//変更(DB更新)
