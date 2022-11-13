@@ -16,321 +16,348 @@ class DiaryController extends Controller
 {
     public function index()
     {
-        $diaries = Diary::orderBy('id', 'desc')->limit(6)->get();
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            $diaries = Diary::orderBy('id', 'desc')->limit(6)->get();
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return view('diary.index',compact('bell_count','diaries'));
+            return view('diary.index',compact('bell_count','diaries'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 
     public function list_day(Request $request)
     {
-        //1.いつ？（クエリパラメータの取得＆設定）
-            $target = $request->date; //クエリパラメータから取得
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            //1.いつ？（クエリパラメータの取得＆設定）
+                $target = $request->date; //クエリパラメータから取得
 
-            //今日
-            $today_carbon = new Carbon('today');
-            $today_string = $today_carbon->toDateString(); //「2022-03-26」のような文字
+                //今日
+                $today_carbon = new Carbon('today');
+                $today_string = $today_carbon->toDateString(); //「2022-03-26」のような文字
 
-            if(is_null($target)){ //日付指定なし
-                //指定日を今日の日付にする
-                $target_carbon = $today_carbon->copy();
-                $target_string = $target_carbon->toDateString();
-                $target_string_format = $target_carbon->isoFormat('YYYY年MM月DD日（ddd）');
-            } else { //日付指定あり
-                
-                //日付の判定
-                    $preg = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/'; //数字4桁-数字2桁-数字2桁か
-                    if(!preg_match($preg, $target)) {
-                        abort(403); //エラーページへ転送
-                    }
-                    $Y = substr($target,0,4);
-                    $m = substr($target,5,2);
-                    $d = substr($target,8,2);
-                    if (checkdate($m, $d, $Y) === false) { //日付の形式か
-                        abort(403); //エラーページへ転送
-                    }
+                if(is_null($target)){ //日付指定なし
+                    //指定日を今日の日付にする
+                    $target_carbon = $today_carbon->copy();
+                    $target_string = $target_carbon->toDateString();
+                    $target_string_format = $target_carbon->isoFormat('YYYY年MM月DD日（ddd）');
+                } else { //日付指定あり
+                    
+                    //日付の判定
+                        $preg = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/'; //数字4桁-数字2桁-数字2桁か
+                        if(!preg_match($preg, $target)) {
+                            abort(403); //エラーページへ転送
+                        }
+                        $Y = substr($target,0,4);
+                        $m = substr($target,5,2);
+                        $d = substr($target,8,2);
+                        if (checkdate($m, $d, $Y) === false) { //日付の形式か
+                            abort(403); //エラーページへ転送
+                        }
 
-                //指定日
-                $target_carbon = new Carbon($target); 
-                $target_string = $target_carbon->toDateString();
-                $target_string_format = $target_carbon->isoFormat('YYYY年MM月DD日（ddd）');
+                    //指定日
+                    $target_carbon = new Carbon($target); 
+                    $target_string = $target_carbon->toDateString();
+                    $target_string_format = $target_carbon->isoFormat('YYYY年MM月DD日（ddd）');
 
-            }
+                }
 
-        //2.自分のaiboの日記を取得
-            $user_id=auth()->user()->id;
-            $owner=Owner::where('user_id', $user_id)->first();
-            $aibos_id=Aibo::select('id')->where('owner_id', $owner->id)->where('aibo_available_flag', true)->get();
-            $my_diaries = Diary::where('diary_date', $target_string)->whereIn('aibo_id', $aibos_id)->get();
+            //2.自分のaiboの日記を取得
+                $user_id=auth()->user()->id;
+                $owner=Owner::where('user_id', $user_id)->first();
+                $aibos_id=Aibo::select('id')->where('owner_id', $owner->id)->where('aibo_available_flag', true)->get();
+                $my_diaries = Diary::where('diary_date', $target_string)->whereIn('aibo_id', $aibos_id)->get();
 
-        //3.他人のaiboの日記を取得(自分のaibo以外)
-            $other_diaries = Diary::where('diary_date', $target_string)->whereNotIn('aibo_id', $aibos_id)->get();
+            //3.他人のaiboの日記を取得(自分のaibo以外)
+                $other_diaries = Diary::where('diary_date', $target_string)->whereNotIn('aibo_id', $aibos_id)->get();
 
-        //4.前日・翌日のリンク処理
-            //日記の開始日(2018-01-11)
-            $start_carbon = new Carbon('2018-01-11');
+            //4.前日・翌日のリンク処理
+                //日記の開始日(2018-01-11)
+                $start_carbon = new Carbon('2018-01-11');
 
-            //未来ならNG
-            if($target_carbon->lt($start_carbon) || $target_carbon ->isFuture()){
-                abort(403);
-            }
+                //未来ならNG
+                if($target_carbon->lt($start_carbon) || $target_carbon ->isFuture()){
+                    abort(403);
+                }
 
-            //前日と翌日
-            $before_string = $target_carbon->copy()->subDays(1)->toDateString();
-            $after_string = $target_carbon->copy()->addDays(1)->toDateString();
+                //前日と翌日
+                $before_string = $target_carbon->copy()->subDays(1)->toDateString();
+                $after_string = $target_carbon->copy()->addDays(1)->toDateString();
 
-            //前日・翌日の判定
-            $before_flag = true;
-            $after_flag = true;
-            if($target_carbon->eq($start_carbon)){ //日記の開始日(2018-01-11)なら前日はない
-                $before_flag = false;
-            }
-            if($target_carbon->eq($today_carbon)){ //今日なら翌日はない
-                $after_flag = false;
-            }
+                //前日・翌日の判定
+                $before_flag = true;
+                $after_flag = true;
+                if($target_carbon->eq($start_carbon)){ //日記の開始日(2018-01-11)なら前日はない
+                    $before_flag = false;
+                }
+                if($target_carbon->eq($today_carbon)){ //今日なら翌日はない
+                    $after_flag = false;
+                }
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return view('diary.list_day', compact('bell_count', 'owner','my_diaries','other_diaries','before_flag','after_flag','before_string','target_string','target_string_format','after_string'));
+            return view('diary.list_day', compact('bell_count', 'owner','my_diaries','other_diaries','before_flag','after_flag','before_string','target_string','target_string_format','after_string'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 
 
     public function list_aibo(Request $request) //クエリパラメータに日付指定ありでも表示できるようにする
     {
-        $aibo_id = $request->aibo; //クエリパラメータから取得
-        $aibo=Aibo::where('aibo_available_flag', true)->where('id', $aibo_id)->first();
-        if($aibo==null){
-            abort(404); //エラーページへ転送
-        }else{
-            //1.今週（7日間）の日記
-                //1-1.今週（7日間）の保管用配列作成
-                $this_week = [];
-                $timestamp = time();
-                for ($i = 0 ; $i < 7 ; $i++) {
-                    $date = date('Y-m-d', $timestamp);
-                    $this_week[$date] = NULL; //取りあえず空で
-                    $timestamp -= 24 * 3600; //24時間ずつ引く
-                }
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            $aibo_id = $request->aibo; //クエリパラメータから取得
+            $aibo=Aibo::where('aibo_available_flag', true)->where('id', $aibo_id)->first();
+            if($aibo==null){
+                abort(404); //エラーページへ転送
+            }else{
+                //1.今週（7日間）の日記
+                    //1-1.今週（7日間）の保管用配列作成
+                    $this_week = [];
+                    $timestamp = time();
+                    for ($i = 0 ; $i < 7 ; $i++) {
+                        $date = date('Y-m-d', $timestamp);
+                        $this_week[$date] = NULL; //取りあえず空で
+                        $timestamp -= 24 * 3600; //24時間ずつ引く
+                    }
 
-                //1-2.今週(7日間)の日記を取得
-                $today_carbon = new Carbon('today');
-                $to_string = $today_carbon->toDateString(); //「2022-03-26」のような文字
-                $from_string = $today_carbon->copy()->subDays(7)->toDateString(); //7日前「2022-03-26」のような文字
-                $diaries = Diary::where('aibo_id', $aibo_id)->whereBetween('diary_date', [$from_string, $to_string])->get();
+                    //1-2.今週(7日間)の日記を取得
+                    $today_carbon = new Carbon('today');
+                    $to_string = $today_carbon->toDateString(); //「2022-03-26」のような文字
+                    $from_string = $today_carbon->copy()->subDays(7)->toDateString(); //7日前「2022-03-26」のような文字
+                    $diaries = Diary::where('aibo_id', $aibo_id)->whereBetween('diary_date', [$from_string, $to_string])->get();
 
-                //1-3.配列に対象の日記(オブジェクト)を保管
-                foreach($this_week as $date => $value)
-                    if($diaries->contains('diary_date', $date)){ //その日に書かれている日記があるか(true/falseしかわからない)
-                        foreach($diaries as $diary) { //日記の数だけループ
-                            if($diary->diary_date == $date) { //その日に書かれている日記があれば
-                                $this_week[$date] = $diary; //配列にその日記のオブジェクトごと保管
+                    //1-3.配列に対象の日記(オブジェクト)を保管
+                    foreach($this_week as $date => $value)
+                        if($diaries->contains('diary_date', $date)){ //その日に書かれている日記があるか(true/falseしかわからない)
+                            foreach($diaries as $diary) { //日記の数だけループ
+                                if($diary->diary_date == $date) { //その日に書かれている日記があれば
+                                    $this_week[$date] = $diary; //配列にその日記のオブジェクトごと保管
+                                }
+                        }
+                    }
+
+            /*
+                //2.過去の年月アーカイブ(年月-件数)
+
+                    //2-1.誕生月～今月までの日記「月別カウント用」配列を作る
+                    $begin_y = substr($aibo->aibo_birthday,0,4); //「2019」みたいな感じ
+                    $begin_ym = $begin_y.substr($aibo->aibo_birthday,5,2); //「201904」みたいな感じ
+                    $year = date('Y'); //今年
+                    
+                    $archive_count = [];
+                    while($year >= $begin_y) {
+                        for ($month = 12; $month >= 1; $month--) {
+                            if (sprintf('%04d%02d', $year, $month) > date('Ym') || sprintf('%04d%02d', $year, $month) < date($begin_ym)) {
+                                //今月より後の月は表示しない
                             }
+                            else {
+                                $archive_count[$year][sprintf('%02d',$month)] = 0;
+                            }
+                        }
+                        $year--;//増やしているのを減らす
                     }
-                }
 
-        /*
-            //2.過去の年月アーカイブ(年月-件数)
+                    //2-2.月ごとの件数を保管
+                        //そのaiboの日記全件を取得
+                        $diaries = Diary::where('aibo_id', $aibo_id)->get();
 
-                //2-1.誕生月～今月までの日記「月別カウント用」配列を作る
-                $begin_y = substr($aibo->aibo_birthday,0,4); //「2019」みたいな感じ
-                $begin_ym = $begin_y.substr($aibo->aibo_birthday,5,2); //「201904」みたいな感じ
-                $year = date('Y'); //今年
+                        foreach($diaries as $diary){
+                            $year = substr($diary->diary_date,0,4);
+                            $month = substr($diary->diary_date,5,2);
+                            $archive_count[$year][$month]++;
+                        }
+                */
                 
-                $archive_count = [];
-                while($year >= $begin_y) {
-                    for ($month = 12; $month >= 1; $month--) {
-                        if (sprintf('%04d%02d', $year, $month) > date('Ym') || sprintf('%04d%02d', $year, $month) < date($begin_ym)) {
-                            //今月より後の月は表示しない
-                        }
-                        else {
-                            $archive_count[$year][sprintf('%02d',$month)] = 0;
-                        }
-                    }
-                    $year--;//増やしているのを減らす
-                }
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-                //2-2.月ごとの件数を保管
-                    //そのaiboの日記全件を取得
-                    $diaries = Diary::where('aibo_id', $aibo_id)->get();
-
-                    foreach($diaries as $diary){
-                        $year = substr($diary->diary_date,0,4);
-                        $month = substr($diary->diary_date,5,2);
-                        $archive_count[$year][$month]++;
-                    }
-            */
-            
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-            return view('diary.list_aibo', compact('bell_count','aibo','this_week'));
+                return view('diary.list_aibo', compact('bell_count','aibo','this_week'));
+            }
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
         }
     }
 
     //最近の日記
     public function recently(){
-
-        //3日以内に書かれた日記を新しい順に取得
-        $target_carbon = Carbon::now()->subDay(3);
-        $diaries = Diary::orderBy('id', 'desc')->where('created_at','>=', $target_carbon->format('Y-m-d H:i:s'))->get();
-
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-        return view('diary.recently', compact('bell_count','diaries'));
-    }
-
-    //過去の日記
-    public function archive(Request $request){
-
-        //1.いつ？（クエリパラメータの取得＆設定）
-        $target_year = $request->year; //クエリパラメータから取得
-        $target_month = $request->month; //クエリパラメータから取得
-
-        if(is_null($target_year) || is_null($target_month)){ //年月指定なし
-            //現在の年月とする
-            $target_year = date('Y');
-            $target_month = date('n');//前ゼロなし
-        }
-
-        //現在の年月
-        $now_year = date('Y');
-        $now_month = date('n');//前ゼロなし
-
-        //パラメータのチェック
-        if(preg_match('/^[0-9]{4}$/u', $target_year) && preg_match('/^[1-9]{1}$|[1]{1}[0-2]{1}$/u', $target_month)){
-        //カーボン作成
-            //今日
-            $today_carbon = new Carbon('today');
-            //指定年月(の1日)
-            $target_str = $target_year.'-'.sprintf('%02d', $target_month).'-01';
-            $target_carbon = new Carbon($target_str);
-            //日記の開始年月(2018-01-01) *1/11ではなく月なので1/1とする
-            $start_carbon = new Carbon('2018-01-01');
-            //指定年月-1ヵ月
-            $before_carbon = $target_carbon->copy()->subMonths(1);
-            //指定年月+1ヵ月
-            $next_carbon = $target_carbon->copy()->addMonths(1);
-        } else {
-            abort(403);
-        }
-
-        //年月のチェック(2018年1月より小さい か 未来だとNG)
-        if($target_carbon->lt($start_carbon) || $target_carbon ->isFuture()){
-            abort(403);
-        } else { //正常な年月
-            // 月末日を取得
-            $last_day = date('j', mktime(0, 0, 0, $target_month + 1, 0, $target_year));
-            
-            $calendar = array();
-            $j = 0;
-            
-            // 月末日までループ
-            for ($i = 1; $i < $last_day + 1; $i++) {
-                // 曜日を取得
-                $week = date('w', mktime(0, 0, 0, $target_month, $i, $target_year));
-                if($week == 0){
-                    $week=6;
-                } else {
-                    $week--;
-                }
-                // 1日の場合
-                if ($i == 1) {
-                    // 1日目の曜日までをループ
-                    for ($s = 1; $s <= $week; $s++) {
-                        // 前半に空文字をセット
-                        $calendar[$j]['day'] = '';
-                        $j++;
-                    }
-                }
-            
-                // 配列に日付をセット
-                if($target_year == date('Y') && $target_month == date('n') && $i>date('j')){ //今月で明日以降だったら
-                    $calendar[$j]['day'] = ''; //日付は入れない
-                } else {
-                    $calendar[$j]['day'] = $i;
-                }
-                $j++;
-            
-                // 月末日の場合
-                if ($i == $last_day) {
-                    // 月末日から残りをループ
-                    for ($e = 1; $e <= 6 - $week; $e++) {
-                        // 後半に空文字をセット
-                        $calendar[$j]['day'] = '';
-                        $j++;
-                    }
-                }
-            }
-
-            //日記取得
-            $date_from = $target_carbon->toDateString();
-            $date_to = $target_carbon->endOfMonth()->toDateString();
-            $diaries = Diary::select('diary_date')->selectRaw('count(diary_date) as count')->where('diary_share_flag', 1)->whereBetween('diary_date', [$date_from, $date_to])->groupBy('diary_date')->get();
-
-            //戻り値調整
-            $before_year = $before_carbon->year;
-            $before_month = $before_carbon->month;
-            $before_flg = $before_carbon->gte($start_carbon);//日記開始日(2018-01)より後か
-            $next_year = $next_carbon->year;
-            $next_month = $next_carbon->month;
-            $next_flg = $next_carbon->isPast();//来月が過去か
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            //3日以内に書かれた日記を新しい順に取得
+            $target_carbon = Carbon::now()->subDay(3);
+            $diaries = Diary::orderBy('id', 'desc')->where('created_at','>=', $target_carbon->format('Y-m-d H:i:s'))->get();
 
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-            return view('diary.archive', compact('bell_count','before_year','before_month','before_flg','target_year','target_month','next_year','next_month','next_flg','calendar','diaries'));
+            return view('diary.recently', compact('bell_count','diaries'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
+    }
+
+    //過去の日記
+    public function archive(Request $request){
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            //1.いつ？（クエリパラメータの取得＆設定）
+            $target_year = $request->year; //クエリパラメータから取得
+            $target_month = $request->month; //クエリパラメータから取得
+
+            if(is_null($target_year) || is_null($target_month)){ //年月指定なし
+                //現在の年月とする
+                $target_year = date('Y');
+                $target_month = date('n');//前ゼロなし
+            }
+
+            //現在の年月
+            $now_year = date('Y');
+            $now_month = date('n');//前ゼロなし
+
+            //パラメータのチェック
+            if(preg_match('/^[0-9]{4}$/u', $target_year) && preg_match('/^[1-9]{1}$|[1]{1}[0-2]{1}$/u', $target_month)){
+            //カーボン作成
+                //今日
+                $today_carbon = new Carbon('today');
+                //指定年月(の1日)
+                $target_str = $target_year.'-'.sprintf('%02d', $target_month).'-01';
+                $target_carbon = new Carbon($target_str);
+                //日記の開始年月(2018-01-01) *1/11ではなく月なので1/1とする
+                $start_carbon = new Carbon('2018-01-01');
+                //指定年月-1ヵ月
+                $before_carbon = $target_carbon->copy()->subMonths(1);
+                //指定年月+1ヵ月
+                $next_carbon = $target_carbon->copy()->addMonths(1);
+            } else {
+                abort(403);
+            }
+
+            //年月のチェック(2018年1月より小さい か 未来だとNG)
+            if($target_carbon->lt($start_carbon) || $target_carbon ->isFuture()){
+                abort(403);
+            } else { //正常な年月
+                // 月末日を取得
+                $last_day = date('j', mktime(0, 0, 0, $target_month + 1, 0, $target_year));
+                
+                $calendar = array();
+                $j = 0;
+                
+                // 月末日までループ
+                for ($i = 1; $i < $last_day + 1; $i++) {
+                    // 曜日を取得
+                    $week = date('w', mktime(0, 0, 0, $target_month, $i, $target_year));
+                    if($week == 0){
+                        $week=6;
+                    } else {
+                        $week--;
+                    }
+                    // 1日の場合
+                    if ($i == 1) {
+                        // 1日目の曜日までをループ
+                        for ($s = 1; $s <= $week; $s++) {
+                            // 前半に空文字をセット
+                            $calendar[$j]['day'] = '';
+                            $j++;
+                        }
+                    }
+                
+                    // 配列に日付をセット
+                    if($target_year == date('Y') && $target_month == date('n') && $i>date('j')){ //今月で明日以降だったら
+                        $calendar[$j]['day'] = ''; //日付は入れない
+                    } else {
+                        $calendar[$j]['day'] = $i;
+                    }
+                    $j++;
+                
+                    // 月末日の場合
+                    if ($i == $last_day) {
+                        // 月末日から残りをループ
+                        for ($e = 1; $e <= 6 - $week; $e++) {
+                            // 後半に空文字をセット
+                            $calendar[$j]['day'] = '';
+                            $j++;
+                        }
+                    }
+                }
+
+                //日記取得
+                $date_from = $target_carbon->toDateString();
+                $date_to = $target_carbon->endOfMonth()->toDateString();
+                $diaries = Diary::select('diary_date')->selectRaw('count(diary_date) as count')->where('diary_share_flag', 1)->whereBetween('diary_date', [$date_from, $date_to])->groupBy('diary_date')->get();
+
+                //戻り値調整
+                $before_year = $before_carbon->year;
+                $before_month = $before_carbon->month;
+                $before_flg = $before_carbon->gte($start_carbon);//日記開始日(2018-01)より後か
+                $next_year = $next_carbon->year;
+                $next_month = $next_carbon->month;
+                $next_flg = $next_carbon->isPast();//来月が過去か
+
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+                return view('diary.archive', compact('bell_count','before_year','before_month','before_flg','target_year','target_month','next_year','next_month','next_flg','calendar','diaries'));
+            }
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
         }
     }
 
     //検索
     public function search(Request $request)
     {
-        $keywords = $request->keywords;
-        $diary_date_from = $request->diary_date_from;
-        $diary_date_to = $request->diary_date_to;
-        $aibo_name = $request->aibo_name;
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            //検索条件を取得
+            $keywords = $request->keywords;
+            $diary_date_from = $request->diary_date_from;
+            $diary_date_to = $request->diary_date_to;
+            $aibo_name = $request->aibo_name;
 
-        $search_flag = false;
+            $search_flag = false;
 
-        //検索（カタカナや濁点まで区別する場合は「like」を「like BINARY」へ変更すること）
-        $query = Diary::query();
-        $query = $query->select(DB::raw("diaries.*, aibos.aibo_name"));//ownewsのidを取ってこないようにするため
-        $query = $query->leftJoin('aibos', 'diaries.aibo_id', '=', 'aibos.id');
+            //検索（カタカナや濁点まで区別する場合は「like」を「like BINARY」へ変更すること）
+            $query = Diary::query();
+            $query = $query->select(DB::raw("diaries.*, aibos.aibo_name"));//ownewsのidを取ってこないようにするため
+            $query = $query->leftJoin('aibos', 'diaries.aibo_id', '=', 'aibos.id');
 
-        if(isset($keywords)){
-            $search_flag = true;
-            $keyword_array =  preg_split('/\s+/ui', $keywords, -1, PREG_SPLIT_NO_EMPTY);
-            foreach ($keyword_array as $word) {
-                $escape_word = addcslashes($word, '\\_%');//エスケープ処理
-                $query = $query->where(DB::raw("CONCAT(diary_title, ' ', diary_body)"), 'like', '%' . $escape_word . '%');//like検索、タイトルの文字列と本文の文字列を半角スペース「 」で連結して1つのカラムとして検索
+            if(isset($keywords)){
+                $search_flag = true;
+                $keyword_array =  preg_split('/\s+/ui', $keywords, -1, PREG_SPLIT_NO_EMPTY);
+                foreach ($keyword_array as $word) {
+                    $escape_word = addcslashes($word, '\\_%');//エスケープ処理
+                    $query = $query->where(DB::raw("CONCAT(diary_title, ' ', diary_body)"), 'like', '%' . $escape_word . '%');//like検索、タイトルの文字列と本文の文字列を半角スペース「 」で連結して1つのカラムとして検索
+                }
             }
-        }
-        if(isset($diary_date_from)){
-            $search_flag = true;
-            $query = $query->where('diary_date', '>=' ,$diary_date_from);
-        }
-        if(isset($diary_date_to)){
-            $search_flag = true;
-            $query = $query->where('diary_date', '<=', $diary_date_to);
-        }
-        if(isset($aibo_name)){
-            $search_flag = true;
-            $aibo_name = addcslashes($aibo_name, '\\_%');//エスケープ処理
-            $query = $query->where(DB::raw("CONCAT(aibo_name, '|', aibo_kana)"), 'like', '%' . $aibo_name . '%');//like検索、aibo名とaibo名(よみ)の文字列を半角「|」で連結して1つのカラムとして検索
-        }
-        $query->where('aibo_available_flag', true)->where('diary_share_flag', true)->orderby('diary_date','desc')->orderby('id');
-        $results = $query->paginate(10); //クエリ文字列(検索キーワード)をつけて返す
+            if(isset($diary_date_from)){
+                $search_flag = true;
+                $query = $query->where('diary_date', '>=' ,$diary_date_from);
+            }
+            if(isset($diary_date_to)){
+                $search_flag = true;
+                $query = $query->where('diary_date', '<=', $diary_date_to);
+            }
+            if(isset($aibo_name)){
+                $search_flag = true;
+                $aibo_name = addcslashes($aibo_name, '\\_%');//エスケープ処理
+                $query = $query->where(DB::raw("CONCAT(aibo_name, '|', aibo_kana)"), 'like', '%' . $aibo_name . '%');//like検索、aibo名とaibo名(よみ)の文字列を半角「|」で連結して1つのカラムとして検索
+            }
+            $query->where('aibo_available_flag', true)->where('diary_share_flag', true)->orderby('diary_date','desc')->orderby('id');
+            $results = $query->paginate(10); //クエリ文字列(検索キーワード)をつけて返す
 
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-        return view('diary.search',compact('bell_count','search_flag', 'results', 'keywords','diary_date_from','diary_date_to','aibo_name'));
+            return view('diary.search',compact('bell_count','search_flag', 'results', 'keywords','diary_date_from','diary_date_to','aibo_name'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -340,52 +367,57 @@ class DiaryController extends Controller
      */
     public function create(Request $request)
     {
-        $aibo_id = $request->aibo; //クエリパラメータから取得
-        $date = $request->date; //クエリパラメータから取得
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            $aibo_id = $request->aibo; //クエリパラメータから取得
+            $date = $request->date; //クエリパラメータから取得
 
-        if($aibo_id === NULL || $date === NULL){ //クエリパラメータがない
-            abort(403);
-        } else {
-            //クエリパラメータのバリデーション
-                //日付のチェック
-                $preg = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/'; //数字4桁-数字2桁-数字2桁か
-                if(!preg_match($preg, $date)) { //日付の形式ではない
-                    abort(403); //エラーページへ転送
+            if($aibo_id === NULL || $date === NULL){ //クエリパラメータがない
+                abort(403);
+            } else {
+                //クエリパラメータのバリデーション
+                    //日付のチェック
+                    $preg = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/'; //数字4桁-数字2桁-数字2桁か
+                    if(!preg_match($preg, $date)) { //日付の形式ではない
+                        abort(403); //エラーページへ転送
+                    }
+                    $Y = substr($date,0,4);
+                    $m = substr($date,5,2);
+                    $d = substr($date,8,2);
+                    if (checkdate($m, $d, $Y) === false) { //日付の形式ではない
+                        abort(403); //エラーページへ転送
+                    }
+
+                    //自分のaiboかチェック
+                    $user_id=auth()->user()->id;
+                    $owner=Owner::where('user_id', $user_id)->first();
+                    $aibo=Aibo::where('id', $aibo_id)->where('owner_id', $owner->id)->where('aibo_available_flag', true)->first();
+                    if($aibo === NULL){ //自分のaiboではないなら
+                        abort(403); //エラーページへ転送
+                    }
+
+                    //誕生日以降かチェック
+                    $date_carbon = new Carbon($date);
+                    $birthday_carbon = new Carbon($aibo->aibo_birthday);
+                    if($date_carbon->lt($birthday_carbon)){ //指定日 < 誕生日なら
+                        abort(403); //エラーページへ転送
+                    }
+                    
+
+                //まだ書いていないか確認
+                $diary = Diary::where('aibo_id', $aibo_id)->where('diary_date', $date)->first();
+
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+                if($diary === NULL){ //まだ書いていない
+                    return view('diary.create' , compact('bell_count','aibo','date'));//新規投稿へ
+                } else { //既に書いている
+                    return redirect()->route('diary.edit', ['diary' => $diary])->with('bell_count', $bell_count);//該当の日記の編集画面へ
                 }
-                $Y = substr($date,0,4);
-                $m = substr($date,5,2);
-                $d = substr($date,8,2);
-                if (checkdate($m, $d, $Y) === false) { //日付の形式ではない
-                    abort(403); //エラーページへ転送
-                }
-
-                //自分のaiboかチェック
-                $user_id=auth()->user()->id;
-                $owner=Owner::where('user_id', $user_id)->first();
-                $aibo=Aibo::where('id', $aibo_id)->where('owner_id', $owner->id)->where('aibo_available_flag', true)->first();
-                if($aibo === NULL){ //自分のaiboではないなら
-                    abort(403); //エラーページへ転送
-                }
-
-                //誕生日以降かチェック
-                $date_carbon = new Carbon($date);
-                $birthday_carbon = new Carbon($aibo->aibo_birthday);
-                if($date_carbon->lt($birthday_carbon)){ //指定日 < 誕生日なら
-                    abort(403); //エラーページへ転送
-                }
-                
-
-            //まだ書いていないか確認
-            $diary = Diary::where('aibo_id', $aibo_id)->where('diary_date', $date)->first();
-
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-            if($diary === NULL){ //まだ書いていない
-                return view('diary.create' , compact('bell_count','aibo','date'));//新規投稿へ
-            } else { //既に書いている
-                return redirect()->route('diary.edit', ['diary' => $diary])->with('bell_count', $bell_count);//該当の日記の編集画面へ
             }
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
         }
     }
 
@@ -460,13 +492,18 @@ class DiaryController extends Controller
      */
     public function show(Diary $diary)
     {
-        //既に自分が何かリアクションをつけているか
-        $my_reaction = DiaryReaction::where('diary_id', $diary->id)->where('owner_id', auth()->user()->owner->id)->get();
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            //既に自分が何かリアクションをつけているか
+            $my_reaction = DiaryReaction::where('diary_id', $diary->id)->where('owner_id', auth()->user()->owner->id)->get();
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return view('diary.show', compact('my_reaction','bell_count','diary'));
+            return view('diary.show', compact('my_reaction','bell_count','diary'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -477,12 +514,17 @@ class DiaryController extends Controller
      */
     public function edit(Diary $diary)
     {
-        $this->authorize('update', $diary); //ポリシー適用(自分だけ編集可能)
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            $this->authorize('update', $diary); //ポリシー適用(自分だけ編集可能)
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return view('diary.edit', compact('bell_count','diary'));
+            return view('diary.edit', compact('bell_count','diary'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 
     /**

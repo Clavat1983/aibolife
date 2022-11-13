@@ -134,13 +134,18 @@ class DiaryCommentController extends Controller
 
     public function commented()
     {
-        $owner_id = auth()->user()->owner->id;
-        //コメントを付けた日記のIDを重複なしで、ページネーションありで取得
-        $comments = DiaryComment::select('diary_id')->where('owner_id', $owner_id)->orderBy('created_at', 'desc')->groupBy('diary_id')->paginate(10);
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            $owner_id = auth()->user()->owner->id;
+            //コメントを付けた日記のIDを重複なしで、ページネーションありで取得
+            $comments = DiaryComment::select('diary_id')->where('owner_id', $owner_id)->orderBy('created_at', 'desc')->groupBy('diary_id')->paginate(10);
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return view('diary.commented', compact('bell_count','comments'));
+            return view('diary.commented', compact('bell_count','comments'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 }

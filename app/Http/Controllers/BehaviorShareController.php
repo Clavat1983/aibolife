@@ -18,39 +18,49 @@ class BehaviorShareController extends Controller
      */
     public function index(Request $request)
     {
-        //このページに来たページネーションのページ数
-        $page = $request->page;
-        
-        if(isset($page)){
-            $mes = "ページあり";
-            $seed = $request->seed; //乱数は発生させずランダム順は固定
-        } else {
-            $mes = "ページなし";
-            $page = 1;
-            $seed = mt_rand(1, 999); //1ページ目(初めて来た)として乱数発生
-        }
-        
-        //ふるまい一覧（ランダムで取得）
-        $query = BehaviorShare::query();
-        $query = $query->select(DB::raw("behavior_shares.*, aibos.aibo_available_flag"));
-        $query = $query->leftJoin('aibos', 'behavior_shares.aibo_id', '=', 'aibos.id');
-        $query = $query->where('aibo_available_flag', true);
-        $behaviors = $query->inRandomOrder($seed)->paginate(10); //inRandomOrderの引数はシード、ランダムだけど順番を固定できるのでぺジネーションで同じ番号が出ない
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            //このページに来たページネーションのページ数
+            $page = $request->page;
+            
+            if(isset($page)){
+                $mes = "ページあり";
+                $seed = $request->seed; //乱数は発生させずランダム順は固定
+            } else {
+                $mes = "ページなし";
+                $page = 1;
+                $seed = mt_rand(1, 999); //1ページ目(初めて来た)として乱数発生
+            }
+            
+            //ふるまい一覧（ランダムで取得）
+            $query = BehaviorShare::query();
+            $query = $query->select(DB::raw("behavior_shares.*, aibos.aibo_available_flag"));
+            $query = $query->leftJoin('aibos', 'behavior_shares.aibo_id', '=', 'aibos.id');
+            $query = $query->where('aibo_available_flag', true);
+            $behaviors = $query->inRandomOrder($seed)->paginate(10); //inRandomOrderの引数はシード、ランダムだけど順番を固定できるのでぺジネーションで同じ番号が出ない
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-        return view('behavior.share_index', compact('bell_count','behaviors','page','seed','mes'));
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            return view('behavior.share_index', compact('bell_count','behaviors','page','seed','mes'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 
     //ふるまい共有コード貼り付け画面
     public function create()
     {
-        //どのaiboのふるまいか選択用
-        $aibos = Aibo::where('owner_id', auth()->user()->owner->id)->where('aibo_available_flag', true)->orderBy('id')->get();
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            //どのaiboのふるまいか選択用
+            $aibos = Aibo::where('owner_id', auth()->user()->owner->id)->where('aibo_available_flag', true)->orderBy('id')->get();
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-        return view('behavior.share_create', compact('bell_count','aibos'));
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            return view('behavior.share_create', compact('bell_count','aibos'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -145,12 +155,17 @@ class BehaviorShareController extends Controller
      */
     public function show(BehaviorShare $behavior, Request $request)
     {
-        $page = $request->page; //このページに来たページネーションのページ数
-        $seed = $request->seed; //ページネーションのランダムのSeed値
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            $page = $request->page; //このページに来たページネーションのページ数
+            $seed = $request->seed; //ページネーションのランダムのSeed値
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-        return view('behavior.share_show', compact('bell_count', 'behavior','page','seed'));
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            return view('behavior.share_show', compact('bell_count', 'behavior','page','seed'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -176,63 +191,68 @@ class BehaviorShareController extends Controller
      */
     public function update(Request $request, BehaviorShare $behavior)
     {
-        $this->authorize('update', $behavior); //ポリシー適用(自分だけ編集可能)
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            $this->authorize('update', $behavior); //ポリシー適用(自分だけ編集可能)
 
-        $inputs=$request->validate([
-            'process' => 'required',
-            'behavior_info' => 'required',
-            'behavior_photo' => 'nullable|image',
-            'behavior_photo_del' => '',
-//            'behavior_tweet' => 'nullable|url',
-//            'behavior_youtube' => 'nullable|url',
-        ],
-        [ //第2引数はバリエーションメッセージのカスタマイズ
-            'behavior_info.required' => "ふるまいの説明は必ず入力してください。",
-        ]
-        );
+            $inputs=$request->validate([
+                'process' => 'required',
+                'behavior_info' => 'required',
+                'behavior_photo' => 'nullable|image',
+                'behavior_photo_del' => '',
+    //            'behavior_tweet' => 'nullable|url',
+    //            'behavior_youtube' => 'nullable|url',
+            ],
+            [ //第2引数はバリエーションメッセージのカスタマイズ
+                'behavior_info.required' => "ふるまいの説明は必ず入力してください。",
+            ]
+            );
 
-        //更新(変更対象の項目のみ、リクエストから取得してセット)
-            $behavior->behavior_info = $inputs['behavior_info'];
-//            $behavior->behavior_tweet = $inputs['behavior_tweet'];
-//            $behavior->behavior_youtube = $inputs['behavior_youtube'];
+            //更新(変更対象の項目のみ、リクエストから取得してセット)
+                $behavior->behavior_info = $inputs['behavior_info'];
+    //            $behavior->behavior_tweet = $inputs['behavior_tweet'];
+    //            $behavior->behavior_youtube = $inputs['behavior_youtube'];
 
-            //画像部分
-                //画像の削除フラグ確認
-                $del_flg = 0;//削除したかどうか
-                $checkbox_behavior_photo_del = 0; //削除チェックボックスの値
-                if(isset($inputs['behavior_photo_del'])){ //非表示の時は取得できないのでisset
-                    $checkbox_behavior_photo_del = $inputs['behavior_photo_del'];
-                }
-                if ($behavior->behavior_photo!=='default.jpg' &&  $checkbox_behavior_photo_del == '1') {
-                    $old='public/behavior_photo/'.$behavior->behavior_photo;
-                    Storage::delete($old);
-                    $behavior->behavior_photo = NULL; //デフォルト(NULL)をセット
-                    $del_flg = 1;//削除後
-                }
-
-                //保存
-                if (request('behavior_photo')){
-                    //古い画像は削除
-                    if ($behavior->behavior_photo!=='default.jpg') {
+                //画像部分
+                    //画像の削除フラグ確認
+                    $del_flg = 0;//削除したかどうか
+                    $checkbox_behavior_photo_del = 0; //削除チェックボックスの値
+                    if(isset($inputs['behavior_photo_del'])){ //非表示の時は取得できないのでisset
+                        $checkbox_behavior_photo_del = $inputs['behavior_photo_del'];
+                    }
+                    if ($behavior->behavior_photo!=='default.jpg' &&  $checkbox_behavior_photo_del == '1') {
                         $old='public/behavior_photo/'.$behavior->behavior_photo;
                         Storage::delete($old);
+                        $behavior->behavior_photo = NULL; //デフォルト(NULL)をセット
+                        $del_flg = 1;//削除後
                     }
-                    //新しい画像を保管
-                    $original = request()->file('behavior_photo')->getClientOriginalName();
-                    $name = date('Ymd_His').'_'.$original;
-                    request()->file('behavior_photo')->move('storage/behavior_photo', $name);
-                    $behavior->behavior_photo = $name;
-                }
-            
-            //DBを更新
-            $behavior->save();
 
-        //新規登録か更新か
-        $process = $inputs['process'];
+                    //保存
+                    if (request('behavior_photo')){
+                        //古い画像は削除
+                        if ($behavior->behavior_photo!=='default.jpg') {
+                            $old='public/behavior_photo/'.$behavior->behavior_photo;
+                            Storage::delete($old);
+                        }
+                        //新しい画像を保管
+                        $original = request()->file('behavior_photo')->getClientOriginalName();
+                        $name = date('Ymd_His').'_'.$original;
+                        request()->file('behavior_photo')->move('storage/behavior_photo', $name);
+                        $behavior->behavior_photo = $name;
+                    }
+                
+                //DBを更新
+                $behavior->save();
 
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-        //return view('behavior.share_show', compact('bell_count', 'behavior', 'process'));
-        return redirect()->route('behaviorshare.show',['behavior' => $behavior])->with('process', $process); //書いた日記の個別表示へ
+            //新規登録か更新か
+            $process = $inputs['process'];
+
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            //return view('behavior.share_show', compact('bell_count', 'behavior', 'process'));
+            return redirect()->route('behaviorshare.show',['behavior' => $behavior])->with('process', $process); //個別表示へ
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 
     /**

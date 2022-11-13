@@ -69,13 +69,18 @@ class DiaryReactionController extends Controller
     //お気に入りの日記
     public function bookmark()
     {
-        $owner_id = auth()->user()->owner->id;
-        //reaction_type=6がお気に入り
-        $bookmarks = DiaryReaction::where('owner_id', $owner_id)->where('reaction_type', 6)->orderBy('created_at', 'desc')->paginate(10);
+        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            $owner_id = auth()->user()->owner->id;
+            //reaction_type=6がお気に入り
+            $bookmarks = DiaryReaction::where('owner_id', $owner_id)->where('reaction_type', 6)->orderBy('created_at', 'desc')->paginate(10);
 
-        //【全ビュー共通処理】未読通知数
-        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-        return view('diary.bookmark', compact('bell_count','bookmarks'));
+            return view('diary.bookmark', compact('bell_count','bookmarks'));
+        } else { //aibo登録まで完了していないと閲覧不可
+            return redirect()->route('home');
+        }
     }
 }

@@ -45,18 +45,22 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li style="color:red"><b>&nbsp;&nbsp;&nbsp; <a href="{{ route('notification.index') }}">@yield('notification')件</a></b></li>
-                    </ul>
+                    @auth
+                        @if((auth()->user()->owner != NULL) && (count(auth()->user()->owner->aibos)>0))
+                            <ul class="navbar-nav me-auto">
+                                <li style="color:red"><b>&nbsp;&nbsp;&nbsp; <a href="{{ route('notification.index') }}">@yield('notification')件</a></b></li>
+                            </ul>
+                        @endif
+                    @endauth
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                            @guest
-                                @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+                        @guest
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
                             @endif
                             @if (Route::has('login'))
                                 <li class="nav-item">

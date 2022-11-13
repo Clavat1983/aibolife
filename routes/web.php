@@ -51,12 +51,12 @@ Route::middleware(['verified'])->group(function(){
     Route::put('/mypage/aibo/{aibo}', 'AiboController@update')->name('aibo.update');//変更(DB更新)
     //aibo情報(公開)
     Route::get('/friend', 'AiboController@index')->name('aibo.index');//aibo名鑑トップ
-    Route::get('/friend/syllabary', 'AiboController@list_syllabary')->name('aibo.list_syllabary');
-    Route::get('/friend/syllabary/{syllabary}', 'AiboController@result_syllabary')->name('aibo.result_syllabary');
+    Route::get('/friend/namelist', 'AiboController@list_syllabary')->name('aibo.list_syllabary');
+    Route::get('/friend/namelist/{syllabary}', 'AiboController@result_syllabary')->name('aibo.result_syllabary');
     Route::get('/friend/birthday', 'AiboController@list_birthday')->name('aibo.list_birthday');
     Route::get('/friend/birthday/{month}', 'AiboController@result_birthday')->name('aibo.result_birthday');
-    Route::get('/friend/area', 'AiboController@list_area')->name('aibo.list_area');
-    Route::get('/friend/area/{pref}', 'AiboController@result_area')->name('aibo.result_area');
+    Route::get('/friend/areamap', 'AiboController@list_area')->name('aibo.list_area');
+    Route::get('/friend/areamap/{pref}', 'AiboController@result_area')->name('aibo.result_area');
     Route::get('/friend/newface', 'AiboController@newface')->name('aibo.newface');
     Route::get('/friend/search', 'AiboController@search')->name('aibo.search');
 //    Route::post('/friend/search/result', 'AiboController@search_result')->name('aibo.search_result');

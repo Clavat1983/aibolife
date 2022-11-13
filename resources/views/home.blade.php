@@ -22,7 +22,7 @@
                                 <td>{{$event->event_title}}</td>
                                 <td>（{{$event->event_start_datetime}}～{{$event->event_end_datetime}}）</td>
                                 @if($event->event_confirm_flag) {{--確定--}}
-                                    <td>【実施中】</td>
+                                    <td>【開催中】</td>
                                 @else {{--確認中--}}
                                     <td>【確認中】</td>
                                 @endif
@@ -30,7 +30,7 @@
                         @endforeach
 
                         @else
-                            <tr><td>最新情報がありません</td></tr>
+                            <tr><td>開催中のイベントはありません</td></tr>
                         @endif
                     </table>
                 </div>
