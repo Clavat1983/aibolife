@@ -58,7 +58,7 @@
                     <div class="c-form__item">
                       <div class="c-alert c-alert--info">
                         <div class="c-alert__text">
-                          旧「aibo life」のログインIDやパスワードではログインできません。新「aibo life」の<a href="{{route('register')}}">アカウント作成</a>をお願いします。
+                          新「aibo life」の<a href="{{route('register')}}">アカウント作成</a>はお済みですか？<br>旧「aibo life」のログイン情報ではログインできません。
                         </div>
                       </div>
                     </div>
@@ -171,10 +171,13 @@
           <nav class="l-external-footer__nav">
             <ul class="l-external-footer__list">
               <li class="l-external-footer__list-item">
-                <a class="l-external-footer__link" href="#">プライバシーポリシー</a>
+                <a class="l-external-footer__link" href="#">aibo life とは?</a>
               </li>
               <li class="l-external-footer__list-item">
                 <a class="l-external-footer__link" href="#">利用規約</a>
+              </li>
+              <li class="l-external-footer__list-item">
+                <a class="l-external-footer__link" href="#">プライバシーポリシー</a>
               </li>
             </ul>
           </nav>

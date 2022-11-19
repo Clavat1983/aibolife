@@ -142,10 +142,13 @@
           <nav class="l-external-footer__nav">
             <ul class="l-external-footer__list">
               <li class="l-external-footer__list-item">
-                <a class="l-external-footer__link" href="#">プライバシーポリシー</a>
+                <a class="l-external-footer__link" href="#">aibo life とは?</a>
               </li>
               <li class="l-external-footer__list-item">
                 <a class="l-external-footer__link" href="#">利用規約</a>
+              </li>
+              <li class="l-external-footer__list-item">
+                <a class="l-external-footer__link" href="#">プライバシーポリシー</a>
               </li>
             </ul>
           </nav>

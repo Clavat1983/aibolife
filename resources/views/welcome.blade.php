@@ -1,4 +1,155 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>aibo life</title>
+    <meta
+      name="description"
+      content="xxxxx"
+    />
+    <meta property="og:title" content="aibo life" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://aibolife.jp/assets/images/ogp.png"
+    />
+    <meta property="og:url" content="https://aibolife.jp" />
+    <meta
+      property="og:description"
+      content="xxxxx"
+    />
+    <meta property="og:site_name" content="websitekit" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Twitter" />
+    <link rel="canonical" href="https://aibolife.jp" />
+    <link rel="icon" href="{{asset('favicon.ico')}}" />
+    <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}" />
+    <link rel="stylesheet" href="{{asset('css/common.css')}}" />
+  </head>
+
+  <body>
+    <div class="l-wrap">
+      <main class="l-external-content">
+        <div class="l-external-content__inner">
+          <div class="p-login-index">
+            <div class="p-login-index__header">
+              <p class="c-img">
+                <img
+                  src="{{asset('img/logo_horizontal.svg')}}"
+                  alt=""
+                  width="161"
+                  height="150"
+                />
+              </p>
+            </div>
+            <div class="p-login-index__body">
+              
+              <section class="c-panel">
+                <header class="c-panel__header">
+                  <h1 class="c-ttl c-ttl--type2">新「aibo life」へようこそ</h1>
+                </header>
+                <div class="c-panel__content">
+                    <div class="c-form">
+                      <div class="c-form__item">
+                        <div class="c-alert c-alert--success">
+                            <div class="c-alert__text">2023年1月のリニューアル後、新「aibo life」を初めて利用される方は「アカウント作成」をお願いします。</div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="c-panel__footer">
+                    <ul class="c-btn-list">
+                      {{-- <li class="c-btn-list__item">
+                        <a href="#">aibo life とは?</a>
+                      </li> --}}
+                      <li class="c-btn-list__item">
+                        <a href="#">【補足】旧「aibo life」にご登録のオーナー様へ</a>
+                      </li>
+                    </ul>
+                </div>
+                <div class="c-panel__footer">
+                    <ul class="c-btn-list">
+                      <li class="c-btn-list__item">
+                        <a href="{{route('register')}}" style="text-decoration:none;"><button class="c-btn" style="background-color:#737373;">アカウント作成</button></a>
+                      </li>
+                    </ul>
+                  </div>
+                <div class="c-panel__content">
+                    <div class="c-form">
+                      <div class="c-form__item">
+                        <div class="c-alert c-alert--info">
+                            <div class="c-alert__text">
+                            旧「aibo life」を利用されていた方も、これまでのデータは移行されますので、まずは<a href="{{route('register')}}">アカウント作成</a>をお願いします。
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="c-panel__footer">
+                    <ul class="c-btn-list">
+                      <li class="c-btn-list__item">
+                          <a href="{{route('login')}}" style="text-decoration: none;"><button class="c-btn" style="background-color:#737373;">ログイン</button></a>
+                        </li>
+                    </ul>
+                  </div>
+                <div class="c-panel__content">
+                    <div class="c-form">
+                        <div class="c-form__item">
+                        <div class="c-alert c-alert--info">
+                            <div class="c-alert__text">
+                            新「aibo life」のアカウント（メールアドレス・パスワード）をお持ちの方は、<a href="{{route('login')}}">ログイン</a>へ進んでください。
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-panel__footer">
+                  <ul class="c-btn-list">
+                    <li class="c-btn-list__item">
+                      <a href="{{ route('contact.index') }}">お問い合わせはこちら</a>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="l-external-footer">
+      <div class="l-external-footer__inner">
+        <p class="l-external-footer__item">
+          <small class="l-external-footer__copyright">
+            ©︎ 2022 aibo life
+          </small>
+        </p>
+        <div class="l-external-footer__item">
+          <nav class="l-external-footer__nav">
+            <ul class="l-external-footer__list">
+              <li class="l-external-footer__list-item">
+                <a class="l-external-footer__link" href="#">aibo life とは?</a>
+              </li>
+              <li class="l-external-footer__list-item">
+                <a class="l-external-footer__link" href="#">利用規約</a>
+              </li>
+              <li class="l-external-footer__list-item">
+                <a class="l-external-footer__link" href="#">プライバシーポリシー</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script type="module" src="{{asset('js/common.js')}}"></script>
+
+  </body>
+</html>
+
+
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -42,7 +193,7 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}
 
 
 
