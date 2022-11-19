@@ -135,7 +135,7 @@
                 <a class="l-external-footer__link" href="#">利用規約</a>
               </li>
               <li class="l-external-footer__list-item">
-                <a class="l-external-footer__link" href="#">個人情報について</a>
+                <a class="l-external-footer__link" href="#">個人情報指針</a>
               </li>
             </ul>
           </nav>

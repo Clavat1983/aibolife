@@ -48,7 +48,7 @@
                 <div class="card-body">
                     aibo life とは？<br>
                     利用規約<br>
-                    プライバシーポリシー<br>
+                    個人情報指針<br>
                     運営メンバー<br>
                     よくある質問<br>
                     権利表記<br>
@@ -286,7 +286,7 @@
                 <div class="card-body">
                     <div>はじめに</div>
                     <div>利用規約</div>
-                    <div>プライバシーポリシー</div>
+                    <div>個人情報指針</div>
                     <div>権利表記</div>
                     <div>よくある質問</div>
                     <div><a href="{{route('contact.index')}}">お問い合わせ</div>
