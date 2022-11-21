@@ -19,7 +19,8 @@
                     <a href="{{route('news.admin')}}">全件表示（非表示も含む）＆変更</a><br/>
                     <a href="{{route('news.create')}}">新規入力</a><br/>
                     <hr/>
-                    <h4>ああああ</h4>
+                    <h4>お問い合わせ</h4>
+                    <a href="{{route('contact.list_admin')}}">問い合わせ一覧（全件）</a><br/>
                     <hr/>
                     <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
                 </div>

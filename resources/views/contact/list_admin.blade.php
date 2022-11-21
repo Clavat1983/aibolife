@@ -7,6 +7,8 @@
 @section('content')
 
 <div class="container">
+    <p style="background-color:black; color:yellow; text-align:center;">【管理者専用ページ】</p>
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -37,10 +39,10 @@
                             <td>{{$contact->created_at}}</td>
                             <td>{{$contact->updated_at}}</td>
                             <td>{{$contact->child_no}}</td>
-                            @if($contact->kidoku_flag === 0)
-                            <td><span style="color:red">未読あり</span></td>
+                            @if($contact->reply_flag === 0)
+                            <td><span style="color:red">未回答</span></td>
                             @else
-                            <td>未読なし</td>
+                            <td>回答済</td>
                             @endif
                         </tr>
                         @endforeach
@@ -48,9 +50,11 @@
                     <br>
                             <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
                 </div>
-
             </div>
         </div>
     </div>
+    <br>
+    <p style="background-color:black; color:yellow; text-align:center;">【管理者専用ページ】</p>
+
 </div>
 @endsection

@@ -46,7 +46,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    aibo life とは？<br>
+                    aibo life とは?<br>
                     利用規約<br>
                     個人情報指針<br>
                     運営メンバー<br>

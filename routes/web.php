@@ -110,6 +110,7 @@ Route::middleware(['verified'])->group(function(){
                 Route::post('/topics', 'NewsController@store')->name('news.store');//最新情報(新規-DB登録)
                 Route::get('/topics/{news}/edit', 'NewsController@edit')->name('news.edit');//変更(入力)
                 Route::put('/topics/{news}', 'NewsController@update')->name('news.update');//変更(DB更新)
+                Route::get('/admin/contact', 'ContactController@list_admin')->name('contact.list_admin');//お問い合わせ(一覧)
             });
         });
         //一般ユーザ
