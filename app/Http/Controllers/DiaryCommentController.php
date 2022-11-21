@@ -138,7 +138,7 @@ class DiaryCommentController extends Controller
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             $owner_id = auth()->user()->owner->id;
             //コメントを付けた日記のIDを重複なしで、ページネーションありで取得
-            $comments = DiaryComment::select('diary_id')->where('owner_id', $owner_id)->groupby('diary_id')->orderby('created_at','desc')->orderby('diary_id','desc')->paginate(10);
+            $comments = DiaryComment::select('diary_id')->where('owner_id', $owner_id)->groupby('diary_id')->groupby('created_at')->orderby('created_at','desc')->orderby('diary_id','desc')->paginate(10);
 
 
             //【全ビュー共通処理】未読通知数
