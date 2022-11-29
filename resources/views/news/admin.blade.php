@@ -29,7 +29,7 @@
                         </tr>
                     @endforeach
                     </table>
-                    {{$news_all->links()}}
+                    {{$news_all->onEachSide(1)->links()}}
                 </div>
 
 

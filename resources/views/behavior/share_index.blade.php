@@ -16,8 +16,9 @@
                         ID：{{$behavior->id}}、タイトル：{{$behavior->behavior_name}}、aiboの名前：{{$behavior->aibo->aibo_name}}　<a href="{{route('behaviorshare.show', $behavior)}}?seed={{$seed}}&page={{$page}}">【見る】</a><br>
                     @endforeach
                     <br>
-                    {{$behaviors->appends(['seed' => $seed])->links()}}
-                    <br>
+                    ---------------↓ここからページネーションのタグ---------------<br>
+                    {{$behaviors->appends(['seed' => $seed])->onEachSide(1)->links()}}
+                    ----------------↑ここまでページネーションのタグ--------------------<br>
                     <p style="text-align:center;"><a href="{{route('behaviorshare.create')}}">ふるまいを登録する</a></p>
 
                 </div>

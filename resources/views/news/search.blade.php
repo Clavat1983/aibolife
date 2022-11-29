@@ -38,7 +38,7 @@
                                 ID：{{$news->id}}、タイトル：{{$news->news_title}}、本文：{{$news->news_body}}、<a href="{{route('news.show', $news->id)}}">【見る】</a><br>
                             @endforeach
                             <br>
-                            {{$results->appends(['keywords' => $keywords])->links()}}<br>
+                            {{$results->appends(['keywords' => $keywords])->onEachSide(1)->links()}}<br>
                         @else
                             検索結果がありません
                         @endif

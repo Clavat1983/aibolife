@@ -48,7 +48,7 @@
                             'diary_date_from' => $diary_date_from,
                             'diary_date_to' => $diary_date_to,
                             'aibo_name' => $aibo_name,
-                        ])->links()}}<br>
+                        ])->onEachSide(1)->links()}}<br>
                     @else
                         検索結果がありません
                     @endif

@@ -31,7 +31,7 @@
                     </table>
 
                     <br>
-                    {{$comments->links()}}
+                    {{$comments->onEachSide(1)->links()}}
 
                     <hr>
                     <a href="{{route('diary.index')}}">aibo日記に戻る</a>

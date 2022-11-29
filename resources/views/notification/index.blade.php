@@ -41,7 +41,7 @@
                         </tr>
                     @endforeach
                     </table>
-                    {{$notifications->links()}}
+                    {{$notifications->onEachSide(1)->links()}}
                 </div>
             </div>
         </div>

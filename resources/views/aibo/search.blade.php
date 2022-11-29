@@ -64,7 +64,7 @@
                                 'aibo_sex' => $aibo_sex,
                                 'owner_name' => $owner_name,
                                 'owner_pref' => $owner_pref,
-                            ])->links()}}<br>
+                            ])->onEachSide(1)->links()}}<br>
                         @else
                             検索結果がありません
                         @endif
