@@ -35,10 +35,40 @@
                         <hr/>
                         @if(count($results))
                             @foreach ($results as $news)
-                                ID：{{$news->id}}、タイトル：{{$news->news_title}}、本文：{{$news->news_body}}、<a href="{{route('news.show', $news->id)}}">【見る】</a><br>
+                                ID：{{$news->id}}、タイトル：{{$news->news_title}}、<a href="{{route('news.show', $news->id)}}">【見る】</a><br>
+                                {{-- 本文： {!! $news->news_body !!}<br>
+                                <hr> --}}
                             @endforeach
                             <br>
-                            {{$results->appends(['keywords' => $keywords])->onEachSide(1)->links()}}<br>
+
+
+                            {{-- {{$results->appends(['keywords' => $keywords])->onEachSide(1)->links()}}<br> --}}
+                            <hr>
+                            ▼ページネーション▼
+                            <table width="60%" style="margin:auto;">
+                                <tr>
+                                    <td width="15%" style="text-align:center;"><a href="{{$results->appends(['keywords' => $keywords])->previousPageUrl()}}">Prev</a></td>
+                                    <td width="70%" style="text-align:center;">
+                                        <div class="pagenation-select">
+                                        <select>
+                                            @for ($i = 1; $i <= $results->lastPage(); $i++)
+                                            <option value="{{$results->appends(['keywords' => $keywords])->url($i)}}" @if($i == $results->currentPage()) selected @endif>{{$i}}ページ目/全{{$results->lastPage()}}ページ</option>
+                                            @endfor
+                                        </select>
+                                        </div>
+                                    </td>
+                                    <td width="15%" style="text-align:center;"><a href="{{$results->appends(['keywords' => $keywords])->nextPageUrl()}}">Next</a></td>
+                                </tr>
+                            </table>
+                            <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+                            <script>
+                            $('.pagenation-select select').change(function(){
+                                location.href = $(this).val();
+                            });
+                            </script>
+                            <hr>
+
+                            
                         @else
                             検索結果がありません
                         @endif

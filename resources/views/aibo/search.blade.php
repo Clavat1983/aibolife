@@ -54,7 +54,7 @@
                             @foreach ($results as $aibo)
                                 ID：{{$aibo->id}}、aiboの名前：{{$aibo->aibo_name}}、オーナー名：{{$aibo->owner->owner_name}}　<a href="{{route('aibo.show', $aibo->id)}}">【見る】</a><br>
                             @endforeach
-                            <br>
+                            {{-- <br>
                             {{$results->appends([
                                 'aibo_name' => $aibo_name,
                                 'aibo_birth_year' => $aibo_birth_year,
@@ -64,7 +64,60 @@
                                 'aibo_sex' => $aibo_sex,
                                 'owner_name' => $owner_name,
                                 'owner_pref' => $owner_pref,
-                            ])->onEachSide(1)->links()}}<br>
+                            ])->onEachSide(1)->links()}}<br> --}}
+
+                            <hr>
+                            ▼ページネーション▼
+                            <table width="60%" style="margin:auto;">
+                                <tr>
+                                    <td width="15%" style="text-align:center;"><a href="{{$results->appends([
+                                        'aibo_name' => $aibo_name,
+                                        'aibo_birth_year' => $aibo_birth_year,
+                                        'aibo_birth_month' => $aibo_birth_month,
+                                        'aibo_birth_day' => $aibo_birth_day,
+                                        'aibo_color' => $aibo_color,
+                                        'aibo_sex' => $aibo_sex,
+                                        'owner_name' => $owner_name,
+                                        'owner_pref' => $owner_pref,
+                                    ])->previousPageUrl()}}">Prev</a></td>
+                                    <td width="70%" style="text-align:center;">
+                                        <div class="pagenation-select">
+                                        <select>
+                                            @for ($i = 1; $i <= $results->lastPage(); $i++)
+                                            <option value="{{$results->appends([
+                                                'aibo_name' => $aibo_name,
+                                                'aibo_birth_year' => $aibo_birth_year,
+                                                'aibo_birth_month' => $aibo_birth_month,
+                                                'aibo_birth_day' => $aibo_birth_day,
+                                                'aibo_color' => $aibo_color,
+                                                'aibo_sex' => $aibo_sex,
+                                                'owner_name' => $owner_name,
+                                                'owner_pref' => $owner_pref,
+                                            ])->url($i)}}" @if($i == $results->currentPage()) selected @endif>{{$i}}ページ目/全{{$results->lastPage()}}ページ</option>
+                                            @endfor
+                                        </select>
+                                        </div>
+                                    </td>
+                                    <td width="15%" style="text-align:center;"><a href="{{$results->appends([
+                                        'aibo_name' => $aibo_name,
+                                        'aibo_birth_year' => $aibo_birth_year,
+                                        'aibo_birth_month' => $aibo_birth_month,
+                                        'aibo_birth_day' => $aibo_birth_day,
+                                        'aibo_color' => $aibo_color,
+                                        'aibo_sex' => $aibo_sex,
+                                        'owner_name' => $owner_name,
+                                        'owner_pref' => $owner_pref,
+                                    ])->nextPageUrl()}}">Next</a></td>
+                                </tr>
+                            </table>
+                            <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+                            <script>
+                            $('.pagenation-select select').change(function(){
+                                location.href = $(this).val();
+                            });
+                            </script>
+                            <hr>
+
                         @else
                             検索結果がありません
                         @endif

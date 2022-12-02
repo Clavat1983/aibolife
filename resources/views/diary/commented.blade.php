@@ -31,9 +31,33 @@
                     </table>
 
                     <br>
-                    {{$comments->onEachSide(1)->links()}}
+                    {{-- {{$comments->onEachSide(1)->links()}} --}}
 
                     <hr>
+                    ▼ページネーション▼
+                    <table width="60%" style="margin:auto;">
+                        <tr>
+                            <td width="15%" style="text-align:center;"><a href="{{$comments->previousPageUrl()}}">Prev</a></td>
+                            <td width="70%" style="text-align:center;">
+                                <div class="pagenation-select">
+                                <select>
+                                    @for ($i = 1; $i <= $comments->lastPage(); $i++)
+                                    <option value="{{$comments->url($i)}}" @if($i == $comments->currentPage()) selected @endif>{{$i}}ページ目/全{{$comments->lastPage()}}ページ</option>
+                                    @endfor
+                                </select>
+                                </div>
+                            </td>
+                            <td width="15%" style="text-align:center;"><a href="{{$comments->nextPageUrl()}}">Next</a></td>
+                        </tr>
+                    </table>
+                    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+                    <script>
+                    $('.pagenation-select select').change(function(){
+                        location.href = $(this).val();
+                    });
+                    </script>
+                    <hr>
+                    
                     <a href="{{route('diary.index')}}">aibo日記に戻る</a>
                     <br>
                     <br>

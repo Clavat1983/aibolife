@@ -29,7 +29,33 @@
                         </tr>
                     @endforeach
                     </table>
-                    {{$news_all->onEachSide(1)->links()}}
+
+                    {{-- {{$news_all->onEachSide(1)->links()}} --}}
+                    <hr>
+                    ▼ページネーション▼
+                    <table width="60%" style="margin:auto;">
+                        <tr>
+                            <td width="15%" style="text-align:center;"><a href="{{$news_all->previousPageUrl()}}">Prev</a></td>
+                            <td width="70%" style="text-align:center;">
+                                <div class="pagenation-select">
+                                <select>
+                                    @for ($i = 1; $i <= $news_all->lastPage(); $i++)
+                                    <option value="{{$news_all->url($i)}}" @if($i == $news_all->currentPage()) selected @endif>{{$i}}ページ目/全{{$news_all->lastPage()}}ページ</option>
+                                    @endfor
+                                </select>
+                                </div>
+                            </td>
+                            <td width="15%" style="text-align:center;"><a href="{{$news_all->nextPageUrl()}}">Next</a></td>
+                        </tr>
+                    </table>
+                    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+                    <script>
+                    $('.pagenation-select select').change(function(){
+                        location.href = $(this).val();
+                    });
+                    </script>
+                    <hr>
+
                 </div>
 
 
