@@ -16,17 +16,20 @@ class DiaryController extends Controller
 {
     public function index()
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $diaries = Diary::orderBy('id', 'desc')->limit(6)->get();
+        //「aibo日記」のトップページは廃止。今日の一覧へ転送するように変更。
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            // if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+            //     $diaries = Diary::orderBy('id', 'desc')->limit(6)->get();
 
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            //     //【全ビュー共通処理】未読通知数
+            //     $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-            return view('diary.index',compact('bell_count','diaries'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
-        }
+            //     return view('diary.index',compact('bell_count','diaries'));
+            // } else { //aibo登録まで完了していないと閲覧不可
+            //     return redirect()->route('home');
+            // }
+
+        return redirect()->route('diary.list_day');
     }
 
     public function list_day(Request $request)

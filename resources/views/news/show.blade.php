@@ -39,7 +39,7 @@
             <div class="l-content__header">
               <p class="c-category-ttl c-category-ttl--topics">
                 <span class="c-category-ttl__en">TOPICS</span>
-                <span class="c-category-ttl__jp">最新情報</span>
+                <span class="c-category-ttl__jp">最新情報［{{$news->news_category}}］</span>
               </p>
             </div>
             <div class="l-content__body">
@@ -178,7 +178,7 @@
                     <dd class="c-sns__detail">
                       <ul class="c-sns-list">
                         <li class="c-sns-list__item">
-                          <a href="http://line.me/R/msg/text/?{{url()->full()}}%0a【U_01102】最新情報・News(個別)">
+                          <a href="http://line.me/R/msg/text/?{{url()->full()}}%0a【U_01102】最新情報・News(個別)" target="_blank">
                             <img src="{{asset('img/logo_line.png')}}" width="44" alt="LINE"/>
                           </a>
                         </li>
@@ -188,7 +188,7 @@
                           </a>
                         </li>
                         <li class="c-sns-list__item">
-                          <a href="https://twiter.com/share?url={{url()->full()}}" rel="nofollow noopener" target="_blank">
+                          <a href="https://twitter.com/share?url={{url()->full()}}" rel="nofollow noopener" target="_blank">
                             <img src="{{asset('img/logo_twitter.png')}}" width="44" alt="Twitter"/>
                           </a>
                         </li>
@@ -201,6 +201,9 @@
 {{-- --------------------------------------------------------------------------- --}}
           </div>
         </div>
+        
+        <br>
+        <p style="text-align:center;"><a href="{{url()->previous()}}">一覧へ戻る</a></p>
 
         {{-- 【共通】バナー広告 --}}
         @include('subview.banner')

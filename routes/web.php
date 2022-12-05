@@ -66,7 +66,7 @@ Route::middleware(['verified'])->group(function(){
     Route::post('/friend/comment/store', 'AiboCommentController@store')->name('aibocomment.store');//(新規-DB登録)
 
     //aibo日記
-    Route::get('/diary', 'DiaryController@index')->name('diary.index');//aibo日記トップ
+    Route::get('/diary', 'DiaryController@index')->name('diary.index');//【廃止】aibo日記トップ【廃止】⇒今日の一覧へ転送
     Route::get('/diary/list_day', 'DiaryController@list_day')->name('diary.list_day');//aibo日記一覧（日ごと）
     Route::get('/diary/list_aibo', 'DiaryController@list_aibo')->name('diary.list_aibo');//aibo日記一覧（aiboごと）
     Route::get('/diary/archive', 'DiaryController@archive')->name('diary.archive');//aibo日記（過去の日記アーカイブ）
@@ -133,12 +133,21 @@ Route::middleware(['verified'])->group(function(){
         Route::get('/mypage/contact/{contact}', 'ContactController@show')->name('contact.show');//お問い合わせ(個別画面)
         Route::post('/mypage/contact', 'ContactController@store_res')->name('contact.store_res');//お問い合わせ(既存のお問い合わせへのレス)
 
-
 });
 
 //認証外
+
     //再認証画面へ
     Route::get('/mypage/user/reverify', function(){return view('user.reverify');})->name('user.reverify');
+
+    //はじめに
+    Route::get('/guide/about', 'GuideController@about')->name('guide.about');//aibo lifeとは?
+    Route::get('/guide/rule', 'GuideController@rule')->name('guide.rule');//利用規約
+    Route::get('/guide/policy', 'GuideController@policy')->name('guide.policy');//プライバシーポリシー
+    Route::get('/guide/staff', 'GuideController@staff')->name('guide.staff');//運営メンバー
+    Route::get('/guide/faq', 'GuideController@faq')->name('guide.faq');//よくある質問
+    Route::get('/guide/copyright', 'GuideController@copyright')->name('guide.copyright');//権利表記
+
 
     //お問い合わせ
     Route::get('/contact', 'ContactController@index')->name('contact.index');//お問い合わせ(トップ)

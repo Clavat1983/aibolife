@@ -1,4 +1,77 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>aibo life</title>
+    <meta name="description" content="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+    <meta property="og:title" content="aibo life" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://example.com../../assets/images/ogp.png"
+    />
+    <meta property="og:url" content="{{url()->full()}}" />
+    <meta property="og:description" content="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+    <meta property="og:site_name" content="aibo life" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Twitter" />
+    <link rel="canonical" href="{{url()->full()}}" />
+    <link rel="icon" href="{{asset('favicon.ico')}}" />
+    <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}" />
+    <link rel="stylesheet" href="{{asset('css/common.css')}}" />
+  </head>
+
+  <body id="pagetop">
+    <div class="l-wrap">
+      
+      {{-- 【共通】header & nav --}}
+      @include('subview.header-nav')
+
+      {{-- main(各画面の個別部分) --}}
+      <main class="l-main">
+        <div class="l-main__content">
+          <div class="l-content">
+{{-- --------------------------------------------------------------------------- --}}
+            <div class="l-content__header">
+              <p class="c-category-ttl c-category-ttl--topics">
+                <span class="c-category-ttl__en">ABOUT</span>
+                <span class="c-category-ttl__jp">aibo lifeとは?</span>
+              </p>
+            </div>
+            <div class="l-content__body">
+              あああああ
+            </div>
+
+{{-- --------------------------------------------------------------------------- --}}
+        </div>
+      </div>
+
+{{-- 【共通】バナー広告 --}}
+@include('subview.banner')
+
+</main>
+
+{{-- 【共通】footer --}}
+@include('subview.footer')
+
+</div>
+<script type="module" src="{{asset('js/common.js')}}"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+{{-- @extends('layouts.app')
 
 @section('notification')
     {{$bell_count}}
@@ -35,14 +108,15 @@
 
                     @if($search_flag)
                     <hr/>
-                    <h2>【検索結果】 {{$results->total()}}件</h2> {{--ページネーション前の合計--}}
+                    {{--ページネーション前の合計--}}
+                    {{-- <h2>【検索結果】 {{$results->total()}}件</h2>
                     ※日記の日付が新しい順、タイトルか本文に検索キーワードを含むもの
                     <hr/>
                     @if(count($results))
                         @foreach ($results as $diary)
                             日付：[{{$diary->diary_date}}]、ID：{{$diary->id}}、日記：{{$diary->diary_title}}、aibo名：{{$diary->aibo->aibo_name}}　<a href="{{route('diary.show', $diary->id)}}">【見る】</a><br>
                         @endforeach
-                        <br>
+                        <br> --}}
 
                         {{-- {{$results->appends([
                             'keywords' => $keywords,
@@ -50,7 +124,7 @@
                             'diary_date_to' => $diary_date_to,
                             'aibo_name' => $aibo_name,
                         ])->onEachSide(1)->links()}}<br> --}}
-                        <hr>
+                        {{-- <hr>
                         ▼ページネーション▼
                         <table width="60%" style="margin:auto;">
                             <tr>
@@ -100,4 +174,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

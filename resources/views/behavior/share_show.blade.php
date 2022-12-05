@@ -67,7 +67,8 @@
             <div class="card">
                 <div class="card-body">
                     @if(isset($page) && isset($seed)) {{-- ふるまい一覧から来た場合：ぺジネーションの情報付与 --}}
-                    <a href="{{route('behaviorshare.index')}}?page={{$page}}&seed={{$seed}}"><button type="button">ふるまい共有に戻る</button></a>
+                    {{-- <a href="{{route('behaviorshare.index')}}?page={{$page}}&seed={{$seed}}"><button type="button">ふるまい共有に戻る</button></a> --}}
+                    <a href="{{url()->previous()}}"><button type="button">ふるまい共有に戻る</button></a>
                     @else
                     <a href="{{route('behaviorshare.index')}}"><button type="button">ふるまい共有に戻る</button></a>
                     @endif

@@ -120,6 +120,8 @@
                         </div>
                     </form>
                     <hr/>
+                    <p style="text-align:center;"><a href="{{url()->previous()}}">一覧へ戻る</a></p>
+                    <hr/>
                     <br/>
                     <a href="{{route('diary.list_day')}}?date={{$diary->diary_date}}"><button type="button">{{date('Y年m月d日', strtotime($diary->diary_date))}}の日記一覧</button></a><br><br>
                     <a href="{{route('diary.list_aibo')}}?aibo={{$diary->aibo_id}}"><button type="button">{{$diary->aibo->aibo_name}}の日記一覧</button></a><br><br>

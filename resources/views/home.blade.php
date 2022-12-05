@@ -41,6 +41,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             
+            <p style="margin:auto; text-align:center;"><img width="80%" src="{{asset('storage/diary_photo/diary_aibo_000001_date_2021-01-28.jpg')}}"></p>
+            <br>
+            <br>
             <hr>
             
             <h2 style="text-align:center;"><u>Today</u></h2>
@@ -189,12 +192,12 @@
 
             <div class="card">
                 <div class="card-body">
-                    ［YYYY.MM.DD］ああああについて<br>
-                    ［YYYY.MM.DD］いいいいについて<br>
-                    ［YYYY.MM.DD］ううううについて<br>
-                    ［YYYY.MM.DD］ああああについて<br>
-                    ［YYYY.MM.DD］いいいいについて<br>
-                    ［YYYY.MM.DD］ううううについて<br>
+                    ［おしゃべり］ああああについて<br>
+                    ［お悩み相談］いいいいについて<br>
+                    ［部　活　動］ううううについて<br>
+                    ［おしゃべり］ああああについて<br>
+                    ［お悩み相談］いいいいについて<br>
+                    ［部　活　動］ううううについて<br>
                 </div>
                 <div style="text-align:right;">【aibo掲示板へ】</div>
 
@@ -255,7 +258,7 @@
             </div>
 
             <hr/>
-            
+
         </div>
     </div>
 </div>
