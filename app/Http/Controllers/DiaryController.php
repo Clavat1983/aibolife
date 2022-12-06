@@ -146,42 +146,36 @@ class DiaryController extends Controller
                         }
                     }
 
-            /*
-                //2.過去の年月アーカイブ(年月-件数)
 
-                    //2-1.誕生月～今月までの日記「月別カウント用」配列を作る
-                    $begin_y = substr($aibo->aibo_birthday,0,4); //「2019」みたいな感じ
-                    $begin_ym = $begin_y.substr($aibo->aibo_birthday,5,2); //「201904」みたいな感じ
-                    $year = date('Y'); //今年
-                    
-                    $archive_count = [];
-                    while($year >= $begin_y) {
-                        for ($month = 12; $month >= 1; $month--) {
-                            if (sprintf('%04d%02d', $year, $month) > date('Ym') || sprintf('%04d%02d', $year, $month) < date($begin_ym)) {
-                                //今月より後の月は表示しない
-                            }
-                            else {
-                                $archive_count[$year][sprintf('%02d',$month)] = 0;
-                            }
-                        }
-                        $year--;//増やしているのを減らす
+                //2. 過去の日記
+                    //1.いつ？（クエリパラメータの取得＆設定）
+                    $target_year = $request->year; //クエリパラメータから取得
+                    $target_month = $request->month; //クエリパラメータから取得
+                    $target_exist_flag = true;
+
+                    if(is_null($target_year) || is_null($target_month)){ //年月指定なし
+                        //現在の年月とする
+                        $target_year = date('Y');
+                        $target_month = date('n');//前ゼロなし
+                        $target_exist_flag = false; //年月指定なし
                     }
 
-                    //2-2.月ごとの件数を保管
-                        //そのaiboの日記全件を取得
-                        $diaries = Diary::where('aibo_id', $aibo_id)->get();
+                    //パラメータのチェック
+                    if(preg_match('/^[0-9]{4}$/u', $target_year) && preg_match('/^[1-9]{1}$|[1]{1}[0-2]{1}$/u', $target_month)){
+                        $target = $target_year.'-'.sprintf('%02d', $target_month).'-01';//表示する年月
+                    } else {
+                        abort(403);
+                    }
 
-                        foreach($diaries as $diary){
-                            $year = substr($diary->diary_date,0,4);
-                            $month = substr($diary->diary_date,5,2);
-                            $archive_count[$year][$month]++;
-                        }
-                */
-                
+                    // $to_string = $today_carbon->toDateString(); //「2022-03-26」のような文字
+                    // $from_string = $aibo->aibo_birthday; //aiboの誕生日
+                    // $archive = Diary::where('aibo_id', $aibo_id)->whereBetween('diary_date', [$from_string, $to_string])->orderby('diary_date', 'DESC')->get();
+                    $archives = Diary::where('aibo_id', $aibo_id)->orderby('diary_date', 'DESC')->get();
+
                 //【全ビュー共通処理】未読通知数
                 $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-                return view('diary.list_aibo', compact('bell_count','aibo','this_week'));
+                return view('diary.list_aibo', compact('bell_count','aibo', 'target_exist_flag','this_week', 'target', 'archives'));
             }
         } else { //aibo登録まで完了していないと閲覧不可
             return redirect()->route('home');
@@ -403,6 +397,12 @@ class DiaryController extends Controller
                     $date_carbon = new Carbon($date);
                     $birthday_carbon = new Carbon($aibo->aibo_birthday);
                     if($date_carbon->lt($birthday_carbon)){ //指定日 < 誕生日なら
+                        abort(403); //エラーページへ転送
+                    }
+
+                    //明日以降ならNG(未来の日記は書けない)
+                    $tomorrow_carbon = Carbon::tomorrow('Asia/Tokyo');
+                    if($date_carbon->gte($tomorrow_carbon)){ //指定日 > 明日なら
                         abort(403); //エラーページへ転送
                     }
                     

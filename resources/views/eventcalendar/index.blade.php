@@ -66,7 +66,7 @@
                         $next = \Carbon\Carbon::createFromFormat('Y-m-d',$target)->addMonth();
                     @endphp
                     <a href="{{route('eventcalendar.index')}}?year={{$prev->format('Y')}}&month={{$prev->format('n')}}">【前の月】</a><br>
-                    <a href="{{route('eventcalendar.index')}}?year={{$today->format('Y')}}&month={{$today->format('n')}}">【今　月】</a><br>
+                    {{-- <a href="{{route('eventcalendar.index')}}?year={{$today->format('Y')}}&month={{$today->format('n')}}">【今　月】</a><br> --}}
                     <a href="{{route('eventcalendar.index')}}?year={{$next->format('Y')}}&month={{$next->format('n')}}">【次の月】</a><br>
 
 
