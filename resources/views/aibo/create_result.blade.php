@@ -1,4 +1,104 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>aibo life</title>
+    <meta name="description" content="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+    <meta property="og:title" content="aibo life" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://example.com../../assets/images/ogp.png"
+    />
+    <meta property="og:url" content="{{url()->full()}}" />
+    <meta property="og:description" content="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+    <meta property="og:site_name" content="aibo life" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Twitter" />
+    <link rel="canonical" href="{{url()->full()}}" />
+    <link rel="icon" href="{{asset('favicon.ico')}}" />
+    <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}" />
+    <link rel="stylesheet" href="{{asset('css/common.css')}}" />
+  </head>
+
+  <body id="pagetop">
+    <div class="l-wrap">
+      
+      {{-- 【共通】header & nav --}}
+      @include('subview.header-nav')
+
+      {{-- main(各画面の個別部分) --}}
+      <main class="l-main">
+        <div class="l-main__content">
+          <div class="l-content">
+{{-- --------------------------------------------------------------------------- --}}
+            <div class="l-content__header">
+            @if(count($owner->aibos) == 1)
+                <!-- 新規登録 -->
+                <p class="c-category-ttl c-category-ttl--topics">
+                <span class="c-category-ttl__en">Registration</span><!--新規登録-->
+                <span class="c-category-ttl__jp">利用登録［完了］</span>
+                </p>
+            @elseif(count($owner->aibos) == 0)
+                <p class="c-category-ttl c-category-ttl--topics"><!--マイページ-->
+                <span class="c-category-ttl__en">Oops!</span>
+                <span class="c-category-ttl__jp">これが表示されたらバグ</span>
+                </p>
+            @else
+                <p class="c-category-ttl c-category-ttl--topics"><!--マイページ-->
+                <span class="c-category-ttl__en">My Page</span>
+                <span class="c-category-ttl__jp">マイページ［aibo追加］</span>
+                </p>
+            @endif
+            </div>
+
+            <div class="l-content__body">
+
+                @if(count($owner->aibos) == 1)
+                        <!-- 新規登録 -->
+                        【1】オーナー登録  -->  【2】aibo登録  -->  <span style="color:red;"><b>【3】完了</b></span>
+                        <br><br>
+                        <p>オーナー登録・aibo登録が全て完了しました。<br>ようこそ、「aibo life」へ！</p>
+                        <a href="{{route('home')}}">トップページへ</a><br>{{-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ --}}
+                @elseif(count($owner->aibos) == 0)
+                    <p>【エラー発生】aibo登録後も結果が0匹。これが出たらバグ。</p>
+                    <a href="{{route('home')}}">トップページへ</a><br>{{-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ --}}
+                @else
+                    <p>aiboの追加が完了しました。<br>
+                    2匹目以降です。OK!</p>
+                    <a href="{{route('mypage')}}">マイページへ</a><br>
+                @endif
+
+
+
+
+            </div>
+
+            {{-- --------------------------------------------------------------------------- --}}
+        </div>
+    </div>
+
+{{-- 【共通】バナー広告 --}}
+@include('subview.banner')
+
+</main>
+
+{{-- 【共通】footer --}}
+@include('subview.footer')
+
+</div>
+<script type="module" src="{{asset('js/common.js')}}"></script>
+</body>
+</html>
+
+
+
+
+{{-- @extends('layouts.app')
 
 @section('notification')
     {{$bell_count}}
@@ -16,10 +116,10 @@
 
                     @if(count($owner->aibos) == 1)
                         <p>オーナー登録・aibo登録が全て完了しました。<br>ようこそ、「aibo life」へ！</p>
-                        <a href="{{route('home')}}">トップページへ</a><br>{{-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ --}}
+                        <a href="{{route('home')}}">トップページへ</a><br><!-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ -->
                     @elseif(count($owner->aibos) == 0)
-                        <p>【エラー】aibo登録後も結果が0匹。</p>
-                        <a href="{{route('home')}}">トップページへ</a><br>{{-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ --}}
+                        <p>【エラー発生】aibo登録後も結果が0匹。これが出たらバグ。</p>
+                        <a href="{{route('home')}}">トップページへ</a><br><!-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ -->
                     @else
                         <p>aiboの追加が完了しました。<br>
                         2匹目以降です。OK!</p>
@@ -32,4 +132,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

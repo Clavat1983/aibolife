@@ -94,7 +94,7 @@ class OwnerController extends Controller
 
                 return view('owner.transfer_result', compact('owner', 'bell_count'));
             } else { //該当なし
-                return back()->withErrors('該当するユーザが見つかりません')->withInput();
+                return back()->withErrors('該当するユーザが見つかりません。旧「aibo life」のログイン情報が不明な方は、お問い合わせください。')->withInput();
             }
 
         } else { //オーナー情報を登録していない(NG)

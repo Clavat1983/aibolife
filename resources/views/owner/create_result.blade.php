@@ -1,4 +1,6 @@
-{{-- @extends('layouts.app')
+{{-- 【廃止】新規登録でオーナー登録が完了して、aibo登録に進みましょう画面。不要と判断。
+    
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
