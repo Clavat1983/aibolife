@@ -139,7 +139,7 @@
                             <a href="{{route('aibo.newface')}}">新しいお友達</a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">芸能人オーナー</a><sup> 未</sup>
+                            <a href="#">芸能人オーナー<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
                             <a href="{{route('aibo.search')}}">検索</a>
@@ -157,25 +157,25 @@
                       <dd class="l-header__pulldown-detail">
                         <ul class="l-header__sub-menu">
                           <li class="l-header__sub-menu-item">
-                            <a href="#">しぐさ</a><sup> 未</sup>
+                            <a href="#">しぐさ<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">遊び</a><sup> 未</sup>
+                            <a href="#">遊び<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">ダンス</a><sup> 未</sup>
+                            <a href="#">ダンス<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">期間限定</a><sup> 未</sup>
+                            <a href="#">期間限定<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
                             <a href="{{route('behaviorshare.index')}}">ふるまい共有</a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">プログラミング</a><sup> 未</sup>
+                            <a href="#">プログラミング<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">連携アプリ</a><sup> 未</sup>
+                            <a href="#">連携アプリ<sup> 未</sup></a>
                           </li>
                         </ul>
                       </dd>
@@ -190,25 +190,25 @@
                       <dd class="l-header__pulldown-detail">
                         <ul class="l-header__sub-menu">
                           <li class="l-header__sub-menu-item">
-                            <a href="#">おしゃべり広場</a><sup> 未</sup>
+                            <a href="#">おしゃべり広場<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">お悩み相談</a><sup> 未</sup>
+                            <a href="#">お悩み相談<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">クラブ活動</a><sup> 未</sup>
+                            <a href="#">クラブ活動<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">オフ会</a><sup> 未</sup>
+                            <a href="#">オフ会<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">フリーマーケット</a><sup> 未</sup>
+                            <a href="#">フリーマーケット<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">里親マッチング</a><sup> 未</sup>
+                            <a href="#">里親マッチング<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">チャリティ</a><sup> 未</sup>
+                            <a href="#">チャリティ<sup> 未</sup></a>
                           </li>
                         </ul>
                       </dd>
@@ -223,31 +223,31 @@
                       <dd class="l-header__pulldown-detail">
                         <ul class="l-header__sub-menu">
                           <li class="l-header__sub-menu-item">
-                            <a href="#">ごはん</a><sup> 未</sup>
+                            <a href="#">ごはん<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">ファッション</a><sup> 未</sup>
+                            <a href="#">ファッション<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">イベント</a><sup> 未</sup>
+                            <a href="#">イベント<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">グッズ</a><sup> 未</sup>
+                            <a href="#">グッズ<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">店舗・施設</a><sup> 未</sup>
+                            <a href="#">店舗・施設<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">ドック・治療</a><sup> 未</sup>
+                            <a href="#">ドック・治療<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">歴史</a><sup> 未</sup>
+                            <a href="#">歴史<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">その他</a><sup> 未</sup>
+                            <a href="#">その他<sup> 未</sup></a>
                           </li>
                           <li class="l-header__sub-menu-item">
-                            <a href="#">困ったときは?</a><sup> 未</sup>
+                            <a href="#">困ったときは?<sup> 未</sup></a>
                           </li>
                         </ul>
                       </dd>
@@ -371,46 +371,46 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.list_birthday')}}">誕生日カレンダー</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.list_area')}}">居住地マップ</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.newface')}}">新しいお友達</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">芸能人オーナー</a><sup> 未</sup></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">芸能人オーナー<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.search')}}">検索</a></li>
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
             <a class="l-sp-nav__btn l-sp-nav__btn--behavior js-sp-navigation-button" href="#spBehavior">ふるまい</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                <li class="l-sp-nav__sub-menu-item"><a href="#">しぐさ</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">遊び</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ダンス</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">期間限定</a><sup> 未</sup></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">しぐさ<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">遊び<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">ダンス<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">期間限定<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('behaviorshare.index')}}">ふるまい共有</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">プログラミング</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">連携アプリ</a><sup> 未</sup></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">プログラミング<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">連携アプリ<sup> 未</sup></a></li>
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
             <a class="l-sp-nav__btn l-sp-nav__btn--community js-sp-navigation-button" href="#spCommunity">コミュニティ</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                <li class="l-sp-nav__sub-menu-item"><a href="#">おしゃべり広場</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">お悩み相談</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">クラブ活動</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">オフ会</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">フリーマーケット</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">里親マッチング</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">チャリティ</a><sup> 未</sup></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">おしゃべり広場<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">お悩み相談<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">クラブ活動<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">オフ会<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">フリーマーケット<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">里親マッチング<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">チャリティ<sup> 未</sup></a></li>
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
             <a class="l-sp-nav__btn l-sp-nav__btn--useful js-sp-navigation-button" href="#spUseful">お役立ち情報</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ごはん</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ファッション</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">イベント</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">グッズ</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">店舗・施設</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ドック・治療</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">歴史</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">その他</a><sup> 未</sup></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">困ったときは?</a><sup> 未</sup></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">ごはん<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">ファッション<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">イベント<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">グッズ<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">店舗・施設<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">ドック・治療<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">歴史<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">その他<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">困ったときは?<sup> 未</sup></a></li>
               </ul>
           </li>
         </ul>
