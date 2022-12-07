@@ -25,15 +25,15 @@
             <nav class="l-footer__nav">
               <ul class="l-footer__list">
                 <li class="l-footer__list-item">
-                  <a class="l-footer__list-link" href="#">利用規約</a>
+                  <a class="l-footer__list-link" href="{{route('guide.rule')}}">利用規約</a>
                 </li>
                 <li class="l-footer__list-item">
-                  <a class="l-footer__list-link" href="#">
+                  <a class="l-footer__list-link" href="{{route('guide.policy')}}">
                     プライバシーポリシー
                   </a>
                 </li>
                 <li class="l-footer__list-item">
-                  <a class="l-footer__list-link" href="#">よくある質問</a>
+                  <a class="l-footer__list-link" href="{{route('guide.faq')}}">よくある質問</a>
                 </li>
                 <li class="l-footer__list-item">
                   <a class="l-footer__list-link" href="{{route('contact.index')}}">お問い合わせ</a>
