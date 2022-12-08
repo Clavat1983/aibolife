@@ -138,7 +138,8 @@ Route::middleware(['verified'])->group(function(){
 //認証外
 
     //再認証画面へ
-    Route::get('/mypage/user/reverify', function(){return view('user.reverify');})->name('user.reverify');
+    //Route::get('/mypage/user/reverify', function(){return view('user.reverify');})->name('user.reverify');
+    Route::get('/mypage/user/reverify', 'UserController@reverify')->name('user.reverify');
 
     //はじめに
     Route::get('/guide/about', 'GuideController@about')->name('guide.about');//aibo lifeとは?

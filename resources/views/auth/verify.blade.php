@@ -28,6 +28,10 @@
     <link rel="icon" href="{{asset('favicon.ico')}}" />
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}" />
     <link rel="stylesheet" href="{{asset('css/common.css')}}" />
+
+    <!-- Google Ad -->
+    @include('subview.google-ad')
+    
   </head>
 
   <body>
@@ -48,7 +52,7 @@
             <div class="p-login-index__body">
               <section class="c-panel">
                 <header class="c-panel__header">
-                  <h1 class="c-ttl c-ttl--type2">メール認証</h1>
+                  <h1 class="c-ttl c-ttl--type2">メール認証が必要です</h1>
                 </header>
                 <div class="c-panel__content">
                   <div class="c-form">
@@ -62,18 +66,17 @@
 @else
                       <div class="c-alert c-alert--success">
                         <div class="c-alert__text">
-                          「アカウント作成」のお知らせメールを送付しました。
+                          メールアドレスの確認メールを送付しました。
                         </div>
                       </div>
 @endif
                       <div class="c-alert c-alert--info" style="margin-top:8px;">
                         <div class="c-alert__text">
-                          ①お知らせメールを受信してください。<br>
+                          ①メールを受信してください。<br>
                           （迷惑メールフォルダなどに振り分けられていないかもご確認ください）<br>
-                          ②1時間以内にメール内に記載されたURLをクリックしてメール認証をしてください。
-                          ③認証後の画面に沿ってアカウント登録を引き続き実施してください。<br/>
+                          ②1時間以内にメール内に記載されたURLをクリックしてメール認証をしてください。<br>
                           <br/>
-                          お知らせメールが届いていない場合は、別のメールアドレスで「アカウント作成」を改めて実施いただくか、以下の「メール再送」ボタンをクリックしてください。
+                          メールが届いていない場合は、以下の「メール再送」ボタンをクリックしてください。
                         </div>
                       </div>
                     </div>
@@ -94,7 +97,7 @@
 
                     <ul class="c-btn-list">
                       <li class="c-btn-list__item" style="margin-top:8px;">
-                        <a href="javascript:logout.submit()">登録をやり直す場合はこちら</a>
+                        <a href="javascript:logout.submit()">ログアウト</a>
                       </li>
                     </ul>
                   </form>
@@ -107,7 +110,7 @@
     </main>
 
     {{-- サブビュー(外部フッター) --}}
-    @include('external-subview.footer')
+    @include('subview.external-footer')
     
   </div>
   <script type="module" src="{{asset('js/common.js')}}"></script>

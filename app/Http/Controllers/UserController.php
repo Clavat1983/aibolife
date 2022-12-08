@@ -115,4 +115,13 @@ class UserController extends Controller
     {
         //
     }
+    
+
+    public function reverify(User $user)
+    {
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        return view('user.reverify', compact('bell_count','user'));
+    }
 }

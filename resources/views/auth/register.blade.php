@@ -28,6 +28,10 @@
     <link rel="icon" href="{{asset('favicon.ico')}}" />
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}" />
     <link rel="stylesheet" href="{{asset('css/common.css')}}" />
+
+    <!-- Google Ad -->
+    @include('subview.google-ad')
+    
   </head>
 
   <body>
@@ -163,7 +167,7 @@
     </main>
 
     {{-- サブビュー(外部フッター) --}}
-    @include('external-subview.footer')
+    @include('subview.external-footer')
     
   </div>
   <script type="module" src="{{asset('js/common.js')}}"></script>

@@ -317,6 +317,7 @@
         @endif
         {{-- オーナー登録済 かつ aibo登録済(ここまで) --}}
 @endauth
+
       </header>
 
       {{-- nav(SP) --}}
