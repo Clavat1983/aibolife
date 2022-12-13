@@ -55,18 +55,18 @@
 
             <div class="card">
                 <div class="card-body">
-                    <table>
+                    <table style="width:70%; margin:auto;">
                     @if($events->count() > 0)
                         @foreach($events as $event)
                             <tr>
-                                <td>【{{$event->event_category}}】</td>
-                                <td>{{$event->event_title}}</td>
-                                <td>（{{$event->event_start_datetime}}～{{$event->event_end_datetime}}）</td>
-                                @if($event->event_confirm_flag) <!--確定-->
-                                    <td>【開催中】</td>
-                                @else <!--確認中-->
-                                    <td>【確認中】</td>
-                                @endif
+                                <td>
+                                    【{{$event->event_category}}】 {{$event->event_title}}<br>
+                                    @if($event->event_confirm_flag) <!--確定-->
+                                        　（{{$event->event_start_datetime}}～{{$event->event_end_datetime}}）
+                                    @else <!--確認中-->
+                                        　（【確認中】{{$event->event_start_datetime}}～{{$event->event_end_datetime}}？）
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
 
@@ -85,7 +85,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    <table>
+                    <table style="width:70%; margin:auto;">
                         @if($news_list->count() > 0)
                             @foreach($news_list as $news)
                                 <tr>
@@ -116,7 +116,7 @@
             <h6 style="text-align:center;">日記</h6>
 
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="width:70%; margin:auto;">
                     【最近の日記から6件】
                     <ul>
                     @if($diaries->count() > 0)
@@ -128,16 +128,8 @@
                     @endif
                     </ul>
                 </div>
-
-                <div class="card-body" style="margin-left:2em;">
-                    <a href="{{route('diary.list_day')}}">今日の日記</a><br>
-                    <a href="{{route('diary.recently')}}">最近の日記</a><br>
-                    <a href="{{route('diary.archive')}}">過去の日記</a><br>
-                    <a href="{{route('diary.commented')}}">コメントした日記</a><br>
-                    <a href="{{route('diary.bookmark')}}">お気に入り</a><br>
-                    <a href="{{route('diary.search')}}">検索</a><br>
-                </div>
             </div>
+            <div style="text-align:right;">【今日の日記？】</div>
 
             <hr/>
 
@@ -147,7 +139,7 @@
             <h6 style="text-align:center;">お友達</h6>
 
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"  style="width:70%; margin:auto;">
                     【新しいお友達から6件】
                     <ul>
                     @if($new_aibos->count() > 0)
@@ -159,16 +151,9 @@
                     @endif
                     </ul>
                 </div>
-
-                <div class="card-body" style="margin-left:2em;">
-                    <a href="{{route('aibo.list_syllabary')}}">お名前リスト</a><br>
-                    <a href="{{route('aibo.list_birthday')}}">誕生日カレンダー</a><br>
-                    <a href="{{route('aibo.list_area')}}">居住地マップ</a><br>
-                    <a href="{{route('aibo.newface')}}">新しいお友達</a><br>
-                    芸能人オーナー<br>
-                    <a href="{{route('aibo.search')}}">検索</a><br>
-                </div>
             </div>
+
+            <div style="text-align:right;">【誕生日カレンダー？】</div>
 
             <hr>
 
@@ -176,17 +161,7 @@
             <h2 style="text-align:center;"><u>Behavior</u></h2>
             <h6 style="text-align:center;">ふるまい</h6>
 
-            <div class="card">
-                <div class="card-body">
-                    しぐさ<br>
-                    遊び<br>
-                    ダンス<br>
-                    期間限定<br>
-                    <a href="{{route('behaviorshare.index')}}">ふるまい共有</a><br>
-                    プログラミング<br>
-                    連携アプリ<br>
-                </div>
-            </div>
+                <div  style="width:70%; margin:auto;">ランダムで3件ほど?</div>
 
             <hr>
 
@@ -195,7 +170,7 @@
             <h6 style="text-align:center;">コミュニティ</h6>
 
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"  style="width:70%; margin:auto;">
                     ［おしゃべり］ああああについて<br>
                     ［お悩み相談］いいいいについて<br>
                     ［部　活　動］ううううについて<br>
@@ -216,7 +191,7 @@
             <h6 style="text-align:center;">注目</h6>
 
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"  style="width:70%; margin:auto;">
                     aibo国勢調査<br>
                     aibo cafe(オフ会)<br>
                 </div>
@@ -225,11 +200,11 @@
             <hr/>
 
             <!----------------------------------->
-            <h2 style="text-align:center;"><u>Account</u></h2>
+            <h2 style="text-align:center;"><u>【最終は表示しない】<br>Account</u></h2>
             <h6 style="text-align:center;">アカウント</h6>
 
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"  style="width:70%; margin:auto;">
                     <!-- @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}

@@ -70,6 +70,11 @@
                         @endforeach
                             <li><a href="{{ route('aibo.create') }}">aiboの追加</a></li>
                         </ul>
+                        <br>
+                        <h4>お問い合わせ</h4>
+                        <ul>
+                            <li><a href="{{ route('contact.list') }}">お問い合わせ</a></li>
+                        </ul>
 
                     @endif
 

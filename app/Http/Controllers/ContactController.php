@@ -28,7 +28,7 @@ class ContactController extends Controller
         } else {
             //自分or自分がレスをつけた問い合わせ
             $sub = Contact::select('parent_no')->where('owner_id', auth()->user()->owner->id)->get();
-            $contacts = Contact::select('parent_no','category','title',DB::raw("MIN(id) as id, MAX(child_no) as child_no, MIN(kidoku_flag) as kidoku_flag, MIN(created_at) as created_at, MAX(updated_at) as updated_at"))->whereIn('parent_no', $sub)->groupBy('parent_no','category','title')->orderby('updated_at','desc')->paginate(10);
+            $contacts = Contact::select('parent_no','category','title',DB::raw("MIN(id) as id, MAX(child_no) as child_no, MIN(kidoku_flag) as kidoku_flag, MIN(created_at) as created_at, MAX(updated_at) as updated_at"))->whereIn('parent_no', $sub)->groupBy('parent_no','category','title')->orderby('updated_at','desc')->paginate(1);
 
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -40,7 +40,7 @@ class ContactController extends Controller
     {
         if(auth()->user()->role == 'admin'){
             //問い合わせ(全て)
-            $contacts = Contact::select('parent_no','category','title',DB::raw("MIN(id) as id, MAX(child_no) as child_no, MIN(reply_flag) as reply_flag, MIN(created_at) as created_at, MAX(updated_at) as updated_at"))->groupBy('parent_no','category','title')->orderby('updated_at','desc')->paginate(10);
+            $contacts = Contact::select('parent_no','category','title',DB::raw("MIN(id) as id, MAX(child_no) as child_no, MIN(reply_flag) as reply_flag, MIN(created_at) as created_at, MAX(updated_at) as updated_at"))->groupBy('parent_no','category','title')->orderby('updated_at','desc')->paginate(3);
 
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
