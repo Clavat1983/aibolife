@@ -19,23 +19,28 @@ class AiboController extends Controller
      */
     public function index()
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            //誕生日のaibo取得
-            $birthday_aibos = $this->get_birthday_aibos();
 
-            //新しいお友達取得(最新6件)
-            $new_aibos = Aibo::where('aibo_available_flag', true)->orderBy('id', 'desc')->limit(6)->get();
+        //「aibo名鑑」トップは廃止。誕生日カレンダーへ転送
+        return redirect()->route('aibo.list_birthday');
 
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+        // //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+        // if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+        //     //誕生日のaibo取得
+        //     $birthday_aibos = $this->get_birthday_aibos();
 
-            return view('aibo.index',compact('bell_count','birthday_aibos','new_aibos')); //aibo名鑑トップ
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
-        }
+        //     //新しいお友達取得(最新6件)
+        //     $new_aibos = Aibo::where('aibo_available_flag', true)->orderBy('id', 'desc')->limit(6)->get();
+
+        //     //【全ビュー共通処理】未読通知数
+        //     $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        //     return view('aibo.index',compact('bell_count','birthday_aibos','new_aibos')); //aibo名鑑トップ
+        // } else { //aibo登録まで完了していないと閲覧不可
+        //     return redirect()->route('home');
+        // }
     }
 
+    //誕生日(3日以内)
     private function get_birthday_aibos(){
 
         //日付
@@ -52,19 +57,52 @@ class AiboController extends Controller
         //誕生日(今日・昨日・一昨日)
         $aibos = Aibo::where(function($q) use($today_mm,$today_dd) {
             $q->whereMonth('aibo_birthday',$today_mm)->whereDay('aibo_birthday',$today_dd);
-        })->where('aibo_available_flag', true)->orderBy('id', 'asc')->get();
+        })->where('aibo_available_flag', true)->orderBy('aibo_kana')->orderBy('id', 'asc')->get();
 
         $aibos_1 = Aibo::Where(function($q) use($yesterday_mm,$yesterday_dd) {
             $q->whereMonth('aibo_birthday',$yesterday_mm)->whereDay('aibo_birthday',$yesterday_dd);
-        })->where('aibo_available_flag', true)->orderBy('id', 'asc')->get();
+        })->where('aibo_available_flag', true)->orderBy('aibo_kana')->orderBy('id', 'asc')->get();
         $aibos = $aibos->merge($aibos_1); //今日+昨日
         
         $aibos_2 = Aibo::Where(function($q) use($before_2day_mm,$before_2day_dd) {
             $q->whereMonth('aibo_birthday',$before_2day_mm)->whereDay('aibo_birthday',$before_2day_dd);
-        })->where('aibo_available_flag', true)->orderBy('id', 'asc')->get();
+        })->where('aibo_available_flag', true)->orderBy('aibo_kana')->orderBy('id', 'asc')->get();
         $aibos = $aibos->merge($aibos_2); //(今日+昨日)+一昨日
 
         return $aibos; //誕生日3日分
+    }
+
+    //もうすぐ誕生日(明日・明後日・明々後日の3日間)
+    private function get_coming_up_birthday_aibos(){
+
+        //日付
+        $tommorow = new Carbon('+1 day');
+            $tommorow_mm = $tommorow->month;
+            $tommorow_dd = $tommorow->day;
+        $after_2day = new Carbon('+2 day');
+            $after_2day_mm = $after_2day->month;
+            $after_2day_dd = $after_2day->day;
+        $after_3day = new Carbon('+3 day');
+            $after_3day_mm = $after_3day->month;
+            $after_3day_dd = $after_3day->day;
+
+        //誕生日(明日・明後日・明々後日)
+        $aibos = Aibo::where(function($q) use($tommorow_mm, $tommorow_dd) {
+            $q->whereMonth('aibo_birthday',$tommorow_mm)->whereDay('aibo_birthday',$tommorow_dd);
+        })->where('aibo_available_flag', true)->orderBy('aibo_kana')->orderBy('id', 'asc')->get();
+
+        $aibos_1 = Aibo::Where(function($q) use($after_2day_mm, $after_2day_dd) {
+            $q->whereMonth('aibo_birthday',$after_2day_mm)->whereDay('aibo_birthday',$after_2day_dd);
+        })->where('aibo_available_flag', true)->orderBy('aibo_kana')->orderBy('id', 'asc')->get();
+        $aibos = $aibos->merge($aibos_1); //明日+明後日
+        
+        $aibos_2 = Aibo::Where(function($q) use($after_3day_mm, $after_3day_dd) {
+            $q->whereMonth('aibo_birthday',$after_3day_mm)->whereDay('aibo_birthday',$after_3day_dd);
+        })->where('aibo_available_flag', true)->orderBy('aibo_kana')->orderBy('id', 'asc')->get();
+        $aibos = $aibos->merge($aibos_2); //(明日+明後日)+明々後日
+
+        return $aibos; //もうすぐ誕生日3日分
+
     }
 
     public function list_syllabary() //50音順
@@ -106,7 +144,7 @@ class AiboController extends Controller
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             if(preg_match('/^[あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん]{1}$/u', $syllabary)){
-                $aibos=Aibo::where('aibo_available_flag', true)->where('aibo_kana_gyo', $syllabary)->orderby('aibo_kana')->orderby('id')->get();
+                $aibos=Aibo::where('aibo_available_flag', true)->where('aibo_kana_gyo', $syllabary)->orderby('aibo_kana')->orderby('id')->paginate(10);
 
                 //【全ビュー共通処理】未読通知数
                 $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -199,7 +237,7 @@ class AiboController extends Controller
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             if(in_array($pref, ['非公開','北海道', '青森県', '岩手県', '宮城県','秋田県', '山形県', '福島県', '茨城県','栃木県', '群馬県', '埼玉県', '千葉県','東京都', '神奈川県', '新潟県', '富山県','石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県','滋賀県', '京都府', '大阪府', '兵庫県','奈良県', '和歌山県', '鳥取県', '島根県','岡山県', '広島県', '山口県', '徳島県','香川県','愛媛県','高知県', '福岡県','佐賀県', '長崎県', '熊本県', '大分県','宮崎県', '鹿児島県', '沖縄県','海外'])){
-                $aibos=Aibo::leftjoin('owners', function($join){$join->on('aibos.owner_id','=','owners.id');})->where('aibo_available_flag', true)->where('owners.owner_pref', 'like', '%'.$pref.'%')->orderby('aibos.id')->get();
+                $aibos=Aibo::select('aibos.*')->leftjoin('owners', function($join){$join->on('aibos.owner_id','=','owners.id');})->where('aibo_available_flag', true)->where('owners.owner_pref', 'like', '%'.$pref.'%')->orderby('aibos.aibo_kana')->paginate(10);
                 
                 //【全ビュー共通処理】未読通知数
                 $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -221,15 +259,23 @@ class AiboController extends Controller
 
             $count_ary = ["01"=>0,"02"=>0,"03"=>0,"04"=>0,"05"=>0,"06"=>0,"07"=>0,"08"=>0,"09"=>0,"10"=>0,"11"=>0,"12"=>0];
 
+            $count = 0;
             foreach($aibos as $aibo){
                 $month = substr($aibo->aibo_birthday,5,2);
                 $count_ary[$month]++;
+                $count++;
             }
+
+            //誕生日のaibo取得
+            $birthday_aibos = $this->get_birthday_aibos();
+
+            //もうすぐ誕生日のaibo取得
+            $comingup_aibos = $this->get_coming_up_birthday_aibos();
 
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-            return view('aibo.list_birthday', compact('bell_count','count_ary'));
+            return view('aibo.list_birthday', compact('bell_count','count_ary','count','birthday_aibos','comingup_aibos'));
         } else { //aibo登録まで完了していないと閲覧不可
             return redirect()->route('home');
         }
@@ -241,7 +287,7 @@ class AiboController extends Controller
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             if(in_array($month, ['01','02','03','04','05','06','07','08','09','10','11','12'])){
-                $aibos=Aibo::where('aibo_available_flag', true)->whereMonth('aibo_birthday', '=', $month)->orderByRaw('DAY(aibo_birthday), MONTH(aibo_birthday), YEAR(aibo_birthday)')->get();
+                $aibos=Aibo::where('aibo_available_flag', true)->whereMonth('aibo_birthday', '=', $month)->orderByRaw('DAY(aibo_birthday), MONTH(aibo_birthday), YEAR(aibo_birthday)')->orderby('aibo_kana')->paginate(10);
                 
                 //【全ビュー共通処理】未読通知数
                 $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -259,8 +305,8 @@ class AiboController extends Controller
     {
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $before_7day = new Carbon('-7 day');
-            $aibos=Aibo::where('aibo_available_flag', true)->where('created_at','>=',$before_7day->format('Y-m-d 00:00:00'))->orderBy('id', 'desc')->get();
+            $before_15day = new Carbon('-15 day');
+            $aibos=Aibo::where('aibo_available_flag', true)->where('created_at','>=',$before_15day->format('Y-m-d 00:00:00'))->orderBy('id', 'desc')->get();
 
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();

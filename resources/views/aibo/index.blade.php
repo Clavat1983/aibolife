@@ -1,3 +1,7 @@
+{{--
+
+【廃止】
+    
 @extends('layouts.app')
 
 @section('notification')
@@ -24,7 +28,6 @@
                 </div>
             </div>
 
-            {{-----------------------------------}}
             <p>&nbsp;</p>
             <h2 style="text-align:center;"><u>Happy Birthday</u></h2>
             <h6 style="text-align:center;">誕生日（いたら表示、いなかったら非表示）</h6>
@@ -87,4 +90,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

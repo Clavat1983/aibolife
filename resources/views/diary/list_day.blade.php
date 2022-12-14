@@ -143,7 +143,8 @@
                                 <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" /></td>
                                 <td width="75%">
                                     名前：{{$diary->aibo->aibo_name}}<br>
-                                    タイトル：{{$diary->diary_title}}
+                                    タイトル：{{$diary->diary_title}}<br>
+                                    オーナー：{{$diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($diary->aibo->owner->owner_pref,3)}}）
                                 </td>
                                 <td width="10%"><a href="{{route('diary.show',$diary)}}">見る</a></td>
                             </tr>

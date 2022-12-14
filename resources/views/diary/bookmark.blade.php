@@ -65,7 +65,8 @@
                         <td width="75%">
                             名前：{{$bookmark->diary->aibo->aibo_name}}<br>
                             日付：{{$bookmark->diary->diary_date}}<br>
-                            タイトル：{{$bookmark->diary->diary_title}}
+                            タイトル：{{$bookmark->diary->diary_title}}<br>
+                            オーナー：{{$bookmark->diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($bookmark->diary->aibo->owner->owner_pref,3)}}）
                         </td>
                         <td width="10%"><a href="{{route('diary.show',$bookmark->diary)}}">見る</a></td>
                     </tr>

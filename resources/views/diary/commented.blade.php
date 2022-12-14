@@ -65,7 +65,8 @@
                         <td width="75%">
                             名前：{{$comment->diary->aibo->aibo_name}}<br>
                             日付：{{$comment->diary->diary_date}}<br>
-                            タイトル：{{$comment->diary->diary_title}}
+                            タイトル：{{$comment->diary->diary_title}}<br>
+                            オーナー：{{$comment->diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($comment->diary->aibo->owner->owner_pref,3)}}）
                         </td>
                         <td width="10%"><a href="{{route('diary.show',$comment->diary)}}">見る</a></td>
                     </tr>

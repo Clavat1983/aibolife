@@ -64,7 +64,8 @@
                         <td width="75%">
                             名前：{{$diary->aibo->aibo_name}}<br>
                             日付：{{$diary->diary_date}}<br>
-                            タイトル：{{$diary->diary_title}}
+                            タイトル：{{$diary->diary_title}}<br>
+                            オーナー：{{$diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($diary->aibo->owner->owner_pref,3)}}）
                         </td>
                         <td width="10%"><a href="{{route('diary.show',$diary)}}">見る</a></td>
                     </tr>

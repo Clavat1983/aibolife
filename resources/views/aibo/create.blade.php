@@ -57,9 +57,9 @@
 
             <div class="l-content__body">
 
-                <div class="card">
+                <div>
     
-                    <div class="card-body">
+                    <div>
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
