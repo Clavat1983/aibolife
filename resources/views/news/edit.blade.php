@@ -55,7 +55,7 @@
                                             $news_publication_flag = '下書き（非公開・終了）';
                                         }
                                     @endphp
-                                    {{-- HTMLタグ出力 --}}
+                                    <!-- HTMLタグ出力 -->
                                     @foreach ($ary as $index => $value)
                                         <input type="radio" id="news_publication_flag_{{$index}}" name="news_publication_flag" value="{{$value}}" @if(old('news_publication_flag', $news_publication_flag) === $value) checked @endif><label for="news_publication_flag_{{$index}}">{{$value}}</label><br>
                                     @endforeach

@@ -104,12 +104,20 @@ Route::middleware(['verified'])->group(function(){
         Route::group(['middleware' => 'auth'], function(){
             Route::middleware('password.confirm')->group(function(){
                 Route::get('/admin', 'HomeController@admin')->name('home.admin'); //管理者画面トップ
+                //▼最新情報(TOPICS)
                 Route::get('/topics/{news}/preview', 'NewsController@preview')->name('news.preview');//最新情報（個別表示=管理者プレビュー）
                 Route::get('/topics/admin', 'NewsController@admin')->name('news.admin');//最新情報（全件表示）★
                 Route::get('/topics/create', 'NewsController@create')->name('news.create');//最新情報(新規-入力画面)★
                 Route::post('/topics', 'NewsController@store')->name('news.store');//最新情報(新規-DB登録)
                 Route::get('/topics/{news}/edit', 'NewsController@edit')->name('news.edit');//変更(入力)
                 Route::put('/topics/{news}', 'NewsController@update')->name('news.update');//変更(DB更新)
+                //▼イベントカレンダー
+                Route::get('/event/admin', 'EventCalendarController@admin')->name('event.admin');//イベントカレンダー（全件表示）★
+                Route::get('/event/create', 'EventCalendarController@create')->name('event.create');//イベントカレンダー(新規-入力画面)★
+                Route::post('/event', 'EventCalendarController@store')->name('event.store');//イベントカレンダー(新規-DB登録)
+                Route::get('/event/{event}/edit', 'EventCalendarController@edit')->name('event.edit');//変更(入力)
+                Route::put('/event/{event}', 'EventCalendarController@update')->name('event.update');//変更(DB更新)
+                //▼お問い合わせ
                 Route::get('/admin/contact', 'ContactController@list_admin')->name('contact.list_admin');//お問い合わせ(一覧)
             });
         });

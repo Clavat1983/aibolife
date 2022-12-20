@@ -56,6 +56,8 @@
                     </script>
                     <hr>
 
+                    <a href="{{route('home.admin')}}"><button type="button">管理者メニューに戻る</button></a>
+                    
                 </div>
 
 

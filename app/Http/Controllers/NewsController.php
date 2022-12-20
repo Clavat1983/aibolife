@@ -221,7 +221,7 @@ class NewsController extends Controller
 
             return view('news.create', compact('bell_count','now'));
         } else {
-            abort(404);
+            abort(403);
         }
     }
 
@@ -262,7 +262,7 @@ class NewsController extends Controller
             'news_link5_url' => 'nullable|url',
         ]);
 
-        //現在のニュースの最大ID
+        //現在のニュースの最大ID(画像を保存する際の記事IDとして取得)
         $max = News::max('id');
         $news_id = $max + 1; //最大のid+1（今回登録されるNewsのid）
 

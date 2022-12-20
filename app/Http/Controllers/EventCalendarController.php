@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\EventCalendar;
 use App\Models\Notification;
+use Carbon\Carbon; //日付操作
 
 class EventCalendarController extends Controller
 {
@@ -36,8 +37,8 @@ class EventCalendarController extends Controller
                     abort(403);
                 }
 
-
-            $events = EventCalendar::orderBy('event_start_datetime')->get();
+            //公開可能なイベント かつ 情報解禁後
+            $events = EventCalendar::where('event_publication_datetime','<=',date('Y-m-d H:i:s'))->where('event_publication_flag', true)->orderBy('event_start_datetime')->get();
 
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -48,6 +49,22 @@ class EventCalendarController extends Controller
         }
     }
 
+    public function admin(){
+        $role=auth()->user()->role;
+        if($role == 'admin'){ //admin(管理者)のみ画面表示
+
+            //公開可能なイベント かつ 情報解禁後
+            $events = EventCalendar::orderBy('event_start_datetime', 'DESC')->paginate(10);
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('eventcalendar.admin', compact('bell_count','events'));
+        } else { //閲覧不可
+            abort(403);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -55,7 +72,17 @@ class EventCalendarController extends Controller
      */
     public function create()
     {
-        //
+        $role=auth()->user()->role;
+        if($role == 'admin'){ //admin(管理者)のみ入力画面表示
+            $now = date('Y-m-d').'T'.date('H:i');
+
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('eventcalendar.create', compact('bell_count','now'));
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -66,7 +93,55 @@ class EventCalendarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //バリデーション
+        $inputs=$request->validate([
+            'event_publication_datetime' => 'required',
+            'event_publication_flag' => 'required',
+            'event_confirm_flag' => 'required',
+            'event_category' => 'required',
+            'event_title' => 'required',
+            'event_start_datetime' => 'required',
+            'event_end_datetime' => 'required',
+            'link_news_id' => 'required',
+        ]);
+
+        //値のセット
+        $event = new EventCalendar();
+
+            //公開日時
+            $event->event_publication_datetime = $inputs['event_publication_datetime'];
+            //公開状態
+            if($inputs['event_publication_flag'] === '公開'){
+                $event->event_publication_flag = true; //公開
+            } else {
+                $event->event_publication_flag = false; //非公開
+            }
+            //情報確度
+            if($inputs['event_confirm_flag'] === '確定'){
+                $event->event_confirm_flag = true; //確定
+            } else {
+                $event->event_confirm_flag = false; //未確認
+            }
+            //カテゴリー
+            $event->event_category = $inputs['event_category'];
+            //タイトル
+            $event->event_title = $inputs['event_title'];
+            //開始日時
+            $event->event_start_datetime = $inputs['event_start_datetime'];
+            //終了日時
+            $event->event_end_datetime = $inputs['event_end_datetime'];
+            //関連ニュースID
+            $event->link_news_id = $inputs['link_news_id'];
+        
+        //DB保存
+        $event->save();
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        //戻る
+        return redirect()->route('home.admin', compact('bell_count'));
+
     }
 
     /**
@@ -86,9 +161,17 @@ class EventCalendarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(EventCalendar $event)
     {
-        //
+        $role=auth()->user()->role;
+        if($role == 'admin'){ //admin(管理者)
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('eventcalendar.edit', compact('bell_count','event'));
+        } else { //一般
+            abort(403);
+        }
     }
 
     /**
@@ -98,9 +181,59 @@ class EventCalendarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, EventCalendar $event)
     {
-        //
+        //バリデーション
+        $inputs=$request->validate([
+            'event_publication_datetime' => 'required',
+            'event_publication_flag' => 'required',
+            'event_confirm_flag' => 'required',
+            'event_category' => 'required',
+            'event_title' => 'required',
+            'event_start_datetime' => 'required',
+            'event_end_datetime' => 'required',
+            'link_news_id' => 'required',
+        ]);
+
+        //値のセット
+        //$event = new EventCalendar();
+
+            //公開日時
+            $event->event_publication_datetime = $inputs['event_publication_datetime'];
+            //公開状態
+            if($inputs['event_publication_flag'] === '公開'){
+                $event->event_publication_flag = true; //公開
+            } else {
+                $event->event_publication_flag = false; //非公開
+            }
+            //情報確度
+            if($inputs['event_confirm_flag'] === '確定'){
+                $event->event_confirm_flag = true; //確定
+            } else {
+                $event->event_confirm_flag = false; //未確認
+            }
+            //カテゴリー
+            $event->event_category = $inputs['event_category'];
+            //タイトル
+            $event->event_title = $inputs['event_title'];
+            //開始日時
+            $event->event_start_datetime = $inputs['event_start_datetime'];
+            //終了日時
+            $event->event_end_datetime = $inputs['event_end_datetime'];
+            //関連ニュースID
+            $event->link_news_id = $inputs['link_news_id'];
+        
+        //DB保存
+        $event->save();
+
+        //【全ビュー共通処理】未読通知数
+        $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+        //戻る
+        return back()->with('message', '更新しました。');
+        //redirect()->route('home.admin', compact('bell_count'));
+        
+        
     }
 
     /**
