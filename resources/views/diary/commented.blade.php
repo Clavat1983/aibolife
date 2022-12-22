@@ -50,7 +50,7 @@
             <div class="l-content__body">
 
               <hr>
-              <h5>コメントを付けた日時順（新しい順）</h5>
+              <h5>あなたがコメントを付けた日時順（新しい順）</h5>
               <hr>
 
               <table width="80%" style="margin:auto;">
@@ -61,12 +61,17 @@
                 @else
                     @foreach ($comments as $comment)
                     <tr>
-                        <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$comment->diary->diary_photo1)}}" /></td>
+                        @if($comment->diary->diary_photo1)
+                            <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$comment->diary->diary_photo1)}}" /></td>
+                        @else
+                            <td width="15%">no image</td>
+                        @endif
                         <td width="75%">
                             名前：{{$comment->diary->aibo->aibo_name}}<br>
                             日付：{{$comment->diary->diary_date}}<br>
                             タイトル：{{$comment->diary->diary_title}}<br>
-                            オーナー：{{$comment->diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($comment->diary->aibo->owner->owner_pref,3)}}）
+                            オーナー：{{$comment->diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($comment->diary->aibo->owner->owner_pref,3)}}）<br>
+                            コメント数：{{$comment->diary->diarycomments->count()}}、リアクション数：{{$comment->diary->diaryreactions->whereNotIn('reaction_type', [6])->count()}}
                         </td>
                         <td width="10%"><a href="{{route('diary.show',$comment->diary)}}">見る</a></td>
                     </tr>

@@ -61,12 +61,17 @@
                 @else
                     @foreach ($bookmarks as $bookmark)
                     <tr>
-                        <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$bookmark->diary->diary_photo1)}}" /></td>
+                        @if($bookmark->diary->diary_photo1)
+                            <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$bookmark->diary->diary_photo1)}}" /></td>
+                        @else
+                            <td width="15%">no image</td>
+                        @endif
                         <td width="75%">
                             名前：{{$bookmark->diary->aibo->aibo_name}}<br>
                             日付：{{$bookmark->diary->diary_date}}<br>
                             タイトル：{{$bookmark->diary->diary_title}}<br>
-                            オーナー：{{$bookmark->diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($bookmark->diary->aibo->owner->owner_pref,3)}}）
+                            オーナー：{{$bookmark->diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($bookmark->diary->aibo->owner->owner_pref,3)}}）<br>
+                            コメント数：{{$bookmark->diary->diarycomments->count()}}、リアクション数：{{$bookmark->diary->diaryreactions->whereNotIn('reaction_type', [6])->count()}}
                         </td>
                         <td width="10%"><a href="{{route('diary.show',$bookmark->diary)}}">見る</a></td>
                     </tr>

@@ -48,14 +48,9 @@
             </div>
             <div class="l-content__body">
 
+        @php /*
             @if(1 == 0 && $target_exist_flag == false) {{--出力要らないかも。なので1==0という否定式にして様子見中--}}
                 <h5>直近7日間の日記</h5>
-                {{-- @if($aibo->owner->user)
-                ログインユーザ：{{auth()->user()->id}}⇔このaiboのオーナーのユーザID{{$aibo->owner->user->id}}<br>
-                @else
-                ログインユーザ：{{auth()->user()->id}}⇔このaiboのオーナーのユーザ（未登録）
-                @endif
-                <br> --}}
 
                 <table width="80%" style="margin:auto;">
                 @foreach($this_week as $date => $diary)
@@ -66,7 +61,7 @@
                             @if(strtotime($aibo->aibo_birthday) <= strtotime($date))
                                 
                                 <tr>
-                                    <td width="15%">No Image</td>
+                                    <td width="15%">----</td>
                                     <td width="75%">
                                         日付：{{$date}}<br>
                                         {{-- 名前：{{$aibo->aibo_name}}<br> --}}
@@ -78,7 +73,7 @@
                                 {{-- 配列の日付：{{date('Y年m月d日', strtotime($date))}}、<a href="{{route('diary.create')}}?aibo={{$aibo->id}}&date={{$date}}">日記を書く</a>（aiboID:{{$aibo->id}}、日付:{{date('Y年m月d日', strtotime($date))}}）<br> --}}
                             @else
                                 <tr>
-                                    <td width="15%">No Image</td>
+                                    <td width="15%">----</td>
                                     <td width="75%">
                                         日付：{{$date}}<br>
                                         {{-- 名前：{{$aibo->aibo_name}}<br> --}}
@@ -94,7 +89,7 @@
                             @if(strtotime($aibo->aibo_birthday) <= strtotime($date))
 
                                 <tr>
-                                    <td width="15%">No Image</td>
+                                    <td width="15%">----</td>
                                     <td width="75%">
                                         日付：{{$date}}<br>
                                         {{-- 名前：{{$aibo->aibo_name}}<br> --}}
@@ -106,7 +101,7 @@
                                 {{-- 配列の日付：{{date('Y年m月d日', strtotime($date))}}、書かれていません<br> --}}
                             @else
                                 <tr>
-                                    <td width="15%">No Image</td>
+                                    <td width="15%">----</td>
                                     <td width="75%">
                                         日付：{{$date}}<br>
                                         {{-- 名前：{{$aibo->aibo_name}}<br> --}}
@@ -120,7 +115,11 @@
                     {{--日記がある日--}}
                     @else
                         <tr>
-                            <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" /></td>
+                            @if($diary->diary_photo1)
+                                <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" /></td>
+                            @else
+                                <td width="15%">no image</td>
+                            @endif
                             <td width="75%">
                                 日付：{{$diary->diary_date}}<br>
                                 タイトル：{{$diary->diary_title}}
@@ -135,7 +134,10 @@
                 <hr>
 
             @endif
-            
+        
+        */
+        @endphp
+
                 {{-- 過去の日記 --}}
 
                 @php
@@ -199,11 +201,16 @@
                             {{-- 日記が書かれていたら --}}
                             @if(($diary_date == $targetday))
                                 <tr>
-                                    <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" /></td>
+                                    @if($diary->diary_photo1)
+                                        <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" /></td>
+                                    @else
+                                        <td width="15%">no image</td>
+                                    @endif
                                     <td width="75%">
                                         {{-- 日記の日付：{{$diary_date}}、ターゲット日付：{{$targetday}}<br> --}}
                                         日付：{{$diary->diary_date}}<br>
-                                        タイトル：{{$diary->diary_title}}
+                                        タイトル：{{$diary->diary_title}}<br>
+                                        コメント数：{{$diary->diarycomments->count()}}、リアクション数：{{$diary->diaryreactions->whereNotIn('reaction_type', [6])->count()}}
                                     </td>
                                     <td width="10%"><a href="{{route('diary.show',$diary)}}">見る</a></td>
                                 </tr>
@@ -222,7 +229,7 @@
                                 @if(strtotime($aibo->aibo_birthday) <= strtotime($targetday->format('Y-m-d')))
                                     
                                     <tr>
-                                        <td width="15%">No Image</td>
+                                        <td width="15%">----</td>
                                         <td width="75%">
                                             {{-- 日記の日付：{{$diary_date}}、ターゲット日付：{{$targetday}}<br> --}}
                                             日付：{{$targetday->format('Y-m-d')}}<br>
@@ -248,7 +255,7 @@
                                 @if(strtotime($aibo->aibo_birthday) <= strtotime($targetday->format('Y-m-d')))
 
                                     <tr>
-                                        <td width="15%">No Image</td>
+                                        <td width="15%">----</td>
                                         <td width="75%">
                                             {{-- 日記の日付：{{$diary_date}}、ターゲット日付：{{$targetday}}<br> --}}
                                             日付：{{$targetday->format('Y-m-d')}}<br>

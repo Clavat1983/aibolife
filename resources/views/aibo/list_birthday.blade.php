@@ -57,7 +57,11 @@
                     @else
                         @foreach ($birthday_aibos as $aibo)
                         <tr>
-                            <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                            @if($aibo->aibo_icon)
+                                <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                            @else
+                                <td width="15%">no image</td>
+                            @endif
                             <td width="75%">
                                 名前：{{$aibo->aibo_name}}<br>
                                 誕生日：{{$aibo->aibo_birthday}}（{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age}}歳）<br>
@@ -80,7 +84,11 @@
                     @else
                         @foreach ($comingup_aibos as $aibo)
                         <tr>
-                            <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                            @if($aibo->aibo_icon)
+                                <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                            @else
+                                <td width="15%">no image</td>
+                            @endif
                             <td width="75%">
                                 名前：{{$aibo->aibo_name}}<br>
                                 誕生日：{{$aibo->aibo_birthday}}（もうすぐ{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age+1}}歳）<br>

@@ -89,7 +89,11 @@
                         @if($news_list->count() > 0)
                             @foreach($news_list as $news)
                                 <tr>
-                                    <td style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
+                                    @if($news->news_image1)
+                                        <td style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
+                                    @else
+                                        <td style="padding:10px;">no image</td>
+                                    @endif
                                     <td style="padding:10px;">
                                         {{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}｜{{$news->news_category}}<br>
                                         <a href="{{route('news.show', $news)}}">{{$news->news_title}}</a><br/>
@@ -115,21 +119,68 @@
             <h2 style="text-align:center;"><u>Diary</u></h2>
             <h6 style="text-align:center;">日記</h6>
 
-            <div class="card">
-                <div class="card-body" style="width:70%; margin:auto;">
-                    【最近の日記から6件】
-                    <ul>
-                    @if($diaries->count() > 0)
-                        @foreach($diaries as $diary)
-                            <li>{{$diary->diary_title}}（{{$diary->aibo->aibo_name}}）<a href="{{route('diary.show', $diary)}}">【見る】</a></li>
-                        @endforeach
-                    @else
-                        <li>日記がありません</li>
-                    @endif
-                    </ul>
+            @if($today_diaries->count() >= 3)
+                <div class="card">
+                    <div class="card-body" style="width:70%; margin:auto;">
+                        （今日の日記：3件以上あれば表示、最大6件）<br>
+                        <br>
+                        <table>
+                            @foreach($today_diaries as $diary)
+                                <tr>
+                                    @if($diary->diary_photo1)
+                                        <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" /></td>
+                                    @else
+                                        <td width="15%">no image</td>
+                                    @endif
+                                    <td width="75%">
+                                        名前：{{$diary->aibo->aibo_name}}<br>
+                                        日付：{{$diary->diary_date}}<br>
+                                        タイトル：{{$diary->diary_title}}<br>
+                                        オーナー：{{$diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($diary->aibo->owner->owner_pref,3)}}）
+                                    </td>
+                                    <td width="10%"><a href="{{route('diary.show',$diary)}}">見る</a></td>
+
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div style="text-align:right;">【今日の日記？】</div>
+                <div style="text-align:right;">【もっと見る】</div>
+            @else
+                <div class="card">
+                    <div class="card-body">
+                        （今日の日記3件以上なければ最近の日記から6件）<br>
+                        <br>
+                        <table style="width:70%; margin:auto;">
+                        @if($recent_diaries->count() > 0)
+                            @foreach($recent_diaries as $diary)
+                                <tr>
+                                    @if($diary->diary_photo1)
+                                        <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" /></td>
+                                    @else
+                                        <td width="15%">no image</td>
+                                    @endif
+                                    <td width="75%">
+                                        名前：{{$diary->aibo->aibo_name}}<br>
+                                        日付：{{$diary->diary_date}}<br>
+                                        タイトル：{{$diary->diary_title}}<br>
+                                        オーナー：{{$diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($diary->aibo->owner->owner_pref,3)}}）<br>
+                                        コメント数：{{$diary->diarycomments->count()}}、リアクション数：{{$diary->diaryreactions->whereNotIn('reaction_type', [6])->count()}}
+                                    </td>
+                                    <td width="10%"><a href="{{route('diary.show',$diary)}}">見る</a></td>
+
+                                </tr>
+                            @endforeach
+                        @else
+                                <tr>
+                                    <td colspan="3">日記がありません</td>
+                                </tr>
+                        @endif
+                        </table>
+                    </div>
+                </div>
+                <div style="text-align:right;">【もっと見る】</div>
+            @endif
 
             <hr/>
 
@@ -138,22 +189,91 @@
             <h2 style="text-align:center;"><u>Friend</u></h2>
             <h6 style="text-align:center;">お友達</h6>
 
-            <div class="card">
-                <div class="card-body"  style="width:70%; margin:auto;">
-                    【新しいお友達から6件】
-                    <ul>
-                    @if($new_aibos->count() > 0)
-                        @foreach($new_aibos as $aibo)
-                            <li>{{$aibo->aibo_name}}（{{substr($aibo->owner->owner_pref,3)}}）<a href="{{route('aibo.show', $aibo)}}">【詳細】</a></li>
-                        @endforeach
-                    @else
-                        <li>aiboがいません</li>
-                    @endif
-                    </ul>
-                </div>
-            </div>
+            {{-- 誕生日のaiboがいたら表示 --}}
+            @if($birthday_aibos->count() > 0)
 
-            <div style="text-align:right;">【誕生日カレンダー？】</div>
+                <div class="card">
+                    <div class="card-body">
+                        【誕生日のaibo】<br>
+                        <br>
+                        <table style="width:70%; margin:auto;">
+                            @foreach($birthday_aibos as $aibo)
+                                <tr>
+                                    @if($aibo->aibo_icon)
+                                        <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                                    @else
+                                        <td width="15%">no image</td>
+                                    @endif
+                                    <td width="75%">
+                                        名前：{{$aibo->aibo_name}}<br>
+                                        誕生日：{{$aibo->aibo_birthday}}（{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age}}歳）<br>
+                                        オーナー：{{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}）
+                                    </td>
+                                    <td width="10%"><a href="{{route('aibo.show',$aibo)}}">見る</a></td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+                <div style="text-align:right;">【もっと見る】</div>
+
+            {{-- もうすぐ誕生日のaiboがいたら表示(誕生日の子がいたら非表示) --}}
+            @elseif($comingup_aibos->count() > 0)
+
+                <div class="card">
+                    <div class="card-body">
+                        【もうすぐ誕生日のaibo】<br>
+                        <br>
+                        <table style="width:70%; margin:auto;">
+                            @foreach($comingup_aibos as $aibo)
+                                <tr>
+                                    @if($aibo->aibo_icon)
+                                        <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                                    @else
+                                        <td width="15%">no image</td>
+                                    @endif
+                                    <td width="75%">
+                                        名前：{{$aibo->aibo_name}}<br>
+                                        誕生日：{{$aibo->aibo_birthday}}（もうすぐ{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age+1}}歳）<br>
+                                        オーナー：{{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}）
+                                    </td>
+                                    <td width="10%"><a href="{{route('aibo.show',$aibo)}}">見る</a></td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+                <div style="text-align:right;">【もっと見る】</div>
+
+            {{-- 誕生日・もうすぐ誕生日のaiboが両方いない場合のみ表示 --}}
+            @else
+
+                <div class="card">
+                    <div class="card-body">
+                        【新しいお友達】(最新6件)<br>
+                        <br>
+                        <table style="width:70%; margin:auto;">
+                            @foreach($new_aibos as $aibo)
+                                <tr>
+                                    @if($aibo->aibo_icon)
+                                        <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                                    @else
+                                        <td width="15%">no image</td>
+                                    @endif
+                                    <td width="75%">
+                                        名前：{{$aibo->aibo_name}}<br>
+                                        誕生日：{{$aibo->aibo_birthday}}（{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age}}歳）<br>
+                                        オーナー：{{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}）
+                                    </td>
+                                    <td width="10%"><a href="{{route('aibo.show',$aibo)}}">見る</a></td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+                <div style="text-align:right;">【もっと見る】</div>
+
+            @endif
 
             <hr>
 
@@ -178,7 +298,7 @@
                     ［お悩み相談］いいいいについて<br>
                     ［部　活　動］ううううについて<br>
                 </div>
-                <div style="text-align:right;">【aibo掲示板へ】</div>
+                <div style="text-align:right;">【もっと見る】</div>
 
             </div>
 

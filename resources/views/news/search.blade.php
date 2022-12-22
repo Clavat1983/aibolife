@@ -71,11 +71,26 @@
                     {{$keywords}} の検索結果
                     <hr/>
                     @if(count($results))
-                        @foreach ($results as $news)
-                            ID：{{$news->id}}、タイトル：{{$news->news_title}}、<a href="{{route('news.show', $news->id)}}">【見る】</a><br>
-                            {{-- 本文： {!! $news->news_body !!}<br>
-                            <hr> --}}
-                        @endforeach
+                        <table>
+                            @foreach ($results as $news)
+                                <tr>
+                                    @if($news->news_image1)
+                                        <td style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
+                                    @else
+                                        <td style="padding:10px;">no image</td>
+                                    @endif
+                                    <td style="padding:10px;">
+                                        {{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}［{{$news->news_category}}］<br>
+                                        <a href="{{route('news.show', $news)}}">{{$news->news_title}}</a><br/>
+                                            {{-- @if($news->news_tag1)#{{$news->news_tag1}}@endif
+                                            @if($news->news_tag2)｜#{{$news->news_tag2}}@endif
+                                            @if($news->news_tag3)｜#{{$news->news_tag3}}@endif
+                                            @if($news->news_tag4)｜#{{$news->news_tag4}}@endif
+                                            @if($news->news_tag5)｜#{{$news->news_tag5}}@endif --}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
                         <br>
 
 

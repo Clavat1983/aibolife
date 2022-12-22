@@ -89,12 +89,17 @@
                         @foreach ($results as $diary)
 
                             <tr>
-                                <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" /></td>
+                                @if($diary->diary_photo1)
+                                    <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" /></td>
+                                @else
+                                    <td width="15%">no image</td>
+                                @endif
                                 <td width="75%">
                                     名前：{{$diary->aibo->aibo_name}}<br>
                                     日付：{{$diary->diary_date}}<br>
                                     タイトル：{{$diary->diary_title}}<br>
-                                    オーナー：{{$diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($diary->aibo->owner->owner_pref,3)}}）
+                                    オーナー：{{$diary->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($diary->aibo->owner->owner_pref,3)}}）<br>
+                                    コメント数：{{$diary->diarycomments->count()}}、リアクション数：{{$diary->diaryreactions->whereNotIn('reaction_type', [6])->count()}}
                                 </td>
                                 <td width="10%"><a href="{{route('diary.show',$diary->id)}}">見る</a></td>
                             </tr>

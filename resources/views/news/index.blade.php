@@ -58,7 +58,11 @@
                     @if(count($news_all)>0)
                         @foreach($news_all as $news)
                         <tr>
-                            <td style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
+                            @if($news->news_image1)
+                                <td style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
+                            @else
+                                <td style="padding:10px;">no image</td>
+                            @endif
                             <td style="padding:10px;">
                                 {{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}［{{$news->news_category}}］<br>
                                 <a href="{{route('news.show', $news)}}">{{$news->news_title}}</a><br/>

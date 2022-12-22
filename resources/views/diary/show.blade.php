@@ -68,14 +68,18 @@
 
                 {{-- 表示部分 --}}
                 <br>
-                <p>aiboの写真：<img src="{{asset('storage/aibo_icon/'.$diary->aibo->aibo_icon)}}" style="height:50px;"></p>
+                @if($diary->aibo->aibo_icon)
+                    <p>aiboの写真：<img src="{{asset('storage/aibo_icon/'.$diary->aibo->aibo_icon)}}" style="height:50px;"></p>
+                @else
+                    <p>aiboの写真：no image</p>
+                @endif
                 <p>aiboの名前：<a href="{{route('aibo.show', $diary->aibo)}}">{{$diary->aibo->aibo_name}}</a></p>
                 <p>（オーナー名：{{$diary->aibo->owner->owner_name}}）</p>
                 <p>この日の性格：{{$diary->diary_personality}}、この日の天気：{{$diary->diary_weather}}</p>
                 @if($diary->diary_photo1)
                    <p>画像：<img src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" style="height:300px;"></p>
                 @else
-                   <p>画像：ありません</p>
+                   <p>画像：no image</p>
                 @endif
                 <p>本文：{!! nl2br(e($diary->diary_body)) !!}</p> {{--改行あり--}}
                 

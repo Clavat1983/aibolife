@@ -73,11 +73,16 @@
                 <div class="p-article-detail__content">
                   <div class="p-article-detail__slide">
                     <ul class="c-slide">
-                      <li class="c-slide__item">
-                        <a href="javascript:;">
-                          <img src="{{ asset('storage/news_image/'.$news->news_image1)}}" />
-                        </a>
-                      </li>
+                      @if($news->news_image1)
+                          <li class="c-slide__item">
+                            <a href="javascript:;">
+                              <img src="{{ asset('storage/news_image/'.$news->news_image1)}}" />
+                            </a>
+                          </li>
+                      @else
+                          <li class="c-slide__item">no image</li>
+                      @endif
+
                       @if($news->news_image2)
                       <li class="c-slide__item">
                         <a href="javascript:;">
@@ -176,7 +181,7 @@
                   </section>
                   @endif
                 </div>
-                <footer class="p-article-detail__footer">
+                {{-- <footer class="p-article-detail__footer">
                   <dl class="c-sns">
                     <dt class="c-sns__ttl">SNS にシェア</dt>
                     <dd class="c-sns__detail">
@@ -199,7 +204,7 @@
                       </ul>
                     </dd>
                   </dl>
-                </footer>
+                </footer> --}}
               </article>
             </div>
 {{-- --------------------------------------------------------------------------- --}}

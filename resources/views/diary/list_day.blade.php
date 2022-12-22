@@ -95,7 +95,7 @@
                             @if($wrote == NULL)
                                 @if(strtotime($aibo->aibo_birthday) <= strtotime($target_string)) {{-- 誕生日が日記の指定日より前なら書ける --}}
                                     <tr>
-                                        <td width="15%">No Image</td>
+                                        <td width="15%">----</td>
                                         <td width="75%">
                                             名前：{{$aibo->aibo_name}}<br>
                                             タイトル：書かれていません
@@ -104,7 +104,7 @@
                                     </tr>
                                 @else {{-- お迎え前は書けない --}}
                                     <tr>
-                                        <td width="15%">No Image</td>
+                                        <td width="15%">----</td>
                                         <td width="75%">
                                             名前：{{$aibo->aibo_name}}<br>
                                             ★お迎え前の日記を書くことは出来ません★
@@ -114,10 +114,15 @@
                                 @endif
                             @else {{--既に書いている--}}
                                 <tr>
-                                    <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$wrote->diary_photo1)}}" /></td>
+                                    @if($wrote->diary_photo1)
+                                        <td width="15%"><img width="70%" src="{{ asset('storage/diary_photo/'.$wrote->diary_photo1)}}" /></td>
+                                    @else
+                                        <td width="15%">no image</td>
+                                    @endif
                                     <td width="75%">
                                         名前：{{$aibo->aibo_name}}<br>
-                                        タイトル：{{$wrote->diary_title}}
+                                        タイトル：{{$wrote->diary_title}}<br>
+                                        コメント数：{{$wrote->diarycomments->count()}}、リアクション数：{{$wrote->diaryreactions->whereNotIn('reaction_type', [6])->count()}}
                                     </td>
                                     <td width="10%"><a href="{{route('diary.show',$wrote)}}">見る</a></td>
                                 </tr>

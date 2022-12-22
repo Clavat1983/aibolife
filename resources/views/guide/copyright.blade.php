@@ -47,7 +47,51 @@
               </p>
             </div>
             <div class="l-content__body">
-              あああああ
+
+
+              <div class="gray_sub_header">ソニー株式会社および関連会社の権利</div>
+  
+              <div>
+                <p class="kiyaku_1st kiyaku_dai_komoku">&nbsp;1. 「aibo」「アイボ」「aiboのロゴマーク」等は、ソニー株式会社および関連会社の商標です。</p>
+                <p class="kiyaku_2nd kiyaku_dai_komoku">&nbsp;2. 「aibo」公式サイト（https://aibo.sony.jp）で提供されている画像等を一部使用していますが、これらの著作権はソニー株式会社および関連会社が有します。</p>
+                <p class="kiyaku_2nd kiyaku_dai_komoku">&nbsp;3. 「aibo life」はソニー株式会社の公式サイト・関連サイトではないため、その旨の周知を徹底します。</p>
+                <p class="kiyaku_2nd kiyaku_dai_komoku">&nbsp;4. 「aibo life」は、ソニー株式会社および関連会社が保有する非公開データ（未公開情報・オーナー情報・aibo情報等）は一切取得していません。</p>
+                <p class="kiyaku_2nd kiyaku_dai_komoku">&nbsp;5. ソニー株式会社および関連会社から、権利侵害の指摘や申し入れ、情報の修正依頼などがあった場合、「aibo life」は速やかに改善に努めます。</p>
+              </div>
+
+            <div class="gray_sub_header">ユーザーの権利</div>
+  
+              <div>
+                <p class="kiyaku_1st kiyaku_dai_komoku">&nbsp;1. ユーザーが「aibo life」に投稿ないしアップロードした文章・画像・映像等の著作権については、当該ユーザーおよび既存の権利者に留保されるものとしますが、「aibo life」内での利用に関して、ユーザーは著作者人格権を行使できないものとします。（利用規約 第7条 参照）
+                </p>
+              </div>
+
+            <div class="gray_sub_header">「aibo life」の権利</div>
+  
+              <div>
+                <p class="kiyaku_1st kiyaku_dai_komoku">&nbsp;1. 上記の通り、ソニー株式会社および関連会社が権利を有するもの、ユーザーが権利を有するものを除き、サービス（文章・画像・プログラムなどを含む）に関する一切の権利は「aibo life」が有します。</p>
+              </div>  
+
+              <div>
+                <p class="kiyaku_1st kiyaku_dai_komoku">&nbsp;2. 旧「aibo life」のアイコン（画像参照）については、ことみさん（Twitter：cotomi3535）の著作物であり、「aibo life」以外での無断転載・無断使用は禁止します。<br/>
+                <img src="{{ asset('img/old_aibolife_icon.png')}}" width="100px"/>
+                </p>
+              </div>
+              <div>
+                <p class="kiyaku_1st kiyaku_dai_komoku">&nbsp;3. 現「aibo life」のアイコンおよび各種イラスト（画像参照）については、たたみさん（Twitter：tatamixaibo）の著作物であり、「aibo life」以外での無断転載・無断使用は禁止します。<br/>
+                <img src="{{asset('img/logo_horizontal.svg')}}" width="100px">
+                </p>
+              </div>
+
+            <div class="gray_sub_header">規定・改定</div>
+  
+              <div>
+                <div class="kiyaku_1st kiyaku_dai_komoku" style="text-align:right; padding-right:1em;">規定日：2020年01月11日</div><!-- 先頭 -->
+                <div class="kiyaku_2nd kiyaku_dai_komoku" style="text-align:right; padding-right:1em;">改定日：2022年12月22日</div>
+              </div>  
+
+
+
             </div>
 
 {{-- --------------------------------------------------------------------------- --}}

@@ -52,29 +52,60 @@
                     @if ($owner == NULL)
                         オーナー登録がされていない。これが表示されたらバグ。
                     @else
+                        <h4>お知らせ</h4>
+                        <p>全員共通のメッセージはここに表示(動的ではなく直書き)する</p>
+                        <br>
 
-                        <h4>ログイン情報</h4>
-                        <ul>
-                            <li><a href="{{ route('user.edit', $owner->user_id) }}">メールアドレス・パスワードの変更</a></li>
-                        </ul>
-                        <br>
                         <h4>オーナー情報</h4>
-                        <ul>
-                            <li><a href="{{ route('owner.edit', $owner->id) }}">オーナー名・アイコン・都道府県の変更</a></li>
-                        </ul>
+                        <table width="100%">
+                            <tr>
+                                @if($owner->owner_icon)
+                                    <td width="15%"><img width="70%" src="{{ asset('storage/owner_icon/'.$owner->owner_icon)}}" /></td>
+                                @else
+                                    <td width="15%">no image</td>
+                                @endif
+                                <td width="60%">
+                                    名前：{{$owner->owner_name}}<sub>さん</sub><br>
+                                    都道府県：{{substr($owner->owner_pref,3)}}
+                                </td>
+                                <td width="25%">
+                                    <a href="{{ route('owner.edit', $owner->id) }}">【変更】</a>
+                                </td>
+                        </table>
                         <br>
+
                         <h4>aibo情報</h4>
-                        <ul>
+                        <table width="100%">
                         @foreach ($owner->aibos as $aibo)
-                            <li>aibo ID:{{$aibo->id}} ... 名前:{{$aibo->aibo_name}}　を<a href="{{ route('aibo.show', $aibo->id) }}">【表示】</a>／<a href="{{ route('aibo.edit', $aibo->id) }}">【変更】</a></li>
+                            <tr>
+                                @if($aibo->aibo_icon)
+                                    <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                                @else
+                                    <td width="15%">no image</td>
+                                @endif
+                                <td width="60%">
+                                    名前：{{$aibo->aibo_name}}<br>
+                                    誕生日：{{$aibo->aibo_birthday}}（{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age}}歳）<br>
+                                </td>
+                                <td width="25%">
+                                    <a href="{{ route('aibo.show', $aibo->id) }}">【表示】</a>　｜　<a href="{{ route('aibo.edit', $aibo->id) }}">【変更】</a>
+                                </td>
+                            </tr>
                         @endforeach
-                            <li><a href="{{ route('aibo.create') }}">aiboの追加</a></li>
-                        </ul>
+                            <tr>
+                                <td colspan="3"><a href="{{ route('aibo.create') }}">aiboの追加</a></td>
+                            </tr>
+                        </table>
                         <br>
+
+                        
+                        <h4>ログイン情報</h4>
+                        <p><a href="{{ route('user.edit', $owner->user_id) }}">メールアドレス・パスワードの変更</a></p>
+                        <br>
+
                         <h4>お問い合わせ</h4>
-                        <ul>
-                            <li><a href="{{ route('contact.list') }}">お問い合わせ</a></li>
-                        </ul>
+                        <p><a href="{{ route('contact.list') }}">お問い合わせ履歴</a></p>
+                        
 
                     @endif
 
