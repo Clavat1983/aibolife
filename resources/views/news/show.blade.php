@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="format-detection" content="telephone=no" />
-    <title>aibo life ------【U_01102】最新情報・News(個別) &#8211; websitekit</title>
+    <title>aibo life</title>
     <meta name="description" content="最新情報・News(個別)" />
     <meta property="og:title" content="【U_01102】最新情報・News(個別)" />
     <meta property="og:type" content="website" />
@@ -54,7 +54,25 @@
                       <p class="c-date">{{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}</p>
                     </div>
                     <div class="p-article-detail__info-item">
-                      <a class="c-category-label" href="#">{{$news->news_category}}</a>
+                      @if($news->news_category == '公式ニュース')
+                        <a class="c-category-label" href="{{route('news.index_news')}}">{{$news->news_category}}</a>
+                      @elseif($news->news_category == '公式イベント')
+                        <a class="c-category-label" href="{{route('index_event')}}">{{$news->news_category}}</a>
+                      @elseif($news->news_category == 'メディア')
+                        <a class="c-category-label" href="{{route('news.index_media')}}">{{$news->news_category}}</a>
+                      @elseif($news->news_category == 'お知らせ')
+                        <a class="c-category-label" href="{{route('news.index_info')}}">{{$news->news_category}}</a>
+                      @elseif($news->news_category == 'アップデート')
+                        <a class="c-category-label" href="{{route('news.index_update')}}">{{$news->news_category}}</a>
+                      @elseif($news->news_category == 'メンテナンス')
+                        <a class="c-category-label" href="{{route('news.index_maintenance')}}">{{$news->news_category}}</a>
+                      @elseif($news->news_category == 'スペシャル')
+                        <a class="c-category-label" href="{{route('news.index_special')}}">{{$news->news_category}}</a>
+                      @elseif($news->news_category == 'その他')
+                        <a class="c-category-label" href="{{route('news.index_etc')}}">{{$news->news_category}}</a>
+                      @else
+                        <a class="c-category-label" href="{{route('news.index')}}">{{$news->news_category}}</a>
+                      @endif
                     </div>
                   </div>
                   <div class="p-article-detail__ttl">

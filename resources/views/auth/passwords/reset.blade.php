@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="format-detection" content="telephone=no" />
-    <title>【U_00008】パスワード再設定</title>
+    <title>aibo life</title>
     <meta
       name="description"
       content="xxxxx"

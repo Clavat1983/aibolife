@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="format-detection" content="telephone=no" />
-    <title>【U_00001】アカウント作成</title>
+    <title>aibo life</title>
     <meta
       name="description"
       content="xxxxx"
@@ -64,8 +64,7 @@
                     <div class="c-form__item">
                       <div class="c-alert c-alert--info">
                         <div class="c-alert__text">
-                          新「aibo life」のアカウント作成を行います。<br>
-                          メールアドレスとパスワードを登録してください。
+                          新「aibo life」のアカウント作成を行います。登録されるメールアドレスとご希望のパスワードを入力してください。
                         </div>
                       </div>
                     </div>
@@ -104,6 +103,7 @@
                           <div class="c-form-data-list__item">
                             <ul class="c-note-list">
                               <li class="c-note-list__item">旧「aibo life」と異なるメールアドレスでも構いません。</li>
+                              <li class="c-note-list__item">Yahoo!やGoogleなど無料メールアドレスでも構いません。</li>
                             </ul>
                           </div>
                         </dd>
@@ -142,6 +142,7 @@
                           <div class="c-form-data-list__item">
                             <ul class="c-note-list">
                               <li class="c-note-list__item">半角英数字8文字以上</li>
+                              <li class="c-note-list__item">旧「aibo life」と異なるパスワードでも構いません。</li>
                             </ul>
                           </div>
                         </dd>

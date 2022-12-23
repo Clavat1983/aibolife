@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="format-detection" content="telephone=no" />
-    <title>【U_00002】メール認証</title>
+    <title>aibo life</title>
     <meta
       name="description"
       content="xxxxx"

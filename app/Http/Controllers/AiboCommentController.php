@@ -35,7 +35,7 @@ class AiboCommentController extends Controller
                 $notification->category = 'aibo';
                 $notification->user_id = $target_aibo->owner->user->id;
                 $notification->send_user_id = auth()->user()->id;
-                $notification->title = 'aiboにcommentがついたよ[1]';
+                $notification->title = 'aibo「'. $target_aibo->aibo_name .'」にコメントがつきました';
                 $notification->link_url = $target_aibo->id;
                 $notification->save();
             }
@@ -49,7 +49,7 @@ class AiboCommentController extends Controller
                         $notification->category = 'aibo';
                         $notification->user_id = $comment_owner->owner->user->id; //他にコメントをつけたオーナーのユーザID
                         $notification->send_user_id = auth()->user()->id;
-                        $notification->title = 'aiboにcommentがついたよ[2]';
+                        $notification->title = 'aibo「'. $target_aibo->aibo_name .'」へのコメントにレスがつきました';
                         $notification->link_url = $target_aibo->id;
                         $notification->save();
                     }

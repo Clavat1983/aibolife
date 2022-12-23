@@ -30,6 +30,23 @@ class GuideController extends Controller
     }
 
 
+    //利用ガイド
+    public function manual()
+    {
+        if (Auth::check()) { //ログインしている
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            } else {
+                $bell_count = 0;
+            }
+        } else { //ログインしていない
+            $bell_count = 0;
+        }
+        return view('guide.manual', compact('bell_count'));
+    }
+
     //利用規約
     public function rule()
     {

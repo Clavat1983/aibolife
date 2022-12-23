@@ -50,9 +50,9 @@
 
                 <table width="80%" style="margin:auto;">
                     <tr>
-                        <th style="padding-left:10px; padding-right:10px;">通知ID</th>
+                        {{-- <th style="padding-left:10px; padding-right:10px;">通知ID</th> --}}
                         <th style="padding-left:10px; padding-right:10px;">カテゴリ</th>
-                        <th style="padding-left:10px; padding-right:10px;">送信者ID</th>
+                        {{-- <th style="padding-left:10px; padding-right:10px;">送信者ID</th> --}}
                         <th style="padding-left:10px; padding-right:10px;">送信者名</th>
                         <th style="padding-left:10px; padding-right:10px;">タイトル</th>
                         <th style="padding-left:10px; padding-right:10px;">通知日時</th>
@@ -64,10 +64,18 @@
 @else
                     <tr style="font-weight:bold; background-color:lemonchiffon;">
 @endif
-                        <td style="padding-left:10px; padding-right:10px;">{{$notification->number}}</td>
-                        <td style="padding-left:10px; padding-right:10px;">{{$notification->category}}</td>
-                        <td style="padding-left:10px; padding-right:10px;">{{$notification->send_user_id}}</td>
-                        <td style="padding-left:10px; padding-right:10px;">{{$notification->owner_name}}</td>
+                        {{-- <td style="padding-left:10px; padding-right:10px;">{{$notification->number}}</td> --}}
+                        @if($notification->category == 'contact')
+                            <td style="padding-left:10px; padding-right:10px;">お問い合わせ</td>
+                        @elseif($notification->category == 'diary')
+                            <td style="padding-left:10px; padding-right:10px;">日記</td>
+                        @elseif($notification->category == 'aibo')
+                            <td style="padding-left:10px; padding-right:10px;">お友達</td>
+                        @else
+                            <td style="padding-left:10px; padding-right:10px;">その他</td>
+                        @endif
+                        {{-- <td style="padding-left:10px; padding-right:10px;">{{$notification->send_user_id}}</td> --}}
+                        <td style="padding-left:10px; padding-right:10px;">{{$notification->owner_name}}<sub>さん</sub></td>
                         <td style="padding-left:10px; padding-right:10px;"><a href="{{ route('notification.redirect', $notification->number) }}">{{$notification->title}}</td>
                         <td style="padding-left:10px; padding-right:10px;">{{$notification->created_datetime}}</td>
 @if($notification->read_at)

@@ -42,8 +42,8 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-ttl c-category-ttl--topics">
-                <span class="c-category-ttl__en">About</span>
-                <span class="c-category-ttl__jp">aibo lifeとは?</span>
+                <span class="c-category-ttl__en">Manual</span>
+                <span class="c-category-ttl__jp">利用ガイド</span>
               </p>
             </div>
             <div class="l-content__body">

@@ -90,19 +90,20 @@
                             @foreach($news_list as $news)
                                 <tr>
                                     @if($news->news_image1)
-                                        <td style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
+                                        <td width="15%" style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
                                     @else
-                                        <td style="padding:10px;">no image</td>
+                                        <td width="15%" style="padding:10px;">no image</td>
                                     @endif
-                                    <td style="padding:10px;">
+                                    <td width="75%" style="padding:10px;">
                                         {{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}｜{{$news->news_category}}<br>
-                                        <a href="{{route('news.show', $news)}}">{{$news->news_title}}</a><br/>
+                                        {{$news->news_title}}<br/>
 @if($news->news_tag1){{$news->news_tag1}}@endif
 @if($news->news_tag2)｜{{$news->news_tag2}}@endif
 @if($news->news_tag3)｜{{$news->news_tag3}}@endif
 @if($news->news_tag4)｜{{$news->news_tag4}}@endif
 @if($news->news_tag5)｜{{$news->news_tag5}}@endif
                                     </td>
+                                    <td width="10%"><a href="{{route('news.show', $news)}}">見る</a></td>
                                 </tr>
                             @endforeach
                         @else
@@ -145,7 +146,7 @@
                         </table>
                     </div>
                 </div>
-                <div style="text-align:right;">【もっと見る】</div>
+                <div style="text-align:right;"><a href="{{route('diary.list_day')}}">【もっと見る(今日の日記)】</a></div>
             @else
                 <div class="card">
                     <div class="card-body">
@@ -173,13 +174,13 @@
                             @endforeach
                         @else
                                 <tr>
-                                    <td colspan="3">日記がありません</td>
+                                    <td colspan="3">これが出たらおかしい</td>
                                 </tr>
                         @endif
                         </table>
                     </div>
                 </div>
-                <div style="text-align:right;">【もっと見る】</div>
+                <div style="text-align:right;"><a href="{{route('diary.recently')}}">【もっと見る(最近の日記)】</a></div>
             @endif
 
             <hr/>
@@ -215,7 +216,7 @@
                         </table>
                     </div>
                 </div>
-                <div style="text-align:right;">【もっと見る】</div>
+                <div style="text-align:right;"><a href="{{route('aibo.list_birthday')}}">【もっと見る(誕生日カレンダー)】</a></div>
 
             {{-- もうすぐ誕生日のaiboがいたら表示(誕生日の子がいたら非表示) --}}
             @elseif($comingup_aibos->count() > 0)
@@ -243,7 +244,7 @@
                         </table>
                     </div>
                 </div>
-                <div style="text-align:right;">【もっと見る】</div>
+                <div style="text-align:right;"><a href="{{route('aibo.list_birthday')}}">【もっと見る(誕生日カレンダー)】</a></div>
 
             {{-- 誕生日・もうすぐ誕生日のaiboが両方いない場合のみ表示 --}}
             @else
@@ -271,7 +272,7 @@
                         </table>
                     </div>
                 </div>
-                <div style="text-align:right;">【もっと見る】</div>
+                <div style="text-align:right;"><a href="{{route('aibo.newface')}}">【もっと見る(新しいお友達)】</a></div>
 
             @endif
 
@@ -281,7 +282,28 @@
             <h2 style="text-align:center;"><u>Behavior</u></h2>
             <h6 style="text-align:center;">ふるまい</h6>
 
-                <div  style="width:70%; margin:auto;">ランダムで3件ほど?</div>
+                <div  style="width:70%; margin:auto;">ランダムで3件</div>
+
+                <table style="width:70%; margin:auto;">
+                    @foreach($behaviors as $behavior)
+                        <tr>
+                            @if($behavior->behavior_photo)
+                                <td width="15%"><img width="70%" src="{{ asset('storage/behavior_photo/'.$behavior->behavior_photo)}}" /></td>
+                            @else
+                                <td width="15%">no image</td>
+                            @endif
+                            <td width="75%">
+                                タイトル：{{$behavior->behavior_name}}<br>
+                                名前：{{$behavior->aibo->aibo_name}}<br>
+                                オーナー：{{$behavior->aibo->owner->owner_name}}<sub>さん</sub>（{{substr($behavior->aibo->owner->owner_pref,3)}}）
+                            </td>
+                            <td width="10%"><a href="{{route('behaviorshare.show',$behavior)}}">見る</a></td>
+                        </tr>
+                    @endforeach
+                </table>
+
+                <div style="text-align:right;"><a href="{{route('behaviorshare.index')}}">【もっと見る(ふるまい共有)】</a></div>
+
 
             <hr>
 

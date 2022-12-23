@@ -64,7 +64,7 @@ class DiaryCommentController extends Controller
                 $notification->category = 'diary';
                 $notification->user_id = $target_diary->aibo->owner->user->id;
                 $notification->send_user_id = auth()->user()->id;
-                $notification->title = '日記にcommentがついたよ[1]';
+                $notification->title = $target_diary->aibo->aibo_name . 'の日記「'. $target_diary->diary_title .'」にコメントがつきました';
                 $notification->link_url = $target_diary->id;
                 $notification->save();
             }
@@ -78,7 +78,7 @@ class DiaryCommentController extends Controller
                         $notification->category = 'diary';
                         $notification->user_id = $comment_owner->owner->user->id; //他にコメントをつけたオーナーのユーザID
                         $notification->send_user_id = auth()->user()->id;
-                        $notification->title = '日記にcommentがついたよ[2]';
+                        $notification->title = $target_diary->aibo->aibo_name . 'の日記「'. $target_diary->diary_title .'」へのコメントにレスがつきました';
                         $notification->link_url = $target_diary->id;
                         $notification->save();
                     }

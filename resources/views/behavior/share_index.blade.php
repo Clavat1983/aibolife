@@ -51,9 +51,20 @@
 
                 <h5>※表示順はランダムです</h5>
 
+                <table width="70%" style="margin:auto;">
                 @foreach ($behaviors as $behavior)
-                    ID：{{$behavior->id}}、タイトル：{{$behavior->behavior_name}}、aiboの名前：{{$behavior->aibo->aibo_name}}　<a href="{{route('behaviorshare.show', $behavior)}}?seed={{$seed}}&page={{$page}}">【見る】</a><br>
-                @endforeach
+                    <tr>
+                        @if($behavior->behavior_photo)
+                            <td width="15%"><img width="70%" src="{{ asset('storage/behavior_photo/'.$behavior->behavior_photo)}}" /></td>
+                        @else
+                            <td width="15%">no image</td>
+                        @endif
+                            <td width="70%">タイトル：{{$behavior->behavior_name}}<br>
+                                aiboの名前：{{$behavior->aibo->aibo_name}}</td>
+                            <td width="10%"><a href="{{route('behaviorshare.show', $behavior)}}?seed={{$seed}}&page={{$page}}">見る</a></td>
+                    </tr>
+                    @endforeach
+                </table>
                 <br>
 
                 <hr>

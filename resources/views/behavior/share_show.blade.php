@@ -49,7 +49,7 @@
 
             <div class="l-content__body">
 
-                <div>
+                <div style="width:70%;margin:auto;">
 
                     @if(session()->has('process'))
                         @if(session('process') == "insert")
@@ -80,19 +80,28 @@
                         <p>ありません</p>
                     @endif
                     
-                    ふるまいID：{{$behavior->id}}<br>
                     タイトル：{{$behavior->behavior_name}}<br>
                     <br>
-                    aiboのID：{{$behavior->aibo->id}}<br>
-                    aiboの名前：{{$behavior->aibo->aibo_name}}<br>
-                    オーナーのID：{{$behavior->aibo->owner->id}}<br>
-                    オーナーの名前：{{$behavior->aibo->owner->owner_name}}<br>
+                    aiboの写真：<br>
+                    @if($behavior->aibo->aibo_icon)
+                        <p><img src="{{ asset('storage/aibo_icon/'.$behavior->aibo->aibo_icon)}}" style="height:100px;"></p>
+                    @else
+                        <p>ありません</p>
+                    @endif
+                    aiboの名前：{{$behavior->aibo->aibo_name}}　｜　<a href="{{route('aibo.show', $behavior->aibo)}}">【見る】</a><br>
+                    オーナーの名前：{{$behavior->aibo->owner->owner_name}}<sub>さん</sub><br>
                     <br>
                     ふるまいの説明：<br>
                     {!! nl2br(e($behavior->behavior_info)) !!}
                     <hr/>
                     ダウンロード(My aiboが開きます)<br>
-                    <a href="{{$behavior->behavior_dl_url}}" target="blank">{{$behavior->behavior_dl_url}}</a>
+                    <br>
+                    <a href="{{$behavior->behavior_dl_url}}" target="blank">{{$behavior->behavior_dl_url}}</a><br>
+                    <br>
+                    ※注意※<br>
+                    現在共有されていない場合はリンクが無効となります。<br>
+                    「My aibo」の案内・画面表示に沿って、ご自身でご判断ください。<br>
+
                     {{-- <hr/>
                     ふるまいを紹介したTwitter：変なツイートが投稿される可能性があるので一旦やめよう
                     <hr/>

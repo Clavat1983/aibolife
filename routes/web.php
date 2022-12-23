@@ -130,7 +130,7 @@ Route::middleware(['verified'])->group(function(){
         Route::get('/topics/update', 'NewsController@index_update')->name('news.index_update');//カテゴリ別（アップデート）
         Route::get('/topics/maintenance', 'NewsController@index_maintenance')->name('news.index_maintenance');//カテゴリ別（障害・メンテ）
         Route::get('/topics/special', 'NewsController@index_special')->name('news.index_special');//カテゴリ別（スペシャル）
-        Route::get('/topics/etc', 'NewsController@index_etc')->name('news.index_etc');//カテゴリ別（スペシャル）
+        Route::get('/topics/etc', 'NewsController@index_etc')->name('news.index_etc');//カテゴリ別（その他）
 
         Route::get('/topics/search', 'NewsController@search')->name('news.search');//検索＆検索結果
 
@@ -152,6 +152,7 @@ Route::middleware(['verified'])->group(function(){
     //はじめに
     Route::get('/guide/about', 'GuideController@about')->name('guide.about');//aibo lifeとは?
     Route::get('/guide/rule', 'GuideController@rule')->name('guide.rule');//利用規約
+    Route::get('/guide/manual', 'GuideController@manual')->name('guide.manual');//利用ガイド
     Route::get('/guide/policy', 'GuideController@policy')->name('guide.policy');//プライバシーポリシー
     Route::get('/guide/staff', 'GuideController@staff')->name('guide.staff');//運営メンバー
     Route::get('/guide/faq', 'GuideController@faq')->name('guide.faq');//よくある質問

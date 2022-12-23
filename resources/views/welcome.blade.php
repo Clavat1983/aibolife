@@ -59,21 +59,21 @@
                     <div class="c-form">
                       <div class="c-form__item">
                         <div class="c-alert c-alert--success">
-                            <div class="c-alert__text">2023年1月のリニューアル後、新「aibo life」を初めて利用される方は「アカウント作成」をお願いします。</div>
+                            <div class="c-alert__text">202?年?月のリニューアル後、新「aibo life」を初めて利用される方は「アカウント作成」をお願いします。</div>
                         </div>
                       </div>
                     </div>
                 </div>
-                <div class="c-panel__footer">
+                {{-- <div class="c-panel__footer">
                     <ul class="c-btn-list">
-                      {{-- <li class="c-btn-list__item">
+                      <li class="c-btn-list__item">
                         <a href="#">aibo life とは?</a>
-                      </li> --}}
+                      </li>
                       <li class="c-btn-list__item">
                         <a href="#">【補足】旧「aibo life」にご登録のオーナー様へ</a>
                       </li>
                     </ul>
-                </div>
+                </div> --}}
                 <div class="c-panel__footer">
                     <ul class="c-btn-list">
                       <li class="c-btn-list__item">
@@ -86,7 +86,7 @@
                       <div class="c-form__item">
                         <div class="c-alert c-alert--info">
                             <div class="c-alert__text">
-                            旧「aibo life」を利用されていた方も、これまでのデータは移行されますので、まずは<a href="{{route('register')}}">アカウント作成</a>をお願いします。
+                            旧「aibo life」を利用されていた方も、まずは<a href="{{route('register')}}">アカウント作成</a>をお願いします。これまでのデータは移行されます。
                             </div>
                         </div>
                       </div>

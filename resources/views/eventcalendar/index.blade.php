@@ -68,10 +68,10 @@
                     <a href="{{route('eventcalendar.index')}}?year={{$prev->format('Y')}}&month={{$prev->format('n')}}">【前月（{{$prev->format('Y')}}年{{$prev->format('n')}}月）】</a>　｜　<a href="{{route('eventcalendar.index')}}?year={{$next->format('Y')}}&month={{$next->format('n')}}">【次月（{{$next->format('Y')}}年{{$next->format('n')}}月）】</a><br>
                     <hr/>
 
-                    <table>
+                    <table width="80%" style="margin:auto;">
                         <tr>
-                            <th>日付</th>
-                            <th>イベント</th>
+                            <th width="25%" style="border:1px solid;">日付</th>
+                            <th width="75%" style="border:1px solid;">イベント</th>
                         </tr>
                     
                     {{-- 今月のカレンダーを出力 --}}
@@ -82,8 +82,8 @@
                         @endphp
                         
                         <tr>
-                            <td>{{$targetday->format('Y/m/d')}}（{{$dayname}}）</td>
-                            <td>
+                            <td style="border:1px solid;">{{$targetday->format('Y/m/d')}}（{{$dayname}}）</td>
+                            <td style="border:1px solid;">
                                 @foreach ($events as $event)
                                     {{-- イベントの開始・終了の日時でCarbonを作る --}}
                                     @php

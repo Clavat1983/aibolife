@@ -9,6 +9,7 @@ use App\Models\Owner;
 use App\Models\Aibo;
 use App\Models\News;
 use App\Models\Diary;
+use App\Models\BehaviorShare;
 use App\Models\EventCalendar;
 use App\Models\Notification;
 use Carbon\Carbon; //日付操作
@@ -71,6 +72,9 @@ class HomeController extends Controller
                 //日記の取得(最新6件)
                 $recent_diaries = Diary::orderBy('id', 'desc')->limit(6)->get();
 
+                //ふるまいの取得(3件)
+                $behaviors = BehaviorShare::inRandomOrder()->take(3)->get();
+
                 //掲示板の取得(最新6件)
 
                 //誕生日のaibo取得
@@ -86,7 +90,7 @@ class HomeController extends Controller
                 //【全ビュー共通処理】未読通知数
                 $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-                return view('home', compact('bell_count','owners', 'events', 'news_list', 'today_diaries', 'recent_diaries', 'birthday_aibos', 'comingup_aibos', 'new_aibos'));
+                return view('home', compact('bell_count','owners', 'events', 'news_list', 'today_diaries', 'recent_diaries', 'behaviors', 'birthday_aibos', 'comingup_aibos', 'new_aibos'));
             }
         }
     }
