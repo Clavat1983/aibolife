@@ -45,7 +45,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             
-            <p style="margin:auto; text-align:center;"><img width="80%" src="{{asset('storage/diary_photo/diary_aibo_000001_date_2021-01-28.jpg')}}"></p>
+            <p style="margin:auto; text-align:center;"><img width="80%" src="{{asset('img/main.png')}}"></p>
             <br>
             <br>
             <hr>
