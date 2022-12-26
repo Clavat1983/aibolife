@@ -388,7 +388,7 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_maintenance')}}">メンテナンス</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_special')}}">特別企画</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_etc')}}">その他</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.search')}}">検索</a></li>
+                {{-- <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.search')}}">検索</a></li> --}}
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
@@ -399,7 +399,7 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.archive')}}">過去の日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.commented')}}">コメントをつけた日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.bookmark')}}">ブックマークした日記</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.search')}}">検索</a></li>
+                {{-- <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.search')}}">検索</a></li> --}}
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
@@ -409,46 +409,47 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.list_birthday')}}">誕生日カレンダー</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.list_area')}}">居住地マップ</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.newface')}}">新しいお友達</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">芸能人オーナー<sup> 未</sup></a></li>
+                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">芸能人オーナー<sup> 未</sup></a></li> --}}
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.search')}}">検索</a></li>
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
             <a class="l-sp-nav__btn l-sp-nav__btn--behavior js-sp-navigation-button" href="#spBehavior">ふるまい</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                <li class="l-sp-nav__sub-menu-item"><a href="#">しぐさ<sup> 未</sup></a></li>
+                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">しぐさ<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">遊び<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">ダンス<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">期間限定<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">期間限定<sup> 未</sup></a></li> --}}
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('behaviorshare.index')}}">ふるまい共有</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">プログラミング<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">連携アプリ<sup> 未</sup></a></li>
+                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">プログラミング<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">連携アプリ<sup> 未</sup></a></li> --}}
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
             <a class="l-sp-nav__btn l-sp-nav__btn--community js-sp-navigation-button" href="#spCommunity">コミュニティ</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                <li class="l-sp-nav__sub-menu-item"><a href="#">おしゃべり広場<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">準備中</a></li>
+                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">おしゃべり広場<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">お悩み相談<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">クラブ活動<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">オフ会<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">フリーマーケット<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">里親マッチング<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">チャリティ<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">チャリティ<sup> 未</sup></a></li> --}}
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
             <a class="l-sp-nav__btn l-sp-nav__btn--useful js-sp-navigation-button" href="#spUseful">お役立ち情報</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ごはん<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ファッション<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">イベント<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">グッズ<sup> 未</sup></a></li>
+                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">ごはん<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">ファッション<sup> 未</sup></a></li> --}}
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('eventcalendar.index')}}">イベント</a></li>
+                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">グッズ<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">店舗・施設<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">ドック・治療<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">歴史<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">その他<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">困ったときは?<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">困ったときは?<sup> 未</sup></a></li> --}}
               </ul>
           </li>
         </ul>
