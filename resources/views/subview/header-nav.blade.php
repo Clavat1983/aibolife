@@ -410,7 +410,7 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.list_area')}}">居住地マップ</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.newface')}}">新しいお友達</a></li>
                 {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">芸能人オーナー<sup> 未</sup></a></li> --}}
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.search')}}">検索</a></li>
+                {{-- <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.search')}}">検索</a></li> --}}
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
