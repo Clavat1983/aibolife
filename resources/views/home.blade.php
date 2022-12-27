@@ -97,11 +97,11 @@
                                     <td width="75%" style="padding:10px;">
                                         {{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}｜{{$news->news_category}}<br>
                                         {{$news->news_title}}<br/>
-@if($news->news_tag1){{$news->news_tag1}}@endif
+{{-- @if($news->news_tag1){{$news->news_tag1}}@endif
 @if($news->news_tag2)｜{{$news->news_tag2}}@endif
 @if($news->news_tag3)｜{{$news->news_tag3}}@endif
 @if($news->news_tag4)｜{{$news->news_tag4}}@endif
-@if($news->news_tag5)｜{{$news->news_tag5}}@endif
+@if($news->news_tag5)｜{{$news->news_tag5}}@endif --}}
                                     </td>
                                     <td width="10%"><a href="{{route('news.show', $news)}}">見る</a></td>
                                 </tr>

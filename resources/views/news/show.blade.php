@@ -78,7 +78,8 @@
                   <div class="p-article-detail__ttl">
                     <h1 class="c-article-ttl">{{$news->news_title}}</h1>
                   </div>
-                  <div class="p-article-detail__tag">
+                  <!-- タグ(要整理)は当面非表示に -->
+                  {{-- <div class="p-article-detail__tag">
                     <ul class="c-tags">
                       <li class="c-tags__item"><a href="#">#{{$news->news_tag1}}</a></li>
                       @if($news->news_tag2)<li class="c-tags__item"><a href="#">#{{$news->news_tag2}}</a></li>@endif
@@ -86,7 +87,7 @@
                       @if($news->news_tag4)<li class="c-tags__item"><a href="#">#{{$news->news_tag4}}</a></li>@endif
                       @if($news->news_tag5)<li class="c-tags__item"><a href="#">#{{$news->news_tag5}}</a></li>@endif
                     </ul>
-                  </div>
+                  </div> --}}
                 </header>
                 <div class="p-article-detail__content">
                   <div class="p-article-detail__slide">
