@@ -115,7 +115,7 @@
                                 <a href="{{route('diary.commented')}}">コメントをつけた日記</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('diary.bookmark')}}">ブックマークした日記</a>
+                                <a href="{{route('diary.bookmark')}}">お気に入りの日記</a>
                               </li>
                               {{-- <li class="l-header__sub-menu-item">
                                 <a href="{{route('diary.search')}}">検索</a>
@@ -280,14 +280,14 @@
                     {{-- 通知 --}}
                     <li class="l-header__info-item">
                       <a class="l-header__notification" href="{{ route('notification.index') }}">
-                        <img src="{{asset('img/ico_notification.svg')}}" height="44" alt="通知"/>
-                        <span class="l-header__notification-badge">{{$bell_count}}</span>
+                      <img src="{{asset('img/ico_notification.svg')}}" height="44" alt="通知"/>
+                      <span class="l-header__notification-badge">{{$bell_count}}</span>
                       </a>
                     </li>
 
                     {{-- マイメニュー --}}
-                    <li class="l-header__info-item">
-                      <a class="l-header__mypage js-header-my-page" href="javascript:;">
+                    <li class="l-header__info-item l-header__info-item--mypage">
+                      <a class="l-header__mypage js-header-mypage" href="javascript:;">
                         @if((auth()->user()->owner != NULL) && (Auth::user()->owner->owner_icon))
                           {{-- オーナーアイコンを登録済 --}}
                           <img src="{{asset('storage/owner_icon/'.Auth::user()->owner->owner_icon)}}" height="44" alt="xxx"/>
@@ -296,7 +296,7 @@
                           <img src="{{asset('img/_sample/img_user.png')}}" height="44" alt="xxx"/>
                         @endif
                       </a>
-                        <ul class="l-header__mypage-menu js-header-my-page__menu">
+                        <ul class="l-header__mypage-menu js-header-mypage__menu">
                           @if(auth()->user()->role == "admin") {{-- 管理者(Admin)の場合のみメニューに追加 --}}
                             <li class="l-header__mypage-menu-item">
                               <a class="l-header__mypage-link" href="{{route('home.admin')}}">★管理者画面★</a>
@@ -398,7 +398,7 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.recently')}}">最近の日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.archive')}}">過去の日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.commented')}}">コメントをつけた日記</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.bookmark')}}">ブックマークした日記</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.bookmark')}}">お気に入りの日記</a></li>
                 {{-- <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.search')}}">検索</a></li> --}}
               </ul>
           </li>

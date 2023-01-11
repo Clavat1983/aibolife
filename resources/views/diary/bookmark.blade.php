@@ -42,21 +42,21 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--topics">
-                <span class="c-category-title__en">Bookmarked</span>
-                <span class="c-category-title__jp">ブックマークした日記</span>
+                <span class="c-category-title__en">Favorite</span>
+                <span class="c-category-title__jp">お気に入りの日記</span>
               </p>
             </div>
 
             <div class="l-content__body">
 
               <hr>
-              <h5>ブックマークした日時順（新しい順）</h5>
+              <h5>お気に入り登録した日時順（新しい順）</h5>
               <hr>
 
               <table width="80%" style="margin:auto;">
                 @if(count($bookmarks) == 0)
                     <tr>
-                      <td colspan="3">（あなたがブックマークした日記はありません）</td>
+                      <td colspan="3">（お気に入りの日記はありません）</td>
                     </tr>
                 @else
                     @foreach ($bookmarks as $bookmark)

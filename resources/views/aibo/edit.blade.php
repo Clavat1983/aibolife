@@ -51,13 +51,15 @@
 
                 <div style="width:80%; margin:auto;">
                     @if ($errors->any())
-                        <div class="alert alert-danger">
+                        <div style="color:red; font-size:200%;">更新できませんでした。入力内容に不備・エラーがあります!!</div>
+                        <div style="color:red;">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                                 @endforeach
                                 @if(empty($errors->first('aibo_icon')))
-                                    <li>aiboの画像を追加していた場合は、再度選択してください。</li>
+                                    <li>---</li>
+                                    <li>aiboや、なかまQRコードの画像を追加・変更していた場合は、お手数ですが再度選択してください。</li>
                                 @endif
                             </ul>
                         </div>
