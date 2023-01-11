@@ -41,9 +41,9 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-ttl c-category-ttl--topics">
-                <span class="c-category-ttl__en">Daily</span>
-                <span class="c-category-ttl__jp">{{$target_string_format}}の日記</span>
+              <p class="c-category-title c-category-title--topics">
+                <span class="c-category-title__en">Daily</span>
+                <span class="c-category-title__jp">{{$target_string_format}}の日記</span>
               </p>
             </div>
             <div class="l-content__body">

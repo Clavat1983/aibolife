@@ -55,9 +55,9 @@
                 $next = \Carbon\Carbon::createFromFormat('Y-m-d',$target)->addMonth();
             @endphp
 
-              <p class="c-category-ttl c-category-ttl--topics">
-                <span class="c-category-ttl__en">Event</span>
-                <span class="c-category-ttl__jp">イベントカレンダー［{{$firstday->format('Y')}}年{{$firstday->format('n')}}月］</span>
+              <p class="c-category-title c-category-title--topics">
+                <span class="c-category-title__en">Event</span>
+                <span class="c-category-title__jp">イベントカレンダー［{{$firstday->format('Y')}}年{{$firstday->format('n')}}月］</span>
               </p>
             </div>
 

@@ -41,9 +41,9 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-ttl c-category-ttl--topics">
-                <span class="c-category-ttl__en">Behavior</span>
-                <span class="c-category-ttl__jp">ふるまい共有［一覧］</span>
+              <p class="c-category-title c-category-title--topics">
+                <span class="c-category-title__en">Behavior</span>
+                <span class="c-category-title__jp">ふるまい共有［一覧］</span>
               </p>
             </div>
 

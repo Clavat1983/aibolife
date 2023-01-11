@@ -41,12 +41,12 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-ttl c-category-ttl--topics">
-                <span class="c-category-ttl__en">Registration</span>
+              <p class="c-category-title c-category-title--topics">
+                <span class="c-category-title__en">Registration</span>
             @if(count($owner->aibos) == 0)
-                <span class="c-category-ttl__jp">利用登録［オーナー登録完了］</span>
+                <span class="c-category-title__jp">利用登録［オーナー登録完了］</span>
             @else
-                <span class="c-category-ttl__jp">利用登録［登録完了］</span>
+                <span class="c-category-title__jp">利用登録［登録完了］</span>
             @endif
               </p>
             </div>

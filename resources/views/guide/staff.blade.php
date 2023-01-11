@@ -41,9 +41,9 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-ttl c-category-ttl--topics">
-                <span class="c-category-ttl__en">Staff</span>
-                <span class="c-category-ttl__jp">運営メンバー</span>
+              <p class="c-category-title c-category-title--topics">
+                <span class="c-category-title__en">Staff</span>
+                <span class="c-category-title__jp">運営メンバー</span>
               </p>
             </div>
             <div class="l-content__body">

@@ -41,9 +41,9 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-ttl c-category-ttl--topics">
-                <span class="c-category-ttl__en">Area Map</span>
-                <span class="c-category-ttl__jp">居住地マップ</span>
+              <p class="c-category-title c-category-title--topics">
+                <span class="c-category-title__en">Area Map</span>
+                <span class="c-category-title__jp">居住地マップ</span>
               </p>
             </div>
             <div class="l-content__body">

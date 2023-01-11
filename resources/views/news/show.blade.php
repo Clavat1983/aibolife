@@ -39,55 +39,276 @@
       <main class="l-main">
         <div class="l-main__content">
           <div class="l-content">
+              <div class="l-content__header">
+                <p class="c-category-title c-category-title--topics">
+                  <span class="c-category-title__en">News</span>
+                  <span class="c-category-title__jp">最新情報［{{$news->news_category}}］</span>
+                </p>
+              </div>
+              <div class="l-content__body">
+                <div class="p-article-detail">
+                  <div class="p-article-detail__content">
+                    <div class="c-article c-article--topics">
+                      <header class="c-article__header">
+                        <div class="c-article__info">
+                          <div class="c-article__info-item">
+                            <p class="c-date">{{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}</p>
+                          </div>
+                          <div class="c-article__info-item">
+                            @if($news->news_category == '公式ニュース')
+                              <a class="c-category-label" href="{{route('news.index_news')}}">{{$news->news_category}}</a>
+                            @elseif($news->news_category == '公式イベント')
+                              <a class="c-category-label" href="{{route('index_event')}}">{{$news->news_category}}</a>
+                            @elseif($news->news_category == 'メディア')
+                              <a class="c-category-label" href="{{route('news.index_media')}}">{{$news->news_category}}</a>
+                            @elseif($news->news_category == 'お知らせ')
+                              <a class="c-category-label" href="{{route('news.index_info')}}">{{$news->news_category}}</a>
+                            @elseif($news->news_category == 'アップデート')
+                              <a class="c-category-label" href="{{route('news.index_update')}}">{{$news->news_category}}</a>
+                            @elseif($news->news_category == 'メンテナンス')
+                              <a class="c-category-label" href="{{route('news.index_maintenance')}}">{{$news->news_category}}</a>
+                            @elseif($news->news_category == 'スペシャル')
+                              <a class="c-category-label" href="{{route('news.index_special')}}">{{$news->news_category}}</a>
+                            @elseif($news->news_category == 'その他')
+                              <a class="c-category-label" href="{{route('news.index_etc')}}">{{$news->news_category}}</a>
+                            @else
+                              <a class="c-category-label" href="{{route('news.index')}}">{{$news->news_category}}</a>
+                            @endif
+                          </div>
+                        </div>
+                        <div class="c-article__ttl">
+                          <h1 class="c-article-ttl">
+                            {{$news->news_title}}
+                          </h1>
+                        </div>
+                        {{-- <div class="c-article__tag">
+                          <ul class="c-tags">
+                            <li class="c-tags__item"><a href="#">#{{$news->news_tag1}}</a></li>
+                            @if($news->news_tag2)<li class="c-tags__item"><a href="#">#{{$news->news_tag2}}</a></li>@endif
+                            @if($news->news_tag3)<li class="c-tags__item"><a href="#">#{{$news->news_tag3}}</a></li>@endif
+                            @if($news->news_tag4)<li class="c-tags__item"><a href="#">#{{$news->news_tag4}}</a></li>@endif
+                            @if($news->news_tag5)<li class="c-tags__item"><a href="#">#{{$news->news_tag5}}</a></li>@endif
+                          </ul>
+                        </div> --}}
+                      </header>
+                      <div class="c-article__content">
+                        <div class="c-article__images">
+                          <ul class="c-images">
+                            @if($news->news_image1)
+                                <li class="c-images__item">
+                                  <a href="javascript:;">
+                                    <img src="{{ asset('storage/news_image/'.$news->news_image1)}}" />
+                                  </a>
+                                </li>
+                            @else
+                                <li class="c-images__item">no image</li>
+                            @endif
+      
+                            @if($news->news_image2)
+                            <li class="c-images__item">
+                              <a href="javascript:;">
+                                <img src="{{ asset('storage/news_image/'.$news->news_image2)}}" />
+                              </a>
+                            </li>
+                            @endif
+                            @if($news->news_image3)
+                            <li class="c-images__item">
+                              <a href="javascript:;">
+                                <img src="{{ asset('storage/news_image/'.$news->news_image3)}}" />
+                              </a>
+                            </li>
+                            @endif
+                            @if($news->news_image4)
+                            <li class="c-images__item">
+                              <a href="javascript:;">
+                                <img src="{{ asset('storage/news_image/'.$news->news_image4)}}" />
+                              </a>
+                            </li>
+                            @endif
+                            @if($news->news_image5)
+                            <li class="c-images__item">
+                              <a href="javascript:;">
+                                <img src="{{ asset('storage/news_image/'.$news->news_image5)}}" />
+                              </a>
+                            </li>
+                            @endif
+                          </ul>
+                        </div>
+                        <div class="c-article__body">
+                          {!! $news->news_body !!}
+                        </div>
+
+                        @if($news->news_link1_name || $news->news_link2_name || $news->news_link3_name || $news->news_link4_name || $news->news_link5_name)
+                        <aside class="c-article__aside">
+                          <header class="c-article__aside-ttl">
+                            <h2 class="c-icon-ttl">リンク</h2>
+                          </header>
+                          <div class="c-article__aside-body">
+                            <ul class="c-link-list">
+                              @if($news->news_link1_name)
+                              <li class="c-link-list__item">
+                                <a href="{{$news->news_link1_url}}" target="blank">{{$news->news_link1_name}}</a>
+                              </li>
+                              @endif
+                              @if($news->news_link2_name)
+                              <li class="c-link-list__item">
+                                <a href="{{$news->news_link2_url}}" target="blank">{{$news->news_link2_name}}</a>
+                              </li>
+                              @endif
+                              @if($news->news_link3_name)
+                              <li class="c-link-list__item">
+                                <a href="{{$news->news_link3_url}}" target="blank">{{$news->news_link3_name}}</a>
+                              </li>
+                              @endif
+                              @if($news->news_link4_name)
+                              <li class="c-link-list__item">
+                                <a href="{{$news->news_link4_url}}" target="blank">{{$news->news_link4_name}}</a>
+                              </li>
+                              @endif
+                              @if($news->news_link5_name)
+                              <li class="c-link-list__item">
+                                <a href="{{$news->news_link5_url}}" target="blank">{{$news->news_link5_name}}</a>
+                              </li>
+                              @endif
+                            </ul>
+                          </div>
+                        </aside>
+                        @endif
+
+                      </div>
+                      {{-- <footer class="c-article__footer">
+                        <dl class="c-sns">
+                          <dt class="c-sns__ttl">SNS にシェア</dt>
+                          <dd class="c-sns__detail">
+                            <ul class="c-sns-list">
+                              <li class="c-sns-list__item">
+                                <a href="http://line.me/R/msg/text/?{{url()->full()}}%0a【U_01102】最新情報・News(個別)" target="_blank">
+                                  <img src="{{asset('img/logo_line.png')}}" width="44" alt="LINE"/>
+                                </a>
+                              </li>
+                              <li class="c-sns-list__item">
+                                <a href="http://www.facebook.com/share.php?u={{url()->full()}}" rel="nofollow noopener" target="_blank">
+                                  <img src="{{asset('img/logo_facebook.png')}}" width="44" alt="Facebook"/>
+                                </a>
+                              </li>
+                              <li class="c-sns-list__item">
+                                <a href="https://twitter.com/share?url={{url()->full()}}" rel="nofollow noopener" target="_blank">
+                                  <img src="{{asset('img/logo_twitter.png')}}" width="44" alt="Twitter"/>
+                                </a>
+                              </li>
+                            </ul>
+                          </dd>
+                        </dl>
+                      </footer> --}}
+                    </div>
+                  </div>
+                  <div class="p-article-detail__footer">
+                    <ul class="c-pager-buttons">
+                      <li>
+                        <a class="c-btn" href="#">
+                          <span class="c-icon-text c-icon-text--prev">
+                            前の記事
+                          </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a class="c-btn" href="#">
+                          <span class="c-icon-text c-icon-text--next">
+                            後の記事
+                          </span>
+                        </a>
+                      </li>
+                      <li><a class="c-btn02" href="{{url()->previous()}}">一覧</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {{-- --------------------------------------------------------------------------- --}}
-            <div class="l-content__header">
-              <p class="c-category-ttl c-category-ttl--topics">
-                <span class="c-category-ttl__en">TOPICS</span>
-                <span class="c-category-ttl__jp">最新情報［{{$news->news_category}}］</span>
+@php
+/*
+<div class="l-content__header">
+              <p class="c-category-title c-category-title--topics">
+                <span class="c-category-title__en">TOPICS</span>
+                <span class="c-category-title__jp">最新情報［{{$news->news_category}}］</span>
               </p>
             </div>
             <div class="l-content__body">
-              <article class="p-article-detail p-article-detail--topics">
-                <header class="p-article-detail__header">
-                  <div class="p-article-detail__info">
-                    <div class="p-article-detail__info-item">
-                      <p class="c-date">{{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}</p>
-                    </div>
-                    <div class="p-article-detail__info-item">
-                      @if($news->news_category == '公式ニュース')
-                        <a class="c-category-label" href="{{route('news.index_news')}}">{{$news->news_category}}</a>
-                      @elseif($news->news_category == '公式イベント')
-                        <a class="c-category-label" href="{{route('index_event')}}">{{$news->news_category}}</a>
-                      @elseif($news->news_category == 'メディア')
-                        <a class="c-category-label" href="{{route('news.index_media')}}">{{$news->news_category}}</a>
-                      @elseif($news->news_category == 'お知らせ')
-                        <a class="c-category-label" href="{{route('news.index_info')}}">{{$news->news_category}}</a>
-                      @elseif($news->news_category == 'アップデート')
-                        <a class="c-category-label" href="{{route('news.index_update')}}">{{$news->news_category}}</a>
-                      @elseif($news->news_category == 'メンテナンス')
-                        <a class="c-category-label" href="{{route('news.index_maintenance')}}">{{$news->news_category}}</a>
-                      @elseif($news->news_category == 'スペシャル')
-                        <a class="c-category-label" href="{{route('news.index_special')}}">{{$news->news_category}}</a>
-                      @elseif($news->news_category == 'その他')
-                        <a class="c-category-label" href="{{route('news.index_etc')}}">{{$news->news_category}}</a>
-                      @else
-                        <a class="c-category-label" href="{{route('news.index')}}">{{$news->news_category}}</a>
-                      @endif
-                    </div>
-                  </div>
-                  <div class="p-article-detail__ttl">
-                    <h1 class="c-article-ttl">{{$news->news_title}}</h1>
-                  </div>
+              <div class="p-article-detail">
+                <div class="p-article-detail__content">
+                  <div class="c-article c-article--topics">
+                    <header class="c-article__header">
+                      <div class="c-article__info">
+                        <div class="c-article__info-item">
+                          <p class="c-date">{{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}</p>
+                        </div>
+                        <div class="c-article__info-item">
+                          @if($news->news_category == '公式ニュース')
+                            <a class="c-category-label" href="{{route('news.index_news')}}">{{$news->news_category}}</a>
+                          @elseif($news->news_category == '公式イベント')
+                            <a class="c-category-label" href="{{route('index_event')}}">{{$news->news_category}}</a>
+                          @elseif($news->news_category == 'メディア')
+                            <a class="c-category-label" href="{{route('news.index_media')}}">{{$news->news_category}}</a>
+                          @elseif($news->news_category == 'お知らせ')
+                            <a class="c-category-label" href="{{route('news.index_info')}}">{{$news->news_category}}</a>
+                          @elseif($news->news_category == 'アップデート')
+                            <a class="c-category-label" href="{{route('news.index_update')}}">{{$news->news_category}}</a>
+                          @elseif($news->news_category == 'メンテナンス')
+                            <a class="c-category-label" href="{{route('news.index_maintenance')}}">{{$news->news_category}}</a>
+                          @elseif($news->news_category == 'スペシャル')
+                            <a class="c-category-label" href="{{route('news.index_special')}}">{{$news->news_category}}</a>
+                          @elseif($news->news_category == 'その他')
+                            <a class="c-category-label" href="{{route('news.index_etc')}}">{{$news->news_category}}</a>
+                          @else
+                            <a class="c-category-label" href="{{route('news.index')}}">{{$news->news_category}}</a>
+                          @endif
+                        </div>
+                      </div>
+                      <div class="p-article-detail__ttl">
+                        <h1 class="c-article-ttl">{{$news->news_title}}</h1>
+                      </div>
                   <!-- タグ(要整理)は当面非表示に -->
-                  {{-- <div class="p-article-detail__tag">
-                    <ul class="c-tags">
+                  {{-- <div class="c-article__tag">
+                        <ul class="c-tags">
                       <li class="c-tags__item"><a href="#">#{{$news->news_tag1}}</a></li>
                       @if($news->news_tag2)<li class="c-tags__item"><a href="#">#{{$news->news_tag2}}</a></li>@endif
                       @if($news->news_tag3)<li class="c-tags__item"><a href="#">#{{$news->news_tag3}}</a></li>@endif
                       @if($news->news_tag4)<li class="c-tags__item"><a href="#">#{{$news->news_tag4}}</a></li>@endif
                       @if($news->news_tag5)<li class="c-tags__item"><a href="#">#{{$news->news_tag5}}</a></li>@endif
                     </ul>
-                  </div> --}}
+                      </div> --}}
                 </header>
                 <div class="p-article-detail__content">
                   <div class="p-article-detail__slide">
@@ -227,11 +448,14 @@
               </article>
             </div>
 {{-- --------------------------------------------------------------------------- --}}
+*/
+@endphp
+
           </div>
         </div>
-        
+{{--         
         <br>
-        <p style="text-align:center;"><a href="{{url()->previous()}}">一覧へ戻る</a></p>
+        <p style="text-align:center;"><a href="{{url()->previous()}}">一覧へ戻る</a></p> --}}
 
         {{-- 【共通】バナー広告 --}}
         @include('subview.banner')

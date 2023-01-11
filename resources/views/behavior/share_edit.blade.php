@@ -41,12 +41,12 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-ttl c-category-ttl--topics">
-                <span class="c-category-ttl__en">Behavior</span>
+              <p class="c-category-title c-category-title--topics">
+                <span class="c-category-title__en">Behavior</span>
                 @if(session('process') == "insert")
-                    <span class="c-category-ttl__jp">ふるまい共有［新規登録］</span>
+                    <span class="c-category-title__jp">ふるまい共有［新規登録］</span>
                 @else
-                <span class="c-category-ttl__jp">ふるまい共有［編集］</span>
+                <span class="c-category-title__jp">ふるまい共有［編集］</span>
                 @endif
               </p>
             </div>
