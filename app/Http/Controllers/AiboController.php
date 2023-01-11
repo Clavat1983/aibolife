@@ -689,7 +689,7 @@ class AiboController extends Controller
         //アイコン
         if (request('aibo_icon')){
             //古い画像は削除
-            if ($aibo->aibo_icon!=='default.jpg') {
+            if ($aibo->aibo_icon!=='default.jpg' && $del_flg == 0) {
                 $old='public/aibo_icon/'.$aibo->aibo_icon;
                 Storage::delete($old);
             }
@@ -716,7 +716,7 @@ class AiboController extends Controller
         //フレンドQRコード
         if (request('aibo_friend_qr')){
             //古い画像は削除
-            if ($aibo->aibo_friend_qr!=='default.jpg') {
+            if ($aibo->aibo_friend_qr!=='default.jpg' && $del_flg == 0) {
                 $old='public/aibo_friend_qr/'.$aibo->aibo_friend_qr;
                 Storage::delete($old);
             }
