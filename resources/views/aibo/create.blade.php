@@ -43,12 +43,12 @@
             <div class="l-content__header">
             @if($owner->aibos()->count() == 0)
                 <!-- 新規登録 -->
-                <p class="c-category-title c-category-title--topics">
+                <p class="c-category-title c-category-title--mypage">
                 <span class="c-category-title__en">Registration</span><!--新規登録-->
                 <span class="c-category-title__jp">利用登録［aibo登録］</span>
                 </p>
             @else
-                <p class="c-category-title c-category-title--topics"><!--マイページ-->
+                <p class="c-category-title c-category-title--mypage"><!--マイページ-->
                 <span class="c-category-title__en">My Page</span>
                 <span class="c-category-title__jp">マイページ［aibo追加］</span>
                 </p>

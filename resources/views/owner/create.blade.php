@@ -41,7 +41,7 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--topics">
+              <p class="c-category-title c-category-title--mypage">
                 <span class="c-category-title__en">Registration</span>
                 <span class="c-category-title__jp">利用登録［オーナー登録］</span>
               </p>

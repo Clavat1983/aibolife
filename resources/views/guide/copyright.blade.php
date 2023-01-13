@@ -41,7 +41,7 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--topics">
+              <p class="c-category-title c-category-title--guide">
                 <span class="c-category-title__en">Copyrights</span>
                 <span class="c-category-title__jp">権利表記</span>
               </p>

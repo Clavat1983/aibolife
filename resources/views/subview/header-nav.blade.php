@@ -87,9 +87,9 @@
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('news.index_etc')}}">その他</a>
                               </li>
-                              {{-- <li class="l-header__sub-menu-item">
+                              <li class="l-header__sub-menu-item">
                                 <a href="{{route('news.search')}}">検索</a>
-                              </li> --}}
+                              </li>
                             </ul>
                           </dd>
                         </dl>
@@ -117,9 +117,9 @@
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('diary.bookmark')}}">お気に入りの日記</a>
                               </li>
-                              {{-- <li class="l-header__sub-menu-item">
+                              <li class="l-header__sub-menu-item">
                                 <a href="{{route('diary.search')}}">検索</a>
-                              </li> --}}
+                              </li>
                             </ul>
                           </dd>
                         </dl>
@@ -146,10 +146,10 @@
                               </li>
                               {{-- <li class="l-header__sub-menu-item">
                                 <a href="#">芸能人オーナー<sup> 未</sup></a>
-                              </li>
+                              </li> --}}
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('aibo.search')}}">検索</a>
-                              </li> --}}
+                              </li>
                             </ul>
                           </dd>
                         </dl>
@@ -388,7 +388,7 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_maintenance')}}">メンテナンス</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_special')}}">特別企画</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_etc')}}">その他</a></li>
-                {{-- <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.search')}}">検索</a></li> --}}
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.search')}}">検索</a></li>
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
@@ -399,7 +399,7 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.archive')}}">過去の日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.commented')}}">コメントをつけた日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.bookmark')}}">お気に入りの日記</a></li>
-                {{-- <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.search')}}">検索</a></li> --}}
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.search')}}">検索</a></li>
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
@@ -410,7 +410,7 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.list_area')}}">居住地マップ</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.newface')}}">新しいお友達</a></li>
                 {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">芸能人オーナー<sup> 未</sup></a></li> --}}
-                {{-- <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.search')}}">検索</a></li> --}}
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('aibo.search')}}">検索</a></li>
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">

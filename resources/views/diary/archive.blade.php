@@ -41,7 +41,7 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--topics">
+              <p class="c-category-title c-category-title--diary">
                 <span class="c-category-title__en">Archive</span>
                 <span class="c-category-title__jp">過去の日記</span>
               </p>

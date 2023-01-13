@@ -41,7 +41,7 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--topics">
+              <p class="c-category-title c-category-title--guide">
                 <span class="c-category-title__en">Policy</span>
                 <span class="c-category-title__jp">プライバシーポリシー</span>
               </p>

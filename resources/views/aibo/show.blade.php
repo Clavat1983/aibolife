@@ -41,7 +41,7 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--topics">
+              <p class="c-category-title c-category-title--friend">
                 <span class="c-category-title__en">Friends</span>
                 <span class="c-category-title__jp">{{$aibo->aibo_name}}</span>
               </p>
