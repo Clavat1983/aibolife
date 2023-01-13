@@ -123,8 +123,8 @@ Route::middleware(['verified'])->group(function(){
         });
         //一般ユーザ
         Route::get('/topics', 'NewsController@index')->name('news.index');//最新情報一覧（すべて）
-        Route::get('/topics/news', 'NewsController@index_news')->name('news.index_news');//カテゴリ別（公式ニュース）
-        Route::get('/topics/event', 'NewsController@index_event')->name('news.index_event');//カテゴリ別（公式イベント）
+        Route::get('/topics/news', 'NewsController@index_news')->name('news.index_news');//カテゴリ別（ニュース）
+        Route::get('/topics/event', 'NewsController@index_event')->name('news.index_event');//カテゴリ別（イベント）
         Route::get('/topics/media', 'NewsController@index_media')->name('news.index_media');//カテゴリ別（メディア）
         Route::get('/topics/info', 'NewsController@index_info')->name('news.index_info');//カテゴリ別（お知らせ）
         Route::get('/topics/update', 'NewsController@index_update')->name('news.index_update');//カテゴリ別（アップデート）

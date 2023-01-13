@@ -55,7 +55,7 @@
                                 <td style="border:solid 1px; padding:10px;">
                                     @php
                                         $ary = [
-                                            '公式ニュース',
+                                            'ニュース',
                                             'イベント',
                                             'メディア',
                                             'お知らせ',

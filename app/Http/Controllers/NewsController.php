@@ -36,7 +36,7 @@ class NewsController extends Controller
     {
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $category = '公式ニュース';
+            $category = 'ニュース';
             $news_all = News::where('news_category',$category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
             
             //【全ビュー共通処理】未読通知数

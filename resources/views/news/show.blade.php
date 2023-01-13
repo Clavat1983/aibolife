@@ -55,9 +55,9 @@
                             <p class="c-date">{{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}</p>
                           </div>
                           <div class="c-article__info-item">
-                            @if($news->news_category == '公式ニュース')
+                            @if($news->news_category == 'ニュース')
                               <a class="c-category-label" href="{{route('news.index_news')}}">{{$news->news_category}}</a>
-                            @elseif($news->news_category == '公式イベント')
+                            @elseif($news->news_category == 'イベント')
                               <a class="c-category-label" href="{{route('index_event')}}">{{$news->news_category}}</a>
                             @elseif($news->news_category == 'メディア')
                               <a class="c-category-label" href="{{route('news.index_media')}}">{{$news->news_category}}</a>
@@ -205,18 +205,18 @@
                   <div class="p-article-detail__footer">
                     <ul class="c-pager-buttons">
                       <li>
-                        <a class="c-btn" href="#">
+                        {{-- <a class="c-btn" href="#">
                           <span class="c-icon-text c-icon-text--prev">
                             前の記事
                           </span>
-                        </a>
+                        </a> --}}
                       </li>
                       <li>
-                        <a class="c-btn" href="#">
+                        {{-- <a class="c-btn" href="#">
                           <span class="c-icon-text c-icon-text--next">
                             後の記事
                           </span>
-                        </a>
+                        </a> --}}
                       </li>
                       <li><a class="c-btn02" href="{{url()->previous()}}">一覧</a></li>
                     </ul>
@@ -275,9 +275,9 @@
                           <p class="c-date">{{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}</p>
                         </div>
                         <div class="c-article__info-item">
-                          @if($news->news_category == '公式ニュース')
+                          @if($news->news_category == 'ニュース')
                             <a class="c-category-label" href="{{route('news.index_news')}}">{{$news->news_category}}</a>
-                          @elseif($news->news_category == '公式イベント')
+                          @elseif($news->news_category == 'イベント')
                             <a class="c-category-label" href="{{route('index_event')}}">{{$news->news_category}}</a>
                           @elseif($news->news_category == 'メディア')
                             <a class="c-category-label" href="{{route('news.index_media')}}">{{$news->news_category}}</a>
