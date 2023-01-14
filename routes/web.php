@@ -95,6 +95,11 @@ Route::middleware(['verified'])->group(function(){
     Route::put('/behavior/share/{behavior}', 'BehaviorShareController@update')->name('behaviorshare.update');//変更(DB更新)
     Route::get('/behavior/share/{behavior}', 'BehaviorShareController@show')->name('behaviorshare.show'); //個別画面(表示)
 
+    //コミュニティ(掲示板)
+    Route::get('/community/board/talk', 'BoardController@index_talk')->name('board.index_talk'); //一覧画面
+    Route::get('/community/board/problem', 'BoardController@index_problem')->name('board.index_problem'); //一覧画面
+    Route::get('/community/board/club', 'BoardController@index_club')->name('board.index_club'); //一覧画面
+
 
     //イベントカレンダー
     Route::get('/useful/event/calendar', 'EventCalendarController@index')->name('eventcalendar.index');//イベントカレンダー（すべて）

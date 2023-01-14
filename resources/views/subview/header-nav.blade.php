@@ -196,18 +196,15 @@
                           <dd class="l-header__pulldown-detail">
                             <ul class="l-header__sub-menu">
                               <li class="l-header__sub-menu-item">
-                                <a href="#">準備中</a>
+                                <a href="{{route('board.index_talk')}}">おしゃべり広場</a>
+                              </li>
+                              <li class="l-header__sub-menu-item">
+                                <a href="{{route('board.index_problem')}}">お悩み相談</a>
+                              </li>
+                              <li class="l-header__sub-menu-item">
+                                <a href="{{route('board.index_club')}}">クラブ活動</a>
                               </li>
                               {{-- <li class="l-header__sub-menu-item">
-                                <a href="#">おしゃべり広場<sup> 未</sup></a>
-                              </li>
-                              <li class="l-header__sub-menu-item">
-                                <a href="#">お悩み相談<sup> 未</sup></a>
-                              </li>
-                              <li class="l-header__sub-menu-item">
-                                <a href="#">クラブ活動<sup> 未</sup></a>
-                              </li>
-                              <li class="l-header__sub-menu-item">
                                 <a href="#">オフ会<sup> 未</sup></a>
                               </li>
                               <li class="l-header__sub-menu-item">
@@ -428,11 +425,10 @@
           <li class="l-sp-nav__menu-item">
             <a class="l-sp-nav__btn l-sp-nav__btn--community js-sp-navigation-button" href="#spCommunity">コミュニティ</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                <li class="l-sp-nav__sub-menu-item"><a href="#">準備中</a></li>
-                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">おしゃべり広場<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">お悩み相談<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">クラブ活動<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">オフ会<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('board.index_talk')}}">おしゃべり広場</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('board.index_problem')}}">お悩み相談</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('board.index_club')}}">クラブ活動</a></li>
+                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">オフ会<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">フリーマーケット<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">里親マッチング<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">チャリティ<sup> 未</sup></a></li> --}}
