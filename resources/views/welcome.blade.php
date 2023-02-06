@@ -77,7 +77,7 @@
                 <div class="c-panel__footer">
                     <ul class="c-btn-list">
                       <li class="c-btn-list__item">
-                        <a href="{{route('register')}}" style="text-decoration:none;"><button class="c-btn" style="background-color:#737373;">アカウント作成</button></a>
+                        <a href="{{route('register')}}" style="text-decoration:none;"><button class="c-btn">アカウント作成</button></a>
                       </li>
                     </ul>
                   </div>
@@ -95,7 +95,7 @@
                 <div class="c-panel__footer">
                     <ul class="c-btn-list">
                       <li class="c-btn-list__item">
-                          <a href="{{route('login')}}" style="text-decoration: none;"><button class="c-btn" style="background-color:#737373;">ログイン</button></a>
+                          <a href="{{route('login')}}" style="text-decoration: none;"><button class="c-btn">ログイン</button></a>
                         </li>
                     </ul>
                   </div>

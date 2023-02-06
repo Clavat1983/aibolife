@@ -201,7 +201,7 @@
       });
       </script>
 @else
-ありません
+      <div class="p-article-index__article"><p>ありません</p></div>
 @endif
 
 

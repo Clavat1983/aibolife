@@ -282,7 +282,9 @@
                     <li class="l-header__info-item">
                       <a class="l-header__notification" href="{{ route('notification.index') }}">
                       <img src="{{asset('img/ico_notification.svg')}}" height="44" alt="通知"/>
-                      <span class="l-header__notification-badge">{{$bell_count}}</span>
+                        @if(isset( $bell_count ))
+                          <span class="l-header__notification-badge">{{$bell_count}}</span>
+                        @endif
                       </a>
                     </li>
 
