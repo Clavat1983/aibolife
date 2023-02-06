@@ -99,6 +99,13 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/community/board/talk', 'BoardController@index_talk')->name('board.index_talk'); //一覧画面
     Route::get('/community/board/problem', 'BoardController@index_problem')->name('board.index_problem'); //一覧画面
     Route::get('/community/board/club', 'BoardController@index_club')->name('board.index_club'); //一覧画面
+    Route::get('/community/board/talk/create', 'BoardController@create_talk')->name('board.create_talk'); //一覧画面
+    Route::get('/community/board/problem/create', 'BoardController@create_problem')->name('board.create_problem'); //一覧画面
+    Route::get('/community/board/club/create', 'BoardController@create_club')->name('board.create_club'); //一覧画面
+    Route::post('/community/board/store', 'BoardController@store')->name('board.store'); //新規-DB登録
+    Route::get('/community/board/{board}', 'BoardController@show')->name('board.show'); //個別画面(表示)
+
+    Route::post('/community/board/comment/store', 'BoardCommentController@store')->name('boardcomment.store'); //(コメント新規-DB登録)
 
 
     //イベントカレンダー
@@ -162,6 +169,14 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/guide/staff', 'GuideController@staff')->name('guide.staff');//運営メンバー
     Route::get('/guide/faq', 'GuideController@faq')->name('guide.faq');//よくある質問
     Route::get('/guide/copyright', 'GuideController@copyright')->name('guide.copyright');//権利表記
+
+    //お役立ち情報(一部)
+    Route::get('/useful/food', 'UsefulController@food')->name('useful.food');//ごはん
+    Route::get('/useful/fashion', 'UsefulController@fashion')->name('useful.fashion');//ファッション
+    Route::get('/useful/event', 'UsefulController@event')->name('useful.event');//イベント概要（カレンダーではない）
+    Route::get('/useful/goods', 'UsefulController@goods')->name('useful.goods');//グッズ
+    Route::get('/useful/shop', 'UsefulController@shop')->name('useful.shop');//店舗・施設
+    Route::get('/useful/history', 'UsefulController@history')->name('useful.history');//歴史
 
 
     //お問い合わせ

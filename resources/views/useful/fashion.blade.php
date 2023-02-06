@@ -41,9 +41,9 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--community">
-                <span class="c-category-title__en">Board</span>
-                <span class="c-category-title__jp">おしゃべり広場</span>
+              <p class="c-category-title c-category-title--useful">
+                <span class="c-category-title__en">Fashion</span>
+                <span class="c-category-title__jp">ファッション</span>
               </p>
             </div>
             <div class="l-content__body">

@@ -41,13 +41,20 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--community">
-                <span class="c-category-title__en">Board</span>
-                <span class="c-category-title__jp">お悩み相談</span>
+              <p class="c-category-title c-category-title--useful">
+                <span class="c-category-title__en">Event</span>
+                <span class="c-category-title__jp">イベント</span>
               </p>
             </div>
             <div class="l-content__body">
               準備中
+
+              <hr>
+
+              <h2>イベントカレンダー</h2>
+              <p>現在開催中のイベントは<a href="{{route('eventcalendar.index')}}">【こちら】</a>をご確認ください。（要ログイン）</p>
+
+
             </div>
 
 {{-- --------------------------------------------------------------------------- --}}

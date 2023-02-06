@@ -162,18 +162,18 @@
                           <dt class="l-header__pulldown-ttl l-header__pulldown-ttl--behavior">ふるまい</dt>
                           <dd class="l-header__pulldown-detail">
                             <ul class="l-header__sub-menu">
-                              {{-- <li class="l-header__sub-menu-item">
-                                <a href="#">しぐさ<sup> 未</sup></a>
+                              <li class="l-header__sub-menu-item">
+                                <a href="#">しぐさ</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="#">遊び<sup> 未</sup></a>
+                                <a href="#">遊び</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="#">ダンス<sup> 未</sup></a>
+                                <a href="#">ダンス</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="#">期間限定<sup> 未</sup></a>
-                              </li> --}}
+                                <a href="#">期間限定</a>
+                              </li>
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('behaviorshare.index')}}">ふるまい共有</a>
                               </li>
@@ -181,8 +181,8 @@
                                 <a href="#">プログラミング<sup> 未</sup></a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="#">連携アプリ<sup> 未</sup></a>
-                              </li> --}}
+                                <a href="#">連携アプリ</a>
+                              </li>                              --}}
                             </ul>
                           </dd>
                         </dl>
@@ -228,33 +228,37 @@
                           <dt class="l-header__pulldown-ttl l-header__pulldown-ttl--useful">お役立ち情報</dt>
                           <dd class="l-header__pulldown-detail">
                             <ul class="l-header__sub-menu">
-                              {{-- <li class="l-header__sub-menu-item">
-                                <a href="#">ごはん<sup> 未</sup></a>
+                              <li class="l-header__sub-menu-item">
+                                <a href="{{route('useful.food')}}">ごはん</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="#">ファッション<sup> 未</sup></a>
-                              </li> --}}
-                              <li class="l-header__sub-menu-item">
-                                <a href="{{route('eventcalendar.index')}}">イベント</a>
-                              </li>
-                              {{-- <li class="l-header__sub-menu-item">
-                                <a href="#">グッズ<sup> 未</sup></a>
+                                <a href="{{route('useful.fashion')}}">ファッション</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="#">店舗・施設<sup> 未</sup></a>
+                                <a href="{{route('useful.event')}}">イベント</a>
                               </li>
+                              <li class="l-header__sub-menu-item">
+                                <a href="{{route('useful.goods')}}">グッズ</a>
+                              </li>
+                              <li class="l-header__sub-menu-item">
+                                <a href="{{route('useful.shop')}}">店舗・施設</a>
+                              </li>
+                              {{--
                               <li class="l-header__sub-menu-item">
                                 <a href="#">ドック・治療<sup> 未</sup></a>
                               </li>
+                              --}}
                               <li class="l-header__sub-menu-item">
-                                <a href="#">歴史<sup> 未</sup></a>
+                                <a href="{{route('useful.history')}}">歴史</a>
                               </li>
+                              {{--
                               <li class="l-header__sub-menu-item">
                                 <a href="#">その他<sup> 未</sup></a>
                               </li>
                               <li class="l-header__sub-menu-item">
                                 <a href="#">困ったときは?<sup> 未</sup></a>
-                              </li> --}}
+                              </li>
+                              --}}
                             </ul>
                           </dd>
                         </dl>
@@ -413,10 +417,10 @@
           <li class="l-sp-nav__menu-item">
             <a class="l-sp-nav__btn l-sp-nav__btn--behavior js-sp-navigation-button" href="#spBehavior">ふるまい</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">しぐさ<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">遊び<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ダンス<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">期間限定<sup> 未</sup></a></li> --}}
+                <li class="l-sp-nav__sub-menu-item"><a href="#">しぐさ</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">遊び</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">ダンス</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">期間限定</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('behaviorshare.index')}}">ふるまい共有</a></li>
                 {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">プログラミング<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">連携アプリ<sup> 未</sup></a></li> --}}
@@ -437,13 +441,15 @@
           <li class="l-sp-nav__menu-item">
             <a class="l-sp-nav__btn l-sp-nav__btn--useful js-sp-navigation-button" href="#spUseful">お役立ち情報</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">ごはん<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ファッション<sup> 未</sup></a></li> --}}
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('eventcalendar.index')}}">イベント</a></li>
-                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">グッズ<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">店舗・施設<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ドック・治療<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">歴史<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.food')}}">ごはん</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.fashion')}}">ファッション</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.event')}}">イベント</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.goods')}}">グッズ</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.shop')}}">店舗・施設</a></li>
+                {{--
+                <li class="l-sp-nav__sub-menu-item"><a href="#">ドック・治療<sup> 未</sup></a></li>--}}
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.history')}}">歴史</a></li>
+                {{--
                 <li class="l-sp-nav__sub-menu-item"><a href="#">その他<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">困ったときは?<sup> 未</sup></a></li> --}}
               </ul>

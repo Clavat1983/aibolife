@@ -24,6 +24,11 @@ class CreateBoardsTable extends Migration
             $table->string('image3')->nullable();
             $table->string('image4')->nullable();
             $table->string('image5')->nullable();
+            $table->string('club_name1')->nullable(); //部活名
+            $table->string('club_name2')->nullable(); //部活名
+            $table->string('club_name3')->nullable(); //部活名
+            $table->string('club_name4')->nullable(); //部活名
+            $table->string('club_name5')->nullable(); //部活名
             $table->integer('open_flag')->default(1);
             $table->datetime('last_res_dt'); //最後にレスが付いた日時
             $table->timestamps();

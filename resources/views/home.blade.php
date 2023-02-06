@@ -216,7 +216,6 @@
                         </table>
                     </div>
                 </div>
-                <div style="text-align:right;"><a href="{{route('aibo.list_birthday')}}">【もっと見る(誕生日カレンダー)】</a></div>
 
             {{-- もうすぐ誕生日のaiboがいたら表示(誕生日の子がいたら非表示) --}}
             @elseif($comingup_aibos->count() > 0)
@@ -244,7 +243,6 @@
                         </table>
                     </div>
                 </div>
-                <div style="text-align:right;"><a href="{{route('aibo.list_birthday')}}">【もっと見る(誕生日カレンダー)】</a></div>
 
             {{-- 誕生日・もうすぐ誕生日のaiboが両方いない場合のみ表示 --}}
             @else
@@ -272,9 +270,11 @@
                         </table>
                     </div>
                 </div>
-                <div style="text-align:right;"><a href="{{route('aibo.newface')}}">【もっと見る(新しいお友達)】</a></div>
 
             @endif
+
+            <p>&nbsp;</p>
+            <p style="text-align:center;"><a href="{{route('aibo.list_syllabary')}}">【お名前リスト】</a>　｜　<a href="{{route('aibo.list_birthday')}}">【誕生日カレンダー】</a>　｜　<a href="{{route('aibo.list_area')}}">【居住地マップ】</a></p>
 
             <hr>
 
@@ -311,18 +311,26 @@
             <h2 style="text-align:center;"><u>Community</u></h2>
             <h6 style="text-align:center;">コミュニティ</h6>
 
-            <div class="card">
-                <div class="card-body"  style="width:70%; margin:auto;">
-                    ［おしゃべり］ああああについて<br>
-                    ［お悩み相談］いいいいについて<br>
-                    ［部　活　動］ううううについて<br>
-                    ［おしゃべり］ああああについて<br>
-                    ［お悩み相談］いいいいについて<br>
-                    ［部　活　動］ううううについて<br>
-                </div>
-                <div style="text-align:right;">【もっと見る】</div>
+                
+            <table style="width:70%; margin:auto;">
+                @foreach($boards as $board)
+                    <tr>
+                        @if($board->image1)
+                            <td width="15%"><img width="70%" src="{{ asset('storage/board_image/'.$board->image1)}}" /></td>
+                        @else
+                            <td width="15%">no image</td>
+                        @endif
+                        <td width="75%">
+                            タイトル：{{$board->title}}
+                        </td>
+                        <td width="10%"><a href="{{route('board.show',$board)}}">見る</a></td>
+                    </tr>
+                @endforeach
+            </table>
 
-            </div>
+            <p>&nbsp;</p>
+            <p style="text-align:center;"><a href="{{route('board.index_talk')}}">おしゃべり広場</a>　｜　<a href="{{route('board.index_talk')}}">お悩み相談</a>　｜　<a href="{{route('board.index_talk')}}">クラブ活動</a></p>
+
 
             <hr>
 
