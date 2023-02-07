@@ -73,15 +73,21 @@
                     瞳：{{$aibo->aibo_eye}}<br>
                     声：{{$aibo->aibo_voice}}<br>
 
-                    @if($aibo->aibo_ear == '')
-                        耳：未登録<br>
+                    @if($aibo->aibo_ear_left == '')
+                        耳（左）：未登録<br>
                     @else
-                        耳：{{$aibo->aibo_ear}}<br>
+                        耳（左）：{{$aibo->aibo_ear_left}}<br>
+                    @endif
+
+                    @if($aibo->aibo_ear_right == '')
+                        耳（右）：未登録<br>
+                    @else
+                        耳（右）：{{$aibo->aibo_ear_right}}<br>
                     @endif
 
                     利き手：{{$aibo->aibo_hand}}<br>
 
-                    @if($aibo->aibo_ear == '')
+                    @if($aibo->aibo_tail == '')
                         尻尾：未登録<br>
                     @else
                         尻尾：{{$aibo->aibo_tail}}<br>

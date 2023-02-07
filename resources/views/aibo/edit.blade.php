@@ -179,11 +179,21 @@
                         </div>
                         <p>&nbsp;</p>
                         <div>
-                            <label for="aibo_ear">aiboの耳</label>
-                            <select id="aibo_ear" name="aibo_ear">
+                            <label for="aibo_ear_left">aiboの耳（左）</label>
+                            <select id="aibo_ear_left" name="aibo_ear_left">
                                 <option disabled="disabled" selected>選択してください</option>
                                 @foreach (config('const.aibo_ear_tail_list') as $value)
-                                    <option value='{{$value}}' @if($value === old('aibo_ear', $aibo->aibo_ear)) selected @endif>{{$value}}</option>
+                                    <option value='{{$value}}' @if($value === old('aibo_ear_left', $aibo->aibo_ear_left)) selected @endif>{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <p>&nbsp;</p>
+                        <div>
+                            <label for="aibo_ear_right">aiboの耳（右）</label>
+                            <select id="aibo_ear_right" name="aibo_ear_right">
+                                <option disabled="disabled" selected>選択してください</option>
+                                @foreach (config('const.aibo_ear_tail_list') as $value)
+                                    <option value='{{$value}}' @if($value === old('aibo_ear_right', $aibo->aibo_ear_right)) selected @endif>{{$value}}</option>
                                 @endforeach
                             </select>
                         </div>

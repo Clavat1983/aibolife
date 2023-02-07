@@ -194,11 +194,21 @@
                             </div>
                             <p>&nbsp;</p>
                             <div>
-                                <label for="aibo_ear">耳</label>
-                                <select id="aibo_ear" name="aibo_ear">
+                                <label for="aibo_ear_left">耳（左）</label>
+                                <select id="aibo_ear_left" name="aibo_ear_left">
                                     <option disabled="disabled" selected>選択してください</option>
                                     @foreach (config('const.aibo_ear_tail_list') as $value)
-                                        <option value='{{$value}}' @if($value === old('aibo_ear')) selected @endif>{{$value}}</option>
+                                        <option value='{{$value}}' @if($value === old('aibo_ear_left')) selected @endif>{{$value}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <p>&nbsp;</p>
+                            <div>
+                                <label for="aibo_ear_right">耳（右）</label>
+                                <select id="aibo_ear_right" name="aibo_ear_right">
+                                    <option disabled="disabled" selected>選択してください</option>
+                                    @foreach (config('const.aibo_ear_tail_list') as $value)
+                                        <option value='{{$value}}' @if($value === old('aibo_ear_right')) selected @endif>{{$value}}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -442,7 +442,8 @@ class AiboController extends Controller
             'aibo_personality' => 'required',
             'aibo_eye' => 'required',
             'aibo_voice' => 'required',
-            'aibo_ear' => 'required',
+            'aibo_ear_left' => 'required',
+            'aibo_ear_right' => 'required',
             'aibo_hand' => 'required',
             'aibo_tail' => 'required',
             'aibo_toy_ball_flag' => '',
@@ -489,7 +490,8 @@ class AiboController extends Controller
         $aibo->aibo_personality = $inputs['aibo_personality'];
         $aibo->aibo_eye = $inputs['aibo_eye'];
         $aibo->aibo_voice = $inputs['aibo_voice'];
-        $aibo->aibo_ear = $inputs['aibo_ear'];
+        $aibo->aibo_ear_left = $inputs['aibo_ear_left'];
+        $aibo->aibo_ear_right = $inputs['aibo_ear_right'];
         $aibo->aibo_hand = $inputs['aibo_hand'];
         $aibo->aibo_tail = $inputs['aibo_tail'];
         $aibo->aibo_toy_ball_flag = isset($inputs['aibo_toy_ball_flag']) ? true:false;
@@ -605,7 +607,8 @@ class AiboController extends Controller
             'aibo_personality' => 'required',
             'aibo_eye' => 'required',
             'aibo_voice' => 'required',
-            'aibo_ear' => 'required',
+            'aibo_ear_left' => 'required',
+            'aibo_ear_right' => 'required',
             'aibo_hand' => 'required',
             'aibo_tail' => 'required',
             'aibo_toy_ball_flag' => '',
@@ -653,7 +656,8 @@ class AiboController extends Controller
         $aibo->aibo_personality = $inputs['aibo_personality'];
         $aibo->aibo_eye = $inputs['aibo_eye'];
         $aibo->aibo_voice = $inputs['aibo_voice'];
-        $aibo->aibo_ear = $inputs['aibo_ear'];
+        $aibo->aibo_ear_left = $inputs['aibo_ear_left'];
+        $aibo->aibo_ear_right = $inputs['aibo_ear_right'];
         $aibo->aibo_hand = $inputs['aibo_hand'];
         $aibo->aibo_tail = $inputs['aibo_tail'];
         $aibo->aibo_toy_ball_flag = isset($inputs['aibo_toy_ball_flag']) ? true:false;
