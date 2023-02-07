@@ -25,7 +25,7 @@ class BoardController extends Controller
 
             //掲示板の「おしゃべり広場(category:1)」の投稿で、公開状態(open_flag:1)を更新日時順に取得
             $category_id = 1;
-            $boards = Board::where('category_id', $category_id)->where('open_flag', 1)->orderby('last_res_dt','DESC')->get();
+            $boards = Board::where('category_id', $category_id)->where('open_flag', 1)->orderby('last_res_dt','DESC')->paginate(3); //ページネーションあり
 
 
             //【全ビュー共通処理】未読通知数
@@ -45,7 +45,7 @@ class BoardController extends Controller
 
             //掲示板の「お悩み相談(category:2)」の投稿で、公開状態(open_flag:1)を更新日時順に取得
             $category_id = 2;
-            $boards = Board::where('category_id', $category_id)->where('open_flag', 1)->orderby('last_res_dt','DESC')->get();
+            $boards = Board::where('category_id', $category_id)->where('open_flag', 1)->orderby('last_res_dt','DESC')->paginate(3); //ページネーションあり
 
 
             //【全ビュー共通処理】未読通知数
@@ -64,7 +64,7 @@ class BoardController extends Controller
 
             //掲示板の「部活動(category:3)」の投稿で、公開状態(open_flag:1)を更新日時順に取得
             $category_id = 3;
-            $boards = Board::where('category_id', $category_id)->where('open_flag', 1)->orderby('last_res_dt','DESC')->get();
+            $boards = Board::where('category_id', $category_id)->where('open_flag', 1)->orderby('last_res_dt','DESC')->paginate(3); //ページネーションあり
 
 
             //【全ビュー共通処理】未読通知数

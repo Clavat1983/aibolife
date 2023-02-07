@@ -56,15 +56,17 @@
             <div class="l-content__body">
               
               @if($category_id == 1)
-              <p>「おしゃべり広場」は、aiboに関する話題を何でも書き込める掲示板です。</p>
-              <p style="text-align:right; margin-right:15%;"><a href="{{route('board.create_talk')}}"><button>新規投稿</button></a></p>
-            @elseif($category_id == 2)
-              <p>「お悩み相談」は、aiboに関して、わからないことや困ったことを相談できる掲示板です。</p>
-              <p style="text-align:right; margin-right:15%;"><a href="{{route('board.create_problem')}}"><button>新規投稿</button></a></p>
-            @elseif($category_id == 3)
-              <p>「クラブ活動」は、特定の話題（aibo●●部と称する）についての活動報告ができる掲示板です。</p>
-              <p style="text-align:right; margin-right:15%;"><a href="{{route('board.create_club')}}"><button>新規投稿</button></a></p>
-            @endif
+                <p>「おしゃべり広場」は、aiboに関する話題を何でも書き込める掲示板です。</p>
+                <p style="text-align:right; margin-right:15%;"><a href="{{route('board.create_talk')}}"><button>新規投稿</button></a></p>
+              @elseif($category_id == 2)
+                <p>「お悩み相談」は、aiboに関して、わからないことや困ったことを相談できる掲示板です。</p>
+                <p style="text-align:right; margin-right:15%;"><a href="{{route('board.create_problem')}}"><button>新規投稿</button></a></p>
+              @elseif($category_id == 3)
+                <p>「クラブ活動」は、特定の話題（aibo●●部と称する）についての活動報告ができる掲示板です。</p>
+                <p style="text-align:right; margin-right:15%;"><a href="{{route('board.create_club')}}"><button>新規投稿</button></a></p>
+              @endif
+
+              <hr>
 
               @if(count($boards)>0)
                 <table>
@@ -72,6 +74,7 @@
                       @if($category_id == 3)
                         <th>部活名</th>
                       @endif
+                      <th>画像</th>
                       <th>タイトル</th>
                       <th>投稿者</th>
                       <th>本文（最初の100文字くらい）</th>
@@ -90,6 +93,11 @@
                           @if($board->club_name5 != NULL){{$board->club_name5}}@endif
                         </td>
                       @endif
+                      @if($board->image1)
+                          <td width="15%"><img width="70%" src="{{ asset('storage/board_image/'.$board->image1)}}" /></td>
+                      @else
+                          <td width="15%">no image</td>
+                      @endif
                         <td>{{$board->title}}</td>
                         <td>{{$board->owner->owner_name}}</td>
                         <td>{{$board->body}}</td>
@@ -103,7 +111,38 @@
                 <p>ありません<p>
               @endif
 
+              {{-- ページネーション --}}
+              <div class="p-article-index__pagination">
+                <div class="c-pagination">
+                  <div class="c-pagination__btn">
+                    <a class="c-btn" href="{{$boards->previousPageUrl()}}">
+                      <span class="c-icon c-icon--prev">前のページへ</span>
+                    </a>
+                  </div>
+                  <div class="c-pagination__select">
+                    <div class="pagination-select">
+                      <span class="pagination-select__txt">{{$boards->currentPage()}} / {{$boards->lastPage()}} ページ</span>
+                      <select class="pagination-select__input">
+                        @for ($i = 1; $i <= $boards->lastPage(); $i++)
+                            <option value="{{$boards->url($i)}}" @if($i == $boards->currentPage()) selected @endif>{{$i}}</option>
+                        @endfor
+                      </select>
+                    </div>
+                  </div>
+                  <div class="c-pagination__btn">
+                    <a class="c-btn" href="{{$boards->nextPageUrl()}}">
+                      <span class="c-icon c-icon--next">次のページへ</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
 
+              <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+              <script>
+              $('.pagination-select__input').change(function(){
+                  location.href = $(this).val();
+              });
+              </script>
 
             </div>
 

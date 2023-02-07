@@ -56,7 +56,7 @@
                     <p class="p-error-404__text"><b>認証に失敗しました</b><br><span style="font-size:85%;">（IDやパスワードの入力不備）</span></p>
                 </div>
                 <div class="p-error-404__footer">
-                    <p class="p-error-404__text">画面を閉じて再度アクセスしてください<br>この画面が何度も表示される場合は<span class="p-error-404__mark">、</span>発生状況の詳細をご連絡ください</p>
+                    <p class="p-error-404__text">ブラウザを閉じて再度アクセスしてください<br>この画面が何度も表示される場合は<span class="p-error-404__mark">、</span>発生状況の詳細をご連絡ください</p>
                     <p class="p-error-404__button">
                     <a class="c-btn02" href="{{route('contact.index')}}">お問い合わせ</a>
                     </p>

@@ -188,3 +188,9 @@ Route::middleware(['verified'])->group(function(){
     //バナー広告一覧（確認用）
     Route::get('/banner', 'ContactController@banner')->name('contact.banner');
 
+    //上記で存在しないURL（ルート情報）は自動的に404ページにリダイレクトさせる。
+    //デフォルトで404エラーページに飛ばすと、@auth　@guestが効かないため、存在しないルート情報の場合として・・と明示。(fallback route機能)
+    Route::fallback(function(){ 
+        return view('errors.404');
+    });
+
