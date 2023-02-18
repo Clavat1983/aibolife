@@ -138,12 +138,12 @@ Route::middleware(['verified'])->group(function(){
         //一般ユーザ
         Route::get('/topics', 'NewsController@index')->name('news.index');//最新情報一覧（すべて）
         Route::get('/topics/news', 'NewsController@index_news')->name('news.index_news');//カテゴリ別（ニュース）
+        Route::get('/topics/app', 'NewsController@index_app')->name('news.index_app');//カテゴリ別（My aibo）
         Route::get('/topics/event', 'NewsController@index_event')->name('news.index_event');//カテゴリ別（イベント）
         Route::get('/topics/media', 'NewsController@index_media')->name('news.index_media');//カテゴリ別（メディア）
-        Route::get('/topics/app', 'NewsController@index_app')->name('news.index_app');//カテゴリ別（My aibo）
-        Route::get('/topics/update', 'NewsController@index_store')->name('news.index_store');//カテゴリ別（ストア）
-        Route::get('/topics/maintenance', 'NewsController@index_maintenance')->name('news.index_maintenance');//カテゴリ別（障害・メンテ）
+        Route::get('/topics/store', 'NewsController@index_store')->name('news.index_store');//カテゴリ別（ストア）
         Route::get('/topics/special', 'NewsController@index_special')->name('news.index_special');//カテゴリ別（スペシャル）
+        Route::get('/topics/maintenance', 'NewsController@index_maintenance')->name('news.index_maintenance');//カテゴリ別（障害・メンテ）
         Route::get('/topics/etc', 'NewsController@index_etc')->name('news.index_etc');//カテゴリ別（その他）
 
         Route::get('/topics/search', 'NewsController@search')->name('news.search');//検索＆検索結果
