@@ -45,17 +45,17 @@
                 <!-- 新規登録 -->
                 <p class="c-category-title c-category-title--mypage">
                 <span class="c-category-title__en">Registration</span><!--新規登録-->
-                <span class="c-category-title__jp">利用登録［完了］</span>
+                <span class="c-category-title__jp">&nbsp;利用登録［完了］</span>
                 </p>
             @elseif(count($owner->aibos) == 0)
                 <p class="c-category-title c-category-title--mypage"><!--マイページ-->
                 <span class="c-category-title__en">Oops!</span>
-                <span class="c-category-title__jp">これが表示されたらバグ</span>
+                <span class="c-category-title__jp">&nbsp;これが表示されたらバグ</span>
                 </p>
             @else
                 <p class="c-category-title c-category-title--mypage"><!--マイページ-->
                 <span class="c-category-title__en">My Page</span>
-                <span class="c-category-title__jp">マイページ［aibo追加］</span>
+                <span class="c-category-title__jp">&nbsp;マイページ［aibo追加］</span>
                 </p>
             @endif
             </div>

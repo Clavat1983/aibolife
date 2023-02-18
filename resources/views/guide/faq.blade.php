@@ -42,8 +42,8 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--guide">
-                <span class="c-category-title__en">FAQ</span>
-                <span class="c-category-title__jp">よくある質問</span>
+                <span class="c-category-title__en">Guide</span>
+                <span class="c-category-title__jp">&nbsp;はじめに［よくある質問］</span>
               </p>
             </div>
             <div class="l-content__body">

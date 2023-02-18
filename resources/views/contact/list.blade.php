@@ -43,7 +43,7 @@
             <div class="l-content__header">
               <p class="c-category-title c-category-title--mypage">
                 <span class="c-category-title__en">Contact</span>
-                <span class="c-category-title__jp">お問い合わせ</span>
+                <span class="c-category-title__jp">&nbsp;お問い合わせ</span>
               </p>
             </div>
             <div class="l-content__body">

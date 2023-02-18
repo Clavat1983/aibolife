@@ -43,7 +43,7 @@
             <div class="l-content__header">
               <p class="c-category-title c-category-title--diary">
                 <span class="c-category-title__en">Diary</span>
-                <span class="c-category-title__jp">{{$aibo->aibo_name}}の日記</span>
+                <span class="c-category-title__jp">&nbsp;日記［{{$aibo->aibo_name}}］</span>
               </p>
             </div>
             <div class="l-content__body">

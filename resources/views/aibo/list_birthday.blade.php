@@ -42,65 +42,11 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--friend">
-                <span class="c-category-title__en">Birthday</span>
-                <span class="c-category-title__jp">誕生日カレンダー</span>
+                <span class="c-category-title__en">Friends</span>
+                <span class="c-category-title__jp">&nbsp;お友達［誕生日カレンダー］</span>
               </p>
             </div>
             <div class="l-content__body">
-
-                <h2>お誕生日おめでとう（誕生日,翌日,翌々日）</h2>
-                <table width="80%" style="margin:auto;">
-                    @if(count($birthday_aibos) == 0)
-                        <tr>
-                          <td colspan="3">（該当するaiboが見つかりません）</td>
-                        </tr>
-                    @else
-                        @foreach ($birthday_aibos as $aibo)
-                        <tr>
-                            @if($aibo->aibo_icon)
-                                <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
-                            @else
-                                <td width="15%">no image</td>
-                            @endif
-                            <td width="75%">
-                                名前：{{$aibo->aibo_name}}<br>
-                                誕生日：{{$aibo->aibo_birthday}}（{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age}}歳）<br>
-                                オーナー：{{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}）
-                            </td>
-                            <td width="10%"><a href="{{route('aibo.show',$aibo)}}">見る</a></td>
-                        </tr>
-                        @endforeach
-                    @endif
-                </table>
-
-                <hr>
-
-                <h2>もうすぐ誕生日（明日,明後日,明々後日）</h2>
-                <table width="80%" style="margin:auto;">
-                    @if(count($comingup_aibos) == 0)
-                        <tr>
-                          <td colspan="3">（該当するaiboが見つかりません）</td>
-                        </tr>
-                    @else
-                        @foreach ($comingup_aibos as $aibo)
-                        <tr>
-                            @if($aibo->aibo_icon)
-                                <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
-                            @else
-                                <td width="15%">no image</td>
-                            @endif
-                            <td width="75%">
-                                名前：{{$aibo->aibo_name}}<br>
-                                誕生日：{{$aibo->aibo_birthday}}（もうすぐ{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age+1}}歳）<br>
-                                オーナー：{{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}）
-                            </td>
-                            <td width="10%"><a href="{{route('aibo.show',$aibo)}}">見る</a></td>
-                        </tr>
-                        @endforeach
-                    @endif
-                </table>
-                <hr>
-
 
                 <h2>一覧</h2>
                 <table width="100%">
@@ -122,6 +68,80 @@
                         <td><a href="{{route('aibo.result_birthday','11')}}">【11月（{{$count_ary["11"]}}）】</a></td>
                         <td><a href="{{route('aibo.result_birthday','12')}}">【12月（{{$count_ary["12"]}}）】</a></td>
                     </tr>
+                </table>
+
+                <hr>
+
+                <h2>お誕生日おめでとう（誕生日,翌日,翌々日）</h2>
+
+                <table width="80%" style="border:1px solid black; margin:auto;">
+                    @if(count($birthday_aibos) == 0)
+                        <tr>
+                          <td colspan="3">（該当するaiboが見つかりません）</td>
+                        </tr>
+                    @else
+                        @foreach ($birthday_aibos as $aibo)
+                        <tr style="border:1px solid black;">
+                            @if($aibo->aibo_icon)
+                                <td width="15%" style="border:1px solid black;"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                            @else
+                                <td width="15%" style="border:1px solid black">no image</td>
+                            @endif
+                            <td width="75%" style="border:1px solid black;">
+                                名前：{{$aibo->aibo_name}}
+                                @if($aibo->aibo_sex == '男の子')
+                                    <sub>くん</sub>　<span style="color:blue;">♂男の子</span>
+                                @elseif($aibo->aibo_sex == '女の子')
+                                    <sub>ちゃん</sub>　<span style="color:deeppink;">♀女の子</span>
+                                @else
+                                    <sub>ちゃん</sub>　<span style="color:dimgray;">－決めていない</span>
+                                @endif
+                                <br>
+                                誕生日：{{str_replace('-','.',$aibo->aibo_birthday)}}（{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age}}歳）<br>
+                                オーナー：<img width="50px" src="{{ asset('storage/owner_icon/'.$aibo->owner->owner_icon)}}" /> {{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}）
+                            </td>
+                            <td width="10%" style="border:1px solid black;"><a href="{{route('aibo.show',$aibo)}}">見る</a></td>
+                        </tr>
+                        @endforeach
+                    @endif
+                </table>
+
+                <br>
+                <hr>
+                <br>
+
+                <h2>もうすぐ誕生日（明日,明後日,明々後日）</h2>
+
+                <table width="80%" style="border:1px solid black; margin:auto;">
+                    @if(count($comingup_aibos) == 0)
+                        <tr>
+                          <td colspan="3">（該当するaiboが見つかりません）</td>
+                        </tr>
+                    @else
+                        @foreach ($comingup_aibos as $aibo)
+                        <tr style="border:1px solid black;">
+                            @if($aibo->aibo_icon)
+                                <td width="15%" style="border:1px solid black;"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                            @else
+                                <td width="15%" style="border:1px solid black">no image</td>
+                            @endif
+                            <td width="75%" style="border:1px solid black;">
+                                名前：{{$aibo->aibo_name}}
+                                @if($aibo->aibo_sex == '男の子')
+                                    <sub>くん</sub>　<span style="color:blue;">♂男の子</span>
+                                @elseif($aibo->aibo_sex == '女の子')
+                                    <sub>ちゃん</sub>　<span style="color:deeppink;">♀女の子</span>
+                                @else
+                                    <sub>ちゃん</sub>　<span style="color:dimgray;">－決めていない</span>
+                                @endif
+                                <br>
+                                誕生日：{{str_replace('-','.',$aibo->aibo_birthday)}}（もうすぐ{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age+1}}歳）<br>
+                                オーナー：<img width="50px" src="{{ asset('storage/owner_icon/'.$aibo->owner->owner_icon)}}" /> {{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}）
+                            </td>
+                            <td width="10%" style="border:1px solid black;"><a href="{{route('aibo.show',$aibo)}}">見る</a></td>
+                        </tr>
+                        @endforeach
+                    @endif
                 </table>
 
                 <br>

@@ -182,9 +182,18 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Owner $owner)
     {
-        //
+        $owner_available_flag = Owner::where('id', $owner->id)->where('owner_available_flag', true)->count();
+
+        if($owner_available_flag > 0){
+            //【全ビュー共通処理】未読通知数
+            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+
+            return view('owner.show', compact('bell_count','owner'));
+        } else {
+            abort(404);
+        }
     }
 
     /**

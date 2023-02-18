@@ -42,8 +42,8 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--friend">
-                <span class="c-category-title__en">Area</span>
-                <span class="c-category-title__jp">居住地マップ</span>
+                <span class="c-category-title__en">Friends</span>
+                <span class="c-category-title__jp">&nbsp;お友達［居住地マップ］</span>
               </p>
             </div>
             <div class="l-content__body">

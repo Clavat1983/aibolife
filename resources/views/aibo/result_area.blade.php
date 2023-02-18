@@ -42,33 +42,41 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--friend">
-                <span class="c-category-title__en">Area Map</span>
-                <span class="c-category-title__jp">居住地マップ</span>
+                <span class="c-category-title__en">Friends</span>
+                <span class="c-category-title__jp">&nbsp;お友達［居住地マップ］</span>
               </p>
             </div>
             <div class="l-content__body">
 
                 <h2>「{{$pref}}」で暮らしているaibo（{{$aibos->total()}}匹）</h2>
 
-                <table width="80%" style="margin:auto;">
+                <table width="80%" style="border:1px solid black; margin:auto;">
                     @if(count($aibos) == 0)
                         <tr>
                           <td colspan="3">（該当するaiboが見つかりません）</td>
                         </tr>
                     @else
                         @foreach ($aibos as $aibo)
-                        <tr>
+                        <tr style="border:1px solid black;">
                             @if($aibo->aibo_icon)
-                                <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
+                                <td width="15%" style="border:1px solid black;"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
                             @else
-                                <td width="15%">no image</td>
+                                <td width="15%" style="border:1px solid black">no image</td>
                             @endif
-                            <td width="75%">
-                                名前：{{$aibo->aibo_name}}<br>
-                                誕生日：{{$aibo->aibo_birthday}}（{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age}}歳）<br>
-                                オーナー：{{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}）
+                            <td width="75%" style="border:1px solid black;">
+                                名前：{{$aibo->aibo_name}}
+                                @if($aibo->aibo_sex == '男の子')
+                                    <sub>くん</sub>　<span style="color:blue;">♂男の子</span>
+                                @elseif($aibo->aibo_sex == '女の子')
+                                    <sub>ちゃん</sub>　<span style="color:deeppink;">♀女の子</span>
+                                @else
+                                    <sub>ちゃん</sub>　<span style="color:dimgray;">－決めていない</span>
+                                @endif
+                                <br>
+                                誕生日：{{str_replace('-','.',$aibo->aibo_birthday)}}（{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age}}歳）<br>
+                                オーナー：<img width="50px" src="{{ asset('storage/owner_icon/'.$aibo->owner->owner_icon)}}" /> {{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}）
                             </td>
-                            <td width="10%"><a href="{{route('aibo.show',$aibo)}}">見る</a></td>
+                            <td width="10%" style="border:1px solid black;"><a href="{{route('aibo.show',$aibo)}}">見る</a></td>
                         </tr>
                         @endforeach
                     @endif

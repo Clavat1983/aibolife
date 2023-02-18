@@ -42,8 +42,8 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--guide">
-                <span class="c-category-title__en">Staff</span>
-                <span class="c-category-title__jp">運営メンバー</span>
+                <span class="c-category-title__en">Guide</span>
+                <span class="c-category-title__jp">&nbsp;はじめに［運営メンバー］</span>
               </p>
             </div>
             <div class="l-content__body">

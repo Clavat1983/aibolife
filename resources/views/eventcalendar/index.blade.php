@@ -56,8 +56,8 @@
             @endphp
 
               <p class="c-category-title c-category-title--useful">
-                <span class="c-category-title__en">Event</span>
-                <span class="c-category-title__jp">イベントカレンダー［{{$firstday->format('Y')}}年{{$firstday->format('n')}}月］</span>
+                <span class="c-category-title__en">Useful</span>
+                <span class="c-category-title__jp">&nbsp;イベント［{{$firstday->format('Y')}}年{{$firstday->format('n')}}月］</span>
               </p>
             </div>
 

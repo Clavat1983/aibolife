@@ -76,7 +76,7 @@
 
                         <h4>aibo情報</h4>
                         <table width="100%">
-                        @foreach ($owner->aibos as $aibo)
+                        @foreach ($owner->aibos->sortBy('aibo_birthday') as $aibo)
                             <tr>
                                 @if($aibo->aibo_icon)
                                     <td width="15%"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>

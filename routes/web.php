@@ -35,6 +35,8 @@ Route::middleware(['verified'])->group(function(){
     Route::put('/mypage/user/{user}', 'UserController@update')->name('user.update');//変更(DB更新)
 
     //オーナー情報
+    Route::get('/owner/{owner}', 'OwnerController@show')->name('owner.show');//オーナーを個別表示
+
     Route::get('/mypage/owner/transfer', 'OwnerController@transfer')->name('owner.transfer');//オーナー登録(新規か引継ぎか選択)
     Route::get('/mypage/owner/transfer/login', 'OwnerController@transfer_login')->name('owner.transfer_login');//旧ユーザ情報の入力画面
     Route::post('/mypage/owner/transfer/result', 'OwnerController@transfer_result')->name('owner.transfer_result');//旧ユーザ情報の入力画面
@@ -138,8 +140,8 @@ Route::middleware(['verified'])->group(function(){
         Route::get('/topics/news', 'NewsController@index_news')->name('news.index_news');//カテゴリ別（ニュース）
         Route::get('/topics/event', 'NewsController@index_event')->name('news.index_event');//カテゴリ別（イベント）
         Route::get('/topics/media', 'NewsController@index_media')->name('news.index_media');//カテゴリ別（メディア）
-        Route::get('/topics/info', 'NewsController@index_info')->name('news.index_info');//カテゴリ別（お知らせ）
-        Route::get('/topics/update', 'NewsController@index_update')->name('news.index_update');//カテゴリ別（アップデート）
+        Route::get('/topics/app', 'NewsController@index_app')->name('news.index_app');//カテゴリ別（My aibo）
+        Route::get('/topics/update', 'NewsController@index_store')->name('news.index_store');//カテゴリ別（ストア）
         Route::get('/topics/maintenance', 'NewsController@index_maintenance')->name('news.index_maintenance');//カテゴリ別（障害・メンテ）
         Route::get('/topics/special', 'NewsController@index_special')->name('news.index_special');//カテゴリ別（スペシャル）
         Route::get('/topics/etc', 'NewsController@index_etc')->name('news.index_etc');//カテゴリ別（その他）

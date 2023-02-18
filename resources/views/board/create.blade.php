@@ -42,13 +42,13 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--community">
-                <span class="c-category-title__en">Board</span>
+                <span class="c-category-title__en">Community</span>
                 @if($category_id == 1)
-                  <span class="c-category-title__jp">おしゃべり広場［新規投稿］</span>
+                  <span class="c-category-title__jp">&nbsp;コミュニティ［おしゃべり広場］</span>
                 @elseif($category_id == 2)
-                  <span class="c-category-title__jp">お悩み相談［新規投稿］</span>
+                  <span class="c-category-title__jp">&nbsp;コミュニティ［お悩み相談］</span>
                 @elseif($category_id == 3)
-                  <span class="c-category-title__jp">クラブ活動［新規投稿］</span>
+                  <span class="c-category-title__jp">&nbsp;コミュニティ［クラブ活動］</span>
                 @endif
               </p>
             </div>

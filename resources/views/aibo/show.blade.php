@@ -43,7 +43,7 @@
             <div class="l-content__header">
               <p class="c-category-title c-category-title--friend">
                 <span class="c-category-title__en">Friends</span>
-                <span class="c-category-title__jp">{{$aibo->aibo_name}}</span>
+                <span class="c-category-title__jp">&nbsp;お友達［{{$aibo->aibo_name}}］</span>
               </p>
             </div>
 
@@ -135,7 +135,7 @@
                     @endif
 
 
-                    オーナー名：{{$aibo->owner->owner_name}}<br>
+                    オーナー名：<a href="{{route('owner.show', $aibo->owner)}}">{{$aibo->owner->owner_name}}</a><br>
                     オーナー名（よみ）：{{$aibo->owner->owner_name_kana}}<br>
                     @if($aibo->owner->owner_icon)
                         オーナーアイコン：<img src="{{ asset('storage/owner_icon/'.$aibo->owner->owner_icon)}}" style="width:300px;"><br>
@@ -172,7 +172,7 @@
                         @foreach ($aibo->aibocomments as $comment)
                         <div class="card mb-4">
                             <div class="card-header">
-                                オーナー名：{{$comment->owner->owner_name}}（投稿日時：{{$comment->created_at}}）
+                                オーナー名：<a href="{{route('owner.show', $comment->owner)}}">{{$comment->owner->owner_name}}</a>（投稿日時：{{$comment->created_at}}）
                             </div>
                             <div class="card-body">
                                 コメント：{!! nl2br(e($comment->aibo_comment_body)) !!}

@@ -341,23 +341,23 @@ class AiboController extends Controller
                 $aibo_name = addcslashes($aibo_name, '\\_%');//エスケープ処理
                 $query = $query->where(DB::raw("CONCAT(aibo_name, '|', aibo_kana)"), 'like', '%' . $aibo_name . '%');//like検索、aibo名とaibo名(よみ)の文字列を半角「|」で連結して1つのカラムとして検索
             }
-            if(isset($aibo_birth_year)){
+            if(isset($aibo_birth_year) && $aibo_birth_year != "0000"){
                 $search_flag = true;
                 $query = $query->whereYear('aibo_birthday',$aibo_birth_year);
             }
-            if(isset($aibo_birth_month)){
+            if(isset($aibo_birth_month) && $aibo_birth_month != "00"){
                 $search_flag = true;
                 $query = $query->whereMonth('aibo_birthday',$aibo_birth_month);
             }
-            if(isset($aibo_birth_day)){
+            if(isset($aibo_birth_day) && $aibo_birth_day != "00"){
                 $search_flag = true;
                 $query = $query->whereDay('aibo_birthday',$aibo_birth_day);
             }
-            if(isset($aibo_color)){
+            if(isset($aibo_color) && $aibo_color != "指定なし"){
                 $search_flag = true;
                 $query = $query->where('aibo_color',$aibo_color);
             }
-            if(isset($aibo_sex)){
+            if(isset($aibo_sex) && $aibo_sex != "指定なし"){
                 $search_flag = true;
                 $query = $query->where('aibo_sex',$aibo_sex);
             }
@@ -366,7 +366,7 @@ class AiboController extends Controller
                 $owner_name = addcslashes($owner_name, '\\_%');//エスケープ処理
                 $query = $query->where(DB::raw("CONCAT(owner_name, '|', owner_name_kana)"), 'like', '%' . $owner_name . '%');//like検索、オーナー名とオーナー名(よみ)の文字列を半角「|」で連結して1つのカラムとして検索
             }
-            if(isset($owner_pref)){
+            if(isset($owner_pref) && $owner_pref != "00_指定なし"){
                 $search_flag = true;
                 $query = $query->where('owner_pref',$owner_pref);
             }

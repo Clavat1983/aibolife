@@ -42,8 +42,8 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--diary">
-                <span class="c-category-title__en">Recently</span>
-                <span class="c-category-title__jp">最近の日記</span>
+                <span class="c-category-title__en">Diary</span>
+                <span class="c-category-title__jp">&nbsp;日記［最近の日記］</span>
               </p>
             </div>
             <div class="l-content__body">

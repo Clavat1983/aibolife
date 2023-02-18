@@ -43,9 +43,13 @@
             <div class="l-content__header">
               <p class="c-category-title c-category-title--diary">
                 <span class="c-category-title__en">Daily</span>
-                <span class="c-category-title__jp">{{$target_string_format}}の日記</span>
+                <span class="c-category-title__jp">&nbsp;日記［@if(!$after_flag)今日の日記@else{{$target_string_format}}@endif］</span>
               </p>
             </div>
+
+            <p style="border:1px solid red; background-color:#fff; width:80%; margin:-20px auto 20px auto; padding:10px;">ああああああああああああああああああああああああああああああああああああああああああああああ</p>
+
+
             <div class="l-content__body">
                 <table width="100%">
                     <tr>

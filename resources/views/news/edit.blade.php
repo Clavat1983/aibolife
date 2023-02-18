@@ -63,18 +63,30 @@
                             </tr>
 
                             <tr style="border:solid 1px;">
+                                <th style="border:solid 1px; padding:10px;"><label for="news_source_name">情報源</label></th>
+                                <td style="border:solid 1px; padding:10px;"><input type="text" name="news_source_name" id="news_source_name" value="{{old('news_source_name', $news->news_source_name)}}" style="width: 100%;"></td>
+                            </tr>
+
+                            <tr style="border:solid 1px;">
+                                <th style="border:solid 1px; padding:10px;"><label for="news_source_url">情報源URL</label></th>
+                                <td style="border:solid 1px; padding:10px;"><input type="text" name="news_source_url" id="news_source_url" value="{{old('news_source_url', $news->news_source_url)}}" style="width: 100%;"></td>
+                            </tr>
+
+                            <tr style="border:solid 1px;">
                                 <th style="border:solid 1px; padding:10px;"><label for="news_category">カテゴリー</label></th>
                                 <td style="border:solid 1px; padding:10px;">
                                     @php
                                         $ary = [
                                             'ニュース',
+                                            'My aibo',
                                             'イベント',
                                             'メディア',
-                                            'お知らせ',
-                                            'アップデート',
-                                            'メンテナンス',
+                                            'ストア',
                                             '特別企画',
-                                            'その他'
+                                            'メンテナンス',
+                                            'その他',
+                                            '未分類',
+                                            '不要'
                                         ];
                                     @endphp
                                     {{-- HTMLタグ出力 --}}
@@ -113,8 +125,8 @@
                             <tr style="border:solid 1px;">
                                 <td colspan="2" style="border:solid 1px; padding:10px;">
                                     <b>本文</b><br>
-                                    &nbsp;&nbsp;&nbsp;・見出しは「スタイル」→「Special Container」を使用。<br>
-                                    &nbsp;&nbsp;&nbsp;・太字→×、下線→○、リンク→○
+                                    &nbsp;&nbsp;&nbsp;・見出しは「標準」を「見出し2（h2）」に変更すれば適用される。<br>
+                                    &nbsp;&nbsp;&nbsp;・太字→〇、下線→○、リンク→○
                                     <textarea class="ckeditor" name="news_body" id="news_body">{{old('news_body', $news->news_body)}}</textarea>
                                 </td>
                             </tr>

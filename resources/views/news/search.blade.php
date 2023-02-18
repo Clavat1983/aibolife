@@ -43,90 +43,132 @@
             <div class="l-content__header">
               <p class="c-category-title c-category-title--topics">
                 <span class="c-category-title__en">Topics</span>
-                <span class="c-category-title__jp">最新情報［検索］</span>
+                <span class="c-category-title__jp">&nbsp;最新情報［検索］</span>
               </p>
             </div>
             <div class="l-content__body">
 
-
-                <table style="margin:auto;">
-                    <tr>
-                        <td colspan="2" style="background-color:lightyellow;">
-                            <a href="{{route('news.index')}}">すべて</a>｜<a href="{{route('news.index_news')}}">ニュース</a>｜<a href="{{route('news.index_event')}}">イベント</a>｜<a href="{{route('news.index_media')}}">メディア</a>｜<a href="{{route('news.index_info')}}">お知らせ</a>｜<a href="{{route('news.index_update')}}">アップデート</a>｜<a href="{{route('news.index_maintenance')}}">メンテナンス</a>｜<a href="{{route('news.index_special')}}">特別企画</a>｜<a href="{{route('news.index_etc')}}">その他</a>｜<a href="{{route('news.search')}}">検索</a></td>
-                    </tr>
-                </table>
-
-                <br>
-                <form method="get" action="{{route('news.search')}}">
-                    @csrf
-                    <div>
-                        <label for="diary_title">検索キーワード：</label>
-                        <input type="text" name="keywords" id="keywords" value="{{old('keywords', $keywords)}}">
-                        <button type="submit" class="btn btn-success">検索</button>
-                    </div>
-                </form>
-
-                @if($keywords != "")
-                    <hr/>
-                    {{$keywords}} の検索結果
-                    <hr/>
-                    @if(count($results))
-                        <table>
-                            @foreach ($results as $news)
-                                <tr>
-                                    @if($news->news_image1)
-                                        <td style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
-                                    @else
-                                        <td style="padding:10px;">no image</td>
-                                    @endif
-                                    <td style="padding:10px;">
-                                        {{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}［{{$news->news_category}}］<br>
-                                        <a href="{{route('news.show', $news)}}">{{$news->news_title}}</a><br/>
-                                            {{-- @if($news->news_tag1)#{{$news->news_tag1}}@endif
-                                            @if($news->news_tag2)｜#{{$news->news_tag2}}@endif
-                                            @if($news->news_tag3)｜#{{$news->news_tag3}}@endif
-                                            @if($news->news_tag4)｜#{{$news->news_tag4}}@endif
-                                            @if($news->news_tag5)｜#{{$news->news_tag5}}@endif --}}
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </table>
-                        <br>
-
-
-                        {{-- {{$results->appends(['keywords' => $keywords])->onEachSide(1)->links()}}<br> --}}
-                        <hr>
-                        ▼ページネーション▼
-                        <table width="60%" style="margin:auto;">
-                            <tr>
-                                <td width="15%" style="text-align:center;"><a href="{{$results->appends(['keywords' => $keywords])->previousPageUrl()}}">Prev</a></td>
-                                <td width="70%" style="text-align:center;">
-                                    <div class="pagenation-select">
-                                    <select>
-                                        @for ($i = 1; $i <= $results->lastPage(); $i++)
-                                        <option value="{{$results->appends(['keywords' => $keywords])->url($i)}}" @if($i == $results->currentPage()) selected @endif>{{$i}}ページ目/全{{$results->lastPage()}}ページ</option>
-                                        @endfor
-                                    </select>
-                                    </div>
-                                </td>
-                                <td width="15%" style="text-align:center;"><a href="{{$results->appends(['keywords' => $keywords])->nextPageUrl()}}">Next</a></td>
-                            </tr>
-                        </table>
-                        <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
-                        <script>
-                        $('.pagenation-select select').change(function(){
-                            location.href = $(this).val();
-                        });
-                        </script>
-                        <hr>
-
+                <div style="width:80%; margin:auto;">
+                    <form method="get" action="{{route('news.search')}}">
+                        @csrf
                         
-                    @else
-                        検索結果がありません
+                        <div>
+                            検索キーワード ※必須：
+                            <input type="text" name="keywords" id="keywords" value="{{old('keywords', $keywords)}}"><br>
+                            （キーワードはスペースを入れて複数指定が可能です。その場合はすべてを含むものが検索されます。）<br>
+                        </div>
+                        <div>
+                            @if((strstr(url()->full(),'?') && old('keywords', $keywords) == ''))
+                                <span style="color:red">検索キーワードは必須です</span>
+                            @endif
+                        </div>
+                        <br>
+                        <div>
+                            カテゴリー（複数選択可）：
+                                {{-- URLにtokenという文字がない=初回検索か、チェックが入っている場合 --}}
+                                <input type="checkbox" name="cat_news" value="1" @if(!strstr(url()->full(),'?') || old('cat_news') || $cat_news == 1) checked @endif>
+                                <label for="cat_news">ニュース</label>
+                                <input type="checkbox" name="cat_app" value="1" @if(!strstr(url()->full(),'?') || old('cat_app') || $cat_app == 1) checked @endif>
+                                <label for="cat_app">My aibo</label>
+                                <input type="checkbox" name="cat_event" value="1" @if(!strstr(url()->full(),'?') || old('cat_event') || $cat_event == 1) checked @endif>
+                                <label for="cat_event">イベント</label>
+                                <input type="checkbox" name="cat_media" value="1" @if(!strstr(url()->full(),'?') || old('cat_media') || $cat_media == 1) checked @endif>
+                                <label for="cat_media">メディア</label>
+                                <input type="checkbox" name="cat_store" value="1" @if(!strstr(url()->full(),'?') || old('cat_store') || $cat_store == 1) checked @endif>
+                                <label for="cat_store">ストア</label>
+                                <input type="checkbox" name="cat_special" value="1" @if(!strstr(url()->full(),'?') || old('cat_special') || $cat_special == 1) checked @endif>
+                                <label for="cat_special">特別企画</label>
+                                <input type="checkbox" name="cat_maintenance" value="1" @if(!strstr(url()->full(),'?') || old('cat_maintenance') || $cat_maintenance == 1) checked @endif>
+                                <label for="cat_maintenance">メンテナンス</label>
+                                <input type="checkbox" name="cat_etc" value="1" @if(!strstr(url()->full(),'?') || old('cat_etc') || $cat_etc == 1) checked @endif>
+                                <label for="cat_etc">その他</label>
+                        </div>
+                        <br>
+                        <div>
+                            検索期間：{{$date_from}}
+                            <input type="date" name="date_from" id="date_from" value="{{old('date_from', $date_from)}}">～
+                            <input type="date" name="date_to" id="date_to" value="{{old('date_to', $date_to)}}">
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success">検索</button>
+                    </form>
+
+                    <br>
+                    <br>
+                    @if(strstr(url()->full(),'?') && $results != NULL)
+                        <hr/>
+                        検索結果（{{$results->total()}}件）
+                        <hr/>
+                        @if($results->total())
+                            <table>
+                                @foreach ($results as $news)
+                                    <tr>
+                                        @if($news->news_image1)
+                                            <td style="padding:10px;"><img src="{{ asset('storage/news_image/'.$news->news_image1)}}" style="width:100px;"></td>
+                                        @else
+                                            <td style="padding:10px;">no image</td>
+                                        @endif
+                                        <td style="padding:10px;">
+                                            {{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}［{{$news->news_category}}］<br>
+                                            <a href="{{route('news.show', $news)}}">{{$news->news_title}}</a><br/>
+                                                {{-- @if($news->news_tag1)#{{$news->news_tag1}}@endif
+                                                @if($news->news_tag2)｜#{{$news->news_tag2}}@endif
+                                                @if($news->news_tag3)｜#{{$news->news_tag3}}@endif
+                                                @if($news->news_tag4)｜#{{$news->news_tag4}}@endif
+                                                @if($news->news_tag5)｜#{{$news->news_tag5}}@endif --}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                            <br>
+
+                            {{-- {{$results->appends(['keywords' => $keywords])->onEachSide(1)->links()}}<br> --}}
+                            <hr>
+                            ▼ページネーション▼
+                            @php
+                                $appends = [
+                                    'keywords' => $keywords,
+                                    'cat_news' => $cat_news,
+                                    'cat_app' => $cat_app,
+                                    'cat_event' => $cat_event,
+                                    'cat_media' => $cat_media,
+                                    'cat_store' => $cat_store,
+                                    'cat_special' => $cat_special,
+                                    'cat_maintenance' => $cat_maintenance,
+                                    'cat_etc' => $cat_etc,
+                                    'date_from' => $date_from,
+                                    'date_to' => $date_to,
+                                ];
+                            @endphp
+                            <table width="60%" style="margin:auto;">
+                                <tr>
+                                    <td width="15%" style="text-align:center;"><a href="{{$results->appends($appends)->previousPageUrl()}}">Prev</a></td>
+                                    <td width="70%" style="text-align:center;">
+                                        <div class="pagenation-select">
+                                        <select>
+                                            @for ($i = 1; $i <= $results->lastPage(); $i++)
+                                            <option value="{{$results->appends($appends)->url($i)}}" @if($i == $results->currentPage()) selected @endif>{{$i}}ページ目/全{{$results->lastPage()}}ページ</option>
+                                            @endfor
+                                        </select>
+                                        </div>
+                                    </td>
+                                    <td width="15%" style="text-align:center;"><a href="{{$results->appends($appends)->nextPageUrl()}}">Next</a></td>
+                                </tr>
+                            </table>
+                            <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+                            <script>
+                            $('.pagenation-select select').change(function(){
+                                location.href = $(this).val();
+                            });
+                            </script>
+                            <hr>
+
+                        @else
+                            検索結果がありません
+                        @endif
                     @endif
-                @endif
 
-
+                </div>
             </div>
 
 {{-- --------------------------------------------------------------------------- --}}
@@ -165,7 +207,7 @@
                     <table>
                         <tr>
                             <td colspan="2" style="background-color:lightyellow;">
-                                <a href="{{route('news.index')}}">すべて</a>｜<a href="{{route('news.index_news')}}">ニュース</a>｜<a href="{{route('news.index_event')}}">イベント</a>｜<a href="{{route('news.index_media')}}">メディア</a>｜<a href="{{route('news.index_info')}}">お知らせ</a>｜<a href="{{route('news.index_update')}}">アップデート</a>｜<a href="{{route('news.index_maintenance')}}">メンテナンス</a>｜<a href="{{route('news.index_special')}}">特別企画</a>｜<a href="{{route('news.index_etc')}}">その他</a>｜<a href="{{route('news.search')}}">検索</a></td>
+                                <a href="{{route('news.index')}}">すべて</a>｜<a href="{{route('news.index_news')}}">ニュース</a>｜<a href="{{route('news.index_event')}}">イベント</a>｜<a href="{{route('news.index_media')}}">メディア</a>｜<a href="{{route('news.index_app')}}">My aibo</a>｜<a href="{{route('news.index_store')}}">ストア</a>｜<a href="{{route('news.index_maintenance')}}">メンテナンス</a>｜<a href="{{route('news.index_special')}}">特別企画</a>｜<a href="{{route('news.index_etc')}}">その他</a>｜<a href="{{route('news.search')}}">検索</a></td>
                         </tr>
                     </table>
 

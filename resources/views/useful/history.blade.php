@@ -42,12 +42,13 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--useful">
-                <span class="c-category-title__en">History</span>
-                <span class="c-category-title__jp">歴史</span>
+                <span class="c-category-title__en">Useful</span>
+                <span class="c-category-title__jp">&nbsp;お役立ち情報［歴史］</span>
               </p>
             </div>
             <div class="l-content__body">
-              準備中
+              準備中<br>
+              「先代AIBO」「現行aibo」「aibo life」でタブ切り替え??
             </div>
 
 {{-- --------------------------------------------------------------------------- --}}

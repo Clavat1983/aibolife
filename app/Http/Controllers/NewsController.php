@@ -21,7 +21,7 @@ class NewsController extends Controller
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             $category = 'すべて';
-            $news_all = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+            $news_all = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -37,7 +37,7 @@ class NewsController extends Controller
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             $category = 'ニュース';
-            $news_all = News::where('news_category',$category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+            $news_all = News::where('news_category',$category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -53,7 +53,7 @@ class NewsController extends Controller
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             $category = 'イベント';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -69,7 +69,7 @@ class NewsController extends Controller
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             $category = 'メディア';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -80,12 +80,12 @@ class NewsController extends Controller
         }
     }
 
-    public function index_info() //お知らせ
+    public function index_app() //Myaibo
     {
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $category = 'お知らせ';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+            $category = 'My aibo';
+            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -96,12 +96,12 @@ class NewsController extends Controller
         }
     }
 
-    public function index_update() //アップデート
+    public function index_store() //ストア
     {
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $category = 'アップデート';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+            $category = 'ストア';
+            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -117,7 +117,7 @@ class NewsController extends Controller
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             $category = 'メンテナンス';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -133,7 +133,7 @@ class NewsController extends Controller
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             $category = '特別企画';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -149,7 +149,7 @@ class NewsController extends Controller
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             $category = 'その他';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -166,23 +166,76 @@ class NewsController extends Controller
         if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
 
             $keywords = $request->keywords;
+            $cat_news = $request->cat_news;
+            $cat_app = $request->cat_app;
+            $cat_event = $request->cat_event;
+            $cat_media = $request->cat_media;
+            $cat_store = $request->cat_store;
+            $cat_special = $request->cat_special;
+            $cat_maintenance = $request->cat_maintenance;
+            $cat_etc = $request->cat_etc;
+            $date_from = $request->date_from;
+            $date_to = $request->date_to;
             
-            //検索（カタカナや濁点まで区別する場合は「like」を「like BINARY」へ変更すること）
-            $query = News::query();
-            if(isset($keywords)){
-                $keyword_array =  preg_split('/\s+/ui', $keywords, -1, PREG_SPLIT_NO_EMPTY);
-                foreach ($keyword_array as $word) {
-                    $escape_word = addcslashes($word, '\\_%');//エスケープ処理
-                    $query = $query->where(DB::raw("CONCAT(news_title, ' ', news_body)"), 'like', '%' . $escape_word . '%');//like検索、タイトルの文字列と本文の文字列を半角スペース「 」で連結して1つのカラムとして検索
+            if($keywords == ""){ //キーワードがない場合は検索しない
+                $results = NULL;
+            } else {
+                //検索
+                $query = News::query();
+
+                //キーワード検索（カタカナや濁点まで区別する場合は「like」を「like BINARY」へ変更すること）
+                if(isset($keywords)){
+                    $keyword_array =  preg_split('/\s+/ui', $keywords, -1, PREG_SPLIT_NO_EMPTY);
+                    foreach ($keyword_array as $word) {
+                        $escape_word = addcslashes($word, '\\_%');//エスケープ処理
+                        $query = $query->where(DB::raw("CONCAT(news_title, ' ', news_body)"), 'like BINARY', '%' . $escape_word . '%');//like検索、タイトルの文字列と本文の文字列を半角スペース「 」で連結して1つのカラムとして検索
+                    }
                 }
-                $query->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc');
+
+                //カテゴリー（チェックがあれば追加ではなく、チェック無いものを除外する）
+                if($cat_news != 1){
+                    $query = $query->where('news_category','!=','ニュース');
+                }
+                if($cat_app != 1){
+                    $query = $query->where('news_category','!=','My aibo');
+                }
+                if($cat_event != 1){
+                    $query = $query->where('news_category','!=','イベント');
+                }
+                if($cat_media != 1){
+                    $query = $query->where('news_category','!=','メディア');
+                }
+                if($cat_store != 1){
+                    $query = $query->where('news_category','!=','ストア');
+                }
+                if($cat_special != 1){
+                    $query = $query->where('news_category','!=','特別企画');
+                }
+                if($cat_maintenance != 1){
+                    $query = $query->where('news_category','!=','メンテナンス');
+                }
+                if($cat_etc != 1){
+                    $query = $query->where('news_category','!=','その他');
+                }
+                $query = $query->where('news_category','!=','不要');
+
+                //期間（開始）
+                if($date_from != ''){
+                    $query = $query->where('news_publication_datetime','>=',$date_from.' 00:00:00');
+                }
+
+                //期間（終了）
+                if($date_to != ''){
+                    $query = $query->where('news_publication_datetime','<=',$date_to.' 23:59:59');
+                }
+
+                $results = $query->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10); //クエリ文字列(検索キーワード)をつけて返す
             }
-            $results = $query->paginate(1); //クエリ文字列(検索キーワード)をつけて返す
 
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
 
-            return view('news.search', compact('bell_count','keywords','results'));
+            return view('news.search', compact('bell_count','keywords','cat_news','cat_app','cat_event','cat_media','cat_store','cat_special','cat_maintenance','cat_etc','date_from','date_to','results'));
         } else { //aibo登録まで完了していないと閲覧不可
             return redirect()->route('home');
         }
@@ -194,7 +247,7 @@ class NewsController extends Controller
     {
         $role=auth()->user()->role;
         if($role == 'admin'){ //admin(管理者)のみ入力画面表示
-            $news_all = News::orderby('news_publication_datetime', 'desc')->paginate(5);//ページネーションあり
+            $news_all = News::orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
 
             //【全ビュー共通処理】未読通知数
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
@@ -237,6 +290,8 @@ class NewsController extends Controller
         $inputs=$request->validate([
             'news_publication_datetime' => 'required',
             'news_publication_flag' => 'required',
+            'news_source_name' => 'required',
+            'news_source_url' => '',
             'news_category' => 'required',
             'news_title' => 'required',
             'news_image1' => 'image|max:10240',//10MB
@@ -277,6 +332,10 @@ class NewsController extends Controller
             } else {
                 $news->news_publication_flag = false; //非公開
             }
+            //情報ソース(名)
+            $news->news_source_name = $inputs['news_source_name'];
+            //情報ソース(URL)
+            $news->news_source_url = $inputs['news_source_url'];
             //カテゴリー
             $news->news_category = $inputs['news_category'];
             //タイトル
@@ -364,7 +423,7 @@ class NewsController extends Controller
             $now = Carbon::now('Asia/Tokyo');
 
             //前後の記事移動を実現するための処理
-            $news_all = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->get();
+            $news_all = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->get();
             $nth = $news_all->search($news); //ニュース一覧($news_all)内で何番目の記事か
             $prev = $news_all->get($nth+1);//1つ古い記事(descなのでソート順で言うと後)
             $next = $news_all->get($nth-1);//1つ新しい記事(descなのでソート順で言うと前)
@@ -429,6 +488,8 @@ class NewsController extends Controller
         $inputs=$request->validate([
             'news_publication_datetime' => 'required',
             'news_publication_flag' => 'required',
+            'news_source_name' => 'required',
+            'news_source_url' => '',
             'news_category' => 'required',
             'news_title' => 'required',
             'news_image1' => 'image|max:10240',//10MB
@@ -472,6 +533,10 @@ class NewsController extends Controller
             } else {
                 $news->news_publication_flag = false; //非公開
             }
+            //情報ソース(名)
+            $news->news_source_name = $inputs['news_source_name'];
+            //情報ソース(URL)
+            $news->news_source_url = $inputs['news_source_url'];
             //カテゴリー
             $news->news_category = $inputs['news_category'];
             //タイトル

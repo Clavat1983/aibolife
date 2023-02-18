@@ -43,7 +43,7 @@
             <div class="l-content__header">
               <p class="c-category-title c-category-title--mypage">
                 <span class="c-category-title__en">My Page</span>
-                <span class="c-category-title__jp">マイページ［aibo編集］</span>
+                <span class="c-category-title__jp">&nbsp;マイページ［aibo編集］</span>
               </p>
             </div>
 

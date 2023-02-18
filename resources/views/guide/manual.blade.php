@@ -42,12 +42,24 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--guide">
-                <span class="c-category-title__en">Manual</span>
-                <span class="c-category-title__jp">利用ガイド</span>
+                <span class="c-category-title__en">Guide</span>
+                <span class="c-category-title__jp">&nbsp;はじめに［利用ガイド］</span>
               </p>
             </div>
             <div class="l-content__body">
-              準備中
+
+              <!-- aibo登録まで完了していない方 -->
+              <div style="width:70%; margin:auto;">
+                aibo登録まで完了していない方向け<br>
+                登録までの流れを説明する
+              </div>
+
+              <!-- aibo登録が完了している方 -->
+              <div style="width:70%; margin:auto;">
+                aibo登録が完了している方向け<br>
+                xxしてみよう！的なミッション。
+              </div>
+
             </div>
 
 {{-- --------------------------------------------------------------------------- --}}

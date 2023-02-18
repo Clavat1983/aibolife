@@ -42,22 +42,29 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--friend">
-                <span class="c-category-title__en">Friends</span>
-                <span class="c-category-title__jp">&nbsp;お友達［新しいお友達］</span>
+                <span class="c-category-title__en">Owner</span>
+                <span class="c-category-title__jp">&nbsp;オーナー［{{$owner->owner_name}}<sub>さん</sub>］</span>
               </p>
             </div>
 
             <div class="l-content__body">
-                
-                <h2>15日以内に登録されたお友達</h2>
 
+                @if($owner->owner_icon)
+                    <p>オーナーアイコン：<img width="50px" src="{{ asset('storage/owner_icon/'.$owner->owner_icon)}}" /></p>
+                @else
+                    <p>オーナーアイコン：未登録</p>
+                @endif
+                <p>オーナー名：{{$owner->owner_name}}<sub>さん</sub></p>
+                <p>居住地：{{substr($owner->owner_pref,3)}}</p>
+
+                <h3>aibo一覧</h3>
                 <table width="80%" style="border:1px solid black; margin:auto;">
-                    @if(count($aibos) == 0)
+                    @if(count($owner->aibos) == 0)
                         <tr>
-                          <td colspan="3">（該当するaiboが見つかりません）</td>
+                          <td colspan="3">（まだaiboが登録されていません）</td>
                         </tr>
                     @else
-                        @foreach ($aibos as $aibo)
+                        @foreach ($owner->aibos->sortBy('aibo_birthday') as $aibo)
                         <tr style="border:1px solid black;">
                             @if($aibo->aibo_icon)
                                 <td width="15%" style="border:1px solid black;"><img width="70%" src="{{ asset('storage/aibo_icon/'.$aibo->aibo_icon)}}" /></td>
@@ -75,7 +82,7 @@
                                 @endif
                                 <br>
                                 誕生日：{{str_replace('-','.',$aibo->aibo_birthday)}}（{{\Carbon\Carbon::parse($aibo->aibo_birthday)->age}}歳）<br>
-                                オーナー：<img width="50px" src="{{ asset('storage/owner_icon/'.$aibo->owner->owner_icon)}}" /> {{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}）
+                                {{-- オーナー：<img width="50px" src="{{ asset('storage/owner_icon/'.$aibo->owner->owner_icon)}}" /> {{$aibo->owner->owner_name}}<sub>さん</sub>（{{substr($aibo->owner->owner_pref,3)}}） --}}
                             </td>
                             <td width="10%" style="border:1px solid black;"><a href="{{route('aibo.show',$aibo)}}">見る</a></td>
                         </tr>
@@ -83,7 +90,26 @@
                     @endif
                 </table>
 
-                
+                <div class="p-article-detail__footer">
+                    <ul class="c-pager-buttons">
+                      <li>
+                        {{-- <a class="c-btn" href="#">
+                          <span class="c-icon-text c-icon-text--prev">
+                            前の記事
+                          </span>
+                        </a> --}}
+                      </li>
+                      <li>
+                        {{-- <a class="c-btn" href="#">
+                          <span class="c-icon-text c-icon-text--next">
+                            後の記事
+                          </span>
+                        </a> --}}
+                      </li>
+                      <li><a class="c-btn02" href="{{url()->previous()}}">戻る</a></li>
+                    </ul>
+                  </div>
+
             </div>
 
 {{-- --------------------------------------------------------------------------- --}}
@@ -104,36 +130,5 @@
 </html>
 
 
-{{-- @extends('layouts.app')
 
-@section('notification')
-    {{$bell_count}}
-@endsection
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">新しいお友達(7日以内)</div>
-                <div class="card-body">
-                    @if(count($aibos)>0)
-                        @foreach ($aibos as $aibo)
-                            {{$aibo->aibo_name}}<br>
-                        @endforeach
-                    @else
-                        いません
-                    @endif
-                </div>
-            </div>
-
-            <br>
-            <div class="card">
-                <div class="card-body">
-                    <a href="{{route('aibo.index')}}"><button type="button">aibo名鑑に戻る</button></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection --}}

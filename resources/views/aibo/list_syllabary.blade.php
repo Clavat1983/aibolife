@@ -42,10 +42,13 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--friend">
-                <span class="c-category-title__en">Syllabary</span>
-                <span class="c-category-title__jp">お名前リスト</span>
+                <span class="c-category-title__en">Friends</span>
+                <span class="c-category-title__jp">&nbsp;お友達［お名前リスト］</span>
               </p>
             </div>
+
+            <p style="border:1px solid red; background-color:#fff; width:80%; margin:-20px auto 20px auto; padding:10px;">「aibo life」に登録されている全てのaiboを「50音」で一覧にしています。</p>
+
             <div class="l-content__body">
 
                 <table width=100%;>

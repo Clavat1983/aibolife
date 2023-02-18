@@ -43,7 +43,7 @@
             <div class="l-content__header">
               <p class="c-category-title c-category-title--behavior">
                 <span class="c-category-title__en">Behavior</span>
-                <span class="c-category-title__jp">ふるまい共有［{{$behavior->behavior_name}}］</span>
+                <span class="c-category-title__jp">&nbsp;ふるまい［ふるまい共有］</span>
               </p>
             </div>
 

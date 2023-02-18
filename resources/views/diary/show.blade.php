@@ -43,7 +43,7 @@
             <div class="l-content__header">
               <p class="c-category-title c-category-title--diary">
                 <span class="c-category-title__en">Diary</span>
-                <span class="c-category-title__jp">日記</span>
+                <span class="c-category-title__jp">&nbsp;日記［{{$diary->aibo->aibo_name}}］</span>
               </p>
             </div>
 
@@ -74,7 +74,8 @@
                     <p>aiboの写真：no image</p>
                 @endif
                 <p>aiboの名前：<a href="{{route('aibo.show', $diary->aibo)}}">{{$diary->aibo->aibo_name}}</a></p>
-                <p>（オーナー名：{{$diary->aibo->owner->owner_name}}）</p>
+                <p>オーナーアイコン：<img src="{{asset('storage/owner_icon/'.$diary->aibo->owner->owner_icon)}}" style="height:50px;"></p>
+                <p>オーナー名：<a href="{{route('owner.show', $diary->aibo->owner)}}">{{$diary->aibo->owner->owner_name}}</a></p>
                 <p>この日の性格：{{$diary->diary_personality}}、この日の天気：{{$diary->diary_weather}}</p>
                 @if($diary->diary_photo1)
                    <p>画像：<img src="{{ asset('storage/diary_photo/'.$diary->diary_photo1)}}" style="height:300px;"></p>
@@ -137,7 +138,7 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             ------------------<br>
-                            オーナー名：{{$comment->owner->owner_name}}（投稿日時：{{$comment->created_at}}）
+                            オーナー名：<img src="{{asset('storage/owner_icon/'.$comment->owner->owner_icon)}}" style="height:30px;"><a href="{{route('owner.show', $comment->owner)}}">{{$comment->owner->owner_name}}</a>（投稿日時：{{$comment->created_at}}）
                         </div>
                         <div class="card-body">
                             {!! nl2br(e($comment->diary_comment_body)) !!}

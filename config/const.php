@@ -111,7 +111,7 @@ return [
         'aibo_toy_dice_flag' => 'サイコロ',
         'aibo_toy_food_flag' => 'ごはんボウル',
         'aibo_toy_drink_flag' => 'のみものボウル',
-    ]
+    ],
   ];
 
 ?>

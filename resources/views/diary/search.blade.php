@@ -42,8 +42,8 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--diary">
-                <span class="c-category-title__en">Search</span>
-                <span class="c-category-title__jp">検索［日記］</span>
+                <span class="c-category-title__en">Diary</span>
+                <span class="c-category-title__jp">&nbsp;日記［検索］</span>
               </p>
             </div>
 
@@ -111,13 +111,7 @@
 
                     <br>
 
-                    {{-- {{$results->appends([
-                        'keywords' => $keywords,
-                        'diary_date_from' => $diary_date_from,
-                        'diary_date_to' => $diary_date_to,
-                        'aibo_name' => $aibo_name,
-                    ])->onEachSide(1)->links()}}<br> --}}
-                    
+                   
                     <hr>
                     
                     ▼ページネーション▼

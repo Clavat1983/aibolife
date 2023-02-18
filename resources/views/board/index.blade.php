@@ -42,13 +42,13 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--community">
-                <span class="c-category-title__en">Board</span>
+                <span class="c-category-title__en">Community</span>
                 @if($category_id == 1)
-                  <span class="c-category-title__jp">おしゃべり広場</span>
+                  <span class="c-category-title__jp">&nbsp;コミュニティ［おしゃべり広場］</span>
                 @elseif($category_id == 2)
-                  <span class="c-category-title__jp">お悩み相談</span>
+                  <span class="c-category-title__jp">&nbsp;コミュニティ［お悩み相談］</span>
                 @elseif($category_id == 3)
-                  <span class="c-category-title__jp">クラブ活動</span>
+                  <span class="c-category-title__jp">&nbsp;コミュニティ［クラブ活動］</span>
                 @endif
               </p>
             </div>
@@ -56,13 +56,13 @@
             <div class="l-content__body">
               
               @if($category_id == 1)
-                <p>「おしゃべり広場」は、aiboに関する話題を何でも書き込める掲示板です。</p>
+                <p style="border:1px solid red; background-color:#fff; width:80%; margin:-20px auto 20px auto; padding:10px;">「おしゃべり広場」は、aiboに関する話題を何でも書き込める掲示板です。</p>
                 <p style="text-align:right; margin-right:15%;"><a href="{{route('board.create_talk')}}"><button>新規投稿</button></a></p>
               @elseif($category_id == 2)
-                <p>「お悩み相談」は、aiboに関して、わからないことや困ったことを相談できる掲示板です。</p>
+                <p style="border:1px solid red; background-color:#fff; width:80%; margin:-20px auto 20px auto; padding:10px;">「お悩み相談」は、aiboに関して、わからないことや困ったことを相談できる掲示板です。</p>
                 <p style="text-align:right; margin-right:15%;"><a href="{{route('board.create_problem')}}"><button>新規投稿</button></a></p>
               @elseif($category_id == 3)
-                <p>「クラブ活動」は、特定の話題（aibo●●部と称する）についての活動報告ができる掲示板です。</p>
+                <p style="border:1px solid red; background-color:#fff; width:80%; margin:-20px auto 20px auto; padding:10px;">「クラブ活動」は、特定の話題（aibo●●部と称する）についての活動報告ができる掲示板です。</p>
                 <p style="text-align:right; margin-right:15%;"><a href="{{route('board.create_club')}}"><button>新規投稿</button></a></p>
               @endif
 

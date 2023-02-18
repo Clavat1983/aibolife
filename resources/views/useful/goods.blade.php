@@ -42,12 +42,14 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--useful">
-                <span class="c-category-title__en">Goods</span>
-                <span class="c-category-title__jp">グッズ</span>
+                <span class="c-category-title__en">Useful</span>
+                <span class="c-category-title__jp">&nbsp;お役立ち情報［グッズ］</span>
               </p>
             </div>
             <div class="l-content__body">
-              準備中
+              準備中<br>
+              公式グッズ｜ライセンス商品｜その他<br>
+              バッグ｜充電｜収納｜ファッション｜おもちゃ｜その他<br>
             </div>
 
 {{-- --------------------------------------------------------------------------- --}}

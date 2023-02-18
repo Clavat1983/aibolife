@@ -42,12 +42,17 @@
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
               <p class="c-category-title c-category-title--friend">
-                <span class="c-category-title__en">Search</span>
-                <span class="c-category-title__jp">検索</span>
+                <span class="c-category-title__en">Friends</span>
+                <span class="c-category-title__jp">&nbsp;お友達［検索］</span>
               </p>
             </div>
 
             <div class="l-content__body">
+
+                @if(!$search_flag && strstr(url()->full(),'?'))
+                    <span style="color:red;">1つ以上は検索条件を設定してください</span><br>
+                @endif
+                <br>
 
                 <form method="get" action="{{route('aibo.search')}}">
                 @csrf
@@ -55,27 +60,81 @@
                     <label for="aibo_name">aiboの名前：</label>
                     <input type="text" name="aibo_name" id="aibo_name" value="{{old('aibo_name', $aibo_name)}}">
                     <br/>
+                    ※部分一致でも可。ひらがな・カタカナ・全角・半角・大文字・小文字・濁点・半濁点の違いは無視して検索します。<br>
+                    <br/>
 
                     <label for="aibo_birth_year">aiboの誕生日：</label>
-                    <input type="text" name="aibo_birth_year" id="aibo_birth_year" value="{{old('aibo_birth_year', $aibo_birth_year)}}">年
-                    <input type="text" name="aibo_birth_month" id="aibo_birth_month" value="{{old('aibo_birth_month', $aibo_birth_month)}}">月
-                    <input type="text" name="aibo_birth_day" id="aibo_birth_day" value="{{old('aibo_birth_day', $aibo_birth_day)}}">日
+                    <select id="aibo_birth_year" name="aibo_birth_year">
+                            <option value="0000" selected>指定なし</option>
+                        @for($y=2018; $y<=date('Y'); $y++)
+                            <option value="{{ $y }}" @if($y == old('aibo_birth_year', $aibo_birth_year)) selected @endif>{{ $y }}</option>
+                        @endfor
+                    </select>年
+
+                    <select id="aibo_birth_month" name="aibo_birth_month">
+                            <option value="00" selected>指定なし</option>
+                        @for($m=1; $m<=12; $m++)
+                            <option value="{{ $m }}" @if($m == old('aibo_birth_month', $aibo_birth_month)) selected @endif>{{ $m }}</option>
+                        @endfor
+                    </select>月
+
+                    <select id="aibo_birth_day" name="aibo_birth_day">
+                            <option value="00" selected>指定なし</option>
+                        @for($d=1; $d<=31; $d++)
+                            <option value="{{ $d }}" @if($d == old('aibo_birth_day', $aibo_birth_day)) selected @endif>{{ $d }}</option>
+                        @endfor
+                    </select>日
                     <br>
-                    
-                    <label for="aibo_color">aiboのカラー：</label>
-                    <input type="text" name="aibo_color" id="aibo_color" value="{{old('aibo_color', $aibo_color)}}">
+                    ※「年のみ」「月のみ」「日のみ」の指定でも検索可能です。<br>
                     <br/>
                     
+                    {{-- <label for="aibo_color">aiboのカラー：</label>
+                    <input type="text" name="aibo_color" id="aibo_color" value="{{old('aibo_color', $aibo_color)}}"> --}}
+                    <label for="aibo_color">aiboのカラー</label>
+                    <select id="aibo_color" name="aibo_color">
+                        <option value="指定なし" selected>指定なし</option>
+                        @foreach (config('const.aibo_color_list') as $value)
+                            <option value='{{$value}}' @if($value == old('aibo_color', $aibo_color)) selected @endif>{{$value}}</option>
+                        @endforeach
+                    </select>
+                    <br/>
+                    <br/>
+                    
+                    {{-- <label for="aibo_sex">aiboの性別：</label>
+                    <input type="text" name="aibo_sex" id="aibo_sex" value="{{old('aibo_sex', $aibo_sex)}}"> --}}
                     <label for="aibo_sex">aiboの性別：</label>
-                    <input type="text" name="aibo_sex" id="aibo_sex" value="{{old('aibo_sex', $aibo_sex)}}">
+                    <select id="aibo_sex" name="aibo_sex">
+                        <option value="指定なし" selected>指定なし</option>
+                        @php
+                            $ary = [
+                                '男の子',
+                                '女の子',
+                                '決めていない',
+                            ];
+                        @endphp
+                        @foreach ($ary as $index => $value)
+                            <option value="{{$value}}" @if(old('aibo_sex', $aibo_sex ) == $value) selected @endif>{{$value}}</option>
+                        @endforeach
+                    </select>
+                    <br/>
                     <br/>
 
                     <label for="owner_name">オーナー名：</label>
                     <input type="text" name="owner_name" id="owner_name" value="{{old('owner_name', $owner_name)}}">
                     <br/>
+                    ※部分一致でも可。ひらがな・カタカナ・全角・半角・大文字・小文字・濁点・半濁点の違いは無視して検索します。<br>
+                    <br/>
 
                     <label for="owner_pref">都道府県：</label>
-                    <input type="text" name="owner_pref" id="owner_pref" value="{{old('owner_pref', $owner_pref)}}">
+                    <select id="owner_pref" name="owner_pref">
+                        <option value="00_指定なし" selected>指定なし</option>
+                        @foreach(config('const.pref_list') as $pref)
+                            @php
+                                $pref_echo = mb_substr($pref,3); //数字2桁と_は消す
+                            @endphp
+                            <option value="{{ $pref }}" @if($pref === old('owner_pref', $owner_pref)) selected @endif>{{ $pref_echo }}</option>
+                        @endforeach
+                    </select>
                     <br/>
                     <br>
                 <button type="submit" class="btn btn-success">検索</button>
@@ -85,7 +144,6 @@
                 @if($search_flag)
                     <hr/>
                     <h2>【検索結果（50音順）】 {{$results->total()}}件</h2><!--ページネーション前の合計-->
-                    ※ひらがな・カタカナ・全角・半角・大文字・小文字・濁点・半濁点の違いは無視して検索しているため、検索結果が多めになる場合があります
                     <hr/>
                     @if(count($results))
 

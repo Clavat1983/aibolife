@@ -43,11 +43,15 @@
             <div class="l-content__header">
               <p class="c-category-title c-category-title--behavior">
                 <span class="c-category-title__en">Behavior</span>
-                <span class="c-category-title__jp">ふるまい共有［一覧］</span>
+                <span class="c-category-title__jp">&nbsp;ふるまい［ふるまい共有］</span>
               </p>
             </div>
 
             <div class="l-content__body">
+
+                <p style="text-align:right;"><a href="{{route('behaviorshare.create')}}">ふるまいを登録する</a></p>
+                <hr>
+                <br>
 
                 <h5>※表示順はランダムです</h5>
 
@@ -84,10 +88,6 @@
                         <td width="15%" style="text-align:center;"><a href="{{$behaviors->appends(['seed' => $seed])->nextPageUrl()}}">Next</a></td>
                     </tr>
                 </table>
-                <hr>
-                <br>
-                <p style="text-align:center;"><a href="{{route('behaviorshare.create')}}">ふるまいを登録する</a></p>
-
 
                 
             </div>

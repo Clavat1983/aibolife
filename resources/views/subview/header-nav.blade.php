@@ -67,22 +67,22 @@
                                 <a href="{{route('news.index_news')}}">ニュース</a>
                               </li>
                               <li class="l-header__sub-menu-item">
+                                <a href="{{route('news.index_app')}}">My aibo</a>
+                              </li>
+                              <li class="l-header__sub-menu-item">
                                 <a href="{{route('news.index_event')}}">イベント</a>
                               </li>
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('news.index_media')}}">メディア</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('news.index_info')}}">お知らせ</a>
-                              </li>
-                              <li class="l-header__sub-menu-item">
-                                <a href="{{route('news.index_update')}}">アップデート</a>
-                              </li>
-                              <li class="l-header__sub-menu-item">
-                                <a href="{{route('news.index_maintenance')}}">メンテナンス</a>
+                                <a href="{{route('news.index_store')}}">ストア</a>
                               </li>
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('news.index_special')}}">特別企画</a>
+                              </li>
+                              <li class="l-header__sub-menu-item">
+                                <a href="{{route('news.index_maintenance')}}">メンテナンス</a>
                               </li>
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('news.index_etc')}}">その他</a>
@@ -112,7 +112,7 @@
                                 <a href="{{route('diary.archive')}}">過去の日記</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('diary.commented')}}">コメントをつけた日記</a>
+                                <a href="{{route('diary.commented')}}">コメントした日記</a>
                               </li>
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('diary.bookmark')}}">お気に入りの日記</a>
@@ -384,12 +384,12 @@
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index')}}">すべて</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_news')}}">ニュース</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_app')}}">My aibo</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_event')}}">イベント</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_media')}}">メディア</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_info')}}">お知らせ</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_update')}}">アップデート</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_maintenance')}}">メンテナンス</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_store')}}">ストア</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_special')}}">特別企画</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_maintenance')}}">メンテナンス</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.index_etc')}}">その他</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('news.search')}}">検索</a></li>
               </ul>
@@ -400,7 +400,7 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.list_day')}}">今日の日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.recently')}}">最近の日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.archive')}}">過去の日記</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.commented')}}">コメントをつけた日記</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.commented')}}">コメントした日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.bookmark')}}">お気に入りの日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.search')}}">検索</a></li>
               </ul>

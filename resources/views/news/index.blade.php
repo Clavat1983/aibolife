@@ -43,13 +43,15 @@
 
 <div class="l-content__header">
     <h1 class="c-category-title c-category-title--topics">
-      <span class="c-category-title__en">News</span>
-      <span class="c-category-title__jp">最新情報［{{$category}}］</span>
+      <span class="c-category-title__en">Topics</span>
+      <span class="c-category-title__jp">&nbsp;最新情報［{{$category}}］</span>
     </h1>
   </div>
+
+  <p style="border:1px solid red; background-color:#fff; width:80%; margin:-20px auto 20px auto; padding:10px;">この部分にページ概要を入れたい。全ページ共通で枠を用意していただければ。個別記事とか概要を入れないページはその部分をコメントアウトします。</p>
+
   <div class="l-content__body">
     <div class="p-article-index">
-
       <dl class="p-article-index__category">
         <dt class="p-article-index__category-title">
           <p class="c-ttl5">カテゴリ選択</p>
@@ -74,6 +76,14 @@
             </li>
 
             <li class="c-category-list__item">
+              @if($category == "My aibo")
+                <span class="c-category-list__link c-category-list__link--current">My aibo</span>
+              @else
+                <a class="c-category-list__link" href="{{route('news.index_app')}}">My aibo</a>
+              @endif
+            </li>
+
+            <li class="c-category-list__item">
               @if($category == "イベント")
                 <span class="c-category-list__link c-category-list__link--current">イベント</span>
               @else
@@ -90,26 +100,10 @@
             </li>
 
             <li class="c-category-list__item">
-              @if($category == "お知らせ")
-                <span class="c-category-list__link c-category-list__link--current">お知らせ</span>
+              @if($category == "ストア")
+                <span class="c-category-list__link c-category-list__link--current">ストア</span>
               @else
-                <a class="c-category-list__link" href="{{route('news.index_info')}}">お知らせ</a>
-              @endif
-            </li>
-
-            <li class="c-category-list__item">
-              @if($category == "アップデート")
-                <span class="c-category-list__link c-category-list__link--current">アップデート</span>
-              @else
-                <a class="c-category-list__link" href="{{route('news.index_update')}}">アップデート</a>
-              @endif
-            </li>
-
-            <li class="c-category-list__item">
-              @if($category == "メンテナンス")
-                <span class="c-category-list__link c-category-list__link--current">メンテナンス</span>
-              @else
-                <a class="c-category-list__link" href="{{route('news.index_maintenance')}}">メンテナンス</a>
+                <a class="c-category-list__link" href="{{route('news.index_store')}}">ストア</a>
               @endif
             </li>
 
@@ -118,6 +112,14 @@
                 <span class="c-category-list__link c-category-list__link--current">特別企画</span>
               @else
                 <a class="c-category-list__link" href="{{route('news.index_special')}}">特別企画</a>
+              @endif
+            </li>
+
+            <li class="c-category-list__item">
+              @if($category == "メンテナンス")
+                <span class="c-category-list__link c-category-list__link--current">メンテナンス</span>
+              @else
+                <a class="c-category-list__link" href="{{route('news.index_maintenance')}}">メンテナンス</a>
               @endif
             </li>
 
@@ -159,8 +161,13 @@
                     </span>
                   </div>
                 </div>
-                <h2 class="c-article-list__ttl">
-                  {{$news->news_title}}
+                @if(strstr($news->news_source_name,'公式',false))
+                  <div style="font-size:80%;"><b>［公式］</b></div>
+                @else
+                  <div style="font-size:80%;"><b>［{{$news->news_source_name}}］</b></div>
+                @endif
+                <h2 class="c-article-list__ttl" style="margin-left:1em;">
+                  {{$news->news_title}}<br>
                 </h2>
               </div>
             </a>
@@ -240,7 +247,7 @@
       <table style="margin:auto;">
           <tr>
               <td colspan="2" style="background-color:lightyellow;">
-                  <a href="{{route('news.index')}}">すべて</a>｜<a href="{{route('news.index_news')}}">ニュース</a>｜<a href="{{route('news.index_event')}}">イベント</a>｜<a href="{{route('news.index_media')}}">メディア</a>｜<a href="{{route('news.index_info')}}">お知らせ</a>｜<a href="{{route('news.index_update')}}">アップデート</a>｜<a href="{{route('news.index_maintenance')}}">メンテナンス</a>｜<a href="{{route('news.index_special')}}">特別企画</a>｜<a href="{{route('news.index_etc')}}">その他</a>｜<a href="{{route('news.search')}}">検索</a></td>
+                  <a href="{{route('news.index')}}">すべて</a>｜<a href="{{route('news.index_news')}}">ニュース</a>｜<a href="{{route('news.index_event')}}">イベント</a>｜<a href="{{route('news.index_media')}}">メディア</a>｜<a href="{{route('news.index_app')}}">My aibo</a>｜<a href="{{route('news.index_store')}}">ストア</a>｜<a href="{{route('news.index_maintenance')}}">メンテナンス</a>｜<a href="{{route('news.index_special')}}">特別企画</a>｜<a href="{{route('news.index_etc')}}">その他</a>｜<a href="{{route('news.search')}}">検索</a></td>
           </tr>
 
           @if(count($news_all)>0)
