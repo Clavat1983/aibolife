@@ -45,7 +45,7 @@ class EventCalendarController extends Controller
 
             return view('eventcalendar.index', compact('bell_count','target','events'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 

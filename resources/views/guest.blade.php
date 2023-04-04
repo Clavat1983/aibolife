@@ -38,44 +38,29 @@
       {{-- main(各画面の個別部分) --}}
       <main class="l-main">
         <div class="l-main__content">
-          {{-- <div class="l-content"> --}}
+          <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
 
-            <div class="l-main__content">
-                <div class="p-error-404">
-                <div class="p-error-404__content">
-                    <div class="p-error-404__image">
-                    <img src="{{asset('img/img_warning.png')}}" width="160" alt="" />
-                    </div>
-                    <div class="p-error-404__title">
-                    <h1 class="c-error-title c-error-title--warning">
-                        <span class="c-error-title__en">Stop!!</span>
-                        <span class="c-error-title__jp">403 : Forbidden</span>
-                    </h1>
-                    </div>
-                    <p class="p-error-404__text"><b>禁止されています</b><br><span style="font-size:85%;">（アクセス権限がありません）</span></p>
-                </div>
-                <div class="p-error-404__footer">
-                    <p class="p-error-404__button"><a class="c-btn02" href="{{route('contact.index')}}">お問い合わせ</a></p>
-                    <p class="p-error-404__text">この画面が何度も表示される場合は<span class="p-error-404__mark">、</span>発生状況の詳細をご連絡ください</p>
-                </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            
+            登録前・ログイン前でも表示させるトップページ
 
 {{-- --------------------------------------------------------------------------- --}}
-        {{-- </div> --}}
-      </div>
+          </div>
+        </div>
 
-{{-- 【共通】バナー広告 --}}
-@include('subview.banner')
+        {{-- 【共通】バナー広告 --}}
+        @include('subview.banner')
 
-</main>
+      </main>
 
-{{-- 【共通】footer --}}
-@include('subview.footer')
-
-</div>
-<script type="module" src="{{asset('js/common.js')}}"></script>
-</body>
+      {{-- 【共通】footer --}}
+      @include('subview.footer')
+      
+    </div>
+    <script type="module" src="{{asset('js/common.js')}}"></script>
+  </body>
 </html>
 

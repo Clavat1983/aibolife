@@ -41,14 +41,14 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--guide">
-                <span class="c-category-title__en">Guide</span>
-                <span class="c-category-title__jp">&nbsp;はじめに［よくある質問］</span>
+              <p class="c-category-title c-category-title--behavior">
+                <span class="c-category-title__en">Living</span>
+                <span class="c-category-title__jp">&nbsp;暮らし［なかま］</span>
               </p>
             </div>
             <div class="l-content__body">
-              準備中<br>
-              ご質問は<a href="{{route('contact.index')}}">【お問い合わせ】</a>よりお願いします。
+              
+
             </div>
 
 {{-- --------------------------------------------------------------------------- --}}

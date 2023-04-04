@@ -36,7 +36,7 @@ class AiboController extends Controller
 
         //     return view('aibo.index',compact('bell_count','birthday_aibos','new_aibos')); //aibo名鑑トップ
         // } else { //aibo登録まで完了していないと閲覧不可
-        //     return redirect()->route('home');
+        //     return redirect()->route('errors.limited');
         // }
     }
 
@@ -135,7 +135,7 @@ class AiboController extends Controller
 
             return view('aibo.list_syllabary',compact('bell_count','count_ary','count'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -154,7 +154,7 @@ class AiboController extends Controller
                 abort(403);
             }
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -227,7 +227,7 @@ class AiboController extends Controller
 
             return view('aibo.list_area',compact('bell_count','count_ary','count'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -247,7 +247,7 @@ class AiboController extends Controller
                 abort(403);
             }
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -277,7 +277,7 @@ class AiboController extends Controller
 
             return view('aibo.list_birthday', compact('bell_count','count_ary','count','birthday_aibos','comingup_aibos'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -297,7 +297,7 @@ class AiboController extends Controller
                 abort(403);
             }
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -313,7 +313,7 @@ class AiboController extends Controller
 
             return view('aibo.newface',compact('bell_count','aibos'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -379,7 +379,7 @@ class AiboController extends Controller
 
             return view('aibo.search',compact('bell_count','results','search_flag','aibo_name','aibo_birth_year','aibo_birth_month','aibo_birth_day','aibo_color','aibo_sex','owner_name', 'owner_pref'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -405,7 +405,7 @@ class AiboController extends Controller
         $owners=Owner::where('user_id', $user)->get();
 
         if(count($owners)==0){ //オーナー情報を登録していない(NG)
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         } else { //オーナー情報を登録している(OK)
             $owner = $owners[0];
 
@@ -558,7 +558,7 @@ class AiboController extends Controller
 
             return view('aibo.show', compact('bell_count', 'aibo', 'age'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 

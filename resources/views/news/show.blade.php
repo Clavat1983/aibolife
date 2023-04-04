@@ -214,21 +214,7 @@
                   </div>
                   <div class="p-article-detail__footer">
                     <ul class="c-pager-buttons">
-                      <li>
-                        {{-- <a class="c-btn" href="#">
-                          <span class="c-icon-text c-icon-text--prev">
-                            前の記事
-                          </span>
-                        </a> --}}
-                      </li>
-                      <li>
-                        {{-- <a class="c-btn" href="#">
-                          <span class="c-icon-text c-icon-text--next">
-                            後の記事
-                          </span>
-                        </a> --}}
-                      </li>
-                      <li><a class="c-btn02" href="{{url()->previous()}}">一覧</a></li>
+                      <li><a class="c-btn02" href="{{url()->previous()}}">戻る</a></li>
                     </ul>
                   </div>
                 </div>

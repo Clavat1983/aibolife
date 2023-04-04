@@ -19,7 +19,7 @@ class NotificationController extends Controller
 
             return view('notification.index', compact('bell_count','notifications'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -50,7 +50,7 @@ class NotificationController extends Controller
                 }
             }
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 }

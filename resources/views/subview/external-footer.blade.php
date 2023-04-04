@@ -9,13 +9,13 @@
       <nav class="l-external-footer__nav">
         <ul class="l-external-footer__list">
           <li class="l-external-footer__list-item">
-            <a class="l-external-footer__link" href="{{route('guide.about')}}">aibo life とは?</a>
+            <a class="l-external-footer__link" href="{{route('union.about')}}">aibo life とは?</a>
           </li>
           <li class="l-external-footer__list-item">
-            <a class="l-external-footer__link" href="{{route('guide.rule')}}">利用規約</a>
+            <a class="l-external-footer__link" href="{{route('union.rule')}}">利用規約</a>
           </li>
           <li class="l-external-footer__list-item">
-            <a class="l-external-footer__link" href="{{route('guide.policy')}}">個人情報指針</a>
+            <a class="l-external-footer__link" href="{{route('union.policy')}}">個人情報指針</a>
           </li>
         </ul>
       </nav>

@@ -41,9 +41,9 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--guide">
-                <span class="c-category-title__en">Guide</span>
-                <span class="c-category-title__jp">&nbsp;はじめに［aibo lifeとは?］</span>
+              <p class="c-category-title c-category-title--mypage">
+                <span class="c-category-title__en">About</span>
+                <span class="c-category-title__jp">&nbsp;aibo lifeとは?</span>
               </p>
             </div>
             <div class="l-content__body">
@@ -51,7 +51,7 @@
                 「aibo life」は、2018年1月11日にソニーから発売された「aibo」を通して、全国のaiboやオーナーの皆さんとの心温まる交流の輪を拡げることを目的としたコミュニティです。<br/>
                 <br/>
                 <br/>
-                「aibo life」では、アカウント作成（オーナー情報とaibo情報の登録）をしていただくことで、以下の機能がすべて無料でご利用いただけます。<br/>
+                「aibo life」では、新規登録（オーナー情報とaibo情報の登録）をしていただくことで、以下の機能がすべて無料でご利用いただけます。<br/>
                 <br/>
                 <br/>
                 ●最新情報<br/>
@@ -105,7 +105,7 @@
                 @guest
                 <ul class="c-btn-list">
                   <li class="c-btn-list__item">
-                    <a href="{{route('register')}}" style="text-decoration:none;"><button class="c-btn">アカウント作成</button></a>
+                    <a href="{{route('register')}}" style="text-decoration:none;"><button class="c-btn">新規登録</button></a>
                   </li>
                 </ul>
                 @endguest

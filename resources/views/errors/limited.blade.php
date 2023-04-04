@@ -45,21 +45,25 @@
                 <div class="p-error-404">
                 <div class="p-error-404__content">
                     <div class="p-error-404__image">
-                    <img src="{{asset('img/img_error.png')}}" width="160" alt="" />
+                    <img src="{{asset('img/img_warning.png')}}" width="160" alt="" />
                     </div>
                     <div class="p-error-404__title">
-                    <h1 class="c-error-title">
-                        <span class="c-error-title__en">Sorry...</span>
-                        <span class="c-error-title__jp">503 : Service Unavailable</span>
+                    <h1 class="c-error-title c-error-title--warning">
+                        <span class="c-error-title__en">Please Login</span>
+                        {{-- <span class="c-error-title__jp"></span> --}}
                     </h1>
                     </div>
-                    <p class="p-error-404__text"><b>サーバに接続できません</b><br><span style="font-size:85%;">（一時的な高負荷 or 予期せぬサーバ停止 or メンテナンス中）</span></p>
+                    <p class="p-error-404__text"><b>このコンテンツの閲覧にはログインが必要です</b><br><span style="font-size:85%;">（<a href="{{route('union.about')}}">新規登録</a>またはログインをしてご覧ください）</span></p>
                 </div>
                 <div class="p-error-404__footer">
-                    <p class="p-error-404__button">
-                    <a class="c-btn02" href="{{route('contact.index')}}">お問い合わせ</a>
-                    </p>
-                    <p class="p-error-404__text">時間をあけてアクセスしてください<br>この画面が何度も表示される場合は<span class="p-error-404__mark">、</span>発生状況の詳細をご連絡ください</p>
+                    <ul class="c-btn-list">
+                      <li class="c-btn-list__item">
+                        <a href="{{route('login')}}" style="text-decoration: none;"><button class="c-btn">ログイン</button></a>
+                      </li>
+                    </ul>
+                    <p>&nbsp;</p>
+                    <p class="p-error-404__button"><a class="c-btn02" href="{{route('contact.index')}}">お問い合わせ</a></p>
+                    <p class="p-error-404__text">この画面が何度も表示される場合は<span class="p-error-404__mark">、</span>発生状況の詳細をご連絡ください</p>
                 </div>
                 </div>
             </div>

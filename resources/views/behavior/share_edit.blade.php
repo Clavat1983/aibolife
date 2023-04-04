@@ -166,7 +166,7 @@
                     <a href="{{route('behaviorshare.index')}}"><button type="button">ふるまい共有に戻る</button></a>
                     <br>
                     <br>
-                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
+                    <a href="{{route('root')}}"><button type="button">トップに戻る</button></a>
                 </div>
             
             </div>
@@ -345,7 +345,7 @@
                     <a href="{{route('behaviorshare.index')}}"><button type="button">ふるまい共有に戻る</button></a>
                     <br>
                     <br>
-                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
+                    <a href="{{route('root')}}"><button type="button">トップに戻る</button></a>
                 </div>
             </div>
         </div>

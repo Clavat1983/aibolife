@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\Notification;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage; //画像削除用
+//use Illuminate\Support\Facades\Storage; //画像削除用
 use Carbon\Carbon; //日付操作
+use Auth;
 
 class NewsController extends Controller
 {
@@ -18,227 +19,271 @@ class NewsController extends Controller
      */
     public function index() //すべて
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $category = 'すべて';
-            $news_all = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
-            
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+        $category = 'すべて';
+        $news_all = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
 
-            return view('news.index', compact('bell_count','category','news_all'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+        if (Auth::check()) { //ログインしている
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            } else {
+                $bell_count = 0;
+            }
+        } else { //ログインしていない
+            $bell_count = 0;
         }
+
+        return view('news.index', compact('bell_count','category','news_all'));
+
     }
 
     public function index_news() //ニュース
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $category = 'ニュース';
-            $news_all = News::where('news_category',$category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
-            
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-            return view('news.index', compact('bell_count','category','news_all'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+        $category = 'ニュース';
+        $news_all = News::where('news_category',$category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
+        
+        if (Auth::check()) { //ログインしている
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            } else {
+                $bell_count = 0;
+            }
+        } else { //ログインしていない
+            $bell_count = 0;
         }
+
+        return view('news.index', compact('bell_count','category','news_all'));
+
     }
 
     public function index_event() //イベント
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $category = 'イベント';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
-            
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-            return view('news.index', compact('bell_count','category','news_all'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+        $category = 'イベント';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
+        
+        if (Auth::check()) { //ログインしている
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            } else {
+                $bell_count = 0;
+            }
+        } else { //ログインしていない
+            $bell_count = 0;
         }
+
+        return view('news.index', compact('bell_count','category','news_all'));
+
     }
 
     public function index_media() //メディア
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $category = 'メディア';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
-            
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-            return view('news.index', compact('bell_count','category','news_all'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+        $category = 'メディア';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
+        
+        if (Auth::check()) { //ログインしている
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            } else {
+                $bell_count = 0;
+            }
+        } else { //ログインしていない
+            $bell_count = 0;
         }
+
+        return view('news.index', compact('bell_count','category','news_all'));
     }
 
     public function index_app() //Myaibo
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $category = 'My aibo';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
-            
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-            return view('news.index', compact('bell_count','category','news_all'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+        $category = 'My aibo';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
+        
+        if (Auth::check()) { //ログインしている
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            } else {
+                $bell_count = 0;
+            }
+        } else { //ログインしていない
+            $bell_count = 0;
         }
+
+        return view('news.index', compact('bell_count','category','news_all'));
     }
 
     public function index_store() //ストア
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $category = 'ストア';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
-            
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-            return view('news.index', compact('bell_count','category','news_all'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+        $category = 'ストア';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
+        
+        if (Auth::check()) { //ログインしている
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            } else {
+                $bell_count = 0;
+            }
+        } else { //ログインしていない
+            $bell_count = 0;
         }
+
+        return view('news.index', compact('bell_count','category','news_all'));
     }
 
     public function index_maintenance() //メンテナンス
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $category = 'メンテナンス';
-            $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
-            
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-            return view('news.index', compact('bell_count','category','news_all'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+        $category = 'メンテナンス';
+        $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
+        
+        if (Auth::check()) { //ログインしている
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            } else {
+                $bell_count = 0;
+            }
+        } else { //ログインしていない
+            $bell_count = 0;
         }
+
+        return view('news.index', compact('bell_count','category','news_all'));
     }
 
     public function index_special() //特別企画
     {
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             $category = '特別企画';
             $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            if (Auth::check()) { //ログインしている
+                //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+                if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                    //【全ビュー共通処理】未読通知数
+                    $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+                } else {
+                    $bell_count = 0;
+                }
+            } else { //ログインしていない
+                $bell_count = 0;
+            }
 
             return view('news.index', compact('bell_count','category','news_all'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
-        }
     }
 
     public function index_etc() //その他
     {
         //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
             $category = 'その他';
             $news_all = News::where('news_category', $category)->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10);//ページネーションあり
             
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            if (Auth::check()) { //ログインしている
+                //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+                if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                    //【全ビュー共通処理】未読通知数
+                    $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+                } else {
+                    $bell_count = 0;
+                }
+            } else { //ログインしていない
+                $bell_count = 0;
+            }
 
             return view('news.index', compact('bell_count','category','news_all'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
-        }
     }
 
     public function search(Request $request) //検索
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+        $keywords = $request->keywords;
+        $cat_news = $request->cat_news;
+        $cat_app = $request->cat_app;
+        $cat_event = $request->cat_event;
+        $cat_media = $request->cat_media;
+        $cat_store = $request->cat_store;
+        $cat_special = $request->cat_special;
+        $cat_maintenance = $request->cat_maintenance;
+        $cat_etc = $request->cat_etc;
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+        
+        if($keywords == ""){ //キーワードがない場合は検索しない
+            $results = NULL;
+        } else {
+            //検索
+            $query = News::query();
 
-            $keywords = $request->keywords;
-            $cat_news = $request->cat_news;
-            $cat_app = $request->cat_app;
-            $cat_event = $request->cat_event;
-            $cat_media = $request->cat_media;
-            $cat_store = $request->cat_store;
-            $cat_special = $request->cat_special;
-            $cat_maintenance = $request->cat_maintenance;
-            $cat_etc = $request->cat_etc;
-            $date_from = $request->date_from;
-            $date_to = $request->date_to;
-            
-            if($keywords == ""){ //キーワードがない場合は検索しない
-                $results = NULL;
-            } else {
-                //検索
-                $query = News::query();
-
-                //キーワード検索（カタカナや濁点まで区別する場合は「like」を「like BINARY」へ変更すること）
-                if(isset($keywords)){
-                    $keyword_array =  preg_split('/\s+/ui', $keywords, -1, PREG_SPLIT_NO_EMPTY);
-                    foreach ($keyword_array as $word) {
-                        $escape_word = addcslashes($word, '\\_%');//エスケープ処理
-                        $query = $query->where(DB::raw("CONCAT(news_title, ' ', news_body)"), 'like BINARY', '%' . $escape_word . '%');//like検索、タイトルの文字列と本文の文字列を半角スペース「 」で連結して1つのカラムとして検索
-                    }
+            //キーワード検索（カタカナや濁点まで区別する場合は「like」を「like BINARY」へ変更すること）
+            if(isset($keywords)){
+                $keyword_array =  preg_split('/\s+/ui', $keywords, -1, PREG_SPLIT_NO_EMPTY);
+                foreach ($keyword_array as $word) {
+                    $escape_word = addcslashes($word, '\\_%');//エスケープ処理
+                    $query = $query->where(DB::raw("CONCAT(news_title, ' ', news_body)"), 'like BINARY', '%' . $escape_word . '%');//like検索、タイトルの文字列と本文の文字列を半角スペース「 」で連結して1つのカラムとして検索
                 }
-
-                //カテゴリー（チェックがあれば追加ではなく、チェック無いものを除外する）
-                if($cat_news != 1){
-                    $query = $query->where('news_category','!=','ニュース');
-                }
-                if($cat_app != 1){
-                    $query = $query->where('news_category','!=','My aibo');
-                }
-                if($cat_event != 1){
-                    $query = $query->where('news_category','!=','イベント');
-                }
-                if($cat_media != 1){
-                    $query = $query->where('news_category','!=','メディア');
-                }
-                if($cat_store != 1){
-                    $query = $query->where('news_category','!=','ストア');
-                }
-                if($cat_special != 1){
-                    $query = $query->where('news_category','!=','特別企画');
-                }
-                if($cat_maintenance != 1){
-                    $query = $query->where('news_category','!=','メンテナンス');
-                }
-                if($cat_etc != 1){
-                    $query = $query->where('news_category','!=','その他');
-                }
-                $query = $query->where('news_category','!=','不要');
-
-                //期間（開始）
-                if($date_from != ''){
-                    $query = $query->where('news_publication_datetime','>=',$date_from.' 00:00:00');
-                }
-
-                //期間（終了）
-                if($date_to != ''){
-                    $query = $query->where('news_publication_datetime','<=',$date_to.' 23:59:59');
-                }
-
-                $results = $query->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10); //クエリ文字列(検索キーワード)をつけて返す
             }
 
-            //【全ビュー共通処理】未読通知数
-            $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            //カテゴリー（チェックがあれば追加ではなく、チェック無いものを除外する）
+            if($cat_news != 1){
+                $query = $query->where('news_category','!=','ニュース');
+            }
+            if($cat_app != 1){
+                $query = $query->where('news_category','!=','My aibo');
+            }
+            if($cat_event != 1){
+                $query = $query->where('news_category','!=','イベント');
+            }
+            if($cat_media != 1){
+                $query = $query->where('news_category','!=','メディア');
+            }
+            if($cat_store != 1){
+                $query = $query->where('news_category','!=','ストア');
+            }
+            if($cat_special != 1){
+                $query = $query->where('news_category','!=','特別企画');
+            }
+            if($cat_maintenance != 1){
+                $query = $query->where('news_category','!=','メンテナンス');
+            }
+            if($cat_etc != 1){
+                $query = $query->where('news_category','!=','その他');
+            }
+            $query = $query->where('news_category','!=','不要');
 
-            return view('news.search', compact('bell_count','keywords','cat_news','cat_app','cat_event','cat_media','cat_store','cat_special','cat_maintenance','cat_etc','date_from','date_to','results'));
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            //期間（開始）
+            if($date_from != ''){
+                $query = $query->where('news_publication_datetime','>=',$date_from.' 00:00:00');
+            }
+
+            //期間（終了）
+            if($date_to != ''){
+                $query = $query->where('news_publication_datetime','<=',$date_to.' 23:59:59');
+            }
+
+            $results = $query->where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->paginate(10); //クエリ文字列(検索キーワード)をつけて返す
         }
+
+        if (Auth::check()) { //ログインしている
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            } else {
+                $bell_count = 0;
+            }
+        } else { //ログインしていない
+            $bell_count = 0;
+        }
+
+        return view('news.search', compact('bell_count','keywords','cat_news','cat_app','cat_event','cat_media','cat_store','cat_special','cat_maintenance','cat_etc','date_from','date_to','results'));
     }
 
 
@@ -417,29 +462,33 @@ class NewsController extends Controller
     //通常ユーザは公開状態かつ公開日時が現在時刻より前のものを確認できる
     public function show(News $news)
     {
-        //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-        if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-            $open = new Carbon($news->news_publication_datetime);
-            $now = Carbon::now('Asia/Tokyo');
+        $open = new Carbon($news->news_publication_datetime);
+        $now = Carbon::now('Asia/Tokyo');
 
-            //前後の記事移動を実現するための処理
-            $news_all = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->get();
-            $nth = $news_all->search($news); //ニュース一覧($news_all)内で何番目の記事か
-            $prev = $news_all->get($nth+1);//1つ古い記事(descなのでソート順で言うと後)
-            $next = $news_all->get($nth-1);//1つ新しい記事(descなのでソート順で言うと前)
+        //前後の記事移動を実現するための処理
+        $news_all = News::where('news_publication_flag',1)->where('news_publication_datetime','<=',date('Y-m-d H:i:s'))->orderby('news_publication_datetime', 'desc')->orderby('id', 'desc')->get();
+        $nth = $news_all->search($news); //ニュース一覧($news_all)内で何番目の記事か
+        $prev = $news_all->get($nth+1);//1つ古い記事(descなのでソート順で言うと後)
+        $next = $news_all->get($nth-1);//1つ新しい記事(descなのでソート順で言うと前)
 
-            //return
-            if($news->news_publication_flag && ($open <= $now)){ //true(公開)
+        //return
+        if($news->news_publication_flag && ($open <= $now)){ //true(公開)
 
-                //【全ビュー共通処理】未読通知数
-                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-
-                return view('news.show', compact('bell_count','news', 'prev', 'next'));
-            } else { //false(非公開)
-                abort(404);
+            if (Auth::check()) { //ログインしている
+                //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+                if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                    //【全ビュー共通処理】未読通知数
+                    $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+                } else {
+                    $bell_count = 0;
+                }
+            } else { //ログインしていない
+                $bell_count = 0;
             }
-        } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+
+            return view('news.show', compact('bell_count','news', 'prev', 'next'));
+        } else { //false(非公開)
+            abort(404);
         }
     }
 

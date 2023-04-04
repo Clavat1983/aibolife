@@ -43,7 +43,7 @@ class BehaviorShareController extends Controller
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
             return view('behavior.share_index', compact('bell_count','behaviors','page','seed','mes'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -59,7 +59,7 @@ class BehaviorShareController extends Controller
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
             return view('behavior.share_create', compact('bell_count','aibos'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -164,7 +164,7 @@ class BehaviorShareController extends Controller
             $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
             return view('behavior.share_show', compact('bell_count', 'behavior','page','seed'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -251,7 +251,7 @@ class BehaviorShareController extends Controller
             //return view('behavior.share_show', compact('bell_count', 'behavior', 'process'));
             return redirect()->route('behaviorshare.show',['behavior' => $behavior])->with('process', $process); //個別表示へ
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 

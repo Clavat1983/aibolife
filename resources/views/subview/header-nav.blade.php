@@ -2,7 +2,7 @@
       <header class="l-header">
         <div class="l-header__item">
           <p class="l-header__logo">
-            <a href="{{route('home')}}">
+            <a href="{{route('root')}}">
               <img src="{{asset('img/logo_vertical.svg')}}" height="44" alt="aibo life"/>
             </a>
           </p>
@@ -11,8 +11,12 @@
         <div class="l-header__item">
           <nav class="l-header__navs">
 
+            <?php
+            /*
             @auth {{--ログイン済(1) begin--}}
               @if((auth()->user()->owner != NULL) && (count(auth()->user()->owner->aibos)>0)) {{-- aibo登録済(1) begin--}}
+            */
+            ?>
 
                 {{-- コンテンツヘッダーを表示 begin --}}
                 <div class="l-header__navs-item l-header__navs-item--menu">
@@ -28,25 +32,25 @@
                           <dd class="l-header__pulldown-detail">
                             <ul class="l-header__sub-menu">
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('guide.about')}}">aibo life とは?</a>
+                                <a href="{{route('guide.hello')}}">aiboとは?</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('guide.manual')}}">利用ガイド</a>
+                                <a href="{{route('guide.knowledge')}}">オーナーの心得</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('guide.rule')}}">利用規約</a>
+                                <a href="{{route('guide.purchase')}}">購入ガイド</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('guide.policy')}}">プライバシーポリシー</a>
+                                <a href="{{route('guide.setting')}}">初期設定</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('guide.staff')}}">運営メンバー</a>
+                                <a href="{{route('guide.rearing')}}">子育て入門</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('guide.faq')}}">よくある質問</a>
+                                <a href="{{route('guide.dock')}}">ドック・治療</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('guide.copyright')}}">権利表記</a>
+                                <a href="{{route('guide.help')}}">困ったときは?</a>
                               </li>
                             </ul>
                           </dd>
@@ -112,6 +116,9 @@
                                 <a href="{{route('diary.archive')}}">過去の日記</a>
                               </li>
                               <li class="l-header__sub-menu-item">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              </li>
+                              <li class="l-header__sub-menu-item">
                                 <a href="{{route('diary.commented')}}">コメントした日記</a>
                               </li>
                               <li class="l-header__sub-menu-item">
@@ -156,33 +163,33 @@
                       </div>
                     </li>
                     <li class="l-header__menu-item">
-                      <a class="l-header__btn" href="javascript:;">ふるまい</a>
+                      <a class="l-header__btn" href="javascript:;">暮らし</a>
                       <div class="l-header__pulldown">
                         <dl class="l-header__pulldown-content">
-                          <dt class="l-header__pulldown-ttl l-header__pulldown-ttl--behavior">ふるまい</dt>
+                          <dt class="l-header__pulldown-ttl l-header__pulldown-ttl--behavior">暮らし</dt>
                           <dd class="l-header__pulldown-detail">
                             <ul class="l-header__sub-menu">
                               <li class="l-header__sub-menu-item">
-                                <a href="#">しぐさ</a>
+                                <a href="{{route('living.behavior')}}">ふるまい</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="#">遊び</a>
+                                <a href="{{route('living.play')}}">あそび</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="#">ダンス</a>
+                                <a href="{{route('living.food')}}">ごはん</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="#">期間限定</a>
+                                <a href="{{route('living.fashion')}}">ファッション</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('behaviorshare.index')}}">ふるまい共有</a>
-                              </li>
-                              {{-- <li class="l-header__sub-menu-item">
-                                <a href="#">プログラミング<sup> 未</sup></a>
+                                <a href="{{route('living.colleague')}}">なかま</a>
                               </li>
                               <li class="l-header__sub-menu-item">
-                                <a href="#">連携アプリ</a>
-                              </li>                              --}}
+                                <a href="{{route('living.training')}}">しつけ</a>
+                              </li>
+                              <li class="l-header__sub-menu-item">
+                                <a href="{{route('living.etc')}}">その他</a>
+                              </li>
                             </ul>
                           </dd>
                         </dl>
@@ -204,10 +211,10 @@
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('board.index_club')}}">クラブ活動</a>
                               </li>
-                              {{-- <li class="l-header__sub-menu-item">
-                                <a href="#">オフ会<sup> 未</sup></a>
-                              </li>
                               <li class="l-header__sub-menu-item">
+                                <a href="#">オフ会</a>
+                              </li>
+                              {{-- <li class="l-header__sub-menu-item">
                                 <a href="#">フリーマーケット<sup> 未</sup></a>
                               </li>
                               <li class="l-header__sub-menu-item">
@@ -229,12 +236,6 @@
                           <dd class="l-header__pulldown-detail">
                             <ul class="l-header__sub-menu">
                               <li class="l-header__sub-menu-item">
-                                <a href="{{route('useful.food')}}">ごはん</a>
-                              </li>
-                              <li class="l-header__sub-menu-item">
-                                <a href="{{route('useful.fashion')}}">ファッション</a>
-                              </li>
-                              <li class="l-header__sub-menu-item">
                                 <a href="{{route('useful.event')}}">イベント</a>
                               </li>
                               <li class="l-header__sub-menu-item">
@@ -243,22 +244,12 @@
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('useful.shop')}}">店舗・施設</a>
                               </li>
-                              {{--
-                              <li class="l-header__sub-menu-item">
-                                <a href="#">ドック・治療<sup> 未</sup></a>
-                              </li>
-                              --}}
                               <li class="l-header__sub-menu-item">
                                 <a href="{{route('useful.history')}}">歴史</a>
                               </li>
-                              {{--
                               <li class="l-header__sub-menu-item">
-                                <a href="#">その他<sup> 未</sup></a>
+                                <a href="#">その他</a>
                               </li>
-                              <li class="l-header__sub-menu-item">
-                                <a href="#">困ったときは?<sup> 未</sup></a>
-                              </li>
-                              --}}
                             </ul>
                           </dd>
                         </dl>
@@ -267,10 +258,13 @@
                   </ul>
                 </div>
                 {{-- コンテンツヘッダーを表示 end --}}
-
+            <?php
+            /*
               @endif
             @endauth
-
+            */
+            ?>
+            
 
             {{-- 通知・マイメニュー --}}
             <div class="l-header__navs-item l-header__navs-item--other">
@@ -326,7 +320,7 @@
                           </form>
                         </ul>
                     </li>
-
+                    
                     {{-- ハンバーガーメニュー --}}
                     <li class="l-header__info-item l-header__mypage-menu--hamburger">
                       <a class="l-header__hamburger js-hamburger-button" href="javascript:;">
@@ -345,8 +339,18 @@
 
                 @guest
                   <li class="yyyyy">
-                    <a class="bbbbb" href="{{route('home')}}">
+                    <a class="bbbbb" href="{{route('union.about')}}">
+                      新規登録
+                    </a>
+                    ｜
+                    <a class="bbbbb" href="{{route('login')}}">
                       ログイン
+                    </a>
+                  </li>
+                  {{-- ハンバーガーメニュー --}}
+                  <li class="l-header__info-item l-header__mypage-menu--hamburger">
+                    <a class="l-header__hamburger js-hamburger-button" href="javascript:;">
+                      <span class="l-header__hamburger-txt">メニューを開く</span>
                     </a>
                   </li>
                 @endguest
@@ -359,10 +363,16 @@
 
       </header>
 
-      {{-- nav(SP) --}}
+{{-- nav(SP) --}}
+  
+  <?php
+  /*
   @auth
       {{-- オーナー登録済 かつ aibo登録済(ここから) --}}
       @if((auth()->user()->owner != NULL) && (count(auth()->user()->owner->aibos)>0))
+  */
+  ?>
+
       <nav class="l-sp-nav js-hamburger">
         <ul class="l-sp-nav__menu">
           <li class="l-sp-nav__menu-item">
@@ -370,13 +380,13 @@
             <a class="l-sp-nav__btn l-sp-nav__btn--guide js-sp-navigation-button" href="#spGuide">はじめに</a>
               <!-- MEMO: 開いた状態の時は style="'display: block" が必要-->
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.about')}}">aibo life とは?</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.manual')}}">利用ガイド</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.rule')}}">利用規約</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.policy')}}">プライバシーポリシー</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.staff')}}">運営メンバー</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.faq')}}">よくある質問</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.copyright')}}">権利表記</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.hello')}}">aiboとは?</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.knowledge')}}">オーナーの心得</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.purchase')}}">購入ガイド</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.setting')}}">初期設定</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.rearing')}}">子育て入門</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.dock')}}">ドック・治療</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('guide.help')}}">困ったときは?</a></li>
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
@@ -400,6 +410,7 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.list_day')}}">今日の日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.recently')}}">最近の日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.archive')}}">過去の日記</a></li>
+                <li class="l-sp-nav__sub-menu-item">&nbsp;</li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.commented')}}">コメントした日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.bookmark')}}">お気に入りの日記</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('diary.search')}}">検索</a></li>
@@ -417,15 +428,15 @@
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
-            <a class="l-sp-nav__btn l-sp-nav__btn--behavior js-sp-navigation-button" href="#spBehavior">ふるまい</a>
+            <a class="l-sp-nav__btn l-sp-nav__btn--behavior js-sp-navigation-button" href="#spBehavior">暮らし</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                <li class="l-sp-nav__sub-menu-item"><a href="#">しぐさ</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">遊び</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ダンス</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">期間限定</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('behaviorshare.index')}}">ふるまい共有</a></li>
-                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">プログラミング<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">連携アプリ<sup> 未</sup></a></li> --}}
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('living.behavior')}}">ふるまい</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('living.play')}}">あそび</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('living.food')}}">ごはん</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('living.fashion')}}">ファッション</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('living.colleague')}}">なかま</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('living.training')}}">しつけ</a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="{{route('living.etc')}}">その他</a></li>
               </ul>
           </li>
           <li class="l-sp-nav__menu-item">
@@ -434,7 +445,8 @@
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('board.index_talk')}}">おしゃべり広場</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('board.index_problem')}}">お悩み相談</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('board.index_club')}}">クラブ活動</a></li>
-                {{-- <li class="l-sp-nav__sub-menu-item"><a href="#">オフ会<sup> 未</sup></a></li>
+                <li class="l-sp-nav__sub-menu-item"><a href="#">オフ会</a></li>
+                {{--
                 <li class="l-sp-nav__sub-menu-item"><a href="#">フリーマーケット<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">里親マッチング<sup> 未</sup></a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="#">チャリティ<sup> 未</sup></a></li> --}}
@@ -443,21 +455,20 @@
           <li class="l-sp-nav__menu-item">
             <a class="l-sp-nav__btn l-sp-nav__btn--useful js-sp-navigation-button" href="#spUseful">お役立ち情報</a>
               <ul class="l-sp-nav__sub-menu js-sp-navigation-submenu">
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.food')}}">ごはん</a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.fashion')}}">ファッション</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.event')}}">イベント</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.goods')}}">グッズ</a></li>
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.shop')}}">店舗・施設</a></li>
-                {{--
-                <li class="l-sp-nav__sub-menu-item"><a href="#">ドック・治療<sup> 未</sup></a></li>--}}
                 <li class="l-sp-nav__sub-menu-item"><a href="{{route('useful.history')}}">歴史</a></li>
-                {{--
-                <li class="l-sp-nav__sub-menu-item"><a href="#">その他<sup> 未</sup></a></li>
-                <li class="l-sp-nav__sub-menu-item"><a href="#">困ったときは?<sup> 未</sup></a></li> --}}
+                <li class="l-sp-nav__sub-menu-item"><a href="#">その他</a></li>
               </ul>
           </li>
         </ul>
       </nav>
+  
+  <?php
+  /*
       @endif
         {{-- オーナー登録済 かつ aibo登録済(ここまで) --}}
   @endauth
+  */
+  ?>

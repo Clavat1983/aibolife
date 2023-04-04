@@ -26,7 +26,7 @@
                     <h4>お問い合わせ</h4>
                     <a href="{{route('contact.list_admin')}}">問い合わせ一覧（全件）</a><br/>
                     <hr/>
-                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
+                    <a href="{{route('root')}}"><button type="button">トップに戻る</button></a>
                 </div>
             </div>
         </div>

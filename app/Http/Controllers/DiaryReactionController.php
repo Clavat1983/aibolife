@@ -80,7 +80,7 @@ class DiaryReactionController extends Controller
 
             return view('diary.bookmark', compact('bell_count','bookmarks'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 }

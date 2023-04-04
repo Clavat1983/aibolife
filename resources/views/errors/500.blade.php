@@ -56,11 +56,11 @@
                     <p class="p-error-404__text"><b>処理中にエラーが発生しました</b><br><span style="font-size:85%;">（サーバの設定不備 or プログラムのバグ）</span></p>
                 </div>
                 <div class="p-error-404__footer">
-                    <p class="p-error-404__text">この画面が表示された場合は<span class="p-error-404__mark">、</span>発生状況の詳細をご連絡ください</p>
                     <p class="p-error-404__button">
                     <a class="c-btn02" href="{{route('contact.index')}}">お問い合わせ</a>
                     </p>
-                </div>
+                    <p class="p-error-404__text">この画面が表示された場合は<span class="p-error-404__mark">、</span>発生状況の詳細をご連絡ください</p>
+                  </div>
                 </div>
             </div>
 

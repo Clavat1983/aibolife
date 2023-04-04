@@ -38,34 +38,32 @@
       {{-- main(各画面の個別部分) --}}
       <main class="l-main">
         <div class="l-main__content">
-          {{-- <div class="l-content"> --}}
+          <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
+            <div class="l-content__header">
+              <p class="c-category-title c-category-title--mypage">
+                <span class="c-category-title__en">Manual</span>
+                <span class="c-category-title__jp">&nbsp;利用方法</span>
+              </p>
+            </div>
+            <div class="l-content__body">
 
-            <div class="l-main__content">
-                <div class="p-error-404">
-                <div class="p-error-404__content">
-                    <div class="p-error-404__image">
-                    <img src="{{asset('img/img_error.png')}}" width="160" alt="" />
-                    </div>
-                    <div class="p-error-404__title">
-                    <h1 class="c-error-title">
-                        <span class="c-error-title__en">Sorry...</span>
-                        <span class="c-error-title__jp">503 : Service Unavailable</span>
-                    </h1>
-                    </div>
-                    <p class="p-error-404__text"><b>サーバに接続できません</b><br><span style="font-size:85%;">（一時的な高負荷 or 予期せぬサーバ停止 or メンテナンス中）</span></p>
-                </div>
-                <div class="p-error-404__footer">
-                    <p class="p-error-404__button">
-                    <a class="c-btn02" href="{{route('contact.index')}}">お問い合わせ</a>
-                    </p>
-                    <p class="p-error-404__text">時間をあけてアクセスしてください<br>この画面が何度も表示される場合は<span class="p-error-404__mark">、</span>発生状況の詳細をご連絡ください</p>
-                </div>
-                </div>
+              <!-- aibo登録まで完了していない方 -->
+              <div style="width:70%; margin:auto;">
+                aibo登録まで完了していない方向け<br>
+                登録までの流れを説明する
+              </div>
+
+              <!-- aibo登録が完了している方 -->
+              <div style="width:70%; margin:auto;">
+                aibo登録が完了している方向け<br>
+                xxしてみよう！的なミッション。
+              </div>
+
             </div>
 
 {{-- --------------------------------------------------------------------------- --}}
-        {{-- </div> --}}
+        </div>
       </div>
 
 {{-- 【共通】バナー広告 --}}
@@ -80,4 +78,3 @@
 <script type="module" src="{{asset('js/common.js')}}"></script>
 </body>
 </html>
-

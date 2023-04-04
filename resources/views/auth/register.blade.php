@@ -57,14 +57,14 @@
               
               <section class="c-panel">
                 <header class="c-panel__header">
-                  <h1 class="c-ttl c-ttl--type2">アカウント作成</h1>
+                  <h1 class="c-ttl c-ttl--type2">新規登録</h1>
                 </header>
                 <div class="c-panel__content">
                   <div class="c-form">
                     <div class="c-form__item">
                       <div class="c-alert c-alert--info">
                         <div class="c-alert__text">
-                          新「aibo life」のアカウント作成を行います。登録されるメールアドレスとご希望のパスワードを入力してください。
+                          新「aibo life」の新規登録を行います。登録されるメールアドレスとご希望のパスワードを入力してください。
                         </div>
                       </div>
                     </div>
@@ -153,7 +153,7 @@
                 <div class="c-panel__footer">
                   <ul class="c-btn-list">
                     <li class="c-btn-list__item">
-                      <button class="c-btn" type="submit">アカウント作成</button>
+                      <button class="c-btn" type="submit">新規登録</button>
                     </li>
                     <li class="c-btn-list__item">
                       <a href="{{ route('login') }}">ログインする場合はこちら</a>

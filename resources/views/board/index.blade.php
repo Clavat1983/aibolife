@@ -69,7 +69,7 @@
               <hr>
 
               @if(count($boards)>0)
-                <table>
+                <table style="width:80%; margin:auto;">
                     <tr>
                       @if($category_id == 3)
                         <th>部活名</th>
@@ -78,7 +78,7 @@
                       <th>タイトル</th>
                       <th>投稿者</th>
                       <th>本文（最初の100文字くらい）</th>
-                      <th>コメント数</th>
+                      <th>コメ数</th>
                       <th>最終更新日時</th>
                       <th>見る</th>
                     </tr>
@@ -94,16 +94,16 @@
                         </td>
                       @endif
                       @if($board->image1)
-                          <td width="15%"><img width="70%" src="{{ asset('storage/board_image/'.$board->image1)}}" /></td>
+                          <td width="10%"><img width="70%" src="{{ asset('storage/board_image/'.$board->image1)}}" /></td>
                       @else
-                          <td width="15%">no image</td>
+                          <td width="10%">no image</td>
                       @endif
-                        <td>{{$board->title}}</td>
-                        <td>{{$board->owner->owner_name}}</td>
-                        <td>{{$board->body}}</td>
-                        <td>{{$board->boardcomments->count()}}</td>
-                        <td>{{$board->last_res_dt}}</td>
-                        <td><a href="{{route('board.show', $board)}}">【見る】</td>
+                        <td width="15%">{{$board->title}}</td>
+                        <td width="15%">{{$board->owner->owner_name}}</td>
+                        <td width="35%">{{mb_substr($board->body,0,100)}} @if(mb_strlen($board->body)>100)...@endif</td>
+                        <td width="5%">{{$board->boardcomments->count()}}</td>
+                        <td width="10%">{{mb_substr(str_replace('-','.',$board->last_res_dt),0,10)}}<br>{{mb_substr($board->last_res_dt,11)}}</td>
+                        <td width="10%"><a href="{{route('board.show', $board)}}">【見る】</td>
                     </tr>
                   @endforeach
                 </table>

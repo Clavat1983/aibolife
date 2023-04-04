@@ -46,16 +46,17 @@
                 <span class="c-category-title__jp">&nbsp;最新情報［検索］</span>
               </p>
             </div>
-            <div class="l-content__body">
 
-                <div style="width:80%; margin:auto;">
+            <div class="l-content__body">
+                <div class="p-article-index">
                     <form method="get" action="{{route('news.search')}}">
                         @csrf
                         
                         <div>
                             検索キーワード ※必須：
                             <input type="text" name="keywords" id="keywords" value="{{old('keywords', $keywords)}}"><br>
-                            （キーワードはスペースを入れて複数指定が可能です。その場合はすべてを含むものが検索されます。）<br>
+                            (?)タイトルまたは本文にキーワードが含まれるものが検索されます。<br>
+                            (?)キーワードはスペースを入れて複数指定が可能です。その場合はすべてを含むものが検索されます。<br>
                         </div>
                         <div>
                             @if((strstr(url()->full(),'?') && old('keywords', $keywords) == ''))
@@ -85,9 +86,9 @@
                         </div>
                         <br>
                         <div>
-                            検索期間：{{$date_from}}
-                            <input type="date" name="date_from" id="date_from" value="{{old('date_from', $date_from)}}">～
-                            <input type="date" name="date_to" id="date_to" value="{{old('date_to', $date_to)}}">
+                            検索期間：<input type="date" name="date_from" id="date_from" value="{{old('date_from', $date_from)}}">～
+                            <input type="date" name="date_to" id="date_to" value="{{old('date_to', $date_to)}}"><br>
+                            (?)指定しない場合は全期間。「開始」「終了」のみの指定も可能。
                         </div>
                         <br>
                         <button type="submit" class="btn btn-success">検索</button>
@@ -98,9 +99,48 @@
                     @if(strstr(url()->full(),'?') && $results != NULL)
                         <hr/>
                         検索結果（{{$results->total()}}件）
-                        <hr/>
                         @if($results->total())
-                            <table>
+                            <div class="p-article-index__article">
+                                <ul class="c-article-list"> 
+                                    @foreach ($results as $news)
+                                        <li class="c-article-list__item">
+                                            <a class="c-article-list__article" href="{{route('news.show', $news)}}">
+                                            <div class="c-article-list__article-thumb">
+                                                <div class="c-article-image">
+                                                @if($news->news_image1)
+                                                    <img src="{{ asset('storage/news_image/'.$news->news_image1)}}" alt=""/>
+                                                @else
+                                                    no image
+                                                @endif
+                                                </div>
+                                            </div>
+                                            <div class="c-article-list__article-detail">
+                                                <div class="c-article-list__info">
+                                                <div class="c-article-list__info-item">
+                                                    <p class="c-date">{{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}</p>
+                                                </div>
+                                                <div class="c-article-list__info-item">
+                                                    <span class="c-category-label02">
+                                                    {{$news->news_category}}
+                                                    </span>
+                                                </div>
+                                                </div>
+                                                @if(strstr($news->news_source_name,'公式',false))
+                                                <div style="font-size:80%;"><b>［公式］</b></div>
+                                                @else
+                                                <div style="font-size:80%;"><b>［{{$news->news_source_name}}］</b></div>
+                                                @endif
+                                                <h2 class="c-article-list__ttl" style="margin-left:1em;">
+                                                {{$news->news_title}}<br>
+                                                </h2>
+                                            </div>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+
+                            {{-- <table>
                                 @foreach ($results as $news)
                                     <tr>
                                         @if($news->news_image1)
@@ -111,20 +151,20 @@
                                         <td style="padding:10px;">
                                             {{str_replace('-', '.', substr($news->news_publication_datetime,0,10))}}［{{$news->news_category}}］<br>
                                             <a href="{{route('news.show', $news)}}">{{$news->news_title}}</a><br/>
-                                                {{-- @if($news->news_tag1)#{{$news->news_tag1}}@endif
+                                                @if($news->news_tag1)#{{$news->news_tag1}}@endif
                                                 @if($news->news_tag2)｜#{{$news->news_tag2}}@endif
                                                 @if($news->news_tag3)｜#{{$news->news_tag3}}@endif
                                                 @if($news->news_tag4)｜#{{$news->news_tag4}}@endif
-                                                @if($news->news_tag5)｜#{{$news->news_tag5}}@endif --}}
+                                                @if($news->news_tag5)｜#{{$news->news_tag5}}@endif
                                         </td>
                                     </tr>
                                 @endforeach
-                            </table>
+                            </table> --}}
+
                             <br>
 
                             {{-- {{$results->appends(['keywords' => $keywords])->onEachSide(1)->links()}}<br> --}}
-                            <hr>
-                            ▼ページネーション▼
+
                             @php
                                 $appends = [
                                     'keywords' => $keywords,
@@ -140,7 +180,40 @@
                                     'date_to' => $date_to,
                                 ];
                             @endphp
-                            <table width="60%" style="margin:auto;">
+
+                            <div class="p-article-index__pagination">
+                                <div class="c-pagination">
+                                <div class="c-pagination__btn">
+                                    <a class="c-btn" href="{{$results->appends($appends)->previousPageUrl()}}">
+                                    <span class="c-icon c-icon--prev">前のページへ</span>
+                                    </a>
+                                </div>
+                                <div class="c-pagination__select">
+                                    <div class="pagination-select">
+                                    <span class="pagination-select__txt">{{$results->currentPage()}} / {{$results->lastPage()}} ページ</span>
+                                    <select class="pagination-select__input">
+                                        @for ($i = 1; $i <= $results->lastPage(); $i++)
+                                            <option value="{{$results->appends($appends)->url($i)}}" @if($i == $results->currentPage()) selected @endif>{{$i}}</option>
+                                        @endfor
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="c-pagination__btn">
+                                    <a class="c-btn" href="{{$results->appends($appends)->nextPageUrl()}}">
+                                    <span class="c-icon c-icon--next">次のページへ</span>
+                                    </a>
+                                </div>
+                                </div>
+                            </div>
+
+                            <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+                            <script>
+                            $('.pagination-select__input').change(function(){
+                                location.href = $(this).val();
+                            });
+                            </script>
+
+                            {{-- <table width="60%" style="margin:auto;">
                                 <tr>
                                     <td width="15%" style="text-align:center;"><a href="{{$results->appends($appends)->previousPageUrl()}}">Prev</a></td>
                                     <td width="70%" style="text-align:center;">
@@ -160,11 +233,10 @@
                             $('.pagenation-select select').change(function(){
                                 location.href = $(this).val();
                             });
-                            </script>
-                            <hr>
+                            </script> --}}
 
                         @else
-                            検索結果がありません
+                            <div class="p-article-index__article"><p>ありません</p></div>
                         @endif
                     @endif
 

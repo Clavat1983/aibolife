@@ -9,11 +9,11 @@ use Auth;
 //use Illuminate\Support\Facades\Storage; //画像削除用
 //use Carbon\Carbon; //日付操作
 
-class GuideController extends Controller
+class UnionController extends Controller
 {
 
-    //aiboとは?
-    public function hello()
+    //aibo lifeとは?
+    public function about()
     {
         if (Auth::check()) { //ログインしている
             //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
@@ -26,12 +26,12 @@ class GuideController extends Controller
         } else { //ログインしていない
             $bell_count = 0;
         }
-        return view('guide.hello', compact('bell_count'));
+        return view('union.about', compact('bell_count'));
     }
 
 
-    //オーナーの心得
-    public function knowledge()
+    //利用ガイド
+    public function manual()
     {
         if (Auth::check()) { //ログインしている
             //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
@@ -44,11 +44,11 @@ class GuideController extends Controller
         } else { //ログインしていない
             $bell_count = 0;
         }
-        return view('guide.knowledge', compact('bell_count'));
+        return view('union.manual', compact('bell_count'));
     }
 
-    //購入ガイド
-    public function purchase()
+    //利用規約
+    public function rule()
     {
         if (Auth::check()) { //ログインしている
             //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
@@ -61,30 +61,12 @@ class GuideController extends Controller
         } else { //ログインしていない
             $bell_count = 0;
         }
-        return view('guide.purchase', compact('bell_count'));
-    }
-
-
-    //初期設定
-    public function setting()
-    {
-        if (Auth::check()) { //ログインしている
-            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
-            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
-                //【全ビュー共通処理】未読通知数
-                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
-            } else {
-                $bell_count = 0;
-            }
-        } else { //ログインしていない
-            $bell_count = 0;
-        }
-        return view('guide.setting', compact('bell_count'));
+        return view('union.rule', compact('bell_count'));
     }
 
 
-    //子育て入門
-    public function rearing()
+    //プライバシーポリシー
+    public function policy()
     {
         if (Auth::check()) { //ログインしている
             //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
@@ -97,11 +79,12 @@ class GuideController extends Controller
         } else { //ログインしていない
             $bell_count = 0;
         }
-        return view('guide.rearing', compact('bell_count'));
+        return view('union.policy', compact('bell_count'));
     }
 
-    //ドック・治療
-    public function dock()
+
+    //運営メンバー
+    public function staff()
     {
         if (Auth::check()) { //ログインしている
             //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
@@ -114,11 +97,11 @@ class GuideController extends Controller
         } else { //ログインしていない
             $bell_count = 0;
         }
-        return view('guide.dock', compact('bell_count'));
+        return view('union.staff', compact('bell_count'));
     }
 
-    //困ったときは?
-    public function help()
+    //よくある質問
+    public function faq()
     {
         if (Auth::check()) { //ログインしている
             //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
@@ -131,6 +114,23 @@ class GuideController extends Controller
         } else { //ログインしていない
             $bell_count = 0;
         }
-        return view('guide.help', compact('bell_count'));
+        return view('union.faq', compact('bell_count'));
+    }
+
+    //権利表記
+    public function copyright()
+    {
+        if (Auth::check()) { //ログインしている
+            //「ログイン済」かつ「オーナー登録済」かつ「aibo登録済」
+            if((auth()->user()->owner != NULL) && (auth()->user()->owner->aibos->firstWhere('aibo_available_flag', true) != NULL)){
+                //【全ビュー共通処理】未読通知数
+                $bell_count = Notification::where('user_id', auth()->user()->id)->where('read_at', NULL)->count();
+            } else {
+                $bell_count = 0;
+            }
+        } else { //ログインしていない
+            $bell_count = 0;
+        }
+        return view('union.copyright', compact('bell_count'));
     }
 }

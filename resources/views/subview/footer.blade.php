@@ -13,7 +13,7 @@
         <div class="l-footer__colset">
           <div class="l-footer__colset-item">
             <p class="l-footer__logo">
-              <a class="l-footer__logo-link" href="{{route('home')}}">
+              <a class="l-footer__logo-link" href="{{route('root')}}">
                 <img
                   src="{{asset('img/logo_vertical.svg')}}"
                   alt="aibo life"
@@ -25,15 +25,19 @@
             <nav class="l-footer__nav">
               <ul class="l-footer__list">
                 <li class="l-footer__list-item">
-                  <a class="l-footer__list-link" href="{{route('guide.rule')}}">利用規約</a>
+                  <a class="l-footer__list-link" href="{{route('union.about')}}">aibo life とは?</a>
                 </li>
                 <li class="l-footer__list-item">
-                  <a class="l-footer__list-link" href="{{route('guide.policy')}}">
-                    プライバシーポリシー
-                  </a>
+                  <a class="l-footer__list-link" href="{{route('union.rule')}}">利用規約</a>
                 </li>
                 <li class="l-footer__list-item">
-                  <a class="l-footer__list-link" href="{{route('guide.faq')}}">よくある質問</a>
+                  <a class="l-footer__list-link" href="{{route('union.policy')}}">プライバシーポリシー</a>
+                </li>
+                <li class="l-footer__list-item">
+                  <a class="l-footer__list-link" href="{{route('union.faq')}}">よくある質問</a>
+                </li>
+                <li class="l-footer__list-item">
+                  <a class="l-footer__list-link" href="{{route('union.copyright')}}">権利表記</a>
                 </li>
                 <li class="l-footer__list-item">
                   <a class="l-footer__list-link" href="{{route('contact.index')}}">お問い合わせ</a>

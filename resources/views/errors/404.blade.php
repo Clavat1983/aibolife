@@ -56,11 +56,9 @@
                     <p class="p-error-404__text"><b>ページが見つかりません</b><br><span style="font-size:85%;">（URL入力ミス or リンク設定不備 or ページ削除済）</span></p>
                 </div>
                 <div class="p-error-404__footer">
+                    <p class="p-error-404__button"><a class="c-btn02" href="{{route('contact.index')}}">お問い合わせ</a></p>
                     <p class="p-error-404__text">この画面が何度も表示される場合は<span class="p-error-404__mark">、</span>発生状況の詳細をご連絡ください</p>
-                    <p class="p-error-404__button">
-                    <a class="c-btn02" href="{{route('contact.index')}}">お問い合わせ</a>
-                    </p>
-                </div>
+                  </div>
                 </div>
             </div>
 

@@ -119,7 +119,7 @@
                     @endif
                     <br>
                     <br>
-                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
+                    <a href="{{route('root')}}"><button type="button">トップに戻る</button></a>
                 </div>
 
             </div>
@@ -217,7 +217,7 @@
                     @endif
                     <br>
                     <br>
-                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
+                    <a href="{{route('root')}}"><button type="button">トップに戻る</button></a>
                 </div>
             </div>
         </div>

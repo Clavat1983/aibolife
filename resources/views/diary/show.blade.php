@@ -326,7 +326,7 @@
                     <br/>
                     <a href="{{route('diary.list_day')}}?date={{$diary->diary_date}}"><button type="button">{{date('Y年m月d日', strtotime($diary->diary_date))}}の日記一覧</button></a><br><br>
                     <a href="{{route('diary.list_aibo')}}?aibo={{$diary->aibo_id}}"><button type="button">{{$diary->aibo->aibo_name}}の日記一覧</button></a><br><br>
-                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a><br>
+                    <a href="{{route('root')}}"><button type="button">トップに戻る</button></a><br>
                 </div>
             </div>
         </div>

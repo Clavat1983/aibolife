@@ -158,7 +158,7 @@
             <br>
             <div class="card">
                 <div class="card-body">
-                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
+                    <a href="{{route('root')}}"><button type="button">トップに戻る</button></a>
                 </div>
             </div>
         </div>

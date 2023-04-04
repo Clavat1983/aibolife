@@ -41,12 +41,12 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
 
-<div class="l-content__header">
-    <h1 class="c-category-title c-category-title--topics">
-      <span class="c-category-title__en">Topics</span>
-      <span class="c-category-title__jp">&nbsp;最新情報［{{$category}}］</span>
-    </h1>
-  </div>
+            <div class="l-content__header">
+              <h1 class="c-category-title c-category-title--topics">
+                <span class="c-category-title__en">Topics</span>
+                <span class="c-category-title__jp">&nbsp;最新情報［{{$category}}］</span>
+              </h1>
+            </div>
 
   <p style="border:1px solid red; background-color:#fff; width:80%; margin:-20px auto 20px auto; padding:10px;">この部分にページ概要を入れたい。全ページ共通で枠を用意していただければ。個別記事とか概要を入れないページはその部分をコメントアウトします。</p>
 
@@ -137,7 +137,7 @@
 
 @if(count($news_all)>0)
       <div class="p-article-index__article">
-        <ul class="c-article-list">
+        <ul class="c-article-list"> 
         @foreach($news_all as $news)
           <li class="c-article-list__item">
             <a class="c-article-list__article" href="{{route('news.show', $news)}}">

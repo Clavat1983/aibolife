@@ -26,7 +26,7 @@ class DiaryController extends Controller
 
             //     return view('diary.index',compact('bell_count','diaries'));
             // } else { //aibo登録まで完了していないと閲覧不可
-            //     return redirect()->route('home');
+            //     return redirect()->route('errors.limited');
             // }
 
         return redirect()->route('diary.list_day');
@@ -106,7 +106,7 @@ class DiaryController extends Controller
 
             return view('diary.list_day', compact('bell_count', 'owner','my_diaries','other_diaries','before_flag','after_flag','before_string','target_string','target_string_format','after_string'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -178,7 +178,7 @@ class DiaryController extends Controller
                 return view('diary.list_aibo', compact('bell_count','aibo', 'target_exist_flag','this_week', 'target', 'archives'));
             }
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -195,7 +195,7 @@ class DiaryController extends Controller
 
             return view('diary.recently', compact('bell_count','diaries'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -302,7 +302,7 @@ class DiaryController extends Controller
                 return view('diary.archive', compact('bell_count','before_year','before_month','before_flg','target_year','target_month','next_year','next_month','next_flg','calendar','diaries'));
             }
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -353,7 +353,7 @@ class DiaryController extends Controller
 
             return view('diary.search',compact('bell_count','search_flag', 'results', 'keywords','diary_date_from','diary_date_to','aibo_name'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -420,7 +420,7 @@ class DiaryController extends Controller
                 }
             }
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -505,7 +505,7 @@ class DiaryController extends Controller
 
             return view('diary.show', compact('my_reaction','bell_count','diary'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -526,7 +526,7 @@ class DiaryController extends Controller
 
             return view('diary.edit', compact('bell_count','diary'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 

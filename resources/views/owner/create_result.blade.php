@@ -16,11 +16,11 @@
                         <p>オーナー登録が完了しました。<br>
                         aiboが登録されていません。<br>
                         aibo登録に進みましょう</p>
-                        <a href="{{route('home')}}">aibo登録へ</a><br>
+                        <a href="{{route('root')}}">aibo登録へ</a><br>
                     @else
                         <p>新規オーナー登録が完了しました。<br>
                         【エラー】既にaibo登録が完了している状態。この表示が出たらおかしい。</p>
-                        <a href="{{route('home')}}">トップページへ</a><br>
+                        <a href="{{route('root')}}">トップページへ</a><br>
                     @endif
                 </div>
 

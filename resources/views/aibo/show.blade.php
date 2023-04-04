@@ -391,7 +391,7 @@
                     <hr/>
 
                     <br/>
-                    <a href="{{route('home')}}"><button type="button">トップに戻る</button></a><br>
+                    <a href="{{route('root')}}"><button type="button">トップに戻る</button></a><br>
                 </div>
             </div>
         </div>

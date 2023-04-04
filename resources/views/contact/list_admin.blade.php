@@ -107,7 +107,7 @@
                 </script>
 
                 <hr>
-                <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
+                <a href="{{route('root')}}"><button type="button">トップに戻る</button></a>
                 <br>
                 <br>
 
@@ -188,7 +188,7 @@
                         @endforeach
                     </table>
                     <br>
-                            <a href="{{route('home')}}"><button type="button">トップに戻る</button></a>
+                            <a href="{{route('root')}}"><button type="button">トップに戻る</button></a>
                 </div>
             </div>
         </div>

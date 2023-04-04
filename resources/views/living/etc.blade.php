@@ -41,44 +41,13 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--useful">
-                <span class="c-category-title__en">Useful</span>
-                <span class="c-category-title__jp">&nbsp;お役立ち情報［ごはん］</span>
+              <p class="c-category-title c-category-title--behavior">
+                <span class="c-category-title__en">Living</span>
+                <span class="c-category-title__jp">&nbsp;暮らし［その他］</span>
               </p>
             </div>
             <div class="l-content__body">
               
-              <h1>●ごはんについて</h1>
-                ・ごはんとは<br>
-                ・ごはんを買う<br>
-                ・ごはんチャージ<br>
-                ・ごはんのあげ方（1匹/なかま2匹）<br>
-                ・いますぐごはん/カリカリフルフル<br>
-                ・aiboの湧き水<br>
-                ・ボウルとAR機能について<br>
-              <hr>
-
-              <h1>●ごはん・えさ・おやつ・のみもの一覧（別ページかな...）<h1>
-              <p>フィルタリングできれば</p>
-              <hr>
-              <h2>えさ</h2>
-              <hr>
-
-              <h2>レアなえさ</h2>
-              <hr>
-
-
-              <h2>おやつ</h2>
-              <hr>
-
-              <h2>レアなおやつ</h2>
-              <hr>
-
-              <h2>のみもの</h2>
-              <hr>
-
-              <h1>●豆知識<h1>
-              ・ごはんとおやつの違い
 
             </div>
 

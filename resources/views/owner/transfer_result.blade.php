@@ -59,7 +59,7 @@
                     <p>オーナー登録が完了しました。<br>
                     <br>
                     引き続き、aibo登録をしてください。</p>
-                    <a href="{{route('home')}}">aibo登録</a><br><!-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ -->
+                    <a href="{{route('root')}}">aibo登録</a><br><!-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ -->
                 @else
                     <!-- aibo情報が既にある＝旧利用者なので、内容の見直しを依頼 -->
                     <p>オーナー情報、aibo情報、投稿・コメントなど情報の引継ぎが完了しました。<br>
@@ -68,7 +68,7 @@
                         <a href="{{route('mypage')}}">マイページ</a><br>
                     </p>
                     
-                    <a href="{{route('home')}}">トップページ</a><br>
+                    <a href="{{route('root')}}">トップページ</a><br>
                 @endif
 
             </div>
@@ -113,10 +113,10 @@
                         <p>オーナー情報の引継ぎが完了しました。<br>
                         aiboが登録されていません。<br>
                         aibo登録に進みましょう</p>
-                        <a href="{{route('home')}}">aibo登録</a><br><!-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ -->
+                        <a href="{{route('root')}}">aibo登録</a><br><!-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ -->
                     @else
                         <p>オーナー情報、aibo情報、投稿・コメントなど情報の引継ぎが完了しました。</p>
-                        <a href="{{route('home')}}">トップページへ</a><br>
+                        <a href="{{route('root')}}">トップページへ</a><br>
                     @endif
 
                     

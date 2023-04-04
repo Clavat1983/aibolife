@@ -24,7 +24,7 @@ class OwnerController extends Controller
             
             return view('owner.transfer',compact('bell_count'));
         } else { //オーナー情報を登録していない(NG)
-            return redirect()->route('home');
+            return redirect()->route('root');
         }
     }
 
@@ -41,7 +41,7 @@ class OwnerController extends Controller
 
             return view('owner.transfer_login', compact('bell_count'));
         } else { //オーナー情報を登録していない(NG)
-            return redirect()->route('home');
+            return redirect()->route('root');
         }
     }
 
@@ -98,7 +98,7 @@ class OwnerController extends Controller
             }
 
         } else { //オーナー情報を登録していない(NG)
-            return redirect()->route('home');
+            return redirect()->route('root');
         }
     }
 
@@ -129,7 +129,7 @@ class OwnerController extends Controller
 
             return view('owner.create', compact('bell_count'));
         } else { //オーナー情報を登録していない(NG)
-            return redirect()->route('home');
+            return redirect()->route('root');
         }
     }
 
@@ -172,7 +172,7 @@ class OwnerController extends Controller
 
         //DBに追加
         $owner->save();
-        return redirect()->route('home');
+        return redirect()->route('root');
         //return view('owner.create_result', compact('owner'));
     }
 

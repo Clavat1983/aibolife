@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 //  Route::get('/', function () {
-//      return view('welcome');
+//      return view('welome');
 //  });
 Route::get('/', 'RootController@root')->name('root'); //トップページにアクセスしたとき
+Route::get('/guest', 'RootController@guest')->name('guest'); //トップページにアクセスしたとき(未登録)
+Route::get('/limited', 'RootController@limited')->name('errors.limited');//未登録で認証エリア内にアクセスしたとき
 
 //Auth::routes();
 Auth::routes(['verify' => true]);
@@ -52,20 +54,20 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/mypage/aibo/{aibo}/edit', 'AiboController@edit')->name('aibo.edit');//変更(入力)
     Route::put('/mypage/aibo/{aibo}', 'AiboController@update')->name('aibo.update');//変更(DB更新)
     //aibo情報(公開)
-    Route::get('/friend', 'AiboController@index')->name('aibo.index');//aibo名鑑トップ
-    Route::get('/friend/namelist', 'AiboController@list_syllabary')->name('aibo.list_syllabary');
-    Route::get('/friend/namelist/{syllabary}', 'AiboController@result_syllabary')->name('aibo.result_syllabary');
-    Route::get('/friend/birthday', 'AiboController@list_birthday')->name('aibo.list_birthday');
-    Route::get('/friend/birthday/{month}', 'AiboController@result_birthday')->name('aibo.result_birthday');
-    Route::get('/friend/areamap', 'AiboController@list_area')->name('aibo.list_area');
-    Route::get('/friend/areamap/{pref}', 'AiboController@result_area')->name('aibo.result_area');
-    Route::get('/friend/newface', 'AiboController@newface')->name('aibo.newface');
-    Route::get('/friend/search', 'AiboController@search')->name('aibo.search');
-//    Route::post('/friend/search/result', 'AiboController@search_result')->name('aibo.search_result');
+    Route::get('/friends', 'AiboController@index')->name('aibo.index');//aibo名鑑トップ
+    Route::get('/friends/namelist', 'AiboController@list_syllabary')->name('aibo.list_syllabary');
+    Route::get('/friends/namelist/{syllabary}', 'AiboController@result_syllabary')->name('aibo.result_syllabary');
+    Route::get('/friends/birthday', 'AiboController@list_birthday')->name('aibo.list_birthday');
+    Route::get('/friends/birthday/{month}', 'AiboController@result_birthday')->name('aibo.result_birthday');
+    Route::get('/friends/areamap', 'AiboController@list_area')->name('aibo.list_area');
+    Route::get('/friends/areamap/{pref}', 'AiboController@result_area')->name('aibo.result_area');
+    Route::get('/friends/newface', 'AiboController@newface')->name('aibo.newface');
+    Route::get('/friends/search', 'AiboController@search')->name('aibo.search');
+//    Route::post('/friends/search/result', 'AiboController@search_result')->name('aibo.search_result');
 
-    Route::get('/friend/{aibo}', 'AiboController@show')->name('aibo.show');//aiboを個別表示
+    Route::get('/friends/{aibo}', 'AiboController@show')->name('aibo.show');//aiboを個別表示
     //aiboコメント
-    Route::post('/friend/comment/store', 'AiboCommentController@store')->name('aibocomment.store');//(新規-DB登録)
+    Route::post('/friends/comment/store', 'AiboCommentController@store')->name('aibocomment.store');//(新規-DB登録)
 
     //aibo日記
     Route::get('/diary', 'DiaryController@index')->name('diary.index');//【廃止】aibo日記トップ【廃止】⇒今日の一覧へ転送
@@ -135,20 +137,6 @@ Route::middleware(['verified'])->group(function(){
                 Route::get('/admin/contact', 'ContactController@list_admin')->name('contact.list_admin');//お問い合わせ(一覧)
             });
         });
-        //一般ユーザ
-        Route::get('/topics', 'NewsController@index')->name('news.index');//最新情報一覧（すべて）
-        Route::get('/topics/news', 'NewsController@index_news')->name('news.index_news');//カテゴリ別（ニュース）
-        Route::get('/topics/app', 'NewsController@index_app')->name('news.index_app');//カテゴリ別（My aibo）
-        Route::get('/topics/event', 'NewsController@index_event')->name('news.index_event');//カテゴリ別（イベント）
-        Route::get('/topics/media', 'NewsController@index_media')->name('news.index_media');//カテゴリ別（メディア）
-        Route::get('/topics/store', 'NewsController@index_store')->name('news.index_store');//カテゴリ別（ストア）
-        Route::get('/topics/special', 'NewsController@index_special')->name('news.index_special');//カテゴリ別（スペシャル）
-        Route::get('/topics/maintenance', 'NewsController@index_maintenance')->name('news.index_maintenance');//カテゴリ別（障害・メンテ）
-        Route::get('/topics/etc', 'NewsController@index_etc')->name('news.index_etc');//カテゴリ別（その他）
-
-        Route::get('/topics/search', 'NewsController@search')->name('news.search');//検索＆検索結果
-
-        Route::get('/topics/{news}', 'NewsController@show')->name('news.show');//最新情報（個別表示）
 
         //お問い合わせ
         Route::get('/mypage/contact', 'ContactController@list')->name('contact.list');//お問い合わせ(一覧)
@@ -164,21 +152,49 @@ Route::middleware(['verified'])->group(function(){
     Route::get('/mypage/user/reverify', 'UserController@reverify')->name('user.reverify');
 
     //はじめに
-    Route::get('/guide/about', 'GuideController@about')->name('guide.about');//aibo lifeとは?
-    Route::get('/guide/rule', 'GuideController@rule')->name('guide.rule');//利用規約
-    Route::get('/guide/manual', 'GuideController@manual')->name('guide.manual');//利用ガイド
-    Route::get('/guide/policy', 'GuideController@policy')->name('guide.policy');//プライバシーポリシー
-    Route::get('/guide/staff', 'GuideController@staff')->name('guide.staff');//運営メンバー
-    Route::get('/guide/faq', 'GuideController@faq')->name('guide.faq');//よくある質問
-    Route::get('/guide/copyright', 'GuideController@copyright')->name('guide.copyright');//権利表記
+    Route::get('/guide/hello', 'GuideController@hello')->name('guide.hello');//aiboとは?
+    Route::get('/guide/knowledge', 'GuideController@knowledge')->name('guide.knowledge');//オーナーの心得
+    Route::get('/guide/purchase', 'GuideController@purchase')->name('guide.purchase');//購入ガイド
+    Route::get('/guide/setting', 'GuideController@setting')->name('guide.setting');//初期設定
+    Route::get('/guide/rearing', 'GuideController@rearing')->name('guide.rearing');//子育て入門
+    Route::get('/guide/dock', 'GuideController@dock')->name('guide.dock');//ドック・治療
+    Route::get('/guide/help', 'GuideController@help')->name('guide.help');//困ったときは?
+
+    //最新情報
+    Route::get('/topics', 'NewsController@index')->name('news.index');//最新情報一覧（すべて）
+    Route::get('/topics/news', 'NewsController@index_news')->name('news.index_news');//カテゴリ別（ニュース）
+    Route::get('/topics/app', 'NewsController@index_app')->name('news.index_app');//カテゴリ別（My aibo）
+    Route::get('/topics/event', 'NewsController@index_event')->name('news.index_event');//カテゴリ別（イベント）
+    Route::get('/topics/media', 'NewsController@index_media')->name('news.index_media');//カテゴリ別（メディア）
+    Route::get('/topics/store', 'NewsController@index_store')->name('news.index_store');//カテゴリ別（ストア）
+    Route::get('/topics/special', 'NewsController@index_special')->name('news.index_special');//カテゴリ別（スペシャル）
+    Route::get('/topics/maintenance', 'NewsController@index_maintenance')->name('news.index_maintenance');//カテゴリ別（障害・メンテ）
+    Route::get('/topics/etc', 'NewsController@index_etc')->name('news.index_etc');//カテゴリ別（その他）
+    Route::get('/topics/search', 'NewsController@search')->name('news.search');//検索＆検索結果
+    Route::get('/topics/{news}', 'NewsController@show')->name('news.show');//最新情報（個別表示）
+
+    //暮らし
+    Route::get('/living/behavior', 'LivingController@behavior')->name('living.behavior');//ふるまい
+    Route::get('/living/play', 'LivingController@play')->name('living.play');//あそび
+    Route::get('/living/food', 'LivingController@food')->name('living.food');//ごはん
+    Route::get('/living/fashion', 'LivingController@fashion')->name('living.fashion');//ファッション
+    Route::get('/living/colleague', 'LivingController@colleague')->name('living.colleague');//なかま
+    Route::get('/living/training', 'LivingController@training')->name('living.training');//しつけ
+    Route::get('/living/etc', 'LivingController@etc')->name('living.etc');//その他
 
     //お役立ち情報(一部)
-    Route::get('/useful/food', 'UsefulController@food')->name('useful.food');//ごはん
-    Route::get('/useful/fashion', 'UsefulController@fashion')->name('useful.fashion');//ファッション
     Route::get('/useful/event', 'UsefulController@event')->name('useful.event');//イベント概要（カレンダーではない）
     Route::get('/useful/goods', 'UsefulController@goods')->name('useful.goods');//グッズ
     Route::get('/useful/shop', 'UsefulController@shop')->name('useful.shop');//店舗・施設
     Route::get('/useful/history', 'UsefulController@history')->name('useful.history');//歴史
+
+    //フッター情報
+    Route::get('/union/about', 'UnionController@about')->name('union.about');//aibo lifeとは?
+    Route::get('/union/rule', 'UnionController@rule')->name('union.rule');//利用規約
+    Route::get('/union/policy', 'UnionController@policy')->name('union.policy');//プライバシーポリシー
+    Route::get('/union/copyright', 'UnionController@copyright')->name('union.copyright');//権利表記
+    Route::get('/union/faq', 'UnionController@faq')->name('union.faq');//よくある質問
+    Route::get('/union/manual', 'UnionController@manual')->name('union.manual');//利用ガイド
 
 
     //お問い合わせ

@@ -59,7 +59,7 @@
                     <div class="c-form">
                       <div class="c-form__item">
                         <div class="c-alert c-alert--success">
-                            <div class="c-alert__text">202?年?月のリニューアル後、新「aibo life」を初めて利用される方は「アカウント作成」をお願いします。</div>
+                            <div class="c-alert__text">202?年?月のリニューアル後、新「aibo life」を初めて利用される方は「新規登録」をお願いします。</div>
                         </div>
                       </div>
                     </div>
@@ -77,7 +77,7 @@
                 <div class="c-panel__footer">
                     <ul class="c-btn-list">
                       <li class="c-btn-list__item">
-                        <a href="{{route('register')}}" style="text-decoration:none;"><button class="c-btn">アカウント作成</button></a>
+                        <a href="{{route('register')}}" style="text-decoration:none;"><button class="c-btn">新規登録</button></a>
                       </li>
                     </ul>
                   </div>
@@ -86,7 +86,7 @@
                       <div class="c-form__item">
                         <div class="c-alert c-alert--info">
                             <div class="c-alert__text">
-                            旧「aibo life」を利用されていた方も、まずは<a href="{{route('register')}}">アカウント作成</a>をお願いします。これまでのデータは移行されます。
+                            旧「aibo life」を利用されていた方も、まずは<a href="{{route('register')}}">新規登録</a>をお願いします。これまでのデータは移行されます。
                             </div>
                         </div>
                       </div>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="c-panel__footer">
                     <ul class="c-btn-list">
-                      <li class="c-btn-list__item">
+                        <li class="c-btn-list__item">
                           <a href="{{route('login')}}" style="text-decoration: none;"><button class="c-btn">ログイン</button></a>
                         </li>
                     </ul>
@@ -144,12 +144,12 @@
 
                 <div class="card-body">
                     <h2>（当初暫定的に...）</h2>
-                    <p>①2022/●/●以降、新「aibo life」を初めて利用される場合は「アカウント作成」をお願いします。</p>
-                    <p style="text-align:center;"><a href="{{route('register')}}"><button class="btn btn-primary">アカウント作成</button></a></p>
-                    <p>※旧「aibo life」（アプリ版）をお使いだった方も、初回は「アカウント作成」へお進みください。<br>
-                        アカウント作成の途中で、旧「aibo life」の全データを移行する画面が表示されます。</p>
+                    <p>①2022/●/●以降、新「aibo life」を初めて利用される場合は「新規登録」をお願いします。</p>
+                    <p style="text-align:center;"><a href="{{route('register')}}"><button class="btn btn-primary">新規登録</button></a></p>
+                    <p>※旧「aibo life」（アプリ版）をお使いだった方も、初回は「新規登録」へお進みください。<br>
+                        新規登録の途中で、旧「aibo life」の全データを移行する画面が表示されます。</p>
                     <p>&nbsp;</p>
-                    <p>②新「aibo life」に登録済（アカウント作成済）の方は「ログイン」からお進みください。</p>
+                    <p>②新「aibo life」に登録済の方は「ログイン」からお進みください。</p>
                     <p style="text-align:center;"><a href="{{route('login')}}"><button class="btn btn-primary">ログイン</button></a></p>
                     <p>-----------------</p>
                     <p style="text-align:center;"><a href="{{route('contact.index')}}"><button class="btn btn-primary">お問い合わせ</button></a></p>

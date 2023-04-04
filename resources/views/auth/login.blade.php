@@ -62,7 +62,7 @@
                     <div class="c-form__item">
                       <div class="c-alert c-alert--info">
                         <div class="c-alert__text">
-                          新「aibo life」の<a href="{{route('register')}}">アカウント作成</a>はお済みですか？<br>旧「aibo life」のログイン情報ではログインできません。
+                          新「aibo life」の<a href="{{route('register')}}">新規登録</a>はお済みですか？<br>旧「aibo life」のログイン情報ではログインできません。
                         </div>
                       </div>
                     </div>

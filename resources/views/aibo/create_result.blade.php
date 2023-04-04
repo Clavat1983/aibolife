@@ -67,10 +67,10 @@
                         【1】オーナー登録  -->  【2】aibo登録  -->  <span style="color:red;"><b>【3】完了</b></span>
                         <br><br>
                         <p>オーナー登録・aibo登録が全て完了しました。<br>ようこそ、「aibo life」へ！</p>
-                        <a href="{{route('home')}}">トップページへ</a><br>{{-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ --}}
+                        <a href="{{route('root')}}">トップページへ</a><br>{{-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ --}}
                 @elseif(count($owner->aibos) == 0)
                     <p>【エラー発生】aibo登録後も結果が0匹。これが出たらバグ。</p>
-                    <a href="{{route('home')}}">トップページへ</a><br>{{-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ --}}
+                    <a href="{{route('root')}}">トップページへ</a><br>{{-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ --}}
                 @else
                     <p>aiboの追加が完了しました。<br>
                     2匹目以降です。OK!</p>
@@ -120,14 +120,14 @@
 
                     @if(count($owner->aibos) == 1)
                         <p>オーナー登録・aibo登録が全て完了しました。<br>ようこそ、「aibo life」へ！</p>
-                        <a href="{{route('home')}}">トップページへ</a><br><!-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ -->
+                        <a href="{{route('root')}}">トップページへ</a><br><!-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ -->
                     @elseif(count($owner->aibos) == 0)
                         <p>【エラー発生】aibo登録後も結果が0匹。これが出たらバグ。</p>
-                        <a href="{{route('home')}}">トップページへ</a><br><!-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ -->
+                        <a href="{{route('root')}}">トップページへ</a><br><!-- homeに戻せば自動的に「aibo.create」に転送される。「aibo.create」と書いても同じ -->
                     @else
                         <p>aiboの追加が完了しました。<br>
                         2匹目以降です。OK!</p>
-                        <a href="{{route('home')}}">トップページへ</a><br>
+                        <a href="{{route('root')}}">トップページへ</a><br>
                     @endif
 
                     

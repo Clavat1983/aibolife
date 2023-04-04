@@ -41,13 +41,14 @@
           <div class="l-content">
 {{-- --------------------------------------------------------------------------- --}}
             <div class="l-content__header">
-              <p class="c-category-title c-category-title--guide">
-                <span class="c-category-title__en">Guide</span>
-                <span class="c-category-title__jp">&nbsp;はじめに［運営メンバー］</span>
+              <p class="c-category-title c-category-title--behavior">
+                <span class="c-category-title__en">Living</span>
+                <span class="c-category-title__jp">&nbsp;暮らし［あそび］</span>
               </p>
             </div>
             <div class="l-content__body">
-              準備中
+              
+
             </div>
 
 {{-- --------------------------------------------------------------------------- --}}

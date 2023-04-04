@@ -33,7 +33,7 @@ class BoardController extends Controller
             return view('board.index', compact('bell_count', 'category_id','boards'));
 
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
 
     }
@@ -53,7 +53,7 @@ class BoardController extends Controller
             return view('board.index', compact('bell_count', 'category_id','boards'));
 
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -72,7 +72,7 @@ class BoardController extends Controller
             return view('board.index', compact('bell_count', 'category_id','boards'));
 
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -93,7 +93,7 @@ class BoardController extends Controller
             return view('board.create', compact('bell_count', 'category_id'));
 
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -109,7 +109,7 @@ class BoardController extends Controller
             return view('board.create', compact('bell_count', 'category_id'));
 
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -125,7 +125,7 @@ class BoardController extends Controller
             return view('board.create', compact('bell_count', 'category_id'));
 
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 
@@ -238,7 +238,7 @@ class BoardController extends Controller
 
             return view('board.show', compact('bell_count','board'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 

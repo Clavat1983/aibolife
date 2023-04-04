@@ -148,7 +148,7 @@ class DiaryCommentController extends Controller
 
             return view('diary.commented', compact('bell_count','comments'));
         } else { //aibo登録まで完了していないと閲覧不可
-            return redirect()->route('home');
+            return redirect()->route('errors.limited');
         }
     }
 }
